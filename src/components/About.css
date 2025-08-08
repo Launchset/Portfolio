@@ -1,0 +1,47 @@
+.about {
+  background-color: #ffffff;
+  padding: 4rem 2rem;
+  color: #222;
+}
+
+.about-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  line-height: 1.8;
+}
+
+.about h2 {
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  color: #00703c; /* Your Launchset green */
+  text-align: center;
+}
+
+.about p {
+  font-size: 1.125rem;
+  margin-bottom: 1.5rem;
+  color: #444;
+}
+
+.about strong {
+  color: #000;
+}
+
+.about h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: #00703c; /* Your brand green */
+  text-align: center;
+  position: relative;
+  padding-bottom: 1rem;
+}
+
+.about h2::after {
+  content: "";
+  display: block;
+  width: 100vh;
+  height: 2px;
+  background-color: #a9e5c1; /* Light green - adjust to taste */
+  margin: 0.5rem auto 0;
+  border-radius: 2px;
+}

@@ -1,0 +1,110 @@
+/* === NAVBAR CONTAINER === */
+.navbar {
+  background: #ffffff;
+  padding: 1rem 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 999;
+}
+
+/* === FLEX LAYOUT === */
+.nav-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1.5rem;
+  width: 100%;
+}
+
+/* === THREE ZONES === */
+.nav-left,
+.nav-center,
+.nav-right {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.nav-left {
+  justify-content: flex-start;
+}
+
+.nav-center {
+  justify-content: center;
+}
+
+.nav-right {
+  justify-content: flex-end;
+}
+
+/* === LOGO === */
+.logo img {
+  height: 40px;
+  width: auto;
+}
+
+/* === MENU TOGGLE (hamburger) === */
+.menu-toggle {
+  font-size: 1.8rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: block;
+}
+
+/* === NAV LINKS (mobile default) === */
+.nav-links {
+  display: none;
+  flex-direction: column;
+  position: absolute;
+  top: 70px;
+  right: 1rem; /* ⬅️ this anchors it to the right side */
+  background: #fff;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  min-width: 150px;
+  align-items: flex-start;
+}
+
+
+.nav-links.open {
+  display: flex;
+}
+
+.nav-links li {
+  margin-bottom: 10px;
+}
+
+.nav-links a {
+  color: #444;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.nav-links a:hover {
+  color: #0077cc;
+}
+
+/* === DESKTOP MODE === */
+@media (min-width: 768px) {
+  .menu-toggle {
+    display: none;
+  }
+
+  .nav-links {
+    display: flex !important;
+    flex-direction: row;
+    position: static;
+    transform: none;
+    background: none;
+    padding: 0;
+    box-shadow: none;
+  }
+
+  .nav-links li {
+    margin: 0 1.5rem;
+  }
+}
