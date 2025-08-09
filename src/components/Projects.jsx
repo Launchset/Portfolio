@@ -1,21 +1,56 @@
 import './Projects.css';
-// REMOVE this:
-// import LightboxImage from './LightboxImage';
-// ADD this:
 import InlineCarousel from './InlineCarousel';
 
-// Desktop assets
-import heroImage from '../assets/hero-image.png';
+/* ========= Desktop images ========= */
 import desktopGraph from '../assets/desktop-graph.png';
-import desktopGraphChange from '../assets/desktop-graph-change.png';
+import desktopChange from '../assets/desktop-graph-change.png';
+import inflationShieldDark from '../assets/inflation-shield-dark.png';
+import inflationShieldLight from '../assets/inflation-shield-light.png';
+import legacyDesktopHome from '../assets/Legacy-desktop-home.png';
+import legacyDesktopLogin from '../assets/Legacy-desktop-login.png';
+import legacyDesktopTimetable from '../assets/Legacy-desktop-timetable.png';
+import legacyDesktopNew from '../assets/Legacy-desktop-newclass.png';
+import legacyDesktopEdit from '../assets/Legacy-desktop-editclass.png';
+import legacyDesktopInfo from '../assets/Legacy-desktop-infoclass.png';
 
-// Phone assets
+/* ========= Phone images (now .png) ========= */
 import phoneGraph from '../assets/phone-graph.png';
-import codeShot from '../assets/code.png';
+import legacyPhoneHome from '../assets/Legacy-phone-home.png';
+import legacyPhoneHomeBottom from '../assets/Legacy-phone-homebottom.png';
+import legacyPhoneMenu from '../assets/Legacy-phone-menu.png';
+import legacyPhoneTimetable from '../assets/Legacy-phone-timetable.png';
+import legacyPhoneLogin from '../assets/Legacy-phone-login.png';
+import legacyPhoneProfile from '../assets/Legacy-phone-profile.png';
+import legacyPhoneNew from '../assets/Legacy-phone-newclass.png';
+import legacyPhoneEdit from '../assets/Legacy-phone-editclass.png';
+import legacyPhoneInfo from '../assets/Legacy-phone-infoclass.png';
 
 export default function Projects() {
-  const desktopGallery = [heroImage, desktopGraph, desktopGraphChange];
-  const phoneGallery = [phoneGraph, codeShot];
+  const desktopGallery = [
+    legacyDesktopHome,
+    legacyDesktopLogin,
+    legacyDesktopTimetable,
+    legacyDesktopNew,
+    legacyDesktopEdit,
+    legacyDesktopInfo,
+    inflationShieldDark,
+    inflationShieldLight,
+    desktopGraph,
+    desktopChange,
+  ];
+
+  const phoneGallery = [
+    legacyPhoneHome,
+    legacyPhoneHomeBottom,
+    legacyPhoneMenu,
+    legacyPhoneTimetable,
+    legacyPhoneLogin,
+    legacyPhoneProfile,
+    legacyPhoneNew,
+    legacyPhoneEdit,
+    legacyPhoneInfo,
+    phoneGraph,
+  ];
 
   return (
     <section id="projects" className="projects">
@@ -25,7 +60,6 @@ export default function Projects() {
         {/* Desktop box (bigger) */}
         <article className="project-card desktop">
           <div className="project-media">
-            {/* SWAP LightboxImage -> InlineCarousel */}
             <InlineCarousel images={desktopGallery} alt="Desktop work" ratio="16 / 9" />
           </div>
           <div className="project-body">
@@ -41,18 +75,17 @@ export default function Projects() {
           </div>
         </article>
 
-        {/* Phone box (smaller) */}
+        {/* Phone box (smaller, iPhone SE aspect) */}
         <article className="project-card mobile">
           <div className="project-media">
             <div className="phone-frame">
-              {/* SWAP LightboxImage -> InlineCarousel, tall ratio */}
-              <InlineCarousel images={phoneGallery} alt="Mobile work" ratio="9 / 19" showDots={false} />
+              <InlineCarousel images={phoneGallery} alt="Mobile work" ratio="9 / 16" showDots={false} />
             </div>
           </div>
           <div className="project-body">
             <h3 className="project-title">Mobile UI</h3>
             <p className="project-desc">
-              Phone-first screens and flows with readable typography and thumb-friendly spacing.
+              Phone-first screens with readable type and thumb-friendly spacing.
             </p>
             <div className="tags">
               <span className="tag">Responsive</span>
