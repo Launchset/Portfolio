@@ -1,0 +1,97 @@
+.projects {
+  background: #eefaf3;
+  padding: 56px 20px;
+}
+
+.projects h2 {
+  text-align: center;
+  color: #0a2b1a;
+  font-size: 2rem;
+  margin-bottom: 24px;
+}
+
+.projects-grid.two-cards {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  gap: 20px;
+
+  /* mobile-first: stack */
+  grid-template-columns: 1fr;
+}
+
+/* two columns: desktop card 2fr, phone card 1fr */
+@media (min-width: 980px) {
+  .projects-grid.two-cards {
+    grid-template-columns: 2fr 1fr;
+    align-items: start;
+  }
+}
+
+.project-card {
+  background: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  transition: transform .2s ease, box-shadow .2s ease;
+  display: flex; flex-direction: column;
+}
+
+.project-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.12);
+}
+
+/* media blocks */
+.project-media { position: relative; background: #f7faf8; }
+.project-media img { width: 100%; height: 100%; object-fit: cover; }
+
+/* big, wide preview for desktop */
+.project-card.desktop .project-media { aspect-ratio: 16/9; }
+
+/* tall + narrower preview for phone */
+.project-card.mobile .project-media { 
+  display: flex; justify-content: center; align-items: center;
+  background: transparent; 
+}
+
+/* phone frame */
+.phone-frame {
+  background: #111;
+  border-radius: 26px;
+  width: min(100%, 380px);
+  aspect-ratio: 9 / 16;
+  margin: 0 auto;
+  box-shadow: 0 10px 24px rgba(0,0,0,0.25) inset, 0 8px 24px rgba(0,0,0,0.12);
+}
+.phone-frame img {
+  border-radius: 18px;
+  width: 100%; height: 100%;
+  object-fit: cover;   /* use contain if your screenshot isn't full-bleed */
+}
+
+/* label chip */
+.media-label {
+  position: absolute; top: 12px; left: 12px;
+  background: #00703c; color: #fff; font-weight: 700;
+  font-size: 0.75rem; letter-spacing: .3px;
+  padding: 6px 10px; border-radius: 999px; z-index: 1;
+}
+
+.project-body { padding: 16px; }
+.project-title { font-size: 1.15rem; margin-bottom: 6px; color: #222; }
+.project-desc { font-size: 0.95rem; color: #555; margin-bottom: 12px; }
+.tags { display: flex; gap: 8px; flex-wrap: wrap; }
+.tag { background: #e4f6ea; color: #00703c; font-size: .75rem; padding: 4px 8px; border-radius: 999px; }
+.card-actions { display: flex; gap: 10px; margin-top: auto; padding: 0 16px 16px; }
+.card-btn { padding: 8px 12px; border-radius: 8px; font-weight: 600; font-size: .9rem; text-decoration: none; }
+.card-btn.primary { background: #00703c; color: #fff; }
+.card-btn.ghost { border: 2px solid #00703c; color: #00703c; background: transparent; }
+.card-btn.ghost:hover { background: #00703c; color: #fff; }
+
+/* Show the whole screenshot inside the phone card */
+.phone-frame .inline-slide img { object-fit: contain; background:#000; }
+.phone-frame .inline-carousel,
+.phone-frame .inline-track,
+.phone-frame .inline-slide { height: 100%; }
+

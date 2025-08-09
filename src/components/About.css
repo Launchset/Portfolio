@@ -36,12 +36,17 @@
   padding-bottom: 1rem;
 }
 
+/* About.css */
 .about h2::after {
   content: "";
   display: block;
-  width: 100vh;
   height: 2px;
-  background-color: #a9e5c1; /* Light green - adjust to taste */
+  background-color: #a9e5c1;
   margin: 0.5rem auto 0;
   border-radius: 2px;
+
+  /* pick ONE of these width styles */
+  width: 60%;               /* simple */
+  max-width: 320px;         /* cap on large screens */
+  /* or modern: width: clamp(120px, 40%, 360px); */
 }
