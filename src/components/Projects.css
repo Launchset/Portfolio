@@ -95,3 +95,28 @@
 .phone-frame .inline-track,
 .phone-frame .inline-slide { height: 100%; }
 
+/* ----- Info box under the grid ----- */
+.projects-info {
+  max-width: 1200px;
+  margin: 20px auto 0;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  padding: 18px 20px;
+}
+
+.projects-info h3 {
+  margin: 0 0 .5rem 0;
+  color: #0a2b1a;
+  font-size: 1.15rem;
+}
+.projects-info p {
+  margin: 0;
+  color: #374151;
+  line-height: 1.7;
+}
+
+/* If you prefer the info box to live INSIDE the grid and span both columns: */
+.projects-grid.two-cards .projects-info.grid-span {
+  grid-column: 1 / -1;
+}

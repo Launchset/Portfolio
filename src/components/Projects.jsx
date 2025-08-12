@@ -114,6 +114,17 @@ export default function Projects() {
             <div className="tags"><span className="tag">Responsive</span><span className="tag">UX</span><span className="tag">Performance</span></div>
           </div>
         </article>
+      </div>{/* end .projects-grid */}
+
+      {/* Info box under projects */}
+      <div className="projects-info">
+        <h3>About This Portfolio</h3>
+        <p>
+          This portfolio showcases real-world projects, including responsive web UIs,
+          mobile-first designs, and interactive data dashboards. Each project focuses on
+          usability, performance, and visual appeal — built using modern frameworks like
+          React and Vite.
+        </p>
       </div>
 
       {/* Lightboxes */}
