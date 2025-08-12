@@ -1,18 +1,30 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './InlineCarousel.css';
 
 export default function InlineCarousel({
   images = [],
   alt = '',
-  ratio = '16 / 9',           // e.g. '16 / 9' or '9 / 19'
+  ratio = '16 / 9',
   className = '',
   showDots = true,
+  onChange,                // NEW: parent gets current index
 }) {
   const [index, setIndex] = useState(0);
   if (!images.length) return null;
 
-  const next = () => setIndex((i) => (i + 1) % images.length);
-  const prev = () => setIndex((i) => (i - 1 + images.length) % images.length);
+  // helper: set index + notify parent
+  const setAndNotify = (next) => {
+    setIndex((prev) => {
+      const ni = typeof next === 'function' ? next(prev) : next;
+      onChange?.(ni);
+      return ni;
+    });
+  };
+
+  useEffect(() => { onChange?.(0); }, []); // tell parent initial
+
+  const next = () => setAndNotify((i) => (i + 1) % images.length);
+  const prev = () => setAndNotify((i) => (i - 1 + images.length) % images.length);
 
   return (
     <div className={`inline-carousel ${className}`} style={{ '--i': index }}>
@@ -35,7 +47,7 @@ export default function InlineCarousel({
             <button
               key={i}
               className={`inline-dot ${i === index ? 'active' : ''}`}
-              onClick={() => setIndex(i)}
+              onClick={() => setAndNotify(i)}
               aria-label={`Go to slide ${i + 1}`}
             />
           ))}
