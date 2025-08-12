@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import './InlineCarousel.css';
 
 export default function InlineCarousel({
@@ -7,38 +7,47 @@ export default function InlineCarousel({
   ratio = '16 / 9',
   className = '',
   showDots = true,
-  onChange,                // NEW: parent gets current index
+  onChange,        // (index) => void  (optional)
+  onImageClick,    // (index) => void  (NEW: tells parent which image was clicked)
 }) {
   const [index, setIndex] = useState(0);
   if (!images.length) return null;
 
-  // helper: set index + notify parent
-  const setAndNotify = (next) => {
-    setIndex((prev) => {
-      const ni = typeof next === 'function' ? next(prev) : next;
-      onChange?.(ni);
-      return ni;
-    });
+  const goTo = (i) => {
+    const ni = ((i % images.length) + images.length) % images.length;
+    setIndex(ni);
+    onChange?.(ni);
   };
 
-  useEffect(() => { onChange?.(0); }, []); // tell parent initial
-
-  const next = () => setAndNotify((i) => (i + 1) % images.length);
-  const prev = () => setAndNotify((i) => (i - 1 + images.length) % images.length);
+  const next = () => goTo(index + 1);
+  const prev = () => goTo(index - 1);
 
   return (
     <div className={`inline-carousel ${className}`} style={{ '--i': index }}>
-      <div className="inline-track" style={{ transform: `translate3d(-${index * 100}%, 0, 0)` }}>
+      <div
+        className="inline-track"
+        style={{ transform: `translate3d(-${index * 100}%, 0, 0)` }}
+      >
         {images.map((src, i) => (
           <div key={i} className="inline-slide" style={{ aspectRatio: ratio }}>
-            <img src={src} alt={alt || `slide ${i + 1}`} />
+            <img
+              src={src}
+              alt={alt || `slide ${i + 1}`}
+              onClick={() => onImageClick?.(i)}   // tell parent which image
+              draggable="false"
+            />
           </div>
         ))}
       </div>
 
-      <div className="inline-nav" aria-hidden="true">
-        <button className="inline-btn prev" onClick={prev} aria-label="Previous">&#10094;</button>
-        <button className="inline-btn next" onClick={next} aria-label="Next">&#10095;</button>
+      {/* Make these accessible; don't hide them with aria-hidden or inert */}
+      <div className="inline-nav">
+        <button className="inline-btn prev" onClick={prev} aria-label="Previous">
+          &#10094;
+        </button>
+        <button className="inline-btn next" onClick={next} aria-label="Next">
+          &#10095;
+        </button>
       </div>
 
       {showDots && (
@@ -47,7 +56,7 @@ export default function InlineCarousel({
             <button
               key={i}
               className={`inline-dot ${i === index ? 'active' : ''}`}
-              onClick={() => setAndNotify(i)}
+              onClick={() => goTo(i)}
               aria-label={`Go to slide ${i + 1}`}
             />
           ))}

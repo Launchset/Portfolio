@@ -1,18 +1,25 @@
 import './Projects.css';
-import InlineCarousel from './InlineCarousel';
+import InlineCarousel from './InlineCarousel.jsx';
+import LightboxPortal from './LightboxPortal.jsx';   // <-- ADD THIS
 
-/* imports (your real ones) */
+/* imports — your existing image imports here ... */
+
+import { useState } from 'react';
+
+  /* ========= Desktop images ========= */
+import desktopGraph from '../assets/desktop-graph.png';
+import desktopChange from '../assets/desktop-graph-change.png';
+import inflationShieldDark from '../assets/inflation-shield-dark.png';
+import inflationShieldLight from '../assets/inflation-shield-light.png';
 import legacyDesktopHome from '../assets/Legacy-desktop-home.png';
 import legacyDesktopLogin from '../assets/Legacy-desktop-login.png';
 import legacyDesktopTimetable from '../assets/Legacy-desktop-timetable.png';
 import legacyDesktopNew from '../assets/Legacy-desktop-newclass.png';
 import legacyDesktopEdit from '../assets/Legacy-desktop-editclass.png';
 import legacyDesktopInfo from '../assets/Legacy-desktop-infoclass.png';
-import inflationShieldDark from '../assets/inflation-shield-dark.png';
-import inflationShieldLight from '../assets/inflation-shield-light.png';
-import desktopGraph from '../assets/desktop-graph.png';
-import desktopChange from '../assets/desktop-graph-change.png';
 
+/* ========= Phone images (now .png) ========= */
+import phoneGraph from '../assets/phone-graph.png';
 import legacyPhoneHome from '../assets/Legacy-phone-home.png';
 import legacyPhoneHomeBottom from '../assets/Legacy-phone-homebottom.png';
 import legacyPhoneMenu from '../assets/Legacy-phone-menu.png';
@@ -22,12 +29,9 @@ import legacyPhoneProfile from '../assets/Legacy-phone-profile.png';
 import legacyPhoneNew from '../assets/Legacy-phone-newclass.png';
 import legacyPhoneEdit from '../assets/Legacy-phone-editclass.png';
 import legacyPhoneInfo from '../assets/Legacy-phone-infoclass.png';
-import phoneGraph from '../assets/phone-graph.png';
 
-import { useState } from 'react';
 
 export default function Projects() {
-  /* ---- DESKTOP: images + metadata in the SAME order ---- */
   const desktopSlides = [
     { img: legacyDesktopHome, title: 'Marketing Home', blurb: 'Hero, value props, and CTA tuned for conversions.' },
     { img: legacyDesktopLogin, title: 'Secure Login', blurb: 'Auth screen with error states and password UX that doesn’t make users cry.' },
@@ -41,7 +45,6 @@ export default function Projects() {
     { img: desktopChange, title: 'Scenario Compare', blurb: 'Side-by-side projections to test strategy changes.' },
   ];
 
-  /* ---- PHONE: same pattern ---- */
   const phoneSlides = [
     { img: legacyPhoneHome, title: 'Mobile Home', blurb: 'Fast, thumb-friendly landing for quick actions.' },
     { img: legacyPhoneHomeBottom, title: 'Feature Strip', blurb: 'Benefits + trust signals for on-the-go users.' },
@@ -52,14 +55,23 @@ export default function Projects() {
     { img: legacyPhoneNew, title: 'Book Class', blurb: 'Fast booking with capacity feedback.' },
     { img: legacyPhoneEdit, title: 'Edit Booking', blurb: 'Reschedule/cancel flows without rage clicks.' },
     { img: legacyPhoneInfo, title: 'Class Details', blurb: 'Coach, equipment, intensity, and rules summary.' },
-    { img: phoneGraph, title: 'Finance Mini‑Dashboard', blurb: 'Tiny charts optimized for small screens.' },
+    { img: phoneGraph, title: 'Finance Mini-Dashboard', blurb: 'Tiny charts optimized for small screens.' },
   ];
 
   const [desktopIdx, setDesktopIdx] = useState(0);
   const [phoneIdx, setPhoneIdx] = useState(0);
 
+  // Lightbox state
+  const [desktopLbOpen, setDesktopLbOpen] = useState(false);
+  const [desktopLbIndex, setDesktopLbIndex] = useState(0);
+  const [phoneLbOpen, setPhoneLbOpen] = useState(false);
+  const [phoneLbIndex, setPhoneLbIndex] = useState(0);
+
   const d = desktopSlides[desktopIdx] || {};
   const m = phoneSlides[phoneIdx] || {};
+
+  const desktopImages = desktopSlides.map(s => s.img);
+  const phoneImages   = phoneSlides.map(s => s.img);
 
   return (
     <section id="projects" className="projects">
@@ -70,9 +82,10 @@ export default function Projects() {
         <article className="project-card desktop">
           <div className="project-media">
             <InlineCarousel
-              images={desktopSlides.map(s => s.img)}
+              images={desktopImages}
               ratio="16 / 9"
               onChange={setDesktopIdx}
+              onImageClick={(i) => { setDesktopLbIndex(i); setDesktopLbOpen(true); }}
             />
           </div>
           <div className="project-body">
@@ -87,10 +100,11 @@ export default function Projects() {
           <div className="project-media">
             <div className="phone-frame">
               <InlineCarousel
-                images={phoneSlides.map(s => s.img)}
+                images={phoneImages}
                 ratio="9 / 16"
                 showDots={false}
                 onChange={setPhoneIdx}
+                onImageClick={(i) => { setPhoneLbIndex(i); setPhoneLbOpen(true); }}
               />
             </div>
           </div>
@@ -101,6 +115,22 @@ export default function Projects() {
           </div>
         </article>
       </div>
+
+      {/* Lightboxes */}
+      {desktopLbOpen && (
+        <LightboxPortal
+          images={desktopImages}
+          startIndex={desktopLbIndex}
+          onClose={() => setDesktopLbOpen(false)}
+        />
+      )}
+      {phoneLbOpen && (
+        <LightboxPortal
+          images={phoneImages}
+          startIndex={phoneLbIndex}
+          onClose={() => setPhoneLbOpen(false)}
+        />
+      )}
     </section>
   );
 }
