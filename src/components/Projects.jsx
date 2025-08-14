@@ -76,24 +76,58 @@ export default function Projects() {
   return (
     <section id="projects" className="projects">
       <h2>My Projects</h2>
+<section className="projects">
+  <h2>Projects</h2>
 
-      <div className="projects-grid two-cards">
-        {/* Desktop card */}
-        <article className="project-card desktop">
-          <div className="project-media">
-            <InlineCarousel
-              images={desktopImages}
-              ratio="16 / 9"
-              onChange={setDesktopIdx}
-              onImageClick={(i) => { setDesktopLbIndex(i); setDesktopLbOpen(true); }}
-            />
-          </div>
-          <div className="project-body">
-            <h3 className="project-title">{d.title || 'Desktop Web UI'}</h3>
-            <p className="project-desc">{d.blurb || 'Responsive desktop layouts and charts.'}</p>
-            <div className="tags"><span className="tag">React</span><span className="tag">Vite</span><span className="tag">CSS</span></div>
-          </div>
-        </article>
+  <div className="projects-grid two-cards">
+
+    {/* Project card 1 */}
+    <article className="project-card desktop">
+      <div className="project-media">
+        <span className="media-label">Desktop</span>
+        <img src={desktopGraph} alt="Desktop Project Preview" />
+      </div>
+      <div className="project-body">
+        <h3 className="project-title">Desktop UI</h3>
+        <p className="project-desc">Description of the desktop UI project…</p>
+        <div className="tags">
+          <span className="tag">React</span>
+          <span className="tag">CSS</span>
+        </div>
+      </div>
+    </article>
+
+    {/* Project card 2 */}
+    <article className="project-card mobile">
+      <div className="project-media">
+        <span className="media-label">Mobile</span>
+        <div className="phone-frame">
+          <img src={mobilePreview} alt="Mobile Project Preview" />
+        </div>
+      </div>
+      <div className="project-body">
+        <h3 className="project-title">Mobile UI</h3>
+        <p className="project-desc">Description of the mobile UI project…</p>
+        <div className="tags">
+          <span className="tag">React</span>
+          <span className="tag">CSS</span>
+        </div>
+      </div>
+    </article>
+
+    {/* About This Portfolio section */}
+    <div className="projects-info">
+      <h3>About This Portfolio</h3>
+      <p>
+        This portfolio showcases various projects built using modern web
+        development tools and techniques. Each project highlights skills in
+        UI/UX design, responsive layouts, and interactive features.
+      </p>
+    </div>
+
+  </div>
+</section>
+
 
         {/* Mobile card */}
         <article className="project-card mobile">
