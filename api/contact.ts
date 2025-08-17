@@ -1,4 +1,3 @@
-import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { Resend } from 'resend';
 import { z } from 'zod';
 
@@ -13,13 +12,17 @@ const schema = z.object({
   consent: z.boolean(),
 });
 
-export default async function handler(req: VercelRequest, res: VercelResponse) {
+export default async function handler(req: any, res: any) {
   if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Method not allowed' });
+    res.statusCode = 405;
+    return res.json({ error: 'Method not allowed' });
   }
 
-  const parsed = schema.safeParse(req.body);
+  // Vercel usually parses JSON, but be defensive in dev/preview
+  const body = typeof req.body === 'string' ? safeJson(req.body) : req.body;
+  if (!body) return res.status(400).json({ error: 'Invalid JSON' });
 
+  const parsed = schema.safeParse(body);
   if (!parsed.success) {
     return res.status(400).json({ error: parsed.error.format() });
   }
@@ -28,9 +31,9 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
   try {
     await resend.emails.send({
-      from: 'Launchset <hello@launchset.dev>', // replace with a verified sender
+      from: 'Launchset <john@launchset.dev>', // use a verified sender or 'onboarding@resend.dev' for sandbox
       to: process.env.SEND_TO_EMAIL!,
-      reply_to: email,
+      replyTo: email, // <-- fixed key
       subject: `New inquiry from ${name}`,
       text: `
 Name: ${name}
@@ -44,7 +47,11 @@ ${message}
 
     return res.status(200).json({ ok: true });
   } catch (err) {
-    console.error(err);
+    console.error('Resend error:', err);
     return res.status(500).json({ error: 'Failed to send email' });
   }
+}
+
+function safeJson(s: string) {
+  try { return JSON.parse(s); } catch { return null; }
 }
