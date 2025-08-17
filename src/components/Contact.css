@@ -1,0 +1,179 @@
+/* === Section === */
+.contact {
+  background: #ffffff;   /* keep your current background */
+  padding: 56px 20px 80px;
+}
+.contact-wrap { max-width: 1200px; margin: 0 auto; }
+.contact-title {
+  font-size: 2rem;
+  text-align: center;
+  color: #0a2b1a;
+  margin-bottom: 24px;
+}
+
+/* === Top info cards === */
+.contact-grid {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: 1fr;       /* mobile: stack */
+  margin-bottom: 24px;
+}
+@media (min-width: 720px) {
+  .contact-grid { grid-template-columns: 1fr 1fr; }           /* tablet: 2-up */
+}
+@media (min-width: 980px) {
+  .contact-grid { grid-template-columns: repeat(3, 1fr); }    /* desktop: 3-up */
+}
+
+.contact-card,
+.contact-form.card {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  padding: 18px 20px;
+}
+.contact-card h3 { margin: 0 0 .5rem; color: #0a2b1a; }
+.muted { color: #555; }
+.bullets { margin: .25rem 0 0 1rem; line-height: 1.7; }
+
+/* === Form layout === */
+.contact-form h3 { margin-top: 0; color: #0a2b1a; }
+
+.form-grid {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: 1fr;       /* mobile: single column */
+  margin-top: 10px;
+}
+.form-grid label { display: grid; gap: 6px; }
+.form-grid .full { grid-column: 1 / -1; }
+
+@media (min-width: 720px) {
+  .form-grid { grid-template-columns: repeat(2, 1fr); } /* tablet+: two cols */
+  .form-grid .full { grid-column: 1 / -1; }             /* textarea spans both */
+}
+
+/* Inputs */
+input,
+textarea {
+  background: #fff;
+  border: 1px solid #cde8d7;
+  border-radius: 10px;
+  padding: 12px 14px;
+  font-size: 1rem;
+  color: #222;
+  width: 100%;
+  box-sizing: border-box;
+}
+input:focus,
+textarea:focus {
+  border-color: #00703c;
+  box-shadow: 0 0 0 3px rgba(0, 112, 60, 0.2);
+  outline: none;
+}
+textarea { resize: vertical; }
+
+/* Actions row */
+.actions {
+  margin-top: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+@media (max-width: 480px) {
+  .actions { flex-direction: column; align-items: stretch; }
+  .actions .btn-primary { width: 100%; }
+}
+
+.btn-primary {
+  background: #00703c;
+  color: #fff;
+  font-weight: 600;
+  padding: 12px 18px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.btn-primary:hover { background: #005f32; }
+
+.note.success { color: #00703c; }
+.note.error { color: #b30000; }
+
+/* Honeypot */
+.hp {
+  position: absolute;
+  left: -9999px;
+  width: 1px; height: 1px;
+}
+
+/* Consent row (text first, checkbox on the right) */
+.consent-row {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+  flex-wrap: wrap; /* allow wrapping on tiny screens */
+}
+.consent-row label {
+  font-size: 0.95rem;
+  color: #222;
+  cursor: pointer;
+}
+.consent-row input[type="checkbox"] {
+  width: 16px; height: 16px;
+  margin: 0; flex: 0 0 auto;
+  accent-color: #00703c;
+}
+
+/* Select styled like inputs */
+.form-grid select {
+  background: #fff;
+  color: #222;
+  border: 1px solid #cde8d7;
+  border-radius: 10px;
+  padding: 12px 40px 12px 14px;
+  font-size: 1rem;
+  line-height: 1.2;
+  height: 44px;
+  width: 100%;
+  outline: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-image:
+    url("data:image/svg+xml;utf8,\
+    <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2300703c' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 16px;
+}
+.form-grid select:focus {
+  border-color: #00703c;
+  box-shadow: 0 0 0 3px rgba(0,112,60,0.2);
+}
+.form-grid select:hover { border-color: #a9dcc2; }
+.form-grid select:disabled {
+  color: #8aa0b3;
+  background-color: #f6fbf8;
+  border-color: #dfeee6;
+  cursor: not-allowed;
+}
+.form-grid select::-ms-expand { display: none; }
+
+/* === Contact cards & form with subtle green tint === */
+.contact-card,
+.contact-form.card {
+  background: rgba(240, 250, 245, 0.9); /* soft greenish-white */
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  padding: 18px 20px;
+  transition: background 0.2s ease;
+}
+
+/* optional: slightly stronger tint on hover */
+.contact-card:hover,
+.contact-form.card:hover {
+  background: rgba(232, 246, 238, 1); 
+}

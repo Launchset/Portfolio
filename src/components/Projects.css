@@ -10,31 +10,51 @@
   margin-bottom: 24px;
 }
 
+/* GRID */
 .projects-grid.two-cards {
   max-width: 1200px;
   margin: 0 auto;
   display: grid;
   gap: 20px;
-
-  /* mobile-first: stack */
-  grid-template-columns: 1fr;
+  grid-template-columns: 1fr; /* mobile: stack */
 }
 
-/* two columns: desktop card 2fr, phone card 1fr */
+/* --- GRID LAYOUT RULES --- */
 @media (min-width: 980px) {
   .projects-grid.two-cards {
     grid-template-columns: 2fr 1fr;
     align-items: start;
   }
+
+  /* force placements so nothing wanders */
+  .project-card.desktop { 
+    grid-column: 1; 
+    grid-row: 1;          /* top-left */
+  }
+
+  .projects-info {
+    grid-column: 1; 
+    grid-row: 2;          /* under desktop card, same column */
+    margin: 0;            /* let the grid gap handle spacing */
+  }
+
+  .project-card.mobile {
+    grid-column: 2; 
+    grid-row: 1 / span 2; /* top-right; runs alongside both left items */
+    align-self: start;    /* no weird vertical centering */
+  }
 }
 
+
+/* CARDS */
 .project-card {
   background: #fff;
   border-radius: 16px;
   overflow: hidden;
   box-shadow: 0 8px 24px rgba(0,0,0,0.08);
   transition: transform .2s ease, box-shadow .2s ease;
-  display: flex; flex-direction: column;
+  display: flex; 
+  flex-direction: column;
 }
 
 .project-card:hover {
@@ -42,20 +62,18 @@
   box-shadow: 0 12px 28px rgba(0,0,0,0.12);
 }
 
-/* media blocks */
+/* MEDIA */
 .project-media { position: relative; background: #f7faf8; }
 .project-media img { width: 100%; height: 100%; object-fit: cover; }
 
-/* big, wide preview for desktop */
 .project-card.desktop .project-media { aspect-ratio: 16/9; }
 
-/* tall + narrower preview for phone */
 .project-card.mobile .project-media { 
   display: flex; justify-content: center; align-items: center;
   background: transparent; 
 }
 
-/* phone frame */
+/* PHONE FRAME */
 .phone-frame {
   background: #111;
   border-radius: 26px;
@@ -70,7 +88,7 @@
   object-fit: cover;   /* use contain if your screenshot isn't full-bleed */
 }
 
-/* label chip */
+/* LABEL CHIP */
 .media-label {
   position: absolute; top: 12px; left: 12px;
   background: #00703c; color: #fff; font-weight: 700;
@@ -78,6 +96,7 @@
   padding: 6px 10px; border-radius: 999px; z-index: 1;
 }
 
+/* BODY */
 .project-body { padding: 16px; }
 .project-title { font-size: 1.15rem; margin-bottom: 6px; color: #222; }
 .project-desc { font-size: 0.95rem; color: #555; margin-bottom: 12px; }
@@ -89,21 +108,23 @@
 .card-btn.ghost { border: 2px solid #00703c; color: #00703c; background: transparent; }
 .card-btn.ghost:hover { background: #00703c; color: #fff; }
 
-/* Show the whole screenshot inside the phone card */
+/* PHONE CAROUSEL INSIDE FRAME */
 .phone-frame .inline-slide img { object-fit: contain; background:#000; }
 .phone-frame .inline-carousel,
 .phone-frame .inline-track,
 .phone-frame .inline-slide { height: 100%; }
 
-/* ----- Info box under the grid ----- */
+/* INFO BOX (as its own grid item under desktop) */
 .projects-info {
-  max-width: 1200px;
-  margin: 20px auto 0;
   background: #fff;
   border-radius: 16px;
   box-shadow: 0 8px 24px rgba(0,0,0,0.08);
   padding: 18px 20px;
+  margin: 0;                 /* default; grid gap adds spacing */
 }
+
+/* Optional tiny nudge closer to the desktop card */
+.projects-info.tight { margin-top: -8px; }
 
 .projects-info h3 {
   margin: 0 0 .5rem 0;
@@ -116,7 +137,10 @@
   line-height: 1.7;
 }
 
-/* If you prefer the info box to live INSIDE the grid and span both columns: */
-.projects-grid.two-cards .projects-info.grid-span {
-  grid-column: 1 / -1;
-}
+  /* Carousel arrows: bigger targets, pulled inside a bit */
+  .inline-carousel .nav-btn,
+  .inline-carousel button[aria-label*="Previous"],
+  .inline-carousel button[aria-label*="Next"] {
+    width: 40px; height: 40px; border-radius: 999px;
+    background: rgba(0,0,0,.5); color: #fff;
+  }

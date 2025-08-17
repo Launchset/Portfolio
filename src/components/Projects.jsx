@@ -88,12 +88,22 @@ export default function Projects() {
               onImageClick={(i) => { setDesktopLbIndex(i); setDesktopLbOpen(true); }}
             />
           </div>
+
           <div className="project-body">
             <h3 className="project-title">{d.title || 'Desktop Web UI'}</h3>
             <p className="project-desc">{d.blurb || 'Responsive desktop layouts and charts.'}</p>
             <div className="tags"><span className="tag">React</span><span className="tag">Vite</span><span className="tag">CSS</span></div>
           </div>
         </article>
+
+          {/* Info box under desktop */}
+        <div className="projects-info">
+          <h3>About This Portfolio</h3>
+          <p>
+            This portfolio showcases real-world projects, including responsive web UIs,
+            mobile-first designs, and interactive data dashboards...
+          </p>
+        </div>
 
         {/* Mobile card */}
         <article className="project-card mobile">
@@ -114,14 +124,6 @@ export default function Projects() {
             <div className="tags"><span className="tag">Responsive</span><span className="tag">UX</span><span className="tag">Performance</span></div>
           </div>
         </article>
-
-        <div className="projects-info grid-span">
-          <h3>About This Portfolio</h3>
-          <p>
-            This portfolio showcases real-world projects, including responsive web UIs,
-            mobile-first designs, and interactive data dashboards...
-          </p>
-        </div>
       </div>{/* end .projects-grid */}
 
 
