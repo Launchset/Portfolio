@@ -31,7 +31,7 @@ export default async function handler(req: any, res: any) {
 
   try {
     await resend.emails.send({
-      from: 'Launchset <john@launchset.dev>', // use a verified sender or 'onboarding@resend.dev' for sandbox
+      from: 'Launchset <launchsetfreelancer@gmail.com>', // use a verified sender or 'onboarding@resend.dev' for sandbox
       to: process.env.SEND_TO_EMAIL!,
       replyTo: email, // <-- fixed key
       subject: `New inquiry from ${name}`,
