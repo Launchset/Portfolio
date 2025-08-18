@@ -67,7 +67,7 @@
 /* === MOBILE BEHAVIOR === */
 @media (max-width: 767px) {
   /* collapse the middle area */
-  .nav-center { display: none; }
+  .nav-center { display: contents; }
 
   /* left = logo, right = hamburger */
   .nav-left, .nav-right { flex: 0 0 auto; }

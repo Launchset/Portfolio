@@ -26,7 +26,10 @@ function Navbar() {
         <div className="nav-right">
             <button
                 className="menu-toggle"
-                onClick={() => setMenuOpen(!menuOpen)}
+                onClick={() => {
+                console.log("Hamburger clicked. menuOpen is:", menuOpen);
+                  setMenuOpen(!menuOpen)
+                }}
                 aria-label="Toggle menu"
                 >
                 ☰
