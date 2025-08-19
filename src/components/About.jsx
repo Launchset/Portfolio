@@ -6,16 +6,22 @@ function About() {
       <div className="about-container">
         <h2>The Person Behind the Code</h2>
         <p>
-          Hi, I’m <strong>John</strong> — an Accounting & Finance student with a passion for technology, automation, and building things that actually move the needle.
+          Hi, I’m <strong>John</strong> — a web developer and boxer who builds websites and booking systems for boxing gyms.
         </p>
         <p>
-          I'm driven by projects that make a real impact. I bring a mix of finance knowledge, coding experience, and automation tools to help businesses — especially in fitness and fintech — run smoother, grow faster, and spend less time on manual work.
+          After years training in local gyms, I saw firsthand how a lack of online presence and clunky booking systems were holding great coaches back. Missed sessions, lost sign-ups, endless admin—it adds up.
         </p>
         <p>
-          My goal is to work <strong>with</strong> businesses, not just <strong>for</strong> them — creating win-win partnerships where I contribute real value through tech and automation, while gaining real experience from you.
+          That’s why I combine my coding skills with my passion for the sport—creating fast, mobile-friendly websites that make it easier for boxing gyms to fill classes, manage schedules, and grow their business.
         </p>
         <p>
-          Whether you’re a gym owner looking to modernise, a startup needing a site that works as hard as you do, or someone with a bold idea — if it’s interesting, I’m in.
+          With a background in finance and automation, I focus on building clean systems that save time and reduce stress—so coaches can spend more time training fighters, and less time chasing paperwork.
+        </p>
+        <p>
+          I don’t just build sites—I partner with gyms to help them run smoother, look more professional, and stay competitive in a digital world.
+        </p>
+        <p>
+          If you run a boxing gym and want your website to actually work for you, let’s build something that punches above its weight.
         </p>
       </div>
     </section>
