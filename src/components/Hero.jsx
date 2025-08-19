@@ -9,10 +9,10 @@ export default function Hero() {
           <span className="hero-tagline">Custom Websites • Real Results</span>
           <h1>Websites & Booking Systems for Boxing Gyms</h1>
           <p>
-            I build fast, mobile-friendly websites and booking systems tailored for boxing gyms and coaches.
+          I design fast, modern websites and booking tools built specifically for boxing gyms and coaches.
           </p>
           <p>
-            Simple to use, designed to convert, and built to keep your classes full—so you can focus on training, not tech.
+          Easy to use, mobile-friendly, and built to keep your classes full—without the tech headaches. You train fighters, I’ll handle the website that brings them through the door.
           </p>
 
           <div className="hero-buttons">
