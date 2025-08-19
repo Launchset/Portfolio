@@ -9,30 +9,26 @@ function Navbar() {
     <nav className="navbar">
       <div className="nav-content">
         <div className="nav-left">
-            <a href="#hero" className="logo">
+          <a href="#hero" className="logo">
             <img src={logo} alt="Logo" />
-            </a>
-        </div>
-
-        
-        <div className="nav-center">
-            <ul className={`nav-links ${menuOpen ? 'open' : ''}`}>
-            <li><a href="#about" onClick={() => setMenuOpen(false)}>About</a></li>
-            <li><a href="#projects" onClick={() => setMenuOpen(false)}>Projects</a></li>
-            <li><a href="#contact" onClick={() => setMenuOpen(false)}>Contact</a></li>
-            </ul>
+          </a>
         </div>
 
         <div className="nav-right">
-            <button
-                className="menu-toggle"
-                onClick={() => setMenuOpen(!menuOpen)}
-                aria-label="Toggle menu"
-                >
-                ☰
-            </button>
+          <button
+            className="menu-toggle"
+            onClick={() => setMenuOpen(!menuOpen)}
+            aria-label="Toggle menu"
+          >
+            ☰
+          </button>
+          <ul className={`nav-links ${menuOpen ? 'open' : ''}`}>
+            <li><a href="#about" onClick={() => setMenuOpen(false)}>About</a></li>
+            <li><a href="#projects" onClick={() => setMenuOpen(false)}>Projects</a></li>
+            <li><a href="#contact" onClick={() => setMenuOpen(false)}>Contact</a></li>
+          </ul>
         </div>
-      </div>   
+      </div>
     </nav>
   );
 }
