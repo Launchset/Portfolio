@@ -1,100 +1,31 @@
-/* =========================================
-   HERO BACKGROUND + LAYOUT (CLEAN MERGE)
-   ========================================= */
+/* ===== HERO CONTENT ON TOP OF GLOBAL BG ===== */
 
-/* ---- Wrapper: holds background layers ---- */
-.hero-wrapper {
-  --mx: 0; /* can be driven by JS for parallax later */
-  --my: 0;
-  position: center;
-  width: 100%;
-  height: 100vh;
-  min-height: 90vh;
-  overflow: hidden;
-  display: block;
-  background: #141521; /* deep neutral for glow contrast */
-  isolation: isolate;   /* keep blend effects scoped */
-}
-
-/* ---- Background layers (behind content) ---- */
-.bg-blob {
-  position: absolute;
-  width: 48rem;
-  height: 48rem;
-  border-radius: 9999px;
-  filter: blur(80px) saturate(120%);
-  opacity: 0.45;
-  mix-blend-mode: screen;
-  z-index: 0;
-  animation: drift 26s ease-in-out infinite;
-  will-change: transform;
-}
-
-/* top-left magenta/violet glow */
-.blob-a {
-  left: -18rem;
-  top: -14rem;
-  background:
-    radial-gradient(closest-side at 30% 30%, #ff4bd8 0%, #8a5cff 55%, transparent 60%),
-    radial-gradient(closest-side at 70% 70%, #6ae1ff 0%, #6b76ff 50%, transparent 60%);
-  transform: translate3d(calc(var(--mx) * -20px), calc(var(--my) * -14px), 0);
-}
-
-/* bottom-right cyan/purple glow */
-.blob-b {
-  right: -16rem;
-  bottom: -18rem;
-  width: 42rem;
-  height: 42rem;
-  opacity: 0.40;
-  background:
-    radial-gradient(closest-side at 70% 40%, #6be7ff 0%, #6b76ff 55%, transparent 60%),
-    radial-gradient(closest-side at 20% 80%, #b06bff 0%, #6b5bff 55%, transparent 60%);
-  transform: translate3d(calc(var(--mx) * 24px), calc(var(--my) * 18px), 0);
-}
-
-/* subtle animated grain for texture (inline SVG) */
-.bg-grain {
-  position: absolute;
-  inset: -50%;
-  z-index: 1; /* above blobs, below content */
-  opacity: 0.07;
-  pointer-events: none;
-  mix-blend-mode: soft-light;
-  background-image: url("data:image/svg+xml;utf8,\
-  <svg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'>\
-    <filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter>\
-    <rect width='100%' height='100%' filter='url(%23n)' opacity='0.9'/>\
-  </svg>");
-  animation: grainShift 8s steps(10) infinite;
-}
-
-/* =========================================
-   HERO CONTENT (YOUR ORIGINAL, TUNED FOR DARK)
-   ========================================= */
-
-/* SECTION WRAPPER (foreground) */
 .hero {
-  position: center;
-  z-index: 2; /* above bg layers */
-  padding: 6rem 4rem;
-  width: 100%;             /* avoid 100vw scrollbars */
+  position: relative;
+  z-index: 2;                 
+  width: 100%;
   box-sizing: border-box;
-  color: #ffffff;          /* readable on dark */
-  margin-top: var( --nav-h, 80px); /* offset for sticky navbar */
+  color: #fff;
+
+  padding: 6rem 4rem;
+  margin-top: var(--nav-h, 80px);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  background: transparent; /* ✅ explicitly ensure it's transparent */
 }
 
-/* FLEX LAYOUT FOR TEXT + IMAGE */
+
 .hero-main {
   display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
   align-items: center;
   justify-content: space-between;
-  gap: 2rem;               /* breathing room */
+  gap: 2rem;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;             /* center the block */
 }
 
-/* TEXT STYLES */
 .hero-text {
   flex: 1 1 50%;
   text-align: left;
@@ -103,7 +34,7 @@
 .hero-tagline {
   display: block;
   font-size: 0.9rem;
-  color: #00c16a;          /* tuned from #00703c for contrast */
+  color: #00c16a;
   font-weight: 600;
   margin-bottom: 1rem;
   text-transform: uppercase;
@@ -111,23 +42,22 @@
 }
 
 .hero-text h1 {
-  font-size: 3.5rem;
-  margin-bottom: 1rem;
-  color: #ffffff;
-  animation: fadeInUp 0.4s ease-out forwards;
-  letter-spacing: -0.01em;
+  font-size: clamp(2.2rem, 2vw + 1.6rem, 3.5rem);
   line-height: 1.15;
+  letter-spacing: -0.01em;
+  color: #fff;
+  margin-bottom: 1rem;
+  animation: fadeInUp 0.4s ease-out forwards;
 }
 
 .hero-text p {
-  font-size: 1.25rem;
-  margin-bottom: 2.0rem;
-  color: #cfd3ffcc;        /* softer light text */
+  font-size: 1.15rem;
+  color: #cfd3ffcc;
   max-width: 600px;
+  margin-bottom: 1.25rem;
   animation: fadeInUp 0.6s ease-out forwards;
 }
 
-/* IMAGE STYLES */
 .hero-image-wrapper {
   flex: 1 1 50%;
   display: flex;
@@ -149,26 +79,15 @@
   display: block;
 }
 
-/* (Optional legacy bubble kept for reuse) */
-.hero-image-bubble {
-  background: #0f1020cc;
-  padding: 2rem;
-  border-radius: 1rem;
-  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.45);
-  transition: transform 0.3s ease-in-out;
-  backdrop-filter: blur(6px);
-}
-
-/* BUTTON GROUP */
+/* Buttons */
 .hero-buttons {
   margin-top: 1rem;
   display: flex;
-  justify-content: flex-start;
   gap: 0.75rem;
 }
 
 .cta-button {
-  background-color: #00c16a;   /* brand green, brighter on dark */
+  background-color: #00c16a;
   color: #0f1117;
   padding: 0.75rem 1.5rem;
   border-radius: 6px;
@@ -176,11 +95,7 @@
   text-decoration: none;
   transition: background-color 0.25s ease, transform 0.1s ease;
 }
-
-.cta-button:hover {
-  background-color: #00a65a;
-  transform: translateY(-1px);
-}
+.cta-button:hover { background-color: #00a65a; transform: translateY(-1px); }
 
 .cta-secondary {
   background: transparent;
@@ -191,72 +106,30 @@
   border-radius: 6px;
   transition: all 0.25s ease;
 }
+.cta-secondary:hover { background: #00c16a; color: #0f1117; }
 
-.cta-secondary:hover {
-  background: #00c16a;
-  color: #0f1117;
-}
-
-/* =========================================
-   ANIMATIONS
-   ========================================= */
+/* Animations */
 @keyframes fadeInUp {
   from { opacity: 0; transform: translateY(40px); }
   to   { opacity: 1; transform: translateY(0); }
 }
 
-@keyframes drift {
-  0%   { transform: translate3d(0,0,0) scale(1); }
-  50%  { transform: translate3d(0,-14px,0) scale(1.03); }
-  100% { transform: translate3d(0,0,0) scale(1); }
-}
-
-@keyframes grainShift {
-  0%   { transform: translate3d(0,0,0); }
-  100% { transform: translate3d(-10%, -10%, 0); }
-}
-
-/* Respect reduced motion */
-@media (prefers-reduced-motion: reduce) {
-  .bg-blob { animation: none; transform: none !important; }
-  .bg-grain { animation: none; }
-}
-
-/* =========================================
-   MOBILE LAYOUT
-   ========================================= */
+/* Mobile */
 @media (max-width: 768px) {
   .hero {
     padding: 2rem 1rem;
     text-align: center;
+    min-height: calc(100vh - var(--nav-h, 64px));
   }
 
-  .hero-main {
-    flex-direction: column;
-    gap: 2.25rem;
-  }
+  .hero-main { flex-direction: column; gap: 2rem; }
+  .hero-text { text-align: center; }
+  .hero-text h1 { font-size: 2.4rem; }
 
-  .hero-text {
-    padding: 0;
-    text-align: center;
-  }
+  .hero-buttons { justify-content: center; flex-wrap: wrap; }
 
-  .hero-text h1 {
-    font-size: 2.5rem;
-  }
-
-  .hero-buttons {
-    justify-content: center;
-    flex-wrap: wrap;
-  }
-
-  .cta-button,
-  .cta-secondary {
+  .cta-button, .cta-secondary {
     padding: 0.6rem 1rem;
     font-size: 0.95rem;
-  }
-
-  .hero-image img {
-    max-width: 100%;
   }
 }
