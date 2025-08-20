@@ -69,10 +69,10 @@ export default function Contact() {
           <article className="contact-card">
             <h3>What to include</h3>
             <ul className="bullets">
-              <li>➤ A brief intro about your gym/business — who you are and what you do.</li>
-              <li>➤ The type of website you’re looking for (new site, redesign, booking, membership features).</li>
-              <li>➤ Any must‑haves or goals (class booking, payments, specific style/brand feel).</li>
-              <li>➤ Timeline or deadlines (if you have a launch date in mind).</li>
+              <li>A brief intro about your gym/business — who you are and what you do.</li>
+              <li>The type of website you’re looking for (new site, redesign, booking, membership features).</li>
+              <li>Any must-haves or goals (class booking, payments, specific style/brand feel).</li>
+              <li>Timeline or deadlines (if you have a launch date in mind).</li>
             </ul>
           </article>
         </div>
