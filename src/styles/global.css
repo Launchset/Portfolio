@@ -13,9 +13,6 @@ body {
   line-height: 1.6;
 }
 
-main {
-  padding-top: 80px; /* offset for sticky navbar */
-}
 
 h1, h2, h3 {
   margin-bottom: 16px;

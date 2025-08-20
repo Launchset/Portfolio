@@ -1,125 +1,157 @@
-:root {
-  --nav-h: 64px; /* Navbar height across the site */
+:root{
+  --nav-h: 64px;
+  --glass-bg: rgba(255,255,255,0.12);
+  --glass-border: rgba(255,255,255,0.28);
+  --glass-shadow: 0 10px 40px rgba(0,0,0,0.25);
+  --brand-accent: #00c16a; /* matches your hero accent */
 }
 
-/* === NAVBAR CONTAINER === */
-.navbar {
+/* ===== NAVBAR CONTAINER (centered, floating) ===== */
+.navbar{
   position: fixed;
-  top: 0;
+  top: 1rem;
+  left: 0;
+  right: 0;
+  transform: none;
   width: 100%;
   height: var(--nav-h);
-  background: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   z-index: 999;
+  pointer-events: none; /* let only pill receive clicks */
+  padding: 0 20px; /* space for the pill */
 }
 
-/* === FLEX LAYOUT === */
-.nav-content {
-  position: relative;
-  height: 100%;
+/* ===== GLASSY PILL ===== */
+.nav-content{
+  pointer-events: auto; /* clickable */
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 1rem;
-  width: 100%;
+  gap: 1rem;
+
+  height: var(--nav-h);
+  padding: 0 1.25rem;
+
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px) saturate(150%);
+  -webkit-backdrop-filter: blur(16px) saturate(150%);
+  border: 1px solid var(--glass-border);
+  border-radius: 9999px; /* the oval */
+  box-shadow: var(--glass-shadow);
+
+  /* Width adapts to contents, but don’t get silly */
+  min-width: 260px;
 }
 
-/* === LEFT (Logo) === */
-.nav-left {
+/* Layout halves */
+.nav-left{
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  flex: 1 1 0;
 }
 
-/* === RIGHT (Hamburger + Links) === */
-.nav-right {
+.nav-right{
   display: flex;
   align-items: center;
-  flex: 0 0 auto;
-  position: relative;
+  position: relative; /* anchor dropdown */
 }
 
-/* === LOGO === */
-.logo img {
-  height: 180px;
+/* ===== LOGO ===== */
+.logo img{
+  margin: 0 auto;
+  height: 25px; /* keep the pill elegant */
   width: auto;
   display: block;
 }
 
-/* === NAV LINKS === */
-.nav-links {
+/* ===== LINKS ===== */
+.nav-links{
   display: flex;
-  gap: 1.5rem;
+  gap: 1.25rem;
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
-.nav-links a {
-  color: #444;
-  font-weight: 500;
+.nav-links a{
+  color: #ffffff;
   text-decoration: none;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  transition: color .2s ease, opacity .2s ease;
+  opacity: 0.9;
 }
 
-.nav-links a:hover {
-  color: #0077cc;
+.nav-links a:hover{
+  color: var(--brand-accent);
+  opacity: 1;
 }
 
-/* === MENU TOGGLE (hamburger) === */
-.menu-toggle {
-  font-size: 1.8rem;
-  background: none;
+/* ===== HAMBURGER ===== */
+.menu-toggle{
+  font-size: 1.5rem;
+  background: transparent;
+  color: #fff;
   border: none;
   cursor: pointer;
-  display: none; /* shown only on mobile */
   line-height: 1;
+  display: none; /* shown on mobile */
 }
 
-/* === MOBILE BEHAVIOR === */
-@media (max-width: 767px) {
-  .menu-toggle {
-    display: block;
+/* ===== MOBILE ===== */
+@media (max-width: 767px){
+  :root { --nav-h: 56px; }
+
+  .nav-content{
+    padding: 0 0.75rem 0 0.75rem;
+    gap: 0.5rem;
   }
 
-  .nav-links {
+  .logo img{ height: 32px; }
+
+  .menu-toggle{ display: block; }
+
+  /* Dropdown menu (glassy card) */
+  .nav-links{
     display: none;
     flex-direction: column;
     position: absolute;
-    top: calc(var(--nav-h) + 8px); /* dropdown below nav bar */
-    right: 0; /* align to right under hamburger */
-    background: #fff;
+    top: calc(100% + 10px);
+    right: 0;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(14px) saturate(160%);
+    -webkit-backdrop-filter: blur(14px) saturate(160%);
+    box-shadow: var(--glass-shadow);
     padding: 0.75rem;
-    border-radius: 10px;
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.14);
-    min-width: 170px;
-    gap: 0.75rem;
-    align-items: flex-start;
-    max-width: calc(100vw - 2rem);
-    z-index: 1000;
+    border-radius: 14px;
+    gap: 0.5rem;
+    min-width: 180px;
   }
 
-  .nav-links.open {
-    display: flex;
-  }
+  .nav-links.open{ display: flex; }
 
-  .nav-links li {
-    margin: 0;
-  }
+  .nav-links li{ margin: 0; }
 }
 
-/* === DESKTOP ONLY === */
-@media (min-width: 768px) {
-  .menu-toggle {
-    display: none;
-  }
-
-  .nav-links {
+/* ===== DESKTOP ONLY ===== */
+@media (min-width: 768px){
+  .menu-toggle{ display: none; }
+  .nav-links{
     display: flex !important;
     position: static;
     flex-direction: row;
     background: none;
     padding: 0;
     box-shadow: none;
+    border: 0;
   }
+}
+
+/* Optional: subtle focus states for accessibility */
+.nav-links a:focus-visible,
+.menu-toggle:focus-visible,
+.logo:focus-visible{
+  outline: 2px solid var(--brand-accent);
+  outline-offset: 2px;
+  border-radius: 8px;
 }
