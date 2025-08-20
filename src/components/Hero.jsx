@@ -14,7 +14,7 @@ function Hero() {
         <div className="hero-main">
           <div className="hero-text">
             <span className="hero-tagline">Custom Websites • Real Results</span>
-            <h1>Websites & Booking Systems for Boxing Gyms</h1>
+            <h1>Custom Websites for Gyms</h1>
             <p>
               I build fast, mobile-friendly websites and booking systems tailored for boxing gyms and coaches.
             </p>

@@ -109,7 +109,7 @@
 }
 
 .hero-text h1 {
-  font-size: 3rem;
+  font-size: 3.5rem;
   margin-bottom: 1rem;
   color: #ffffff;
   animation: fadeInUp 0.4s ease-out forwards;
@@ -118,7 +118,7 @@
 }
 
 .hero-text p {
-  font-size: 1.2rem;
+  font-size: 1.25rem;
   margin-bottom: 2.0rem;
   color: #cfd3ffcc;        /* softer light text */
   max-width: 600px;
