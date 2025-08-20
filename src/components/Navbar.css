@@ -155,3 +155,106 @@
   outline-offset: 2px;
   border-radius: 8px;
 }
+
+/* ===============================
+   Navbar + Side Drawer (Global)
+   =============================== */
+
+/* Top fixed navbar wrapper */
+.navbar{
+  position: fixed;
+  inset: 0 0 auto 0;        /* top:0, left:0, right:0 */
+  height: var(--nav-h);
+  z-index: 1000;
+  pointer-events: none;  
+  margin: 20px;    /* only inner content is clickable */
+}
+
+/* Inner navbar content (brand + controls) */
+.nav-content{
+  pointer-events: auto;
+  max-width: 1200px;
+  margin: 0 auto;
+  height: 100%;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Brand + hamburger button */
+.nav-brand{ display: flex; align-items: center; gap: .5rem; }
+
+.nav-toggle{
+  appearance: none;
+  background: transparent;
+  border: 0;
+  width: 40px; height: 40px;
+  display: grid; place-items: center;
+  cursor: pointer;
+
+  /* Style hamburger icon */
+  color: #fff;         /* make it white */
+  font-size: 1.8rem;   /* increase size (try 2rem if you want even bigger) */
+  line-height: 1;
+}
+
+/* Hide inline links by default (mobile) */
+.nav-inline{
+  display: none;
+}
+
+/* Backdrop behind drawer */
+.nav-backdrop{
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.35);
+  backdrop-filter: blur(2px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .25s ease;
+  z-index: 1998;
+}
+.nav-backdrop.open{
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Right-side slide-out drawer */
+.nav-drawer{
+  position: fixed;
+  top: 0; right: 0;
+  height: 100dvh;
+  width: min(82vw, 260px);
+  background: #141521;           /* solid so hero text doesn't show through */
+  color: #fff;
+  padding: calc(env(safe-area-inset-top) + 20px) 20px 24px;
+  box-shadow: -8px 0 24px rgba(0,0,0,.28);
+  transform: translateX(100%);
+  transition: transform .28s ease;
+  z-index: 1999;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.nav-drawer.open{ transform: translateX(0); }
+
+.nav-drawer a{
+  color: #e9f7f0;
+  text-decoration: none;
+  font-weight: 600;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+
+/* Desktop: show inline nav; hide drawer/backdrop */
+@media (min-width: 900px){
+  .nav-toggle{ display: none; }
+  .nav-inline{ display: flex; gap: 20px; }
+  .nav-inline a{ 
+    color: #fff;             /* changed from dark to white */
+    text-decoration: none; 
+    font-weight: 600; 
+  }
+  .nav-backdrop, .nav-drawer{ display: none; }
+}
