@@ -100,8 +100,7 @@ export default function Projects() {
         <div className="projects-info">
           <h3>About This Portfolio</h3>
           <p>
-            This portfolio showcases real-world projects, including responsive web UIs,
-            mobile-first designs, and interactive data dashboards...
+            This portfolio highlights a selection of real-world projects, featuring responsive web interfaces, mobile-first designs, and interactive data dashboards. Each project demonstrates a focus on usability, performance, and clean design — with the goal of turning complex requirements into simple, effective digital solutions.
           </p>
         </div>
 
