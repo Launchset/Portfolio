@@ -6,8 +6,9 @@
 .hero-wrapper {
   --mx: 0; /* can be driven by JS for parallax later */
   --my: 0;
-  position: relative;
+  position: center;
   width: 100%;
+  height: 100vh;
   min-height: 90vh;
   overflow: hidden;
   display: block;
@@ -74,12 +75,13 @@
 
 /* SECTION WRAPPER (foreground) */
 .hero {
-  position: relative;
+  position: center;
   z-index: 2; /* above bg layers */
   padding: 6rem 4rem;
   width: 100%;             /* avoid 100vw scrollbars */
   box-sizing: border-box;
   color: #ffffff;          /* readable on dark */
+  margin-top: var( --nav-h, 80px); /* offset for sticky navbar */
 }
 
 /* FLEX LAYOUT FOR TEXT + IMAGE */
