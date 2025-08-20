@@ -33,7 +33,7 @@
   padding: 18px 20px;
 }
 .contact-card h3 { margin: 0 0 .5rem; color: #0a2b1a; }
-.muted { color: #555; }
+.muted { color: #0a2b1a; }
 
 /* === Bullets with spacing + green arrows === */
 .bullets {
