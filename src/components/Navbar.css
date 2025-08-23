@@ -1,102 +1,260 @@
-:root {
-  --nav-h: 64px;            /* navbar height across the site */
+:root{
+  --nav-h: 64px;
+  --glass-bg: rgba(255,255,255,0.12);
+  --glass-border: rgba(255,255,255,0.28);
+  --glass-shadow: 0 10px 40px rgba(0,0,0,0.25);
+  --brand-accent: #00c16a; /* matches your hero accent */
 }
 
-/* === NAVBAR CONTAINER === */
-.navbar {
+/* ===== NAVBAR CONTAINER (centered, floating) ===== */
+.navbar{
   position: fixed;
-  top: 0;
+  top: 1rem;
+  left: 0;
+  right: 0;
+  transform: none;
   width: 100%;
   height: var(--nav-h);
-  background: #fff;
-  box-shadow: 0 2px 4px rgba(0,0,0,.1);
   z-index: 999;
+  pointer-events: none; /* let only pill receive clicks */
+  padding: 0 20px; /* space for the pill */
 }
 
-/* === FLEX LAYOUT === */
-.nav-content {
-  position: relative;          /* anchor the dropdown */
-  height: 100%;
+/* ===== GLASSY PILL ===== */
+.nav-content{
+  pointer-events: auto; /* clickable */
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 1rem;              /* tighter on mobile */
-  width: 100%;
+  gap: 1rem;
+
+  height: var(--nav-h);
+  padding: 0 1.25rem;
+
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px) saturate(150%);
+  -webkit-backdrop-filter: blur(16px) saturate(150%);
+  border: 1px solid var(--glass-border);
+  border-radius: 9999px; /* the oval */
+  box-shadow: var(--glass-shadow);
+
+  /* Width adapts to contents, but don’t get silly */
+  min-width: 260px;
 }
 
-/* === THREE ZONES (desktop default) === */
-.nav-left,
-.nav-center,
-.nav-right {
+/* Layout halves */
+.nav-left{
   display: flex;
   align-items: center;
+  justify-content: flex-start;
 }
 
-.nav-left { flex: 1 1 0; justify-content: flex-start; }
-.nav-center { flex: 1 1 0; justify-content: center; }
-.nav-right { flex: 1 1 0; justify-content: flex-end; }
+.nav-right{
+  display: flex;
+  align-items: center;
+  position: relative; /* anchor dropdown */
+}
 
-/* === LOGO === */
-.logo img { height: 40px; width: auto; display: block; }
+/* ===== LOGO ===== */
+.logo img{
+  margin: 0 auto;
+  height: 25px; /* keep the pill elegant */
+  width: auto;
+  display: block;
+}
 
-/* === MENU TOGGLE (hamburger) === */
-.menu-toggle {
-  font-size: 1.8rem;
-  background: none;
+/* ===== LINKS ===== */
+.nav-links{
+  display: flex;
+  gap: 1.25rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links a{
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  transition: color .2s ease, opacity .2s ease;
+  opacity: 0.9;
+}
+
+.nav-links a:hover{
+  color: var(--brand-accent);
+  opacity: 1;
+}
+
+/* ===== HAMBURGER ===== */
+.menu-toggle{
+  font-size: 1.5rem;
+  background: transparent;
+  color: #fff;
   border: none;
   cursor: pointer;
-  display: none;               /* hidden on desktop */
+  line-height: 1;
+  display: none; /* shown on mobile */
+}
+
+/* ===== MOBILE ===== */
+@media (max-width: 767px){
+  :root { --nav-h: 56px; }
+
+  .nav-content{
+    padding: 0 0.75rem 0 0.75rem;
+    gap: 0.5rem;
+  }
+
+  .logo img{ height: 32px; }
+
+  .menu-toggle{ display: block; }
+
+  /* Dropdown menu (glassy card) */
+  .nav-links{
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: calc(100% + 10px);
+    right: 0;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(14px) saturate(160%);
+    -webkit-backdrop-filter: blur(14px) saturate(160%);
+    box-shadow: var(--glass-shadow);
+    padding: 0.75rem;
+    border-radius: 14px;
+    gap: 0.5rem;
+    min-width: 180px;
+  }
+
+  .nav-links.open{ display: flex; }
+
+  .nav-links li{ margin: 0; }
+}
+
+/* ===== DESKTOP ONLY ===== */
+@media (min-width: 768px){
+  .menu-toggle{ display: none; }
+  .nav-links{
+    display: flex !important;
+    position: static;
+    flex-direction: row;
+    background: none;
+    padding: 0;
+    box-shadow: none;
+    border: 0;
+  }
+}
+
+/* Optional: subtle focus states for accessibility */
+.nav-links a:focus-visible,
+.menu-toggle:focus-visible,
+.logo:focus-visible{
+  outline: 2px solid var(--brand-accent);
+  outline-offset: 2px;
+  border-radius: 8px;
+}
+
+/* ===============================
+   Navbar + Side Drawer (Global)
+   =============================== */
+
+/* Top fixed navbar wrapper */
+.navbar{
+  position: fixed;
+  inset: 0 0 auto 0;        /* top:0, left:0, right:0 */
+  height: var(--nav-h);
+  z-index: 1000;
+  pointer-events: none;  
+  margin: 20px;    /* only inner content is clickable */
+}
+
+/* Inner navbar content (brand + controls) */
+.nav-content{
+  pointer-events: auto;
+  max-width: 1200px;
+  margin: 0 auto;
+  height: 100%;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Brand + hamburger button */
+.nav-brand{ display: flex; align-items: center; gap: .5rem; }
+
+.nav-toggle{
+  appearance: none;
+  background: transparent;
+  border: 0;
+  width: 40px; height: 40px;
+  display: grid; place-items: center;
+  cursor: pointer;
+
+  /* Style hamburger icon */
+  color: #fff;         /* make it white */
+  font-size: 1.8rem;   /* increase size (try 2rem if you want even bigger) */
   line-height: 1;
 }
 
-/* === NAV LINKS (desktop default) === */
-.nav-links {
+/* Hide inline links by default (mobile) */
+.nav-inline{
+  display: none;
+}
+
+/* Backdrop behind drawer */
+.nav-backdrop{
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.35);
+  backdrop-filter: blur(2px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .25s ease;
+  z-index: 1998;
+}
+.nav-backdrop.open{
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Right-side slide-out drawer */
+.nav-drawer{
+  position: fixed;
+  top: 0; right: 0;
+  height: 100dvh;
+  width: min(82vw, 260px);
+  background: #141521;           /* solid so hero text doesn't show through */
+  color: #fff;
+  padding: calc(env(safe-area-inset-top) + 20px) 20px 24px;
+  box-shadow: -8px 0 24px rgba(0,0,0,.28);
+  transform: translateX(100%);
+  transition: transform .28s ease;
+  z-index: 1999;
   display: flex;
-  gap: 1.5rem;
-  list-style: none;
+  flex-direction: column;
+  gap: 20px;
 }
+.nav-drawer.open{ transform: translateX(0); }
 
-.nav-links a {
-  color: #444;
-  font-weight: 500;
+.nav-drawer a{
+  color: #e9f7f0;
   text-decoration: none;
+  font-weight: 600;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(255,255,255,.08);
 }
 
-.nav-links a:hover { color: #0077cc; }
-
-/* === MOBILE BEHAVIOR === */
-@media (max-width: 767px) {
-  /* collapse the middle area */
-  .nav-center { display: contents; }
-
-  /* left = logo, right = hamburger */
-  .nav-left, .nav-right { flex: 0 0 auto; }
-
-  .menu-toggle { display: block; }
-
-  /* dropdown menu */
-  .nav-links {
-    display: none;                /* hidden until open */
-    flex-direction: column;
-    position: absolute;
-    top: calc(var(--nav-h) - 6px);/* sits below the bar */
-    right: 1rem;
-    background: #fff;
-    padding: 0.75rem;
-    border-radius: 10px;
-    box-shadow: 0 6px 16px rgba(0,0,0,.14);
-    min-width: 170px;
-    gap: .75rem;
-    align-items: flex-start;
-    max-width: calc(100vw - 2rem);
+/* Desktop: show inline nav; hide drawer/backdrop */
+@media (min-width: 900px){
+  .nav-toggle{ display: none; }
+  .nav-inline{ display: flex; gap: 20px; }
+  .nav-inline a{ 
+    color: #fff;             /* changed from dark to white */
+    text-decoration: none; 
+    font-weight: 600; 
   }
-  .nav-links.open { display: flex; }
-
-  .nav-links li { margin: 0; }
-}
-
-/* === DESKTOP RE-EXPANSION === */
-@media (min-width: 768px) {
-  .menu-toggle { display: none; }
-  .nav-center { display: flex; }
+  .nav-backdrop, .nav-drawer{ display: none; }
 }

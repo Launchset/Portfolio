@@ -41,19 +41,27 @@ export default function Contact() {
         <div className="contact-grid">
           {/* Card 1 */}
           <article className="contact-card">
-            <h3>Contact Info</h3>
-            <p><a href="mailto:john@launchset.dev">john@launchset.dev</a></p>
-            <p>Business hours: 9AM – 5PM</p>
-            <p className="muted">(I usually reply within one day.)</p>
+            <h3>Contact</h3>
+            <p>
+              <strong>Email:</strong>{" "}
+              <a href="mailto:john@launchset.dev">john@launchset.dev</a>
+            </p>
+            <p>
+              <strong>Business Hours:</strong> Hours may vary, but I typically work Monday to Friday, 9 AM to 5 PM GMT.
+            </p>
+            <p className="muted">
+              <strong>Response Time:</strong> I typically reply within 24 hours.
+            </p>
           </article>
 
           {/* Card 2 */}
           <article className="contact-card">
             <h3>Got a question?</h3>
             <p>
-              Whether you’re ready to start a project or just want to say hello,
-              feel free to reach out. I’m happy to chat about your ideas or
-              specific requests — let’s see what we can build together.
+              Got a question about websites or booking systems for your boxing gym?
+              I specialize in creating solutions that attract members and simplify
+              class management. Drop me a message and let’s see how we can put the
+              right system in place.
             </p>
           </article>
 
@@ -61,10 +69,10 @@ export default function Contact() {
           <article className="contact-card">
             <h3>What to include</h3>
             <ul className="bullets">
-              <li>A short intro about your business</li>
-              <li>What kind of website you’re looking for</li>
-              <li>Any deadlines or must-haves</li>
-              <li>No pressure — just info is fine</li>
+              <li>A brief intro about your gym/business — who you are and what you do.</li>
+              <li>The type of website you’re looking for (new site, redesign, booking, membership features).</li>
+              <li>Any must-haves or goals (class booking, payments, specific style/brand feel).</li>
+              <li>Timeline or deadlines (if you have a launch date in mind).</li>
             </ul>
           </article>
         </div>
@@ -106,7 +114,7 @@ export default function Contact() {
 
             <label>
               <span>Company (optional)</span>
-              <input name="company" type="text" placeholder="Acme Co." />
+              <input name="company" type="text" placeholder="Arc Co." />
             </label>
 
             <label>
@@ -115,7 +123,7 @@ export default function Contact() {
                 <option value="" disabled>
                   Select a range
                 </option>
-                <option> £50 – £200 + % of revenue on new customers</option>
+                <option> £50 – £200</option>
                 <option>£200 – £500</option>
                 <option>£500 – £1,000</option>
                 <option>£1,000+</option>
@@ -128,7 +136,7 @@ export default function Contact() {
                 name="message"
                 required
                 rows="6"
-                placeholder="What are you trying to build? Any deadlines or examples?"
+                placeholder="What kind of website are you looking for? Include must-haves, deadlines, or example sites you like."
               />
             </label>
 
@@ -138,7 +146,6 @@ export default function Contact() {
               </label>
               <input id="consent" type="checkbox" name="consent" required />
             </div>
-
           </div>
 
           <div className="actions">

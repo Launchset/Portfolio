@@ -1,19 +1,24 @@
-import './Hero.css';
-import heroImage from '../assets/hero-image.png';
+import "./Hero.css";
+import heroImage from "../assets/hero-image.png";
 
-function Hero() {
+export default function Hero() {
   return (
-    <section className="hero">
+    <section id="hero" className="hero">
       <div className="hero-main">
         <div className="hero-text">
-          <span className="hero-tagline">Boxing Gyms • Booking Systems • Real Results</span>
+          <span className="hero-tagline">Custom Websites • Real Results</span>
           <h1>Websites & Booking Systems for Boxing Gyms</h1>
           <p>
-          I design fast, modern websites and booking tools built specifically for boxing gyms and coaches.
+            I build fast, mobile-friendly websites and booking systems tailored for boxing gyms and coaches.
           </p>
           <p>
-          Easy to use, mobile-friendly, and built to keep your classes full—without the tech headaches. You train fighters, I’ll handle the website that brings them through the door.
+            Simple to use, designed to convert, and built to keep your classes full—so you can focus on training, not tech.
           </p>
+
+          <div className="hero-buttons">
+            <a href="#projects" className="cta-button">See My Work</a>
+            <a href="#contact" className="cta-secondary">Book a Free Demo</a>
+          </div>
         </div>
 
         <div className="hero-image-wrapper">
@@ -22,13 +27,6 @@ function Hero() {
           </div>
         </div>
       </div>
-
-      <div className="hero-buttons">
-        <a href="#projects" className="cta-button">See My Work</a>
-        <a href="#about" className="cta-secondary">Learn More</a>
-      </div>
     </section>
   );
 }
-
-export default Hero;

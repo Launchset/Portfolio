@@ -1,28 +1,38 @@
-import './About.css';
+import "./About.css";
 
 function About() {
   return (
     <section id="about" className="about">
       <div className="about-container">
-        <h2>The Person Behind the Code</h2>
-        <p>
-          Hi, I’m <strong>John</strong> — a web developer and boxer who builds websites and booking systems for boxing gyms.
+        <h2>The Team Behind the Code</h2>
+        <p className="about-intro">
+          We’re John and James — a two-man team combining design and development to build
+          boxing-gym websites and booking systems that work as good as they look.
         </p>
-        <p>
-          After years training in local gyms, I saw firsthand how a lack of online presence and clunky booking systems were holding great coaches back. Missed sessions, lost sign-ups, endless admin—it adds up.
-        </p>
-        <p>
-          That’s why I combine my coding skills with my passion for the sport—creating fast, mobile-friendly websites that make it easier for boxing gyms to fill classes, manage schedules, and grow their business.
-        </p>
-        <p>
-          With a background in finance and automation, I focus on building clean systems that save time and reduce stress—so coaches can spend more time training fighters, and less time chasing paperwork.
-        </p>
-        <p>
-          I don’t just build sites—I partner with gyms to help them run smoother, look more professional, and stay competitive in a digital world.
-        </p>
-        <p>
-          If you run a boxing gym and want your website to actually work for you, let’s build something that punches above its weight.
-        </p>
+
+        <div className="team-grid">
+          {/* James Card */}
+          <article className="team-card">
+            <h3>James — Front-End &amp; Design</h3>
+            <p>
+              James focuses on the <strong>front-end</strong> — the design, layout, and user
+              experience that make a site inviting and easy to use. He crafts clean, responsive
+              interfaces so boxing gyms look modern on any device and members can find classes,
+              pricing, and schedules without friction.
+            </p>
+          </article>
+
+          {/* John Card */}
+          <article className="team-card">
+            <h3>John — Back-End &amp; Systems</h3>
+            <p>
+              John handles the <strong>back-end</strong> — the systems and automation that keep
+              everything running smoothly. From booking logic and payments to reminders and
+              analytics, he builds fast, reliable functionality that saves coaches time and keeps
+              classes full.
+            </p>
+          </article>
+        </div>
       </div>
     </section>
   );
