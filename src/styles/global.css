@@ -10,7 +10,6 @@
 
 :root {
   --bg-base: #141521; /* deep neutral for glowy background */
-  --text-color: #f3fdf8; /* default light text on dark bg */
 }
 
 html, body, #root {
@@ -27,10 +26,6 @@ h1, h2, h3 {
   color: #ffffff;
 }
 
-p {
-  margin-bottom: 20px;
-  color: #cfd3ffcc;
-}
 
 /* Links (global style) */
 a {

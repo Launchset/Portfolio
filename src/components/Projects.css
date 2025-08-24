@@ -1,5 +1,7 @@
 .projects {
   padding: 56px 20px;
+  background: #fff;
+  border-radius: 60px;
 }
 
 .projects h2 {

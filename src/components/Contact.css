@@ -1,173 +1,140 @@
+/* ===============================
+   Contact Section — same visuals, cleaner CSS (readability fixed)
+   =============================== */
+:root {
+  /* Colors */
+  --green: #00703c;
+  --green-700: #005f32;
+  --brand-dark: #0a2b1a;
+  --text: #fff;                 /* kept for dark-on-dark needs */
+  --text-on-card: #0a2b1a;      /* NEW: readable on light cards */
+  --muted: #0a2b1a;
+  --input-border: #cde8d7;
+
+  /* Surfaces & effects */
+  --card-bg: rgba(240, 250, 245, 0.9);
+  --card-bg-hover: rgba(232, 246, 238, 1);
+  --focus-ring: 0 0 0 3px rgba(0, 112, 60, 0.2);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.08);
+
+  /* Sizing */
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --gap-sm: 12px;
+  --gap-md: 16px;
+  --gap-lg: 20px;
+}
+
 /* === Section === */
 .contact {
-  /* keep your current background */
   padding: 56px 20px 80px;
 }
 .contact-wrap { max-width: 1200px; margin: 0 auto; }
 .contact-title {
   font-size: 2rem;
   text-align: center;
-  color: #0a2b1a;
+  color: #fff;                  /* visible on dark bg */
   margin-bottom: 24px;
 }
 
-/* === Top info cards === */
-.contact-grid {
-  display: grid;
-  gap: 20px;
-  grid-template-columns: 1fr;       /* mobile: stack */
-  margin-bottom: 24px;
-}
-@media (min-width: 720px) {
-  .contact-grid { grid-template-columns: 1fr 1fr; }           /* tablet: 2-up */
-}
-@media (min-width: 980px) {
-  .contact-grid { grid-template-columns: repeat(3, 1fr); }    /* desktop: 3-up */
-}
-
+/* === Cards (info + form) === */
 .contact-card,
 .contact-form.card {
-  background: #fff;
-  border-radius: 16px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-  padding: 18px 20px;
+  background: var(--card-bg);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  padding: 18px var(--gap-lg);
+  transition: background 0.2s ease;
+  color: var(--text-on-card);   /* FIX: text readable on card */
 }
-.contact-card h3 { margin: 0 0 .5rem; color: #0a2b1a; }
-.muted { color: #0a2b1a; }
+.contact-card:hover,
+.contact-form.card:hover { background: var(--card-bg-hover); }
+.contact-card h3,
+.contact-form h3 {
+  margin: 0 0 0.5rem;
+  color: var(--brand-dark);
+}
+.muted { color: var(--muted); }
 
-/* === Bullets with spacing + green arrows === */
-.bullets {
-  list-style: none;
-  margin: .25rem 0 0;
-  padding: 0;
+/* === Responsive grids === */
+.contact-grid {
+  display: grid;
+  gap: var(--gap-lg);
+  grid-template-columns: 1fr;
+  margin-bottom: 24px;
 }
-.bullets li {
-  margin-bottom: 1rem;         /* gap between bullets */
-  line-height: 1.6;
-  position: relative;
-  padding-left: 1.5rem;        /* space for arrow */
-}
-.bullets li::before {
-  content: "➤";
-  position: absolute;
-  left: 0;
-  top: 0;
-  color: #00703c;              /* Launchset green */
-  font-weight: bold;
-}
-
-/* === Form layout === */
-.contact-form h3 { margin-top: 0; color: #0a2b1a; }
-
 .form-grid {
   display: grid;
-  gap: 16px;
-  grid-template-columns: 1fr;       /* mobile: single column */
+  gap: var(--gap-md);
+  grid-template-columns: 1fr;
   margin-top: 10px;
 }
-.form-grid label { display: grid; gap: 6px; }
+.form-grid label { display: grid; gap: 6px; color: var(--text-on-card); }
 .form-grid .full { grid-column: 1 / -1; }
 
 @media (min-width: 720px) {
-  .form-grid { grid-template-columns: repeat(2, 1fr); } /* tablet+: two cols */
-  .form-grid .full { grid-column: 1 / -1; }             /* textarea spans both */
+  .contact-grid { grid-template-columns: 1fr 1fr; }
+  .form-grid { grid-template-columns: repeat(2, 1fr); }
+  .form-grid .full { grid-column: 1 / -1; }
+}
+@media (min-width: 980px) {
+  .contact-grid { grid-template-columns: repeat(3, 1fr); }
 }
 
-/* Inputs */
+/* === Bullets with green arrows === */
+.bullets { list-style: none; margin: 0.25rem 0 0; padding: 0; }
+.bullets li {
+  position: relative;
+  padding-left: 1.5rem;
+  margin-bottom: 1rem;
+  line-height: 1.6;
+  color: var(--text-on-card);
+}
+.bullets li::before {
+  content: "➤";
+  position: absolute; left: 0; top: 0;
+  color: var(--green); font-weight: bold;
+}
+
+/* === Inputs (text, textarea, select) === */
 input,
-textarea {
-  background: #fff;
-  border: 1px solid #cde8d7;
-  border-radius: 10px;
-  padding: 12px 14px;
-  font-size: 1rem;
-  color: #222;
+textarea,
+.form-grid select {
   width: 100%;
   box-sizing: border-box;
+  background: #fff;
+  color: var(--text-on-card);   /* FIX: dark text on white inputs */
+  border: 1px solid var(--input-border);
+  border-radius: var(--radius-md);
+  padding: 12px 14px;
+  font-size: 1rem;
+  line-height: 1.2;
 }
+
+/* focus */
 input:focus,
-textarea:focus {
-  border-color: #00703c;
-  box-shadow: 0 0 0 3px rgba(0, 112, 60, 0.2);
+textarea:focus,
+.form-grid select:focus {
+  border-color: var(--green);
+  box-shadow: var(--focus-ring);
   outline: none;
 }
-textarea { resize: vertical; }
 
-/* === Placeholder text styling === */
+/* placeholders */
 input::placeholder,
 textarea::placeholder {
-  font-family: sans-serif;  /* force sans-serif */
+  font-family: sans-serif;
   font-size: 1rem;
   color: #555;
   letter-spacing: 0.3px;
 }
 
-/* Actions row */
-.actions {
-  margin-top: 16px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  flex-wrap: wrap;
-}
-@media (max-width: 480px) {
-  .actions { flex-direction: column; align-items: stretch; }
-  .actions .btn-primary { width: 100%; }
-}
+textarea { resize: vertical; }
 
-.btn-primary {
-  background: #00703c;
-  color: #fff;
-  font-weight: 600;
-  padding: 12px 18px;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-}
-.btn-primary:hover { background: #005f32; }
-
-.note.success { color: #00703c; }
-.note.error { color: #b30000; }
-
-/* Honeypot */
-.hp {
-  position: absolute;
-  left: -9999px;
-  width: 1px; height: 1px;
-}
-
-/* Consent row (text first, checkbox on the right) */
-.consent-row {
-  grid-column: 1 / -1;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-top: 8px;
-  flex-wrap: wrap; /* allow wrapping on tiny screens */
-}
-.consent-row label {
-  font-size: 0.95rem;
-  color: #222;
-  cursor: pointer;
-}
-.consent-row input[type="checkbox"] {
-  width: 16px; height: 16px;
-  margin: 0; flex: 0 0 auto;
-  accent-color: #00703c;
-}
-
-/* Select styled like inputs */
+/* === Select caret (custom arrow) === */
 .form-grid select {
-  background: #fff;
-  color: #222;
-  border: 1px solid #cde8d7;
-  border-radius: 10px;
-  padding: 12px 40px 12px 14px;
-  font-size: 1rem;
-  line-height: 1.2;
   height: 44px;
-  width: 100%;
-  outline: none;
+  padding-right: 40px;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
@@ -178,10 +145,6 @@ textarea::placeholder {
   background-position: right 12px center;
   background-size: 16px;
 }
-.form-grid select:focus {
-  border-color: #00703c;
-  box-shadow: 0 0 0 3px rgba(0,112,60,0.2);
-}
 .form-grid select:hover { border-color: #a9dcc2; }
 .form-grid select:disabled {
   color: #8aa0b3;
@@ -191,18 +154,58 @@ textarea::placeholder {
 }
 .form-grid select::-ms-expand { display: none; }
 
-/* === Contact cards & form with subtle green tint === */
-.contact-card,
-.contact-form.card {
-  background: rgba(240, 250, 245, 0.9); /* soft greenish-white */
-  border-radius: 16px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-  padding: 18px 20px;
-  transition: background 0.2s ease;
+/* === Actions row === */
+.actions {
+  margin-top: var(--gap-md);
+  display: flex;
+  align-items: center;
+  gap: var(--gap-sm);
+  flex-wrap: wrap;
+}
+@media (max-width: 480px) {
+  .actions { flex-direction: column; align-items: stretch; }
+  .actions .btn-primary { width: 100%; }
 }
 
-/* optional: slightly stronger tint on hover */
-.contact-card:hover,
-.contact-form.card:hover {
-  background: rgba(232, 246, 238, 1); 
+/* Buttons */
+.btn-primary {
+  background: var(--green);
+  color: #fff;
+  font-weight: 600;
+  padding: 12px 18px;
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+}
+.btn-primary:hover { background: var(--green-700); }
+
+/* Notes */
+.note.success { color: var(--green); }
+.note.error { color: #b30000; }
+
+/* Honeypot (anti-bot) */
+.hp {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+}
+
+/* Consent row */
+.consent-row {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+  flex-wrap: wrap;
+}
+.consent-row label {
+  font-size: 0.95rem;
+  color: var(--text-on-card);   /* FIX: readable on card */
+  cursor: pointer;
+}
+.consent-row input[type="checkbox"] {
+  width: 16px; height: 16px; margin: 0; flex: 0 0 auto;
+  accent-color: var(--green);
 }
