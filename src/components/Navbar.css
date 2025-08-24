@@ -73,7 +73,7 @@
 }
 
 .nav-links a{
-  color: #ffffff;
+  color: #00c16a;
   text-decoration: none;
   font-weight: 600;
   letter-spacing: 0.01em;
@@ -194,7 +194,7 @@
   cursor: pointer;
 
   /* Style hamburger icon */
-  color: #fff;         /* make it white */
+  color: #00c16a;         /* make it white */
   font-size: 1.8rem;   /* increase size (try 2rem if you want even bigger) */
   line-height: 1;
 }
@@ -252,7 +252,7 @@
   .nav-toggle{ display: none; }
   .nav-inline{ display: flex; gap: 20px; }
   .nav-inline a{ 
-    color: #fff;             /* changed from dark to white */
+    color: #00c16a;             /* changed from dark to white */
     text-decoration: none; 
     font-weight: 600; 
   }
