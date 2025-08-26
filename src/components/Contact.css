@@ -213,7 +213,7 @@ textarea { resize: vertical; }
 
 /* Select styled like inputs */
 .form-grid select {
-  background: #030202;
+  background: #ffffff;   /* ✅ CHANGED to white */
   color: #222;
   border: 1px solid #cde8d7;
   border-radius: 10px;
@@ -253,13 +253,15 @@ textarea { resize: vertical; }
   border-radius: 16px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
   padding: 18px 20px;
-  transition: background 0.2s ease;
+  transition: background 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
 }
 
-/* optional: slightly stronger tint on hover */
+/* ✅ Softer hover highlight + shadow lift */
 .contact-card:hover,
 .contact-form.card:hover {
-  background: rgb(7, 170, 107); 
+  background: rgba(240, 250, 245, 1); /* subtle lighter highlight */
+  transform: translateY(-3px);        /* slight lift */
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
 }
 
 /* === Force all text in Contact section black === */
