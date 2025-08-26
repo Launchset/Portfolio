@@ -31,10 +31,13 @@
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-HX8DBNS3QQ"></script>
   <script>
+    console.log("Google Analytics script loaded");
     window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
+    function gtag() {
+      console.log("GTAG fired", arguments);
+      dataLayer.push(arguments);
+    }
     gtag('js', new Date());
-
     gtag('config', 'G-HX8DBNS3QQ');
   </script>
 </head>
