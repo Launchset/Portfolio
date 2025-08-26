@@ -1,4 +1,5 @@
 import "./Footer.css";
+import facebookLogo from "../assets/faceboook.png"; // adjust path if Footer.jsx is deeper in folders
 
 export default function Footer() {
     return (
@@ -14,7 +15,11 @@ export default function Footer() {
                         rel="noopener noreferrer"
                         className="facebook-link"
                     >
-                        Click here to visit our <strong>Facebook page</strong><underline>!</underline>  
+                        <img 
+                            src={facebookLogo} 
+                            alt="Facebook" 
+                            style={{ width: "24px", height: "24px" }} 
+                        />
                     </a>
                 </p>
             </div>
