@@ -7,7 +7,7 @@ export default function Hero() {
       <div className="hero-main">
         <div className="hero-text">
           <span className="hero-tagline">Custom Websites • Real Results</span>
-          <h1>Websites & Booking Systems for Boxing Gyms</h1>
+          <h1>Custom Websites for Boxing Gyms</h1>
           <p>
           I design fast, modern websites and booking tools built specifically for boxing gyms and coaches.
           </p>
