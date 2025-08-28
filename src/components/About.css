@@ -3,10 +3,10 @@
   background-color: #ffffff;
   padding: 4rem 2rem;
   color: #222;
-  border-radius: 60px; /* full rounding on all corners */
-  margin-bottom: -2rem; /* pulls the white section down to touch footer */
-  position: relative; /* ensures z-index works */
-  z-index: 1; /* sits above the footer */
+  border-radius: 60px 60px 0 0; /* Rounded top corners only */
+
+  position: relative;
+  z-index: 1;
 }
 
 .about-container {
