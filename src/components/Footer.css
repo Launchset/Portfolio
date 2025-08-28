@@ -34,14 +34,27 @@
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
+  padding: 0.5rem 0; /* tighter inner spacing */
 }
 
+.footer p {
+  margin: 0;
+}
+
+/* First line (copyright text) */
+.footer p:first-of-type {
+  color: #000000;
+}
+
+/* Social links */
 .footer-links a {
   color: #064420;
   /* dark green for contrast */
   margin-right: .75rem;
   text-decoration: none;
   font-weight: 500;
+  font-size: 0.9rem;
+  transition: color 0.2s ease;
 }
 
 .footer-links a:hover {

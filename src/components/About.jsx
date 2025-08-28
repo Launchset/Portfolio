@@ -12,7 +12,7 @@ function About() {
 
         <div className="team-grid">
           {/* James Card */}
-          <article className="team-card">
+          <article className="team-card hover-card">
             <h3>James — Front-End &amp; Design</h3>
             <p>
               James focuses on the <strong>front-end</strong> — the design, layout, and user
@@ -23,7 +23,7 @@ function About() {
           </article>
 
           {/* John Card */}
-          <article className="team-card">
+          <article className="team-card hover-card">
             <h3>John — Back-End &amp; Systems</h3>
             <p>
               John handles the <strong>back-end</strong> — the systems and automation that keep
