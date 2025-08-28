@@ -6,8 +6,10 @@
   --green: #00703c;
   --green-700: #005f32;
   --brand-dark: #0a2b1a;
-  --text: #fff;                 /* kept for dark-on-dark needs */
-  --text-on-card: #0a2b1a;      /* NEW: readable on light cards */
+  --text: #fff;
+  /* kept for dark-on-dark needs */
+  --text-on-card: #0a2b1a;
+  /* NEW: readable on light cards */
   --muted: #0a2b1a;
   --input-border: #cde8d7;
 
@@ -29,11 +31,17 @@
 .contact {
   padding: 56px 20px 80px;
 }
-.contact-wrap { max-width: 1200px; margin: 0 auto; }
+
+.contact-wrap {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
 .contact-title {
   font-size: 2rem;
   text-align: center;
-  color: #fff;                  /* visible on dark bg */
+  color: #fff;
+  /* visible on dark bg */
   margin-bottom: 24px;
 }
 
@@ -45,16 +53,24 @@
   box-shadow: var(--shadow-md);
   padding: 18px var(--gap-lg);
   transition: background 0.2s ease;
-  color: var(--text-on-card);   /* FIX: text readable on card */
+  color: var(--text-on-card);
+  /* FIX: text readable on card */
 }
+
 .contact-card:hover,
-.contact-form.card:hover { background: var(--card-bg-hover); }
+.contact-form.card:hover {
+  background: var(--card-bg-hover);
+}
+
 .contact-card h3,
 .contact-form h3 {
   margin: 0 0 0.5rem;
   color: var(--brand-dark);
 }
-.muted { color: var(--muted); }
+
+.muted {
+  color: var(--muted);
+}
 
 /* === Responsive grids === */
 .contact-grid {
@@ -63,26 +79,51 @@
   grid-template-columns: 1fr;
   margin-bottom: 24px;
 }
+
 .form-grid {
   display: grid;
   gap: var(--gap-md);
   grid-template-columns: 1fr;
   margin-top: 10px;
 }
-.form-grid label { display: grid; gap: 6px; color: var(--text-on-card); }
-.form-grid .full { grid-column: 1 / -1; }
+
+.form-grid label {
+  display: grid;
+  gap: 6px;
+  color: var(--text-on-card);
+}
+
+.form-grid .full {
+  grid-column: 1 / -1;
+}
 
 @media (min-width: 720px) {
-  .contact-grid { grid-template-columns: 1fr 1fr; }
-  .form-grid { grid-template-columns: repeat(2, 1fr); }
-  .form-grid .full { grid-column: 1 / -1; }
+  .contact-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .form-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .form-grid .full {
+    grid-column: 1 / -1;
+  }
 }
+
 @media (min-width: 980px) {
-  .contact-grid { grid-template-columns: repeat(3, 1fr); }
+  .contact-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
 /* === Bullets with green arrows === */
-.bullets { list-style: none; margin: 0.25rem 0 0; padding: 0; }
+.bullets {
+  list-style: none;
+  margin: 0.25rem 0 0;
+  padding: 0;
+}
+
 .bullets li {
   position: relative;
   padding-left: 1.5rem;
@@ -90,10 +131,14 @@
   line-height: 1.6;
   color: var(--text-on-card);
 }
+
 .bullets li::before {
   content: "➤";
-  position: absolute; left: 0; top: 0;
-  color: var(--green); font-weight: bold;
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--green);
+  font-weight: bold;
 }
 
 /* === Inputs (text, textarea, select) === */
@@ -103,7 +148,8 @@ textarea,
   width: 100%;
   box-sizing: border-box;
   background: #fff;
-  color: var(--text-on-card);   /* FIX: dark text on white inputs */
+  color: var(--text-on-card);
+  /* FIX: dark text on white inputs */
   border: 1px solid var(--input-border);
   border-radius: var(--radius-md);
   padding: 12px 14px;
@@ -129,7 +175,9 @@ textarea::placeholder {
   letter-spacing: 0.3px;
 }
 
-textarea { resize: vertical; }
+textarea {
+  resize: vertical;
+}
 
 /* === Select caret (custom arrow) === */
 .form-grid select {
@@ -145,14 +193,21 @@ textarea { resize: vertical; }
   background-position: right 12px center;
   background-size: 16px;
 }
-.form-grid select:hover { border-color: #a9dcc2; }
+
+.form-grid select:hover {
+  border-color: #a9dcc2;
+}
+
 .form-grid select:disabled {
   color: #8aa0b3;
   background-color: #f6fbf8;
   border-color: #dfeee6;
   cursor: not-allowed;
 }
-.form-grid select::-ms-expand { display: none; }
+
+.form-grid select::-ms-expand {
+  display: none;
+}
 
 /* === Actions row === */
 .actions {
@@ -162,9 +217,16 @@ textarea { resize: vertical; }
   gap: var(--gap-sm);
   flex-wrap: wrap;
 }
+
 @media (max-width: 480px) {
-  .actions { flex-direction: column; align-items: stretch; }
-  .actions .btn-primary { width: 100%; }
+  .actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .actions .btn-primary {
+    width: 100%;
+  }
 }
 
 /* Buttons */
@@ -177,11 +239,19 @@ textarea { resize: vertical; }
   border-radius: var(--radius-md);
   cursor: pointer;
 }
-.btn-primary:hover { background: var(--green-700); }
+
+.btn-primary:hover {
+  background: var(--green-700);
+}
 
 /* Notes */
-.note.success { color: var(--green); }
-.note.error { color: #b30000; }
+.note.success {
+  color: var(--green);
+}
+
+.note.error {
+  color: #b30000;
+}
 
 /* Honeypot (anti-bot) */
 .hp {
@@ -200,12 +270,83 @@ textarea { resize: vertical; }
   margin-top: 8px;
   flex-wrap: wrap;
 }
+
 .consent-row label {
   font-size: 0.95rem;
-  color: var(--text-on-card);   /* FIX: readable on card */
+  color: var(--text-on-card);
+  /* FIX: readable on card */
   cursor: pointer;
 }
+
 .consent-row input[type="checkbox"] {
-  width: 16px; height: 16px; margin: 0; flex: 0 0 auto;
-  accent-color: var(--green);
+  width: 16px;
+  height: 16px;
+  margin: 0;
+  flex: 0 0 auto;
+  accent-color: #00703c;
+}
+
+/* Select styled like inputs */
+.form-grid select {
+  background: #ffffff;
+  /* ✅ CHANGED to white */
+  color: #222;
+  border: 1px solid #cde8d7;
+  border-radius: 10px;
+  padding: 12px 40px 12px 14px;
+  font-size: 1rem;
+  line-height: 1.2;
+  height: 44px;
+  width: 100%;
+  outline: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-image:
+    url("data:image/svg+xml;utf8,\
+    <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2300703c' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 16px;
+}
+
+.form-grid select:focus {
+  border-color: #00703c;
+  box-shadow: 0 0 0 3px rgba(0, 112, 60, 0.2);
+}
+
+.form-grid select:hover {
+  border-color: #a9dcc2;
+}
+
+.form-grid select:disabled {
+  color: #8aa0b3;
+  background-color: #f6fbf8;
+  border-color: #dfeee6;
+  cursor: not-allowed;
+}
+
+.form-grid select::-ms-expand {
+  display: none;
+}
+
+/* === Contact cards & form with subtle green tint === */
+.contact-card,
+.contact-form.card {
+  background: rgba(240, 250, 245, 0.9);
+  /* soft greenish-white */
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  padding: 18px 20px;
+  transition: background 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* ✅ Softer hover highlight + shadow lift */
+.contact-card:hover,
+.contact-form.card:hover {
+  background: rgba(240, 250, 245, 1);
+  /* subtle lighter highlight */
+  transform: translateY(-3px);
+  /* slight lift */
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
 }
