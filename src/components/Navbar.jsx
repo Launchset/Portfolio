@@ -36,8 +36,8 @@ function Navbar() {
             </a>
           </div>
 
-          {/* Desktop inline links */}
-          <ul className="nav-inline" role="menubar" aria-label="Primary">
+          {/* ✅ Desktop inline links (with correct class) */}
+          <ul className="nav-links nav-inline" role="menubar" aria-label="Primary">
             <li role="none"><a role="menuitem" href="#about">About</a></li>
             <li role="none"><a role="menuitem" href="#projects">Projects</a></li>
             <li role="none"><a role="menuitem" href="#contact">Contact Us</a></li>
