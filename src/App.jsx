@@ -18,8 +18,8 @@ function App() {
         <Projects />
         <Contact />
         <About />
+        <Footer />
       </main>
-      <Footer />
     </>
   );
 }

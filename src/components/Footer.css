@@ -1,43 +1,29 @@
-.footer {
-    background-color: #ffffff;
-    color: #0c0b0d;
-    padding: 2rem;
-    text-align: center;
-    font-size: 0.9rem;
-}
-
-.footer-content {
-    max-width: 1000px;
-    margin: 0 auto;
-    padding: 1rem;
-}
-
 .footer p {
-    margin: 6px 0;
+  margin: 6px 0;
 }
 
 /* First line (copyright text) */
 .footer p:first-of-type {
-    color: #000000;
+  color: #000000;
 }
 
 /* Second line (Facebook link) */
 .footer .facebook-link {
-    color: #324d96;
-    font-weight: 500;
-    text-decoration: none;
+  color: #324d96;
+  font-weight: 500;
+  text-decoration: none;
 }
 
 .footer .facebook-link:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
 /* src/components/Footer.css */
 .footer {
-  background: #d6f0e0;   /* light green, darker than #eefaf3 */
+  background: #d6f0e0;
+  /* light green, darker than #eefaf3 */
   color: #111;
   padding: 1.5rem 1rem;
-  margin-top: 3rem;
 }
 
 .footer-content {
@@ -51,12 +37,14 @@
 }
 
 .footer-links a {
-  color: #064420;   /* dark green for contrast */
+  color: #064420;
+  /* dark green for contrast */
   margin-right: .75rem;
   text-decoration: none;
   font-weight: 500;
 }
 
 .footer-links a:hover {
-  color: #000;      /* sharp hover */
+  color: #000;
+  /* sharp hover */
 }
