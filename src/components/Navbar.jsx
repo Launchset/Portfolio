@@ -28,30 +28,32 @@ function Navbar() {
   return (
     <nav className="navbar" role="navigation" aria-label="Main">
       {/* Top bar */}
-      <div className="nav-content">
-        <div className="nav-left">
-          <a href="#hero" className="logo" aria-label="Home">
-            <img src={logo} alt="Logo" />
-          </a>
+      <div className="nav-wrapper">
+        <div className="nav-content">
+          <div className="nav-left">
+            <a href="#hero" className="logo" aria-label="Home">
+              <img src={logo} alt="Logo" />
+            </a>
+          </div>
+
+          {/* Desktop inline links */}
+          <ul className="nav-inline" role="menubar" aria-label="Primary">
+            <li role="none"><a role="menuitem" href="#about">About</a></li>
+            <li role="none"><a role="menuitem" href="#projects">Projects</a></li>
+            <li role="none"><a role="menuitem" href="#contact">Contact Us</a></li>
+          </ul>
+
+          {/* Hamburger (mobile) */}
+          <button
+            className="nav-toggle"
+            onClick={() => setMenuOpen(true)}
+            aria-label="Open menu"
+            aria-expanded={menuOpen}
+            aria-controls="mobile-drawer"
+          >
+            ☰
+          </button>
         </div>
-
-        {/* Desktop inline links */}
-        <ul className="nav-inline" role="menubar" aria-label="Primary">
-          <li role="none"><a role="menuitem" href="#about">About</a></li>
-          <li role="none"><a role="menuitem" href="#projects">Projects</a></li>
-          <li role="none"><a role="menuitem" href="#contact">Contact Us</a></li>
-        </ul>
-
-        {/* Hamburger (mobile) */}
-        <button
-          className="nav-toggle"
-          onClick={() => setMenuOpen(true)}
-          aria-label="Open menu"
-          aria-expanded={menuOpen}
-          aria-controls="mobile-drawer"
-        >
-          ☰
-        </button>
       </div>
 
       {/* Backdrop */}
