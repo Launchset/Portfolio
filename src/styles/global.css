@@ -9,19 +9,25 @@
 }
 
 :root {
-  --bg-base: #141521; /* deep neutral for glowy background */
+  --bg-base: #141521;
+  /* deep neutral for glowy background */
 }
 
-html, body, #root {
-  height: 100%;
-  background: var(--bg-base); /* default background behind blobs */
+html,
+body,
+#root {
+  min-height: 100%;
+  background: var(--bg-base);
+  /* default background behind blobs */
   color: var(--text-color);
   font-family: 'Helvetica Neue', sans-serif;
   line-height: 1.6;
 }
 
 /* Typography */
-h1, h2, h3 {
+h1,
+h2,
+h3 {
   margin-bottom: 16px;
   color: #ffffff;
 }
@@ -46,7 +52,8 @@ ul {
 .site-bg {
   position: fixed;
   inset: 0;
-  z-index: 0; /* changed from -1 -> sits above document background but behind content */
+  z-index: 0;
+  /* changed from -1 -> sits above document background but behind content */
   overflow: hidden;
   isolation: isolate;
   pointer-events: none;
@@ -85,25 +92,37 @@ main {
 .bg-vignette {
   position: absolute;
   inset: 0;
-  background: radial-gradient(
-    120% 80% at 50% 20%,
-    transparent 0 60%,
-    rgba(0,0,0,.28) 100%
-  );
+  background: radial-gradient(120% 80% at 50% 20%,
+      transparent 0 60%,
+      rgba(0, 0, 0, .28) 100%);
 }
 
 /* Animations */
 @keyframes drift {
-  0%   { transform: translate3d(0,0,0) scale(1); }
-  50%  { transform: translate3d(0,-16px,0) scale(1.03); }
-  100% { transform: translate3d(0,0,0) scale(1); }
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+
+  50% {
+    transform: translate3d(0, -16px, 0) scale(1.03);
+  }
+
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
 }
 
 @keyframes grain {
-  100% { transform: translate3d(-10%, -10%, 0); }
+  100% {
+    transform: translate3d(-10%, -10%, 0);
+  }
 }
 
 /* Motion sensitivity */
 @media (prefers-reduced-motion: reduce) {
-  .bg-blob, .bg-grain { animation: none; }
+
+  .bg-blob,
+  .bg-grain {
+    animation: none;
+  }
 }

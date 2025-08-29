@@ -1,3 +1,4 @@
+// Navbar.jsx
 import './Navbar.css';
 import logo from '../assets/logo.png';
 import { useEffect, useRef, useState } from 'react';
@@ -6,62 +7,57 @@ function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const firstLinkRef = useRef(null);
 
-  // Lock body scroll when drawer is open + focus first link
+  // lock body scroll while open
   useEffect(() => {
-    const b = document.body;
-    if (menuOpen) {
-      b.classList.add('body-lock');
-      setTimeout(() => firstLinkRef.current?.focus(), 10);
-    } else {
-      b.classList.remove('body-lock');
-    }
-    return () => b.classList.remove('body-lock');
+    document.body.style.overflow = menuOpen ? 'hidden' : '';
+    if (menuOpen) setTimeout(() => firstLinkRef.current?.focus(), 10);
+    return () => { document.body.style.overflow = ''; };
   }, [menuOpen]);
 
-  // Close on ESC key
-  useEffect(() => {
-    const onKey = (e) => { if (e.key === 'Escape') setMenuOpen(false); };
-    window.addEventListener('keydown', onKey);
-    return () => window.removeEventListener('keydown', onKey);
-  }, []);
+  const links = [
+    { id: 'about', label: 'About' },
+    { id: 'projects', label: 'Projects' },
+    { id: 'contact', label: 'Contact Us' },
+  ];
 
   return (
-    <nav className="navbar" role="navigation" aria-label="Main">
-      {/* Top bar */}
-      <div className="nav-content">
-        <div className="nav-left">
-          <a href="#hero" className="logo" aria-label="Home">
-            <img src={logo} alt="Logo" />
-          </a>
+    <>
+      {/* Top bar only */}
+      <nav className="navbar" role="navigation" aria-label="Main">
+        <div className="nav-content">
+          <div className="nav-left">
+            <a href="#hero" className="logo" aria-label="Home">
+              <img src={logo} alt="Logo" />
+            </a>
+          </div>
+
+          <ul className="nav-inline" role="menubar" aria-label="Primary">
+            {links.map(l => (
+              <li role="none" key={l.id}>
+                <a role="menuitem" href={`#${l.id}`}>{l.label}</a>
+              </li>
+            ))}
+          </ul>
+
+          <button
+            className="nav-toggle"
+            onClick={() => setMenuOpen(true)}
+            aria-label="Open menu"
+            aria-expanded={menuOpen}
+            aria-controls="mobile-drawer"
+          >
+            ☰
+          </button>
         </div>
+      </nav>
 
-        {/* Desktop inline links */}
-        <ul className="nav-inline" role="menubar" aria-label="Primary">
-          <li role="none"><a role="menuitem" href="#about">About</a></li>
-          <li role="none"><a role="menuitem" href="#projects">Projects</a></li>
-          <li role="none"><a role="menuitem" href="#contact">Contact Us</a></li>
-        </ul>
-
-        {/* Hamburger (mobile) */}
-        <button
-          className="nav-toggle"
-          onClick={() => setMenuOpen(true)}
-          aria-label="Open menu"
-          aria-expanded={menuOpen}
-          aria-controls="mobile-drawer"
-        >
-          ☰
-        </button>
-      </div>
-
-      {/* Backdrop */}
+      {/* Backdrop + Drawer OUTSIDE the nav */}
       <div
         className={`nav-backdrop ${menuOpen ? 'open' : ''}`}
         onClick={() => setMenuOpen(false)}
         aria-hidden="true"
       />
 
-      {/* Right-side drawer */}
       <aside
         id="mobile-drawer"
         className={`nav-drawer ${menuOpen ? 'open' : ''}`}
@@ -81,7 +77,7 @@ function Navbar() {
         <a href="#projects" role="menuitem" onClick={() => setMenuOpen(false)}>Projects</a>
         <a href="#contact" role="menuitem" onClick={() => setMenuOpen(false)}>Contact Us</a>
       </aside>
-    </nav>
+    </>
   );
 }
 

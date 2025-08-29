@@ -2,16 +2,17 @@
 
 .hero {
   position: relative;
-  z-index: 2;                 
+  z-index: 2;
   width: 100%;
   box-sizing: border-box;
   color: #fff;
 
   padding: 6rem 4rem;
-  min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
   align-items: center;
-  background: transparent; /* ✅ explicitly ensure it's transparent */
+  background: transparent;
+  /* ✅ explicitly ensure it's transparent */
 }
 
 
@@ -22,7 +23,8 @@
   gap: 2rem;
   width: 100%;
   max-width: 1200px;
-  margin: 0 auto;             /* center the block */
+  margin: 0 auto;
+  /* center the block */
 }
 
 .hero-text {
@@ -94,7 +96,11 @@
   text-decoration: none;
   transition: background-color 0.25s ease, transform 0.1s ease;
 }
-.cta-button:hover { background-color: #00a65a; transform: translateY(-1px); }
+
+.cta-button:hover {
+  background-color: #00a65a;
+  transform: translateY(-1px);
+}
 
 .cta-secondary {
   background: transparent;
@@ -105,12 +111,23 @@
   border-radius: 6px;
   transition: all 0.25s ease;
 }
-.cta-secondary:hover { background: #00c16a; color: #0f1117; }
+
+.cta-secondary:hover {
+  background: #00c16a;
+  color: #0f1117;
+}
 
 /* Animations */
 @keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(40px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* Mobile */
@@ -121,13 +138,27 @@
     min-height: calc(100vh - var(--nav-h, 64px));
   }
 
-  .hero-main { flex-direction: column; gap: 2rem; }
-  .hero-text { text-align: center; }
-  .hero-text h1 { font-size: 2.4rem; }
+  .hero-main {
+    flex-direction: column;
+    gap: 2rem;
+    padding-top: var(--nav-h);
+  }
 
-  .hero-buttons { justify-content: center; flex-wrap: wrap; }
+  .hero-text {
+    text-align: center;
+  }
 
-  .cta-button, .cta-secondary {
+  .hero-text h1 {
+    font-size: 2.4rem;
+  }
+
+  .hero-buttons {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .cta-button,
+  .cta-secondary {
     padding: 0.6rem 1rem;
     font-size: 0.95rem;
   }

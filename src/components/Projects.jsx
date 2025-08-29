@@ -6,7 +6,7 @@ import LightboxPortal from './LightboxPortal.jsx';   // <-- ADD THIS
 
 import { useState } from 'react';
 
-  /* ========= Desktop images ========= */
+/* ========= Desktop images ========= */
 import desktopGraph from '../assets/desktop-graph.png';
 import desktopChange from '../assets/desktop-graph-change.png';
 import inflationShieldDark from '../assets/inflation-shield-dark.png';
@@ -71,7 +71,7 @@ export default function Projects() {
   const m = phoneSlides[phoneIdx] || {};
 
   const desktopImages = desktopSlides.map(s => s.img);
-  const phoneImages   = phoneSlides.map(s => s.img);
+  const phoneImages = phoneSlides.map(s => s.img);
 
   return (
     <section id="projects" className="projects">
@@ -96,7 +96,7 @@ export default function Projects() {
           </div>
         </article>
 
-          {/* Info box under desktop */}
+        {/* Info box under desktop */}
         <div className="projects-info">
           <h3>About This Portfolio</h3>
           <p>
