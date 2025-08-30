@@ -12,6 +12,7 @@
   color: #324d96;
   font-weight: 500;
   text-decoration: none;
+  align-items: center;
 }
 
 .footer .facebook-link:hover {
@@ -47,4 +48,14 @@
 .footer-links a:hover {
   color: #000;
   /* sharp hover */
+}
+
+/* Social links container */
+.footer .social-links {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  /* space between icons */
+  margin: 0;
+  /* reset default p margins */
 }

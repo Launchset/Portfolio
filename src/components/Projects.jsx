@@ -7,28 +7,28 @@ import LightboxPortal from './LightboxPortal.jsx';   // <-- ADD THIS
 import { useState } from 'react';
 
 /* ========= Desktop images ========= */
-import desktopGraph from '../assets/desktop-graph.png';
-import desktopChange from '../assets/desktop-graph-change.png';
-import inflationShieldDark from '../assets/inflation-shield-dark.png';
-import inflationShieldLight from '../assets/inflation-shield-light.png';
-import legacyDesktopHome from '../assets/Legacy-desktop-home.png';
-import legacyDesktopLogin from '../assets/Legacy-desktop-login.png';
-import legacyDesktopTimetable from '../assets/Legacy-desktop-timetable.png';
-import legacyDesktopNew from '../assets/Legacy-desktop-newclass.png';
-import legacyDesktopEdit from '../assets/Legacy-desktop-editclass.png';
-import legacyDesktopInfo from '../assets/Legacy-desktop-infoclass.png';
+import desktopGraph from '../assets/desktop-graph.webp';
+import desktopChange from '../assets/desktop-graph-change.webp';
+import inflationShieldDark from '../assets/inflation-shield-dark.webp';
+import inflationShieldLight from '../assets/inflation-shield-light.webp';
+import legacyDesktopHome from '../assets/Legacy-desktop-home.webp';
+import legacyDesktopLogin from '../assets/Legacy-desktop-login.webp';
+import legacyDesktopTimetable from '../assets/Legacy-desktop-timetable.webp';
+import legacyDesktopNew from '../assets/Legacy-desktop-newclass.webp';
+import legacyDesktopEdit from '../assets/Legacy-desktop-editclass.webp';
+import legacyDesktopInfo from '../assets/Legacy-desktop-infoclass.webp';
 
-/* ========= Phone images (now .png) ========= */
-import phoneGraph from '../assets/phone-graph.png';
-import legacyPhoneHome from '../assets/Legacy-phone-home.png';
-import legacyPhoneHomeBottom from '../assets/Legacy-phone-homebottom.png';
-import legacyPhoneMenu from '../assets/Legacy-phone-menu.png';
-import legacyPhoneTimetable from '../assets/Legacy-phone-timetable.png';
-import legacyPhoneLogin from '../assets/Legacy-phone-login.png';
-import legacyPhoneProfile from '../assets/Legacy-phone-profile.png';
-import legacyPhoneNew from '../assets/Legacy-phone-newclass.png';
-import legacyPhoneEdit from '../assets/Legacy-phone-editclass.png';
-import legacyPhoneInfo from '../assets/Legacy-phone-infoclass.png';
+/* ========= Phone images (now .webp) ========= */
+import phoneGraph from '../assets/phone-graph.webp';
+import legacyPhoneHome from '../assets/Legacy-phone-home.webp';
+import legacyPhoneHomeBottom from '../assets/Legacy-phone-homebottom.webp';
+import legacyPhoneMenu from '../assets/Legacy-phone-menu.webp';
+import legacyPhoneTimetable from '../assets/Legacy-phone-timetable.webp';
+import legacyPhoneLogin from '../assets/Legacy-phone-login.webp';
+import legacyPhoneProfile from '../assets/Legacy-phone-profile.webp';
+import legacyPhoneNew from '../assets/Legacy-phone-newclass.webp';
+import legacyPhoneEdit from '../assets/Legacy-phone-editclass.webp';
+import legacyPhoneInfo from '../assets/Legacy-phone-infoclass.webp';
 
 
 export default function Projects() {

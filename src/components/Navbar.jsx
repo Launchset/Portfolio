@@ -1,6 +1,6 @@
 // Navbar.jsx
 import './Navbar.css';
-import logo from '../assets/logo.png';
+import logo from '../assets/logo.webp';
 import { useEffect, useRef, useState } from 'react';
 
 function Navbar() {

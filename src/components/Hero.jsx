@@ -1,5 +1,5 @@
 import "./Hero.css";
-import heroImage from "../assets/hero-image.png";
+import heroImage from "../assets/hero-image.webp";
 
 export default function Hero() {
   return (
@@ -9,10 +9,10 @@ export default function Hero() {
           <span className="hero-tagline">Custom Websites • Real Results</span>
           <h1>Custom Websites for Boxing Gyms</h1>
           <p>
-          I design fast, modern websites and booking tools built specifically for boxing gyms and coaches.
+            I design fast, modern websites and booking tools built specifically for boxing gyms and coaches.
           </p>
           <p>
-          Easy to use, mobile-friendly, and built to keep your classes full—without the tech headaches. You train fighters, I’ll handle the website that brings them through the door.
+            Easy to use, mobile-friendly, and built to keep your classes full—without the tech headaches. You train fighters, I’ll handle the website that brings them through the door.
           </p>
 
           <div className="hero-buttons">

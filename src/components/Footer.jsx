@@ -1,6 +1,6 @@
 import "./Footer.css";
-import facebookLogo from "../assets/faceboook.png";
-import instagramLogo from "../assets/instagram.png";
+import facebookLogo from "../assets/facebook.webp";
+import instagramLogo from "../assets/instagram.webp";
 
 export default function Footer() {
   return (
@@ -36,7 +36,9 @@ export default function Footer() {
             <img
               src={instagramLogo}
               alt="Instagram"
-              style={{ width: "28px", height: "25px" }}
+              style={{
+                width: "32px", height: "32px"
+              }}
             />
           </a>
         </p>
