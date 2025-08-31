@@ -10,12 +10,17 @@
   <meta name="description"
     content="We build websites for small businesses that cut down on admin work and add simple automation, so you can focus on running your business." />
 
-  <!-- Favicon (replace with your own icon file) -->
-  <!-- Favicons -->
-  <link rel="icon" type="image/webp" sizes="16x16" href="/htmlogo1.webp" />
-  <link rel="icon" type="image/webp" sizes="32x32" href="/htmlogo1.webp" />
-  <link rel="icon" type="image/webp" sizes="48x48" href="/htmlogo1.webp" />
-  <link rel="apple-touch-icon" href="/htmlogo1.webp" />
+  <!-- Proper favicons for all platforms -->
+
+  <!-- Traditional favicon.ico for max compatibility -->
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+  <!-- PNG fallbacks for modern browsers -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+
+  <!-- Apple touch icon for iOS homescreen bookmarks -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 
 
   <link rel="canonical" href="https://launchset.dev/" />
@@ -27,6 +32,17 @@
   <meta property="og:image" content="https://launchset.dev/logo.webp" />
   <meta property="og:url" content="https://launchset.dev/" />
   <meta name="twitter:card" content="summary_large_image" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Launchset",
+    "url": "https://launchset.dev",
+    "logo": "https://launchset.dev/htmlogo1.webp"
+  }
+  </script>
+
 
   <!--bing webmaster verification -->
   <meta name="msvalidate.01" content="7BCB6951B0DD16F9F1598FF51A4FA40B" />
