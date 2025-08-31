@@ -4,7 +4,7 @@
 
 /* First line (copyright text) */
 .footer p:first-of-type {
-  color: #000000;
+  color: #000;
 }
 
 /* Second line (Facebook link) */
@@ -21,7 +21,7 @@
 
 /* src/components/Footer.css */
 .footer {
-  background: #d6f0e0;
+  background: rgba(214, 240, 224, 0.7);
   /* light green, darker than #eefaf3 */
   color: #111;
   padding: 1.5rem 1rem;
