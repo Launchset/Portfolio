@@ -58,9 +58,9 @@ export default function Contact() {
           <article className="contact-card">
             <h3>Got a question?</h3>
             <p>
-              Got a question about websites or booking systems for your boxing gym?
-              I specialize in creating solutions that attract members and simplify
-              class management. Drop me a message and let’s see how we can put the
+              Got a question about a websites or altomation for your business?
+              We specialize in creating solutions that attract clients and simplify
+              tech. Drop me a message and let’s see how we can put the
               right system in place.
             </p>
           </article>
@@ -69,8 +69,8 @@ export default function Contact() {
           <article className="contact-card">
             <h3>What to include</h3>
             <ul className="bullets">
-              <li>A brief intro about your gym/business — who you are and what you do.</li>
-              <li>The type of website you’re looking for (new site, redesign, booking, membership features).</li>
+              <li>A brief intro about your business — who you are and what you do.</li>
+              <li>The type of website you’re looking for (new site, redesign, booking, membership features or altomation).</li>
               <li>Any must-haves or goals (class booking, payments, specific style/brand feel).</li>
               <li>Timeline or deadlines (if you have a launch date in mind).</li>
             </ul>

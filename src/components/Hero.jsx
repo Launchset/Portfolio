@@ -7,12 +7,12 @@ export default function Hero() {
       <div className="hero-main">
         <div className="hero-text">
           <span className="hero-tagline">Custom Websites • Real Results</span>
-          <h1>Custom Websites for Boxing Gyms</h1>
+          <h1>Custom Websites for Small Businesses</h1>
           <p>
-            I design fast, modern websites and booking tools built specifically for boxing gyms and coaches.
+            I design fast, modern websites with booking tools and altomation, built specifically for small businesses.
           </p>
           <p>
-            Easy to use, mobile-friendly, and built to keep your classes full—without the tech headaches. You train fighters, I’ll handle the website that brings them through the door.
+            Easy to use, mobile-friendly, and built to gain customers without the tech headaches. You focus on your business, I’ll handle the website that brings people through the door.
           </p>
 
           <div className="hero-buttons">
