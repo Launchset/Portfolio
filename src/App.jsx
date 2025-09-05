@@ -6,19 +6,29 @@ import Projects from "./components/Projects";
 import Contact from "./components/Contact";
 import About from "./components/About";
 import Footer from "./components/Footer";
+import ScrollUpSection from "./components/ScrollUpSection"; // 👈 swapped
 
 function App() {
-  usePageTracking(); // 👈 Initialize page tracking
+  usePageTracking();
   return (
     <>
-      <SiteBackground /> {/* ✅ Top-level, outside <main> */}
+      <SiteBackground />
       <Navbar />
       <main>
-        <Hero />
-        <Projects />
-        <Contact />
-        <About />
+        <ScrollUpSection>
+          <Hero />
+        </ScrollUpSection>
+        <ScrollUpSection>
+          <Projects />
+        </ScrollUpSection>
+        <ScrollUpSection>
+          <Contact />
+        </ScrollUpSection>
+        <ScrollUpSection>
+          <About />
+        </ScrollUpSection>
         <Footer />
+
       </main>
     </>
   );
