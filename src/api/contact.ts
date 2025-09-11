@@ -1,57 +1,68 @@
-import { Resend } from 'resend';
-import { z } from 'zod';
+import type { VercelRequest, VercelResponse } from "@vercel/node";
+import { Resend } from "resend";
+import { google } from "googleapis";
 
-const resend = new Resend(process.env.RESEND_API_KEY!);
+// Resend setup
+const resend = new Resend(process.env.RESEND_API_KEY);
 
-const schema = z.object({
-  name: z.string().min(2),
-  email: z.string().email(),
-  company: z.string().optional(),
-  budget: z.string().optional(),
-  message: z.string().min(10),
-  consent: z.boolean(),
+// Google Sheets setup
+const auth = new google.auth.GoogleAuth({
+  credentials: JSON.parse(process.env.GOOGLE_CREDENTIALS as string),
+  scopes: ["https://www.googleapis.com/auth/spreadsheets"],
 });
+const sheets = google.sheets({ version: "v4", auth });
 
-export default async function handler(req: any, res: any) {
-  if (req.method !== 'POST') {
-    res.statusCode = 405;
-    return res.json({ error: 'Method not allowed' });
+// Append a row to the sheet
+async function addLeadToSheet(lead: any) {
+  await sheets.spreadsheets.values.append({
+    spreadsheetId: process.env.SHEET_ID,
+    range: "Sheet1!A1",
+    valueInputOption: "USER_ENTERED",
+    requestBody: {
+      values: [[
+        lead.name,
+        lead.email,
+        lead.business || "",
+        lead.budget || "",
+        lead.message || "",
+        lead.consent ? "Yes" : "No",
+        new Date().toISOString(),
+      ]],
+    },
+  });
+}
+
+export default async function handler(req: VercelRequest, res: VercelResponse) {
+  if (req.method !== "POST") {
+    return res.status(405).json({ error: "Method not allowed" });
   }
-
-  // Vercel usually parses JSON, but be defensive in dev/preview
-  const body = typeof req.body === 'string' ? safeJson(req.body) : req.body;
-  if (!body) return res.status(400).json({ error: 'Invalid JSON' });
-
-  const parsed = schema.safeParse(body);
-  if (!parsed.success) {
-    return res.status(400).json({ error: parsed.error.format() });
-  }
-
-  const { name, email, company, budget, message } = parsed.data;
 
   try {
+    const { name, email, business, budget, message, consent } = req.body;
+
+    // Send email
     await resend.emails.send({
-      from: 'Launchset <no-reply@launchset.dev>', // use a verified sender or 'onboarding@resend.dev' for sandbox
-      to: process.env.SEND_TO_EMAIL!,
-      replyTo: email, // <-- fixed key
+      from: process.env.FROM_EMAIL!,
+      to: process.env.TO_EMAIL!,
       subject: `New inquiry from ${name}`,
       text: `
 Name: ${name}
 Email: ${email}
-Company: ${company || '-'}
-Budget: ${budget || '-'}
+Business: ${business || "-"}
+Budget: ${budget || "-"}
+Consent: ${consent ? "Yes" : "No"}
+
 Message:
 ${message}
       `.trim(),
     });
 
-    return res.status(200).json({ ok: true });
-  } catch (err) {
-    console.error('Resend error:', err);
-    return res.status(500).json({ error: 'Failed to send email' });
-  }
-}
+    // Log to Google Sheet
+    await addLeadToSheet({ name, email, business, budget, message, consent });
 
-function safeJson(s: string) {
-  try { return JSON.parse(s); } catch { return null; }
+    return res.status(200).json({ status: "ok" });
+  } catch (error: any) {
+    console.error("Error:", error.message);
+    return res.status(500).json({ status: "fail" });
+  }
 }
