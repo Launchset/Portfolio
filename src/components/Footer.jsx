@@ -7,7 +7,7 @@ export default function Footer() {
     <footer className="footer">
       <div className="footer-content">
         <p>
-          &copy; {new Date().getFullYear()} James Dyson & John Helyar. All rights reserved.
+          &copy; {new Date().getFullYear()} John Helyar. All rights reserved.
         </p>
 
         <p className="social-links">
