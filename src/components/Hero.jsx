@@ -9,7 +9,7 @@ export default function Hero() {
           <span className="hero-tagline">Custom Websites • Real Results</span>
           <h1>Custom Websites for Small Businesses</h1>
           <p>
-            I design fast, modern websites with booking tools and altomation, built specifically for small businesses.
+            I design fast, modern websites with booking tools and automation, built specifically for small businesses.
           </p>
           <p>
             Easy to use, mobile-friendly, and built to gain customers without the tech headaches. You focus on your business, I’ll handle the website that brings people through the door.

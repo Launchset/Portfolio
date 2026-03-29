@@ -1,12 +1,48 @@
-# React + Vite
+# Launchset Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Marketing site and contact funnel for Launchset, built with React and Vite and deployed with a Vercel serverless contact endpoint.
 
-Currently, two official plugins are available:
+## Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- React 19
+- Vite 7
+- Plain CSS
+- Vercel serverless function for contact handling
+- Resend for notification email delivery
+- Google Sheets for lead logging
 
-## Expanding the ESLint configuration
+## Local Development
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Install dependencies and start the frontend:
+
+```bash
+npm install
+npm run dev
+```
+
+The site runs locally at `http://localhost:5173` by default.
+
+## Contact Form Setup
+
+The contact form posts to `/api/contact`. The serverless function expects these environment variables:
+
+- `RESEND_API_KEY`
+- `FROM_EMAIL`
+- `TO_EMAIL`
+- `GOOGLE_CREDENTIALS`
+- `SHEET_ID`
+
+`GOOGLE_CREDENTIALS` must be a valid JSON string for a Google service account with access to the target sheet.
+
+## Scripts
+
+- `npm run dev` starts the Vite dev server
+- `npm run build` creates a production build
+- `npm run lint` runs ESLint
+- `npm run preview` serves the production build locally
+
+## Notes
+
+- Form submissions are validated server-side before email delivery or sheet logging.
+- Analytics is enabled in production and skipped on localhost.
+- Static SEO assets live in `public/`.

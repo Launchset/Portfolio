@@ -3,6 +3,7 @@ import "./Contact.css";
 
 export default function Contact() {
   const [status, setStatus] = useState("idle");
+  const [message, setMessage] = useState("");
 
   const ENDPOINT = "/api/contact"; // hits Vercel serverless function
 
@@ -24,13 +25,16 @@ export default function Contact() {
 
       if (res.ok) {
         setStatus("success");
+        setMessage("Thanks — I’ll reply shortly.");
         form.reset();
       } else {
         setStatus("error");
+        setMessage("Something broke. Email me directly: john@launchset.dev");
       }
     } catch (err) {
       console.error(err);
       setStatus("error");
+      setMessage("Something broke. Email me directly: john@launchset.dev");
     }
   }
 
@@ -40,7 +44,6 @@ export default function Contact() {
         <h2 className="contact-title">Contact Me to Discuss Your Website</h2>
 
         <div className="contact-grid">
-          {/* Info Cards */}
           <article className="contact-card">
             <h3>Contact</h3>
             <p>
@@ -148,13 +151,20 @@ export default function Contact() {
             >
               {status === "loading" ? "Sending…" : "Get in Touch"}
             </button>
-            {status === "success" && (
-              <span className="note success">Thanks — I’ll reply shortly.</span>
-            )}
-            {status === "error" && (
-              <span className="note error">
-                Something broke. Email me directly:{" "}
-                <a href="mailto:john@launchset.dev">john@launchset.dev</a>
+            {(status === "success" || status === "error") && (
+              <span
+                className={`note ${status}`}
+                role="status"
+                aria-live="polite"
+              >
+                {status === "error" ? (
+                  <>
+                    Something broke. Email me directly:{" "}
+                    <a href="mailto:john@launchset.dev">john@launchset.dev</a>
+                  </>
+                ) : (
+                  message
+                )}
               </span>
             )}
           </div>

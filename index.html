@@ -29,9 +29,13 @@
   <meta property="og:title" content="Launchset – Websites for Small Businesses" />
   <meta property="og:description"
     content="Websites that reduce admin and add automation, built for small businesses." />
-  <meta property="og:image" content="https://launchset.dev/logo.webp" />
+  <meta property="og:image" content="https://launchset.dev/og-image.webp" />
   <meta property="og:url" content="https://launchset.dev/" />
   <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Launchset – Websites for Small Businesses" />
+  <meta name="twitter:description"
+    content="Websites that reduce admin and add automation, built for small businesses." />
+  <meta name="twitter:image" content="https://launchset.dev/og-image.webp" />
 
   <script type="application/ld+json">
   {
@@ -39,7 +43,7 @@
     "@type": "Organization",
     "name": "Launchset",
     "url": "https://launchset.dev",
-    "logo": "https://launchset.dev/htmlogo1.webp"
+    "logo": "https://launchset.dev/og-image.webp"
   }
   </script>
 
@@ -50,14 +54,12 @@
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-HX8DBNS3QQ"></script>
   <script>
-    console.log("Google Analytics script loaded");
     window.dataLayer = window.dataLayer || [];
     function gtag() {
-      console.log("GTAG fired", arguments);
       dataLayer.push(arguments);
     }
     gtag('js', new Date());
-    gtag('config', 'G-HX8DBNS3QQ');
+    gtag('config', 'G-HX8DBNS3QQ', { send_page_view: false });
   </script>
 </head>
 
