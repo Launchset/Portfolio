@@ -1,4 +1,5 @@
 const baseUrl = (process.argv[2] ?? "https://launchset.dev").replace(/\/$/, "");
+const indexNowKey = "d741c621a029fa2ac19b5648d7863617";
 
 const checks = [
   ["/", "text/html"],
@@ -19,6 +20,7 @@ const checks = [
   ["/apple-icon.png", "image/png"],
   ["/icon-192.png", "image/png"],
   ["/icon-512.png", "image/png"],
+  [`/${indexNowKey}.txt`, "text/plain"],
 ];
 
 let failed = false;
@@ -47,6 +49,14 @@ for (const [path, expectedType] of checks) {
           console.error(`FAIL homepage marker missing: ${marker}`);
           failed = true;
         }
+      }
+    }
+
+    if (path === `/${indexNowKey}.txt` && response.ok) {
+      const body = (await response.text()).trim();
+      if (body !== indexNowKey) {
+        console.error("FAIL IndexNow key file content does not match its filename");
+        failed = true;
       }
     }
 

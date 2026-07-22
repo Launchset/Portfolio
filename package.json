@@ -11,7 +11,9 @@
     "cf-typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts",
     "start": "next start",
     "lint": "eslint",
+    "bing": "node scripts/bing-cli.mjs",
     "google": "node scripts/google-cli.mjs",
+    "indexnow": "node scripts/indexnow.mjs",
     "verify:production": "node scripts/verify-production.mjs"
   },
   "dependencies": {
