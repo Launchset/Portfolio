@@ -10,6 +10,7 @@
     "cf-typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts",
     "start": "next start",
     "lint": "eslint",
+    "google": "node scripts/google-cli.mjs",
     "verify:production": "node scripts/verify-production.mjs"
   },
   "dependencies": {
