@@ -51,6 +51,19 @@ for (const [path, expectedType] of checks) {
     }
 
     if (path === "/" && response.ok) {
+      const link = response.headers.get("link") ?? "";
+      const contentSignal = response.headers.get("content-signal") ?? "";
+      if (!link.includes("/llms.txt") || !link.includes("/sitemap.xml")) {
+        console.error("FAIL homepage discovery Link header missing llms.txt or sitemap.xml");
+        failed = true;
+      }
+      if (!contentSignal.includes("search=yes") || !contentSignal.includes("ai-input=yes")) {
+        console.error("FAIL homepage Content-Signal header missing search or AI input permission");
+        failed = true;
+      }
+    }
+
+    if (path === "/" && response.ok) {
       for (const header of [
         "strict-transport-security",
         "x-content-type-options",
@@ -68,6 +81,28 @@ for (const [path, expectedType] of checks) {
     console.error(`FAIL ${path}: ${error instanceof Error ? error.message : String(error)}`);
     failed = true;
   }
+}
+
+try {
+  const response = await fetch(`${baseUrl}/`, {
+    signal: AbortSignal.timeout(15_000),
+    headers: {
+      accept: "text/markdown",
+      "user-agent": "Launchset production check",
+    },
+  });
+  const contentType = response.headers.get("content-type") ?? "";
+  const markdown = await response.text();
+  const valid =
+    response.ok &&
+    contentType.includes("text/markdown") &&
+    markdown.includes("# Launchset") &&
+    response.headers.get("vary")?.toLowerCase().includes("accept");
+  console.log(`${valid ? "PASS" : "FAIL"} ${response.status} / Accept: text/markdown ${contentType}`);
+  if (!valid) failed = true;
+} catch (error) {
+  console.error(`FAIL / Accept: text/markdown: ${error instanceof Error ? error.message : String(error)}`);
+  failed = true;
 }
 
 if (failed) process.exit(1);
