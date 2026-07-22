@@ -1,0 +1,10 @@
+.control { margin-top:25px; padding:20px; display:flex; align-items:center; justify-content:space-between; gap:25px; border:1px solid rgba(20,32,25,.17); border-radius:9px; background:#dfe4dc; }
+.control > div { display:flex; flex-direction:column; gap:7px; }
+.control span { color:#617068; font-size:7px; font-weight:800; letter-spacing:.14em; }
+.control strong { color:#243229; font-size:13px; }
+.control[data-disabled="true"] { border-color:rgba(15,125,80,.32); background:#d9eadf; }
+.control[data-disabled="true"] span { color:#0b7d50; }
+.control button { flex:0 0 auto; padding:11px 14px; border:1px solid #203027; border-radius:7px; background:#142019; color:#eef2ef; font-size:10px; font-weight:750; cursor:pointer; }
+.control button:hover { background:#203329; }
+.control button:focus-visible { outline:2px solid #0b7d50; outline-offset:3px; }
+@media(max-width:600px){.control{align-items:stretch;flex-direction:column}.control button{width:100%}}

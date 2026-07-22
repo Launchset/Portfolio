@@ -1,0 +1,36 @@
+.banner { position:fixed; z-index:300; right:18px; bottom:18px; width:min(540px,calc(100vw - 36px)); padding:20px; display:grid; gap:18px; border:1px solid rgba(226,255,238,.17); border-radius:12px; background:rgba(11,18,15,.97); color:#eef3ef; box-shadow:0 24px 70px rgba(0,0,0,.4); backdrop-filter:blur(14px); }
+.banner span { color:var(--green); font-size:8px; font-weight:800; letter-spacing:.17em; }
+.banner p { margin:10px 0 0; color:#b0bbb5; font-size:12px; line-height:1.6; }
+.actions { display:flex; align-items:center; justify-content:flex-end; gap:10px; }
+.actions a { padding:9px 3px; color:#a9b5ae; font-size:11px; border-bottom:1px solid rgba(226,255,238,.22); }
+.actions button { min-width:112px; padding:11px 14px; border:1px solid var(--green); border-radius:7px; background:var(--green); color:#07150e; font-size:11px; font-weight:800; cursor:pointer; }
+.actions .secondary { border-color:rgba(226,255,238,.22); background:transparent; color:#dce5df; }
+.actions a:focus-visible,.actions button:focus-visible { outline:2px solid #fff; outline-offset:3px; }
+.settings { display:grid; gap:0; }
+.settingsIntro { padding-bottom:17px; }
+.settingsIntro h2 { margin:10px 0 7px; font-family:"Avenir Next","Noto Sans","Segoe UI",sans-serif; font-size:22px; line-height:1.05; letter-spacing:-.04em; }
+.settingsIntro p { margin:0; }
+.settingRow { position:relative; min-height:78px; padding:14px 0; display:flex; align-items:center; justify-content:space-between; gap:22px; border-top:1px solid rgba(226,255,238,.12); color:inherit; cursor:default; }
+.settingRow > div { min-width:0; }
+.settingRow strong { color:#edf3ef; font-size:12px; }
+.settingRow p { margin:5px 0 0; color:#8f9c95; font-size:10px; line-height:1.45; }
+.alwaysOn { flex:0 0 auto; padding:6px 8px; border-radius:20px; background:rgba(37,211,138,.1); color:var(--green); font-size:7px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; }
+.settingRow input { position:absolute; width:1px; height:1px; opacity:0; pointer-events:none; }
+.settingRow > i { position:relative; width:42px; height:23px; flex:0 0 auto; border:1px solid rgba(226,255,238,.24); border-radius:20px; background:#25312b; transition:background .2s ease,border-color .2s ease; cursor:pointer; }
+.settingRow > i::after { content:""; position:absolute; left:3px; top:3px; width:15px; height:15px; border-radius:50%; background:#c5cec9; transition:transform .2s ease,background .2s ease; }
+.settingRow input:checked+i { border-color:var(--green); background:rgba(37,211,138,.22); }
+.settingRow input:checked+i::after { background:var(--green); transform:translateX(19px); }
+.settingRow input:focus-visible+i { outline:2px solid #fff; outline-offset:3px; }
+.settingsActions { padding-top:16px; display:flex; align-items:center; justify-content:space-between; gap:14px; border-top:1px solid rgba(226,255,238,.12); }
+.settingsActions a { color:#a9b5ae; font-size:10px; border-bottom:1px solid rgba(226,255,238,.22); }
+.settingsActions button { min-width:118px; padding:11px 15px; border:1px solid var(--green); border-radius:7px; background:var(--green); color:#07150e; font-size:11px; font-weight:800; cursor:pointer; }
+.settingsActions a:focus-visible,.settingsActions button:focus-visible { outline:2px solid #fff; outline-offset:3px; }
+@media(max-width:600px){
+  .banner{right:10px;bottom:10px;width:calc(100vw - 20px);max-height:calc(100dvh - 20px);padding:17px;overflow-y:auto}
+  .actions{align-items:stretch;flex-direction:column}
+  .actions a{align-self:flex-start}
+  .actions button{width:100%}
+  .settingsActions{align-items:stretch;flex-direction:column}
+  .settingsActions a{align-self:flex-start}
+  .settingsActions button{width:100%}
+}

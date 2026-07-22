@@ -1,0 +1,40 @@
+:root {
+  --ink: #eef2f1;
+  --muted: #9ca9ac;
+  --night: #080d12;
+  --panel: #10181e;
+  --green: #25d38a;
+  --green-dark: #0f6f4b;
+  --line: rgba(224, 255, 244, 0.14);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--night);
+  color: var(--ink);
+  font-family: "Noto Sans", "Segoe UI", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+button,
+a {
+  font: inherit;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+::selection {
+  background: var(--green);
+  color: #04110b;
+}

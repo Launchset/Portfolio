@@ -1,0 +1,55 @@
+# Launchset — full studio context
+
+Launchset is a digital design and automation studio. It combines creative web design with practical systems that remove repetitive work, make decisions clearer and return time to a business.
+
+## Positioning
+
+Launchset is presented as a studio rather than a solo freelance-development service. The work covers customer-facing websites, internal tools, automation and measurement. The goal is not technology for its own sake; each project is framed around useful business value.
+
+## Website work
+
+### Prestige Kitchens
+
+A premium catalogue-led experience for a growing interiors business. The work brings fitted-kitchen and bedroom journeys together with direct product discovery while keeping the buying path clear.
+
+### Vietmed Travel
+
+A calm, reassuring digital journey for international patients considering medical care in Vietnam. The experience explains medical travel, support and next steps in a more human and understandable way.
+
+### Pristine Barbers
+
+A practical growth and measurement project connecting website activity, Google visibility, Instagram and customer actions so business decisions can use clearer evidence.
+
+## Internal tools and automation
+
+### Caple Scrape Review
+
+A staged catalogue pipeline that collects supplier product content, normalises it into a canonical JSON snapshot, exposes it in a human-review interface, prepares images and relational data, and verifies the result before it reaches a live catalogue.
+
+### Lead Audit Review
+
+A deterministic research pipeline that discovers candidate businesses, qualifies and deduplicates websites, crawls relevant public pages, records evidence, applies explainable scoring rules and presents the result in a human-controlled review workspace. Outreach is not sent solely because a score is high.
+
+### Other systems
+
+The portfolio also includes local speech translation, on-device bilingual browser support and reporting access designed to reduce repetitive work while keeping people in control.
+
+## Founder
+
+John Helyar founded Launchset. His experience with dyslexia shaped a habit of breaking problems down, looking from different angles and continuing until a clearer and faster useful solution appears. That perspective is part of Launchset's personal brand and approach to business problems.
+
+## Contact
+
+- Website: https://launchset.dev
+- Email: launchsetfreelancer@gmail.com
+- LinkedIn: https://www.linkedin.com/in/johnhelyar1/
+
+## Canonical references
+
+- https://launchset.dev/work
+- https://launchset.dev/founder
+- https://launchset.dev/work/tools/caple-scrape-review
+- https://launchset.dev/work/tools/lead-audit-review
+- https://launchset.dev/privacy
+- https://launchset.dev/cookies
+- https://launchset.dev/terms

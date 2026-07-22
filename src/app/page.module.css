@@ -1,0 +1,103 @@
+.work,
+.services,
+.process,
+.contact {
+  position: relative;
+  padding: 110px max(6vw, calc((100vw - 1180px) / 2));
+}
+
+.work { background: #e8e9e2; color: #142019; }
+.sectionLabel {
+  padding-bottom: 18px;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(17, 31, 23, .28);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+}
+.workHeading { margin: 78px 0 95px; display: grid; grid-template-columns: 2fr 1fr; align-items: end; gap: 60px; }
+.workHeading h2,.serviceIntro h2 { margin: 0; font-family: "Avenir Next", "Noto Sans", "Segoe UI", sans-serif; font-size: clamp(43px, 5.4vw, 76px); line-height: 1.02; letter-spacing: -.06em; font-weight: 600; }
+.workHeading p { max-width: 350px; margin: 0 0 8px; color: #647068; font-size: 15px; line-height: 1.65; }
+.projectGrid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+.projectVisual { position: relative; height: 480px; overflow: hidden; border-radius: 3px; }
+.projectWarm { background: linear-gradient(145deg, #c98752, #e1b886 55%, #5e7560); }
+.projectViolet { background: linear-gradient(145deg, #352a68, #776bd0 58%, #a69ceb); }
+.projectVisual::after { content: ""; position: absolute; inset: 0; background: linear-gradient(125deg, rgba(255,255,255,.18), transparent 45%); }
+.projectNumber { position: absolute; z-index: 3; left: 22px; top: 20px; padding: 7px 11px; border-radius: 20px; background: rgba(255,255,255,.8); color: #172017; font-size: 9px; font-weight: 700; }
+.projectBrowser { position: absolute; z-index: 2; width: 77%; height: 65%; top: 18%; left: 12%; overflow: hidden; border: 1px solid rgba(255,255,255,.55); border-radius: 10px; background: #ece9dc; box-shadow: 0 35px 55px rgba(30,24,16,.35); transform: perspective(900px) rotateY(-5deg) rotateX(2deg); transition: transform .5s ease; }
+.project:hover .projectBrowser { transform: perspective(900px) rotateY(0) rotateX(0) scale(1.025); }
+.projectBar { height: 26px; padding: 0 10px; display: flex; align-items: center; gap: 4px; background: #1c2525; }
+.projectBar i { width: 5px; height: 5px; border-radius: 50%; background: #f17f65; }
+.projectBar i:nth-child(2) { background:#e9c068; }.projectBar i:nth-child(3) { background:#65ce81; }
+.projectScreen { position: relative; height: calc(100% - 26px); overflow: hidden; background: #eef1ed; }
+.projectScreenshot { object-fit: cover; }
+.projectMeta { padding: 25px 1px 40px; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.projectMeta span { color: #718077; font-size: 9px; letter-spacing: .1em; }
+.projectMeta h3 { margin: 7px 0 0; font-family: "Avenir Next", "Noto Sans", "Segoe UI", sans-serif; font-size: 24px; letter-spacing: -.04em; }
+.projectMeta p { margin: 1px 0 0; color: #66726b; font-size: 13px; line-height: 1.55; }
+.moreWork { margin-top: 42px; padding-top: 28px; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid rgba(17,31,23,.22); }
+.moreWork p { margin: 0; color: #66726b; font-size: 14px; }
+.moreWork a { min-width: 190px; padding: 15px 18px; display: flex; align-items: center; justify-content: space-between; border-radius: 10px; background: #142019; color: #f1f4ef; font-size: 13px; font-weight: 700; transition: transform .2s ease, background .2s ease; }
+.moreWork a:hover { transform: translateY(-2px); background: #1e3026; }
+.moreWork a span { color: var(--green); font-size: 18px; }
+
+.services { background: #101815; color: #eef1eb; }
+.services .sectionLabel { border-color: rgba(238,241,235,.2); color: #91a097; }
+.serviceIntro { padding: 100px 0 65px; }
+.serviceIntro em { color: var(--green); font-family: Georgia, serif; font-weight: 400; }
+.serviceList article { position: relative; padding: 42px 55px 42px 0; display: grid; grid-template-columns: 90px 1fr 1fr 35px; align-items: center; border-top: 1px solid rgba(238,241,235,.16); }
+.serviceList article > span { color: var(--green); font-size: 11px; }
+.serviceList h3 { margin: 0; font-family: "Avenir Next", "Noto Sans", "Segoe UI", sans-serif; font-size: clamp(20px, 2vw, 29px); letter-spacing: -.04em; }
+.serviceList p { max-width: 330px; margin: 0; color: #8f9c95; font-size: 13px; line-height: 1.55; }
+.serviceList b { width: 34px; height: 34px; display: grid; place-items: center; border: 1px solid #506059; border-radius: 50%; color: var(--green); transition: transform .2s, background .2s; }
+.serviceList article:hover b { transform: rotate(45deg); background: var(--green); color: #07120d; }
+
+.process { min-height: 95vh; display: flex; flex-direction: column; justify-content: center; background: #d8ff67; color: #17200c; }
+.kicker { font-size: 10px; font-weight: 700; letter-spacing: .18em; }
+.process h2 { margin: 55px 0 80px; font-family: "Avenir Next", "Noto Sans", "Segoe UI", sans-serif; font-size: clamp(55px, 8vw, 110px); line-height: .88; letter-spacing: -.075em; font-weight: 600; }
+.process h2 span { color: rgba(23,32,12,.35); }
+.processBottom { display: grid; grid-template-columns: 1fr 1fr; align-items: end; }
+.processBottom p { max-width: 420px; margin: 0; font-size: 16px; line-height: 1.6; }
+.processBottom a { justify-self: end; padding-bottom: 8px; border-bottom: 1px solid currentColor; font-weight: 700; }
+.processBottom a span { margin-left: 45px; }
+
+.contact { min-height: 92vh; padding-bottom: 35px; display: flex; flex-direction: column; justify-content: center; background: #080d12; text-align: center; }
+.contact > p { color: var(--green); font-size: 10px; font-weight: 700; letter-spacing: .2em; }
+.contact h2 { margin: 32px 0 50px; font-family: "Avenir Next", "Noto Sans", "Segoe UI", sans-serif; font-size: clamp(50px, 7.7vw, 105px); line-height: .94; letter-spacing: -.07em; font-weight: 600; }
+.contact h2 em { color: var(--green); font-family: Georgia, serif; font-weight: 400; }
+.contactLinks { align-self:center; display:flex; flex-direction:column; align-items:center; gap:15px; }
+.contactLinks a { max-width:100%; padding:12px 0 9px; border-bottom:1px solid #61706b; font-size:clamp(19px,2vw,27px); }
+.contactLinks a span { margin-left:80px; color:var(--green); }
+.contactLinks a:last-child { color:#aeb9b3; font-size:14px; }
+
+@media (max-width: 760px) {
+  .work,.services,.process,.contact { padding: 80px 22px; }
+  .workHeading { margin: 60px 0 70px; grid-template-columns: 1fr; }
+  .projectGrid { grid-template-columns: 1fr; }
+  .projectVisual { height: auto; aspect-ratio: 1.06; }
+  .projectBrowser { width: 90%; height: auto; aspect-ratio: 1.28; left: 5%; top: 50%; border-radius: 7px; transform: translateY(-50%); box-shadow: 0 22px 38px rgba(30,24,16,.3); }
+  .project:hover .projectBrowser { transform: translateY(-50%); }
+  .projectMeta { grid-template-columns: 1fr; }
+  .moreWork { align-items: stretch; flex-direction: column; gap: 20px; }
+  .moreWork a { width: 100%; }
+  .serviceList article { grid-template-columns: 45px 1fr 30px; gap: 10px; padding-right: 0; }
+  .serviceList p { grid-column: 2; margin-top: 12px; }
+  .serviceList b { grid-column: 3; grid-row: 1; }
+  .process { min-height: 85vh; }
+  .processBottom { grid-template-columns: 1fr; gap: 45px; }
+  .processBottom a { justify-self: start; }
+  .contactLinks { width:100%; }
+  .contactLinks a { max-width:100%; font-size:clamp(16px,4.7vw,20px); overflow-wrap:anywhere; }
+  .contactLinks a span { margin-left:20px; }
+  .contactLinks a:last-child { font-size:14px; }
+}
+
+@media (max-width: 420px) {
+  .work,.services,.process,.contact { padding-inline: 18px; }
+  .projectVisual { height: auto; }
+  .contact h2 { font-size: 44px; }
+  .contactLinks a { max-width:100%; font-size:16px; overflow-wrap:anywhere; }
+  .contactLinks a span { margin-left:18px; }
+}

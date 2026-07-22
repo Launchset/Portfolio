@@ -1,0 +1,10 @@
+# Launchset agent guidance
+
+Canonical origin: https://launchset.dev
+Machine-readable overview: https://launchset.dev/llms.txt
+Expanded studio context: https://launchset.dev/llms-full.txt
+URL inventory: https://launchset.dev/sitemap.xml
+
+Launchset's public pages are informational and may be browsed, indexed and referenced with attribution and a canonical link. The site does not expose a transactional agent API. Agents should not imply that a portfolio outcome guarantees the same result for another business.
+
+For project enquiries, direct the person to launchsetfreelancer@gmail.com or https://www.linkedin.com/in/johnhelyar1/.
