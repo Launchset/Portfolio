@@ -4,6 +4,8 @@
 .contact {
   position: relative;
   padding: 110px max(6vw, calc((100vw - 1180px) / 2));
+  content-visibility: auto;
+  contain-intrinsic-size: auto 900px;
 }
 
 .work { background: #e8e9e2; color: #142019; }
@@ -19,7 +21,7 @@
 }
 .workHeading { margin: 78px 0 95px; display: grid; grid-template-columns: 2fr 1fr; align-items: end; gap: 60px; }
 .workHeading h2,.serviceIntro h2 { margin: 0; font-family: "Avenir Next", "Noto Sans", "Segoe UI", sans-serif; font-size: clamp(43px, 5.4vw, 76px); line-height: 1.02; letter-spacing: -.06em; font-weight: 600; }
-.workHeading p { max-width: 350px; margin: 0 0 8px; color: #647068; font-size: 15px; line-height: 1.65; }
+.workHeading p { max-width: 350px; margin: 0 0 8px; color: #5d6961; font-size: 15px; line-height: 1.65; }
 .projectGrid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
 .projectVisual { position: relative; height: 480px; overflow: hidden; border-radius: 3px; }
 .projectWarm { background: linear-gradient(145deg, #c98752, #e1b886 55%, #5e7560); }
@@ -34,11 +36,11 @@
 .projectScreen { position: relative; height: calc(100% - 26px); overflow: hidden; background: #eef1ed; }
 .projectScreenshot { object-fit: cover; }
 .projectMeta { padding: 25px 1px 40px; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-.projectMeta span { color: #718077; font-size: 9px; letter-spacing: .1em; }
+.projectMeta span { color: #58665e; font-size: 9px; letter-spacing: .1em; }
 .projectMeta h3 { margin: 7px 0 0; font-family: "Avenir Next", "Noto Sans", "Segoe UI", sans-serif; font-size: 24px; letter-spacing: -.04em; }
-.projectMeta p { margin: 1px 0 0; color: #66726b; font-size: 13px; line-height: 1.55; }
+.projectMeta p { margin: 1px 0 0; color: #5e6a63; font-size: 13px; line-height: 1.55; }
 .moreWork { margin-top: 42px; padding-top: 28px; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid rgba(17,31,23,.22); }
-.moreWork p { margin: 0; color: #66726b; font-size: 14px; }
+.moreWork p { margin: 0; color: #5e6a63; font-size: 14px; }
 .moreWork a { min-width: 190px; padding: 15px 18px; display: flex; align-items: center; justify-content: space-between; border-radius: 10px; background: #142019; color: #f1f4ef; font-size: 13px; font-weight: 700; transition: transform .2s ease, background .2s ease; }
 .moreWork a:hover { transform: translateY(-2px); background: #1e3026; }
 .moreWork a span { color: var(--green); font-size: 18px; }
@@ -57,7 +59,7 @@
 .process { min-height: 95vh; display: flex; flex-direction: column; justify-content: center; background: #d8ff67; color: #17200c; }
 .kicker { font-size: 10px; font-weight: 700; letter-spacing: .18em; }
 .process h2 { margin: 55px 0 80px; font-family: "Avenir Next", "Noto Sans", "Segoe UI", sans-serif; font-size: clamp(55px, 8vw, 110px); line-height: .88; letter-spacing: -.075em; font-weight: 600; }
-.process h2 span { color: rgba(23,32,12,.35); }
+.process h2 span { color: #65782a; }
 .processBottom { display: grid; grid-template-columns: 1fr 1fr; align-items: end; }
 .processBottom p { max-width: 420px; margin: 0; font-size: 16px; line-height: 1.6; }
 .processBottom a { justify-self: end; padding-bottom: 8px; border-bottom: 1px solid currentColor; font-weight: 700; }

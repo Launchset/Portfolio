@@ -12,7 +12,7 @@
 .contact a b { margin-left:24px; font-weight:400; }
 .contact .socialLink { margin-top:14px; color:#b6c1bb; font-size:13px; font-weight:600; letter-spacing:0; }
 .contact p { max-width:320px; margin:24px 0 0; color:#8e9b94; font-size:12px; line-height:1.65; }
-.footerBottom { padding-top:22px; display:grid; grid-template-columns:1fr auto 1fr; gap:30px; align-items:center; border-top:1px solid rgba(226,255,238,.12); color:#68756e; font-size:9px; letter-spacing:.08em; text-transform:uppercase; }
+.footerBottom { padding-top:22px; display:grid; grid-template-columns:1fr auto 1fr; gap:30px; align-items:center; border-top:1px solid rgba(226,255,238,.12); color:#74827a; font-size:9px; letter-spacing:.08em; text-transform:uppercase; }
 .footerBottom > p { margin:0; }
 .footerBottom > p:last-child { text-align:right; }
 .legalLinks { display:flex; align-items:center; justify-content:center; gap:22px; }

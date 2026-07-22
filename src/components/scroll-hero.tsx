@@ -1,7 +1,10 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import { useEffect, useRef, useState } from "react";
 import styles from "./scroll-hero.module.css";
+
+const DesktopHeroVisual = dynamic(() => import("./desktop-hero-visual"), { ssr: false });
 
 const clamp = (value: number, min = 0, max = 1) =>
   Math.min(Math.max(value, min), max);
@@ -14,6 +17,15 @@ export default function ScrollHero() {
   const stageRef = useRef<HTMLDivElement>(null);
   const navRef = useRef<HTMLElement>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [showDesktopVisual, setShowDesktopVisual] = useState(false);
+
+  useEffect(() => {
+    const media = window.matchMedia("(min-width: 701px)");
+    const update = () => setShowDesktopVisual(media.matches);
+    update();
+    media.addEventListener("change", update);
+    return () => media.removeEventListener("change", update);
+  }, []);
 
   useEffect(() => {
     const section = sectionRef.current;
@@ -21,11 +33,33 @@ export default function ScrollHero() {
     const nav = navRef.current;
     if (!section || !stage || !nav) return;
 
+    let heroVisible = true;
+    const updateMotionState = () => {
+      stage.dataset.motion = heroVisible && !document.hidden ? "running" : "paused";
+    };
+    const visibilityObserver = new IntersectionObserver(
+      ([entry]) => {
+        heroVisible = entry?.isIntersecting ?? false;
+        updateMotionState();
+      },
+      { rootMargin: "120px 0px" },
+    );
+    visibilityObserver.observe(section);
+    document.addEventListener("visibilitychange", updateMotionState);
+    updateMotionState();
+
+    const cleanupMotionState = () => {
+      visibilityObserver.disconnect();
+      document.removeEventListener("visibilitychange", updateMotionState);
+      delete stage.dataset.motion;
+    };
+
     // Phones use a normal document-flow hero. Keeping them out of the pinned
     // scene also means touch scrolling is never captured by the animation.
     if (window.matchMedia("(max-width: 700px)").matches) {
       nav.dataset.visible = "true";
       return () => {
+        cleanupMotionState();
         nav.dataset.visible = "false";
       };
     }
@@ -43,6 +77,7 @@ export default function ScrollHero() {
     let lastScrollY = window.scrollY;
     let pointerAtTop = false;
     let headerVisible = false;
+    let heroCompletionReported = false;
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     const setHeaderVisible = (visible: boolean) => {
@@ -182,6 +217,10 @@ export default function ScrollHero() {
           const distance = Math.max(section.offsetHeight - window.innerHeight, 1);
           released = true;
           window.scrollTo(0, section.offsetTop + distance * target);
+          if (!heroCompletionReported) {
+            heroCompletionReported = true;
+            window.dispatchEvent(new CustomEvent("launchset:hero-complete"));
+          }
         }
 
         transitioning = false;
@@ -278,6 +317,7 @@ export default function ScrollHero() {
       if (frame) window.cancelAnimationFrame(frame);
       if (transitionFrame) window.cancelAnimationFrame(transitionFrame);
       delete stage.dataset.transitioning;
+      cleanupMotionState();
     };
   }, []);
 
@@ -352,101 +392,7 @@ export default function ScrollHero() {
           <div className={styles.sphere} />
         </div>
 
-        <div className={styles.browserWrap} aria-label="Example Launchset website project">
-          <div className={styles.browserGlow} />
-          <div className={styles.browser}>
-            <div className={styles.browserBar}>
-              <div><i /><i /><i /></div>
-              <span>launchset.dev / latest</span>
-              <b>＋</b>
-            </div>
-            <div className={styles.handoffSite}>
-              <div className={styles.handoffContent}>
-                <div className={styles.visualComposition} aria-hidden="true">
-                  <div className={styles.visualGrid} />
-                  <div className={styles.visualGlow} />
-                  <div className={styles.designMessage}>
-                    <span>01 / DIGITAL EXPERIENCES</span>
-                    <h2>Reactive,<br />clean designs.</h2>
-                  </div>
-                  <div className={styles.monolith}>
-                    <div className={styles.monolithWash} />
-                    <div className={styles.orbit}><i /><i /><i /></div>
-                    <div className={styles.sphere} />
-                    <div className={styles.monolithLines}><i /><i /><i /><i /><i /></div>
-                  </div>
-                  <div className={`${styles.glassPlane} ${styles.planeLeft}`}>
-                    <i /><i /><i />
-                  </div>
-                  <div className={`${styles.glassPlane} ${styles.planeRight}`}>
-                    <div /><div /><div /><div />
-                  </div>
-                  <div className={styles.floatingDisc}><i /></div>
-                  <div className={styles.edgeLines}><i /><i /><i /></div>
-                  <div className={styles.automationScreen}>
-                    <div className={styles.automationChrome}>
-                      <div><i /><i /><i /></div>
-                      <span>Launchset / Flow</span>
-                    </div>
-                    <div className={styles.automationContent}>
-                      <div className={styles.automationCopy}>
-                        <span>02 / SMARTER SYSTEMS</span>
-                        <h2>As well as<br />useful automations.</h2>
-                        <p>
-                          Enquiries sorted, replies sent, and your team kept up
-                          to date—automatically.
-                        </p>
-                      </div>
-                      <div className={styles.automationVisual}>
-                        <div className={styles.workflowHeader}>
-                          <div><i /> Enquiry workflow</div>
-                          <span>ACTIVE</span>
-                        </div>
-                        <div className={styles.workflowCanvas}>
-                          <svg className={`${styles.workflowConnections} ${styles.desktopConnections}`} viewBox="0 0 600 330" preserveAspectRatio="none" aria-hidden="true">
-                            <path d="M145 165 H270" />
-                            <path d="M295 165 C350 165 340 60 405 60" />
-                            <path d="M295 165 H405" />
-                            <path d="M295 165 C350 165 340 270 405 270" />
-                            <path className={`${styles.flowBall} ${styles.flowBallMain}`} pathLength="100" d="M145 165 H270" />
-                            <path className={`${styles.flowBall} ${styles.flowBallMain} ${styles.flowBallDelayed}`} pathLength="100" d="M145 165 H270" />
-                            <path className={`${styles.flowBall} ${styles.flowBallTop}`} pathLength="100" d="M295 165 C350 165 340 60 405 60" />
-                            <path className={`${styles.flowBall} ${styles.flowBallMiddle}`} pathLength="100" d="M295 165 H405" />
-                            <path className={`${styles.flowBall} ${styles.flowBallBottom}`} pathLength="100" d="M295 165 C350 165 340 270 405 270" />
-                          </svg>
-                          <svg className={`${styles.workflowConnections} ${styles.mobileConnections}`} viewBox="0 0 330 500" preserveAspectRatio="none" aria-hidden="true">
-                            <path d="M165 60 V155" />
-                            <path d="M165 155 V245" />
-                            <path d="M165 245 V340" />
-                            <path d="M165 340 V435" />
-                            <path className={`${styles.flowBall} ${styles.flowBallMain}`} pathLength="100" d="M165 60 V155" />
-                            <path className={`${styles.flowBall} ${styles.flowBallTop}`} pathLength="100" d="M165 155 V245" />
-                            <path className={`${styles.flowBall} ${styles.flowBallMiddle}`} pathLength="100" d="M165 245 V340" />
-                            <path className={`${styles.flowBall} ${styles.flowBallBottom}`} pathLength="100" d="M165 340 V435" />
-                          </svg>
-                          <div className={`${styles.workflowNode} ${styles.triggerNode}`}>
-                            <i>↗</i>
-                            <div><b>TRIGGER</b><span>Website enquiry</span></div>
-                          </div>
-                          <div className={styles.routerNode}><i /><i /><i /></div>
-                          <div className={`${styles.workflowNode} ${styles.actionOne}`}>
-                            <i>＋</i><div><b>ACTION</b><span>Create customer</span></div>
-                          </div>
-                          <div className={`${styles.workflowNode} ${styles.actionTwo}`}>
-                            <i>✦</i><div><b>ACTION</b><span>Send tailored reply</span></div>
-                          </div>
-                          <div className={`${styles.workflowNode} ${styles.actionThree}`}>
-                            <i>✓</i><div><b>ACTION</b><span>Notify the team</span></div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        {showDesktopVisual && <DesktopHeroVisual />}
 
         </div>
       </section>

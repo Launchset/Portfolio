@@ -36,14 +36,14 @@
 .heroCopy p { max-width: 360px; margin: 0 0 10px; color: #98a59f; font-size: 16px; line-height: 1.65; }
 .scrollNote { color: var(--green); font-size: 9px; font-weight: 700; letter-spacing: .18em; }
 
-.projects { padding: 120px max(6vw, calc((100vw - 1180px) / 2)); }
+.projects { padding: 120px max(6vw, calc((100vw - 1180px) / 2)); content-visibility:auto; contain-intrinsic-size:auto 2400px; }
 .caseStudy + .caseStudy { margin-top: 160px; padding-top: 120px; border-top: 1px solid rgba(17,31,23,.22); }
 .projectHeading { margin-bottom: 58px; display: grid; grid-template-columns: 60px 1fr 1fr; gap: 30px; align-items: end; }
 .projectHeadingNoIndex { grid-template-columns: 1fr 1fr; }
 .projectHeading > span { width: 34px; height: 34px; display: grid; place-items: center; border: 1px solid rgba(20,32,25,.3); border-radius: 50%; font-size: 9px; font-weight: 700; }
-.projectHeading div p { margin: 0 0 9px; color: #718077; font-size: 9px; letter-spacing: .12em; }
+.projectHeading div p { margin: 0 0 9px; color: #58665e; font-size: 9px; letter-spacing: .12em; }
 .projectHeading h2 { margin: 0; font-family: "Avenir Next", "Noto Sans", "Segoe UI", sans-serif; font-size: clamp(42px,5.5vw,75px); line-height: .95; letter-spacing: -.06em; }
-.projectHeading > p { max-width: 440px; justify-self: end; margin: 0; color: #647068; font-size: 15px; line-height: 1.65; }
+.projectHeading > p { max-width: 440px; justify-self: end; margin: 0; color: #5d6961; font-size: 15px; line-height: 1.65; }
 
 .projectImage { height: min(72vw,760px); padding: clamp(28px,6vw,80px); display: grid; place-items: center; overflow: hidden; border-radius: 4px; }
 .warm { background: radial-gradient(circle at 78% 20%,rgba(255,241,204,.65),transparent 28%),linear-gradient(145deg,#c98752,#e1b886 55%,#5e7560); }
@@ -57,14 +57,14 @@
 
 .projectDetails { margin-top: 58px; display: grid; grid-template-columns: 1.05fr 1fr 1.05fr; gap: 60px; }
 .projectDetails section { padding-top: 18px; border-top: 1px solid rgba(17,31,23,.24); }
-.projectDetails span { color: #718077; font-size: 9px; font-weight: 700; letter-spacing: .14em; }
+.projectDetails span { color: #58665e; font-size: 9px; font-weight: 700; letter-spacing: .14em; }
 .projectDetails p,.projectDetails li { color: #56645c; font-size: 14px; line-height: 1.65; }
 .projectDetails p { margin: 22px 0 0; }
 .projectDetails ul { margin: 18px 0 0; padding: 0; list-style: none; }
 .projectDetails li { padding: 9px 0 9px 17px; border-bottom: 1px solid rgba(17,31,23,.1); }
 .projectDetails li::before { content: "↗"; margin-left: -17px; margin-right: 7px; color: #0f8d5c; }
 
-.systems { padding: 120px max(6vw, calc((100vw - 1180px) / 2)); background: #101815; color: #eef1eb; }
+.systems { padding: 120px max(6vw, calc((100vw - 1180px) / 2)); background: #101815; color: #eef1eb; content-visibility:auto; contain-intrinsic-size:auto 2100px; }
 .systemsHeading { margin-bottom: 74px; display: grid; grid-template-columns: 1.4fr .6fr; gap: 70px; align-items: end; }
 .systemsHeading > div > span,.toolCopy > span { color: var(--green); font-size: 9px; font-weight: 700; letter-spacing: .16em; }
 .systemsHeading h2 { margin: 26px 0 0; font-family: "Avenir Next", "Noto Sans", "Segoe UI", sans-serif; font-size: clamp(50px,7vw,94px); line-height: .9; letter-spacing: -.07em; font-weight: 600; }
@@ -79,7 +79,7 @@
 .toolCopy { padding: 30px; }
 .toolCopy h3 { margin: 12px 0; font-family: "Avenir Next", "Noto Sans", "Segoe UI", sans-serif; font-size: clamp(26px,3vw,38px); letter-spacing: -.045em; }
 .toolCopy p { max-width: 680px; margin: 0; color: #9ba7a0; font-size: 14px; line-height: 1.65; }
-.toolCopy small { display: block; margin-top: 24px; color: #6f8177; font-size: 8px; font-weight: 700; letter-spacing: .13em; }
+.toolCopy small { display: block; margin-top: 24px; color: #83968c; font-size: 8px; font-weight: 700; letter-spacing: .13em; }
 .architectureLink { width: min(100%,220px); margin-top: 24px; padding: 12px 14px; display: flex; align-items: center; justify-content: space-between; border: 1px solid rgba(226,255,238,.18); border-radius: 8px; color: #e9efeb; font-size: 11px; font-weight: 700; transition: border-color .2s ease, background .2s ease, transform .2s ease; }
 .architectureLink:hover { border-color: var(--green); background: rgba(37,211,138,.07); transform: translateY(-2px); }
 .architectureLink span { color: var(--green); font-size: 16px; }
@@ -98,7 +98,7 @@
 .chatDemo > b { align-self: flex-end; padding: 10px; border-radius: 10px; background: #fff; color: #0068ff; font-size: 11px; box-shadow: 0 8px 24px rgba(15,23,42,.15); }
 .chatDemo > b small { margin-left: 8px; color: #52637a; font-weight: 400; }
 
-.barberSection { padding: 130px max(6vw, calc((100vw - 1180px) / 2)); background: #e8e9e2; }
+.barberSection { padding: 130px max(6vw, calc((100vw - 1180px) / 2)); background: #e8e9e2; content-visibility:auto; contain-intrinsic-size:auto 1500px; }
 .barberShowcase { min-height: 680px; padding: clamp(28px,5vw,68px); display: grid; grid-template-columns: 1.45fr .55fr; gap: 28px; align-items: center; border-radius: 4px; background: radial-gradient(circle at 70% 16%,rgba(63,139,255,.45),transparent 26%),linear-gradient(145deg,#111822,#23394d); }
 .barberBrowser { width: 100%; }
 .analyticsCard { min-height: 520px; padding: 26px; display: flex; flex-direction: column; border: 1px solid rgba(255,255,255,.16); border-radius: 14px; background: rgba(7,13,18,.92); color: #eef4f0; box-shadow: 0 30px 55px rgba(0,0,0,.3); }
@@ -113,7 +113,7 @@
 .analyticsFoot > span { display: block; color: #a8b3ad; font-size: 10px; }.analyticsFoot > span i { width: 7px; height: 7px; display: inline-block; margin-right: 6px; border-radius: 50%; background: var(--green); }
 .analyticsFoot small { display: block; margin-top: 13px; color: #59665f; font-size: 7px; letter-spacing: .1em; }
 
-.nextProject { min-height: 82vh; padding: 100px max(6vw, calc((100vw - 1180px) / 2)); display: flex; flex-direction: column; justify-content: center; align-items: center; background: #080d12; color: #eef1eb; text-align: center; }
+.nextProject { min-height: 82vh; padding: 100px max(6vw, calc((100vw - 1180px) / 2)); display: flex; flex-direction: column; justify-content: center; align-items: center; background: #080d12; color: #eef1eb; text-align: center; content-visibility:auto; contain-intrinsic-size:auto 800px; }
 .nextProject > p { color: var(--green); font-size: 10px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; }
 .nextProject h2 { margin: 34px 0 52px; font-family: "Avenir Next", "Noto Sans", "Segoe UI", sans-serif; font-size: clamp(54px,8vw,110px); line-height: .9; letter-spacing: -.07em; font-weight: 600; }
 .nextProject h2 em { color: var(--green); font-family: Georgia,serif; font-weight: 400; }

@@ -411,20 +411,31 @@
 .orbit::after { inset: 25%; border-color: rgba(150,255,209,.14); }
 .orbit i {
   position: absolute;
-  left: 0;
-  top: 0;
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: var(--green);
-  box-shadow: 0 0 11px var(--green);
-  offset-rotate: 0deg;
+  left: 50%;
+  top: 50%;
+  width: 96%;
+  aspect-ratio: 1;
+  --orbit-scale-y: .54;
+  --dot-scale-y: 1.85;
+  --dot-size: 7px;
+  --dot-colour: var(--green);
   animation: orbitLight 7s linear infinite;
-  will-change: offset-distance;
+  will-change: transform;
 }
-.orbit i:first-child { offset-path: ellipse(48% 47% at 50% 50%); }
-.orbit i:nth-child(2) { offset-path: ellipse(37% 35% at 50% 50%); background: #786ee4; animation-duration: 9s; animation-direction: reverse; }
-.orbit i:last-child { width: 4px; height: 4px; offset-path: ellipse(25% 23% at 50% 50%); animation-duration: 6s; animation-delay: -2s; }
+.orbit i::after {
+  content: "";
+  position: absolute;
+  left: 100%;
+  top: 50%;
+  width: var(--dot-size);
+  height: var(--dot-size);
+  border-radius: 50%;
+  background: var(--dot-colour);
+  box-shadow: 0 0 11px var(--dot-colour);
+  transform: translate(-50%, -50%) scaleY(var(--dot-scale-y));
+}
+.orbit i:nth-child(2) { width: 74%; --dot-colour:#786ee4; animation-duration: 9s; animation-direction: reverse; }
+.orbit i:last-child { width: 50%; --dot-size:4px; animation-duration: 6s; animation-delay: -2s; }
 .lightSlice {
   position: absolute;
   z-index: 3;
@@ -654,7 +665,10 @@
 
 @keyframes ambientGlow { to { opacity: .6; transform: translate(-48%, -52%) scale(1.08); } }
 @keyframes slowTurn { to { transform: rotate(360deg); } }
-@keyframes orbitLight { to { offset-distance: 100%; } }
+@keyframes orbitLight {
+  from { transform: translate(-50%, -50%) scaleY(var(--orbit-scale-y)) rotate(0deg); }
+  to { transform: translate(-50%, -50%) scaleY(var(--orbit-scale-y)) rotate(360deg); }
+}
 @keyframes sliceMove { from { transform: translateY(-70px) rotate(-2deg); opacity: .35; } to { transform: translateY(75px) rotate(2deg); opacity: .8; } }
 @keyframes planeFloatLeft { 50% { transform: rotate(-5deg) translateY(-9px); } }
 @keyframes planeFloatRight { 50% { transform: rotate(4deg) translateY(9px); } }
@@ -669,6 +683,22 @@
 .stage[data-transitioning="true"] .autoPulse i,
 .stage[data-transitioning="true"] .flowBall {
   animation-play-state: paused;
+}
+.stage[data-motion="paused"] .orbit i,
+.stage[data-motion="paused"] .glassPlane,
+.stage[data-motion="paused"] .floatingDisc,
+.stage[data-motion="paused"] .autoRail i,
+.stage[data-motion="paused"] .autoCard,
+.stage[data-motion="paused"] .autoPulse i,
+.stage[data-motion="paused"] .flowBall,
+.stage[data-motion="paused"] .liveDot i,
+.stage[data-motion="paused"] .chartLine,
+.stage[data-motion="paused"] .chartPulse,
+.stage[data-motion="paused"] .sparkBars i,
+.stage[data-motion="paused"] .ringValue,
+.stage[data-motion="paused"] .flowLine i,
+.stage[data-motion="paused"] .activityStrip i {
+  animation-play-state: paused !important;
 }
 .dashboardHead {
   display: flex;
