@@ -15,7 +15,7 @@ const checks = [
   ["/llms-full.txt", "text/plain"],
   ["/agents.txt", "text/plain"],
   ["/manifest.webmanifest", "application/manifest+json"],
-  ["/favicon.ico", "image/x-icon"],
+  ["/favicon.ico", ["image/x-icon", "image/vnd.microsoft.icon"]],
   ["/apple-icon.png", "image/png"],
   ["/icon-192.png", "image/png"],
   ["/icon-512.png", "image/png"],
@@ -30,7 +30,8 @@ for (const [path, expectedType] of checks) {
       headers: { "user-agent": "Launchset production check" },
     });
     const contentType = response.headers.get("content-type") ?? "";
-    const valid = response.ok && contentType.includes(expectedType);
+    const expectedTypes = Array.isArray(expectedType) ? expectedType : [expectedType];
+    const valid = response.ok && expectedTypes.some((type) => contentType.includes(type));
     console.log(`${valid ? "PASS" : "FAIL"} ${response.status} ${path} ${contentType}`);
     if (!valid) failed = true;
 
