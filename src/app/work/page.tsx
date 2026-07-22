@@ -3,6 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 import styles from "./work.module.css";
 import SmartHeader from "./smart-header";
+import JsonLd from "@/src/components/seo/json-ld";
+import { absoluteUrl, breadcrumbList, studioReference, websiteReference } from "@/src/lib/structured-data";
 
 export const metadata: Metadata = {
   title: "Our Work | Launchset",
@@ -12,6 +14,7 @@ export const metadata: Metadata = {
 
 const projects = [
   {
+    slug: "prestige-kitchens",
     type: "CONSTRUCTION / E-COMMERCE",
     title: "Prestige Kitchens",
     image: "/projects/prestige-kitchens.webp",
@@ -30,6 +33,7 @@ const projects = [
     theme: "warm",
   },
   {
+    slug: "vietmed-travel",
     type: "MEDICAL TRAVEL / SUPPORT",
     title: "Vietmed Travel",
     image: "/projects/vietmed-travel.webp",
@@ -49,9 +53,96 @@ const projects = [
   },
 ] as const;
 
+const portfolioItems = [
+  ...projects.map((project) => ({
+    name: project.title,
+    description: project.summary,
+    image: absoluteUrl(project.image),
+    url: absoluteUrl(`/work#${project.slug}`),
+    genre: project.type,
+  })),
+  {
+    name: "Caple Scrape Review",
+    description: "A review surface for checking scraped product data before it reaches a live catalogue.",
+    image: absoluteUrl("/portfolio/catalogue-review.webp"),
+    url: absoluteUrl("/work/tools/caple-scrape-review"),
+    genre: "Supplier data review and catalogue automation",
+  },
+  {
+    name: "Lead Audit Review",
+    description: "A research and review workspace that turns public website evidence into human-reviewed business opportunities.",
+    image: absoluteUrl("/portfolio/lead-audit-review-v2.webp"),
+    url: absoluteUrl("/work/tools/lead-audit-review"),
+    genre: "Business intelligence and opportunity review",
+  },
+  {
+    name: "Vietnamese voice translator",
+    description: "A local microphone tool that detects Vietnamese speech, transcribes it and translates it into English.",
+    url: absoluteUrl("/work#vietnamese-voice-translator"),
+    genre: "Local AI and accessibility",
+  },
+  {
+    name: "Zalo bilingual companion",
+    description: "An on-device browser companion that keeps Vietnamese messages visible and adds English translations.",
+    url: absoluteUrl("/work#zalo-bilingual-companion"),
+    genre: "On-device translation",
+  },
+  {
+    name: "Pristine Barbers",
+    description: "A local-business website paired with booking measurement, Search Console and analytics reporting.",
+    image: absoluteUrl("/portfolio/pristine-barbers.webp"),
+    url: absoluteUrl("/work#pristine-barbers"),
+    genre: "Website design and analytics",
+  },
+] as const;
+
+const workJsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "CollectionPage",
+      "@id": absoluteUrl("/work#webpage"),
+      url: absoluteUrl("/work"),
+      name: "Our Work | Launchset",
+      description: "Websites, automations and practical digital tools by Launchset.",
+      isPartOf: websiteReference,
+      about: studioReference,
+      breadcrumb: { "@id": absoluteUrl("/work#breadcrumb") },
+      mainEntity: { "@id": absoluteUrl("/work#portfolio") },
+      inLanguage: "en-GB",
+    },
+    breadcrumbList("/work#breadcrumb", [
+      { name: "Launchset", path: "/" },
+      { name: "Our work", path: "/work" },
+    ]),
+    {
+      "@type": "ItemList",
+      "@id": absoluteUrl("/work#portfolio"),
+      name: "Launchset portfolio",
+      numberOfItems: portfolioItems.length,
+      itemListOrder: "https://schema.org/ItemListOrderAscending",
+      itemListElement: portfolioItems.map((item, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        item: {
+          "@type": "CreativeWork",
+          "@id": `${item.url}#project`,
+          name: item.name,
+          description: item.description,
+          url: item.url,
+          ...("image" in item && item.image ? { image: item.image } : {}),
+          genre: item.genre,
+          creator: studioReference,
+        },
+      })),
+    },
+  ],
+};
+
 export default function WorkPage() {
   return (
     <main className={styles.page}>
+      <JsonLd data={workJsonLd} />
       <SmartHeader />
 
       <section className={styles.hero}>
@@ -71,7 +162,7 @@ export default function WorkPage() {
 
       <section className={styles.projects}>
         {projects.map((project) => (
-          <article className={styles.caseStudy} key={project.title}>
+          <article id={project.slug} className={styles.caseStudy} key={project.title}>
             <div className={`${styles.projectHeading} ${styles.projectHeadingNoIndex}`}>
               <div>
                 <p>{project.type}</p>
@@ -155,7 +246,7 @@ export default function WorkPage() {
             </div>
           </article>
 
-          <article className={`${styles.toolCard} ${styles.toolDark}`}>
+          <article id="vietnamese-voice-translator" className={`${styles.toolCard} ${styles.toolDark}`}>
             <div className={styles.voiceDemo} aria-label="Local voice translator interface demonstration">
               <div><span>MIC</span><b><i /> Listening</b></div>
               <div><span>LEVEL</span><b>-32.4 dBFS</b></div>
@@ -171,7 +262,7 @@ export default function WorkPage() {
             </div>
           </article>
 
-          <article className={`${styles.toolCard} ${styles.toolBlue}`}>
+          <article id="zalo-bilingual-companion" className={`${styles.toolCard} ${styles.toolBlue}`}>
             <div className={styles.chatDemo} aria-label="Zalo bilingual translator interface demonstration">
               <div>
                 Chào bạn, ngày mai chúng ta gặp nhau lúc mấy giờ?
@@ -195,7 +286,7 @@ export default function WorkPage() {
       </section>
 
       <section className={styles.barberSection}>
-        <article className={styles.caseStudy}>
+        <article id="pristine-barbers" className={styles.caseStudy}>
           <div className={`${styles.projectHeading} ${styles.projectHeadingNoIndex}`}>
             <div>
               <p>WEBSITE / MEASUREMENT</p>

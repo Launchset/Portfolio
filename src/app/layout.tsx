@@ -43,43 +43,12 @@ export const metadata: Metadata = {
   },
 };
 
-const organizationJsonLd = {
-  "@context": "https://schema.org",
-  "@type": "ProfessionalService",
-  "@id": "https://launchset.dev/#studio",
-  name: "Launchset",
-  url: "https://launchset.dev",
-  logo: "https://launchset.dev/icon.png",
-  image: "https://launchset.dev/opengraph-image",
-  description:
-    "A digital design and automation studio creating distinctive websites, practical internal tools and useful automations.",
-  email: "launchsetfreelancer@gmail.com",
-  founder: {
-    "@type": "Person",
-    name: "John Helyar",
-    url: "https://launchset.dev/founder",
-    sameAs: ["https://www.linkedin.com/in/johnhelyar1/"],
-  },
-  sameAs: ["https://www.linkedin.com/in/johnhelyar1/"],
-  knowsAbout: [
-    "Web design",
-    "Web development",
-    "Business automation",
-    "Internal tools",
-    "Data review systems",
-  ],
-};
-
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
       <body>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
-        />
         {children}
         <Footer />
         <CookieBanner />

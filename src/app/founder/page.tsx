@@ -3,6 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 import SmartHeader from "../work/smart-header";
 import styles from "./founder.module.css";
+import JsonLd from "@/src/components/seo/json-ld";
+import { absoluteUrl, breadcrumbList, founderId, studioReference, websiteReference } from "@/src/lib/structured-data";
 
 export const metadata: Metadata = {
   title: "Founder | Launchset",
@@ -11,9 +13,54 @@ export const metadata: Metadata = {
   alternates: { canonical: "/founder" },
 };
 
+const founderJsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "ProfilePage",
+      "@id": absoluteUrl("/founder#webpage"),
+      url: absoluteUrl("/founder"),
+      name: "Founder | Launchset",
+      description: "Meet John Helyar, the founder of Launchset, and the problem-solving perspective behind the studio.",
+      isPartOf: websiteReference,
+      mainEntity: { "@id": founderId },
+      breadcrumb: { "@id": absoluteUrl("/founder#breadcrumb") },
+      inLanguage: "en-GB",
+    },
+    breadcrumbList("/founder#breadcrumb", [
+      { name: "Launchset", path: "/" },
+      { name: "Founder", path: "/founder" },
+    ]),
+    {
+      "@type": "Person",
+      "@id": founderId,
+      name: "John Helyar",
+      url: absoluteUrl("/founder"),
+      image: {
+        "@type": "ImageObject",
+        url: absoluteUrl("/founder-portrait.webp"),
+        contentUrl: absoluteUrl("/founder-portrait.webp"),
+        caption: "John Helyar, founder of Launchset",
+      },
+      jobTitle: "Founder",
+      description: "Founder of Launchset, applying a dyslexic problem-solving perspective to websites, automation and practical business systems.",
+      worksFor: studioReference,
+      sameAs: ["https://www.linkedin.com/in/johnhelyar1/"],
+      knowsAbout: [
+        "Problem solving",
+        "Web design and development",
+        "Business automation",
+        "Internal tools",
+        "Digital systems",
+      ],
+    },
+  ],
+};
+
 export default function FounderPage() {
   return (
     <main className={styles.page}>
+      <JsonLd data={founderJsonLd} />
       <SmartHeader />
 
       <section className={styles.founder}>

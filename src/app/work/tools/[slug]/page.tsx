@@ -4,6 +4,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import SmartHeader from "../../smart-header";
 import styles from "./architecture.module.css";
+import JsonLd from "@/src/components/seo/json-ld";
+import { absoluteUrl, breadcrumbList, studioReference, websiteReference } from "@/src/lib/structured-data";
 
 type Architecture = {
   slug: string;
@@ -16,6 +18,8 @@ type Architecture = {
   flow: Array<{ title: string; label: string; copy: string; detail: string }>;
   layers: Array<{ title: string; copy: string; items: string[] }>;
   decisions: Array<{ title: string; copy: string }>;
+  technologies: string[];
+  applicationCategory: string;
 };
 
 const architectures: Record<string, Architecture> = {
@@ -27,6 +31,8 @@ const architectures: Record<string, Architecture> = {
     image: "/portfolio/catalogue-review.webp",
     imageAlt: "Caple Scrape Review product interface",
     accent: "green",
+    applicationCategory: "Catalogue management and product data review",
+    technologies: ["Next.js", "JavaScript", "JSON", "Sharp", "WebP", "Cloudflare R2", "Supabase"],
     flow: [
       { title: "Supplier pages", label: "SOURCE", copy: "Caple WooCommerce product and accessory pages.", detail: "Reliable selectors expose SKU, price, gallery images, features, accessories and related items." },
       { title: "Scrape + validate", label: "AUTOMATION", copy: "The scraper normalises the source into one catalogue shape.", detail: "scrapeCapleSample.mjs uses shared validation before anything moves into the later stages." },
@@ -54,6 +60,8 @@ const architectures: Record<string, Architecture> = {
     image: "/portfolio/lead-audit-review-v2.webp",
     imageAlt: "Lead Audit Review business opportunity interface",
     accent: "red",
+    applicationCategory: "Business intelligence and lead review",
+    technologies: ["Python", "Next.js", "React", "Beautiful Soup", "Playwright", "Pandas", "OpenPyXL", "JSON", "CSV"],
     flow: [
       { title: "Search inputs", label: "SOURCE", copy: "Search terms and optional manually supplied company URLs.", detail: "Excluded domains, location hints and maximum-company limits keep each run intentionally scoped." },
       { title: "Discovery", label: "QUALIFY", copy: "Bing or DuckDuckGo results are qualified and deduplicated.", detail: "Optional related-company expansion can follow stockist, distributor or brand relationships from seed sites." },
@@ -195,9 +203,56 @@ export default async function ArchitecturePage({ params }: { params: Promise<{ s
   const architecture = architectures[slug];
   if (!architecture) notFound();
   const portfolioHref = `/work#${architecture.slug}`;
+  const pagePath = `/work/tools/${architecture.slug}`;
+  const pageUrl = absoluteUrl(pagePath);
+  const toolJsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebPage",
+        "@id": `${pageUrl}#webpage`,
+        url: pageUrl,
+        name: `${architecture.title} Architecture | Launchset`,
+        description: architecture.intro,
+        isPartOf: websiteReference,
+        about: { "@id": `${pageUrl}#software` },
+        mainEntity: { "@id": `${pageUrl}#software` },
+        breadcrumb: { "@id": `${pageUrl}#breadcrumb` },
+        primaryImageOfPage: { "@id": `${pageUrl}#primaryimage` },
+        inLanguage: "en-GB",
+      },
+      breadcrumbList(`${pagePath}#breadcrumb`, [
+        { name: "Launchset", path: "/" },
+        { name: "Our work", path: "/work" },
+        { name: architecture.title, path: pagePath },
+      ]),
+      {
+        "@type": "WebApplication",
+        "@id": `${pageUrl}#software`,
+        name: architecture.title,
+        description: architecture.intro,
+        url: pageUrl,
+        image: { "@id": `${pageUrl}#primaryimage` },
+        applicationCategory: architecture.applicationCategory,
+        operatingSystem: "Web browser",
+        browserRequirements: "Requires a modern web browser",
+        creator: studioReference,
+        featureList: architecture.flow.map((step) => `${step.title}: ${step.copy}`),
+        keywords: architecture.technologies.join(", "),
+      },
+      {
+        "@type": "ImageObject",
+        "@id": `${pageUrl}#primaryimage`,
+        url: absoluteUrl(architecture.image),
+        contentUrl: absoluteUrl(architecture.image),
+        caption: architecture.imageAlt,
+      },
+    ],
+  };
 
   return (
     <main className={`${styles.page} ${architecture.accent === "red" ? styles.red : ""}`}>
+      <JsonLd data={toolJsonLd} />
       <SmartHeader />
 
       <section className={styles.hero}>

@@ -3,6 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 import styles from "./page.module.css";
 import ScrollHero from "@/src/components/scroll-hero";
+import JsonLd from "@/src/components/seo/json-ld";
+import { founderId, siteUrl, studioId, websiteId } from "@/src/lib/structured-data";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/" },
@@ -29,9 +31,130 @@ const projects = [
   },
 ];
 
+const homeJsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": studioId,
+      name: "Launchset",
+      url: siteUrl,
+      description:
+        "A digital design and automation studio creating distinctive websites, practical internal tools and useful automations that save time and create measurable value.",
+      email: "launchsetfreelancer@gmail.com",
+      logo: {
+        "@type": "ImageObject",
+        "@id": `${siteUrl}/#logo`,
+        url: `${siteUrl}/icon.png`,
+        contentUrl: `${siteUrl}/icon.png`,
+        width: 1024,
+        height: 1024,
+        caption: "Launchset",
+      },
+      image: { "@id": `${siteUrl}/#primaryimage` },
+      founder: { "@id": founderId },
+      sameAs: ["https://www.linkedin.com/in/johnhelyar1/"],
+      contactPoint: {
+        "@type": "ContactPoint",
+        contactType: "project enquiries",
+        email: "launchsetfreelancer@gmail.com",
+        url: `${siteUrl}/#contact`,
+        availableLanguage: "English",
+      },
+      knowsAbout: [
+        "Web design",
+        "Web development",
+        "Responsive design",
+        "E-commerce",
+        "Booking journeys",
+        "Business process automation",
+        "Internal business tools",
+        "Data pipelines",
+        "Analytics implementation",
+      ],
+      hasOfferCatalog: {
+        "@type": "OfferCatalog",
+        "@id": `${siteUrl}/#services`,
+        name: "Digital design and automation services",
+        itemListElement: [
+          {
+            "@type": "Offer",
+            itemOffered: {
+              "@type": "Service",
+              "@id": `${siteUrl}/#web-design-development`,
+              name: "Web design and development",
+              description: "Fast, distinctive websites designed around a clear business goal.",
+              provider: { "@id": studioId },
+            },
+          },
+          {
+            "@type": "Offer",
+            itemOffered: {
+              "@type": "Service",
+              "@id": `${siteUrl}/#bookings-ecommerce`,
+              name: "Bookings and e-commerce",
+              description: "Simple customer journeys that turn interest into real action.",
+              provider: { "@id": studioId },
+            },
+          },
+          {
+            "@type": "Offer",
+            itemOffered: {
+              "@type": "Service",
+              "@id": `${siteUrl}/#smart-automation`,
+              name: "Smart automation",
+              description: "Practical automation that removes repetitive administration and returns time to a business.",
+              provider: { "@id": studioId },
+            },
+          },
+        ],
+      },
+    },
+    {
+      "@type": "WebSite",
+      "@id": websiteId,
+      url: siteUrl,
+      name: "Launchset",
+      description: "The portfolio and service website for Launchset digital design and automation studio.",
+      publisher: { "@id": studioId },
+      inLanguage: "en-GB",
+    },
+    {
+      "@type": "WebPage",
+      "@id": `${siteUrl}/#webpage`,
+      url: siteUrl,
+      name: "Launchset — Websites built to move business forward",
+      description: "Distinctive websites and smart automations that save time, create value and move businesses forward.",
+      isPartOf: { "@id": websiteId },
+      about: { "@id": studioId },
+      primaryImageOfPage: { "@id": `${siteUrl}/#primaryimage` },
+      inLanguage: "en-GB",
+    },
+    {
+      "@type": "ImageObject",
+      "@id": `${siteUrl}/#primaryimage`,
+      url: `${siteUrl}/opengraph-image`,
+      contentUrl: `${siteUrl}/opengraph-image`,
+      caption: "Launchset digital design and automation studio",
+    },
+    {
+      "@type": "Person",
+      "@id": founderId,
+      name: "John Helyar",
+      url: `${siteUrl}/founder`,
+      image: `${siteUrl}/founder-portrait.webp`,
+      jobTitle: "Founder",
+      worksFor: { "@id": studioId },
+      sameAs: ["https://www.linkedin.com/in/johnhelyar1/"],
+      knowsAbout: ["Problem solving", "Web development", "Business automation", "Digital systems"],
+    },
+  ],
+};
+
 export default function Home() {
   return (
     <main>
+      <JsonLd data={homeJsonLd} />
       <ScrollHero />
 
       <section className={styles.work} id="work">
