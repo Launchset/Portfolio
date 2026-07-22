@@ -1,0 +1,186 @@
+.page { --accent:#25d38a; --accent-soft:rgba(37,211,138,.12); background:#e8e9e2; color:#142019; }
+.red { --accent:#db4960; --accent-soft:rgba(219,73,96,.12); }
+.hero { padding:54px max(6vw,calc((100vw - 1180px)/2)) 110px; background:#101815; color:#eef1eb; }
+.back { display:inline-block; margin-bottom:90px; color:#8e9c94; font-size:11px; transition:color .2s ease; }.back:hover { color:#fff; }
+.heroGrid { display:grid; grid-template-columns:1.35fr .65fr; gap:70px; align-items:end; }
+.heroGrid > div > span,.sectionIntro > span { color:var(--accent); font-size:9px; font-weight:700; letter-spacing:.17em; }
+.hero h1 { max-width:850px; margin:22px 0 0; font-family:"Avenir Next","Noto Sans","Segoe UI",sans-serif; font-size:clamp(65px,9vw,130px); line-height:.84; letter-spacing:-.075em; font-weight:600; }
+.heroGrid > p { max-width:430px; margin:0 0 8px; color:#9ba7a0; font-size:16px; line-height:1.7; }
+.heroImage { position:relative; height:min(58vw,690px); margin-top:90px; overflow:hidden; border:1px solid rgba(255,255,255,.14); border-radius:12px; background:#f3f2ed; box-shadow:0 40px 75px rgba(0,0,0,.28); }
+.heroImage img { object-fit:cover; object-position:top center; }
+.flowSection,.layersSection,.technologySection,.decisionsSection { padding:120px max(6vw,calc((100vw - 1180px)/2)); }
+.sectionIntro { display:grid; grid-template-columns:1fr 1.25fr .75fr; gap:45px; align-items:end; }
+.sectionIntro h2 { margin:0; font-family:"Avenir Next","Noto Sans","Segoe UI",sans-serif; font-size:clamp(46px,5.6vw,78px); line-height:.95; letter-spacing:-.065em; font-weight:600; }
+.titleLine { white-space:nowrap; }
+.sectionIntro > p { max-width:350px; margin:0 0 5px; color:#657169; font-size:14px; line-height:1.65; }
+.flow { margin-top:78px; display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+.flow article { position:relative; min-height:330px; padding:25px; display:flex; flex-direction:column; border:1px solid rgba(20,32,25,.16); border-radius:10px; background:#f1f2ec; }
+.flowTop { display:flex; justify-content:space-between; color:#79867e; font-size:8px; letter-spacing:.12em; }.flowTop b { color:var(--accent); }
+.flow h3,.layers h3,.decisions h3 { margin:45px 0 14px; font-family:"Avenir Next","Noto Sans","Segoe UI",sans-serif; font-size:27px; letter-spacing:-.045em; }
+.flow p { margin:0; color:#445249; font-size:14px; line-height:1.55; }
+.flow small { margin-top:auto; padding-top:25px; color:#7a857e; font-size:10px; line-height:1.5; }
+.flow article > i { position:absolute; z-index:2; right:-23px; top:50%; width:30px; height:30px; display:grid; place-items:center; border-radius:50%; background:var(--accent); color:#07120d; font-style:normal; }
+.logicSection { padding:120px max(6vw,calc((100vw - 1180px)/2)); overflow:hidden; background:#0b1210; color:#edf2ee; }
+.logicIntro { display:grid; grid-template-columns:1.35fr .65fr; gap:70px; align-items:end; }
+.logicIntro > div > span { color:var(--accent); font-size:9px; font-weight:700; letter-spacing:.17em; }
+.logicIntro h2 { margin:20px 0 0; font-family:"Avenir Next","Noto Sans","Segoe UI",sans-serif; font-size:clamp(48px,6vw,82px); line-height:.94; letter-spacing:-.065em; font-weight:600; }
+.logicIntro > p { max-width:430px; margin:0 0 7px; color:#8f9c95; font-size:14px; line-height:1.7; }
+.architectureMap { width:min(100%,1180px); margin:90px auto 0; display:flex; flex-direction:column; align-items:center; }
+.diagramNode { position:relative; z-index:1; width:min(100%,570px); min-height:74px; padding:17px 22px; display:flex; flex-direction:column; align-items:center; justify-content:center; border:1px solid rgba(226,255,238,.17); border-radius:9px; background:linear-gradient(145deg,rgba(255,255,255,.052),rgba(255,255,255,.022)),#0b1210; text-align:center; }
+.diagramNode strong { color:#e7ede9; font-size:13px; line-height:1.4; font-weight:650; }
+.diagramNode span { max-width:500px; margin-top:7px; color:#85938b; font-size:9px; line-height:1.5; }
+.diagramNodeAccent { border-color:color-mix(in srgb,var(--accent) 48%,transparent); background:linear-gradient(145deg,var(--accent-soft),rgba(255,255,255,.025)),#0b1210; }
+.diagramNodeAccent strong { color:#fff; }
+.explainedStep { position:relative; width:100%; display:grid; grid-template-columns:minmax(150px,1fr) minmax(400px,570px) minmax(150px,1fr); gap:38px; align-items:center; }
+.explainedStep::before { content:""; position:absolute; left:50%; top:0; bottom:0; border-left:1px solid rgba(226,255,238,.28); transform:translateX(-50%); }
+.explainedStep > .diagramNode { grid-column:2; grid-row:1; width:100%; transition:border-color .25s ease,background .25s ease,transform .25s ease; }
+.diagramExplanation { position:relative; max-width:270px; padding:17px 18px 18px; border:1px solid rgba(226,255,238,.12); border-left:2px solid color-mix(in srgb,var(--accent) 78%,transparent); border-radius:0 8px 8px 0; background:rgba(255,255,255,.035); box-shadow:0 16px 34px rgba(0,0,0,.1); opacity:.9; transition:opacity .25s ease,transform .25s ease,border-color .25s ease,background .25s ease; }
+.diagramExplanation > span { color:var(--accent); font-size:7px; font-weight:800; letter-spacing:.16em; }
+.diagramExplanation h3 { margin:11px 0 9px; color:#edf2ee; font-family:"Avenir Next","Noto Sans","Segoe UI",sans-serif; font-size:19px; line-height:1.16; letter-spacing:-.035em; }
+.diagramExplanation p { margin:0; color:#a2aea7; font-size:11px; line-height:1.68; }
+.diagramExplanation::after { content:""; position:absolute; top:50%; width:38px; border-top:1px solid rgba(226,255,238,.18); }
+.explanationLeft { grid-column:1; grid-row:1; justify-self:end; transform:translateX(-5px); }
+.explanationLeft::after { left:100%; }
+.explanationRight { grid-column:3; grid-row:1; transform:translateX(5px); }
+.explanationRight::after { right:100%; }
+.explainedStep:hover .diagramExplanation { opacity:1; border-color:color-mix(in srgb,var(--accent) 42%,rgba(226,255,238,.15)); background:rgba(255,255,255,.055); transform:translateX(0); }
+.explainedStep:hover > .diagramNode { border-color:color-mix(in srgb,var(--accent) 64%,transparent); background:linear-gradient(145deg,var(--accent-soft),rgba(255,255,255,.04)),#0b1210; transform:scale(1.012); }
+.diagramArrow { position:relative; width:1px; height:52px; flex:0 0 auto; background:rgba(226,255,238,.28); }
+.diagramArrow i { position:absolute; left:50%; bottom:-1px; width:7px; height:7px; border-right:1px solid var(--accent); border-bottom:1px solid var(--accent); transform:translateX(-50%) rotate(45deg); }
+.sourceCluster { width:min(100%,820px); }
+.sourceNodes { display:grid; grid-template-columns:1fr 1fr; gap:100px; }
+.sourceNodes .diagramNode { width:100%; }
+.sourceNodes .diagramNode::after { content:""; position:absolute; left:50%; bottom:-29px; height:29px; border-left:1px solid rgba(226,255,238,.25); }
+.sourceJoin { position:relative; height:86px; }
+.sourceJoin::before { content:""; position:absolute; left:25%; right:25%; top:28px; border-top:1px solid rgba(226,255,238,.25); }
+.sourceJoin::after { content:""; position:absolute; left:50%; top:28px; bottom:30px; border-left:1px solid rgba(226,255,238,.25); }
+.sourceJoin span,.branchMerge span { position:absolute; z-index:2; left:50%; bottom:0; min-width:220px; padding:10px 16px; border:1px solid rgba(226,255,238,.18); border-radius:22px; background:#14201b; color:var(--accent); font-size:9px; font-weight:700; letter-spacing:.08em; text-align:center; transform:translateX(-50%); }
+.optionalStep { margin-top:12px; padding:8px 13px; border:1px dashed rgba(226,255,238,.18); border-radius:20px; color:#87958d; font-size:9px; }
+.optionalStep span { margin-right:8px; color:var(--accent); font-size:7px; font-weight:800; letter-spacing:.12em; }
+.branchLabel { position:relative; margin-top:18px; padding:8px 12px 0; color:#718078; font-size:7px; font-weight:700; letter-spacing:.16em; }
+.branchLabel::before { content:""; position:absolute; left:50%; top:-18px; height:18px; border-left:1px solid rgba(226,255,238,.25); }
+.diagramBranch { position:relative; width:100%; padding-top:58px; }
+.diagramBranch::before { content:""; position:absolute; left:50%; top:0; height:29px; border-left:1px solid rgba(226,255,238,.25); }
+.branchNodes { position:relative; display:grid; grid-template-columns:repeat(3,1fr); gap:34px; }
+.branchNodes::before { content:""; position:absolute; left:16.666%; right:16.666%; top:-29px; border-top:1px solid rgba(226,255,238,.25); }
+.branchNodes .diagramNode { width:100%; min-height:68px; padding-inline:14px; }
+.branchNodes .diagramNode::before { content:""; position:absolute; left:50%; top:-29px; height:29px; border-left:1px solid rgba(226,255,238,.25); }
+.branchNodes .diagramNode::after { content:""; position:absolute; left:50%; bottom:-30px; height:30px; border-left:1px solid rgba(226,255,238,.25); }
+.branchMerge { position:relative; height:78px; margin-top:30px; }
+.branchMerge::before { content:""; position:absolute; left:16.666%; right:16.666%; top:0; border-top:1px solid rgba(226,255,238,.25); }
+.branchMerge::after { content:""; position:absolute; left:50%; top:0; bottom:30px; border-left:1px solid rgba(226,255,238,.25); }
+.layersSection { background:#111916; color:#edf2ee; }
+.layersSection .sectionIntro { grid-template-columns:1fr 2fr; }.layersSection .sectionIntro h2 { grid-column:2; }
+.layers { margin-top:78px; display:grid; grid-template-columns:repeat(3,1fr); border-top:1px solid rgba(255,255,255,.16); }
+.layers article { padding:32px 32px 20px 0; border-right:1px solid rgba(255,255,255,.12); }.layers article + article { padding-left:32px; }
+.layers article:last-child { border-right:0; }
+.layers article > span { color:var(--accent); font-size:9px; }.layers h3 { margin-top:40px; font-size:30px; }
+.layers p { min-height:72px; color:#8f9d95; font-size:13px; line-height:1.6; }
+.layers ul { margin:28px 0 0; padding:0; list-style:none; }.layers li { padding:12px 0; border-top:1px solid rgba(255,255,255,.09); color:#c4cec8; font-size:11px; }.layers li::before { content:"↗"; margin-right:9px; color:var(--accent); }
+.technologySection { background:#111916; color:#edf2ee; }
+.technologySection .sectionIntro { grid-template-columns:minmax(0,1fr) auto minmax(0,1fr); align-items:end; }
+.technologySection .sectionIntro h2 { justify-self:center; text-align:center; }
+.technologySection .sectionIntro > p { color:#b1bcb5; }
+.technologyGrid { margin-top:78px; display:grid; grid-template-columns:repeat(2,1fr); border-top:1px solid rgba(255,255,255,.16); border-left:1px solid rgba(255,255,255,.12); }
+.technologyGrid > article { min-height:510px; padding:30px 34px 34px; border-right:1px solid rgba(255,255,255,.12); border-bottom:1px solid rgba(255,255,255,.12); background:linear-gradient(145deg,rgba(255,255,255,.025),transparent); transition:background .25s ease; }
+.technologyGrid > article:hover { background:linear-gradient(145deg,var(--accent-soft),rgba(255,255,255,.018)); }
+.technologyTop { display:flex; align-items:center; justify-content:space-between; }
+.technologyTop > span { color:var(--accent); font-size:10px; font-weight:800; }
+.technologyTop > small { color:#929f98; font-size:8px; font-weight:700; letter-spacing:.16em; }
+.technologyGrid h3 { max-width:430px; margin:52px 0 16px; font-family:"Avenir Next","Noto Sans","Segoe UI",sans-serif; font-size:clamp(27px,2.5vw,38px); line-height:1.04; letter-spacing:-.05em; }
+.technologyGrid article > p { max-width:480px; margin:0; color:#b0bbb4; font-size:13px; line-height:1.65; }
+.technologyGrid ul { margin:34px 0 0; padding:0; list-style:none; }
+.technologyGrid li { padding:15px 0; display:grid; grid-template-columns:minmax(110px,.6fr) 1.4fr; gap:24px; border-top:1px solid rgba(255,255,255,.09); }
+.technologyGrid li strong { color:#e7ede9; font-size:12px; }
+.technologyGrid li span { color:#a9b5ae; font-size:11px; line-height:1.5; }
+.decisionsSection { background:#d8ff67; }
+.decisionsSection .sectionIntro { grid-template-columns:1fr 2fr; }.decisionsSection .sectionIntro h2 { grid-column:2; }
+.decisions { margin-top:78px; display:grid; grid-template-columns:repeat(3,1fr); gap:40px; }
+.decisions article { padding-top:22px; border-top:1px solid rgba(20,32,12,.32); }.decisions article > span { font-size:9px; font-weight:700; }.decisions h3 { margin-top:42px; }.decisions p { color:#42502e; font-size:14px; line-height:1.65; }
+.next { min-height:72vh; padding:100px 22px; display:flex; flex-direction:column; align-items:center; justify-content:center; background:#080d12; color:#eef1eb; text-align:center; }
+.next > p { color:var(--accent); font-size:9px; font-weight:700; letter-spacing:.18em; }.next h2 { margin:30px 0 46px; font-family:"Avenir Next","Noto Sans","Segoe UI",sans-serif; font-size:clamp(54px,8vw,105px); line-height:.9; letter-spacing:-.07em; font-weight:600; }.next h2 em { color:var(--accent); font-family:Georgia,serif; font-weight:400; }.next a { min-width:220px; padding:15px 18px; display:flex; justify-content:space-between; border:1px solid rgba(255,255,255,.2); border-radius:9px; font-size:12px; font-weight:700; }.next a span { color:var(--accent); }
+@media(max-width:800px){
+  .hero{padding:40px 22px 80px}
+  .back{margin-bottom:65px}
+  .heroGrid{grid-template-columns:1fr;gap:32px}
+  .hero h1{font-size:clamp(57px,18vw,88px)}
+  .heroImage{height:auto;min-height:0;aspect-ratio:1.406;margin-top:60px}
+  .flowSection,.logicSection,.layersSection,.technologySection,.decisionsSection{padding:85px 22px}
+  .sectionIntro,.layersSection .sectionIntro,.decisionsSection .sectionIntro,.logicIntro{grid-template-columns:1fr;gap:28px}
+  .technologySection .sectionIntro{grid-template-columns:1fr}
+  .technologySection .sectionIntro h2{justify-self:start;text-align:left}
+  .layersSection .sectionIntro h2,.decisionsSection .sectionIntro h2{grid-column:auto}
+  .flow{grid-template-columns:1fr}
+  .flow article{min-height:290px}
+  .flow article>i{right:calc(50% - 15px);top:auto;bottom:-24px;transform:rotate(90deg)}
+  .architectureMap{margin-top:65px}
+  .explainedStep{max-width:570px;grid-template-columns:1fr;gap:0}
+  .explainedStep>.diagramNode{grid-column:1;grid-row:1}
+  .diagramExplanation{grid-column:1;grid-row:2;max-width:none;margin:14px 0 0;padding:16px 17px 17px;opacity:1;transform:none}
+  .diagramExplanation::after{display:none}
+  .explanationLeft,.explanationRight{grid-column:1;grid-row:2;justify-self:stretch;transform:none}
+  .diagramExplanation h3{font-size:16px}
+  .diagramExplanation p{font-size:12px;line-height:1.65}
+  .diagramNode{min-height:68px;padding:14px 12px}
+  .diagramNode strong{font-size:11px}
+  .diagramNode span{font-size:9px}
+  .sourceNodes{gap:16px}
+  .sourceJoin span,.branchMerge span{min-width:210px;font-size:8px}
+  .branchNodes{gap:8px}
+  .branchNodes .diagramNode{min-height:72px;padding:10px 6px}
+  .branchNodes .diagramNode strong{font-size:9px}
+  .diagramArrow{height:45px}
+  .layers,.decisions{grid-template-columns:1fr}
+  .technologyGrid{grid-template-columns:1fr}
+  .technologyGrid>article{min-height:0;padding:27px 22px 30px}
+  .technologyGrid h3{margin-top:38px;font-size:30px}
+  .technologyGrid li{grid-template-columns:1fr;gap:6px}
+  .layers article,.layers article+article{padding:28px 0;border-right:0;border-bottom:1px solid rgba(255,255,255,.12)}
+  .layers p{min-height:0}
+  .decisions{gap:28px}
+  .next{min-height:65vh}
+}
+
+@media(max-width:560px){
+  .hero h1{font-size:clamp(50px,16vw,70px)}
+  .heroImage{height:auto;min-height:0;aspect-ratio:1.406}
+  .logicSection{padding-inline:18px}
+  .logicIntro h2{font-size:clamp(43px,14vw,62px)}
+  .architectureMap{margin-top:52px}
+  .diagramNode{min-height:72px;padding:15px 13px}
+  .diagramNode strong{font-size:12px}
+  .diagramNode span{font-size:9.5px;line-height:1.55}
+  .explainedStep::before{display:none}
+  .diagramNode{background:#111a16}
+  .diagramNodeAccent{background:linear-gradient(145deg,var(--accent-soft),rgba(255,255,255,.025)),#111a16}
+  .diagramExplanation{border-left-width:3px;background:#121c18;box-shadow:none}
+  .sourceNodes{grid-template-columns:1fr;gap:10px;padding:10px;border:1px dashed rgba(226,255,238,.12);border-radius:11px}
+  .sourceNodes .diagramNode{padding-inline:12px}
+  .sourceNodes .diagramNode strong{font-size:11.5px}
+  .sourceNodes .diagramNode span{font-size:9px}
+  .sourceNodes .diagramNode::after{display:none}
+  .sourceJoin{height:70px}
+  .sourceJoin::before{display:none}
+  .sourceJoin::after{left:50%;top:0;bottom:31px}
+  .sourceJoin span,.branchMerge span{min-width:205px;padding:9px 12px;font-size:8.5px}
+  .optionalStep{max-width:90%;text-align:center;line-height:1.5}
+  .diagramExplanation{padding:17px 16px 18px}
+  .diagramExplanation h3{font-size:18px;line-height:1.2}
+  .diagramExplanation p{font-size:12.5px}
+  .diagramBranch{padding-top:38px;display:flex;flex-direction:column;align-items:center}
+  .diagramBranch::before{left:50%;top:0;bottom:auto;height:38px}
+  .diagramBranch::after{display:none}
+  .branchNodes{width:100%;grid-template-columns:1fr;gap:28px;padding-left:0}
+  .branchNodes::before{display:none}
+  .branchNodes .diagramNode{min-height:64px;padding:13px 12px;text-align:center;align-items:center}
+  .branchNodes .diagramNode strong{font-size:11.5px}
+  .branchNodes .diagramNode::before{left:50%;top:-29px;width:0;height:29px;border-top:0;border-left:1px solid rgba(226,255,238,.25)}
+  .branchNodes .diagramNode:first-child::before{display:none}
+  .branchNodes .diagramNode::after{display:none}
+  .branchMerge{width:100%;height:70px;margin-top:0}
+  .branchMerge::before{left:50%;right:auto;top:0;width:0;height:31px;border-top:0;border-left:1px solid rgba(226,255,238,.25)}
+  .branchMerge::after{display:none}
+  .technologyGrid article>p,.decisions p{font-size:14px}
+  .technologyGrid li strong{font-size:13px}
+  .technologyGrid li span{font-size:12px}
+}

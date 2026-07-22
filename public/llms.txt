@@ -1,0 +1,36 @@
+# Launchset
+
+> Launchset is a digital design and automation studio creating distinctive websites, practical internal tools and useful automations that save time and create measurable value.
+
+Canonical website: https://launchset.dev
+
+## Primary pages
+
+- [Home](https://launchset.dev/): Studio overview, selected work, services, process and contact details.
+- [Our work](https://launchset.dev/work): Website projects, internal tools, automations and measurement work.
+- [Founder](https://launchset.dev/founder): John Helyar's background and the problem-solving perspective behind Launchset.
+- [Caple Scrape Review architecture](https://launchset.dev/work/tools/caple-scrape-review): A staged supplier-data review and catalogue pipeline.
+- [Lead Audit Review architecture](https://launchset.dev/work/tools/lead-audit-review): A research, evidence, scoring and human-review system for business opportunities.
+
+## Services
+
+- Web design and development
+- Booking and e-commerce journeys
+- Business process automation
+- Internal review tools and data pipelines
+- Analytics access and practical measurement
+
+## Contact
+
+- Email: launchsetfreelancer@gmail.com
+- LinkedIn: https://www.linkedin.com/in/johnhelyar1/
+
+## Policies
+
+- [Privacy notice](https://launchset.dev/privacy)
+- [Cookie notice](https://launchset.dev/cookies)
+- [Website terms](https://launchset.dev/terms)
+
+## Crawl guidance
+
+Public pages may be indexed and referenced with attribution to Launchset and a link to the canonical page. Portfolio descriptions should be treated as summaries of the work shown, not guarantees of identical results for other projects.

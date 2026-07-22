@@ -1,48 +1,35 @@
-# Launchset Portfolio
+# Launchset
 
-Marketing site and contact funnel for Launchset, built with React and Vite and deployed with a Vercel serverless contact endpoint.
+The production website for [launchset.dev](https://launchset.dev), built with Next.js and the App Router.
 
-## Stack
-
-- React 19
-- Vite 7
-- Plain CSS
-- Vercel serverless function for contact handling
-- Resend for notification email delivery
-- Google Sheets for lead logging
-
-## Local Development
-
-Install dependencies and start the frontend:
+## Local development
 
 ```bash
 npm install
 npm run dev
 ```
 
-The site runs locally at `http://localhost:5173` by default.
+The default local URL is `http://localhost:3000`. Google Analytics is automatically disabled on localhost and private network addresses.
 
-## Contact Form Setup
+## Production checks
 
-The contact form posts to `/api/contact`. The serverless function expects these environment variables:
+```bash
+npm run lint
+npm run build
+```
 
-- `RESEND_API_KEY`
-- `FROM_EMAIL`
-- `TO_EMAIL`
-- `GOOGLE_CREDENTIALS`
-- `SHEET_ID`
+## Environment
 
-`GOOGLE_CREDENTIALS` must be a valid JSON string for a Google service account with access to the target sheet.
+Copy `.env.example` to the environment configuration used by the host.
 
-## Scripts
+```text
+NEXT_PUBLIC_GA_MEASUREMENT_ID=G-HX8DBNS3QQ
+```
 
-- `npm run dev` starts the Vite dev server
-- `npm run build` creates a production build
-- `npm run lint` runs ESLint
-- `npm run preview` serves the production build locally
+Analytics loads only after the visitor grants consent. Advertising storage and personalisation remain denied.
 
-## Notes
+## Deployment
 
-- Form submissions are validated server-side before email delivery or sheet logging.
-- Analytics is enabled in production and skipped on localhost.
-- Static SEO assets live in `public/`.
+The existing production site is hosted by Vercel from the `Launchset/Portfolio` GitHub repository, with `launchset.dev` proxied through Cloudflare. Branches should be deployed and reviewed through a Vercel preview before they replace `main`.
+
+Search and agent discovery routes are generated at `/sitemap.xml`, `/robots.txt`, `/llms.txt`, `/llms-full.txt` and `/agents.txt`.
