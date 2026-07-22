@@ -1,4 +1,4 @@
-// @ts-expect-error The OpenNext worker is generated during the Cloudflare build.
+// @ts-ignore The OpenNext worker is generated during the Cloudflare build.
 import openNextWorker from "./.open-next/worker.js";
 
 type WorkerEnvironment = {
@@ -66,6 +66,17 @@ function withDiscoveryHeaders(response: Response) {
   });
 }
 
+function withShadowHeaders(response: Response) {
+  const headers = new Headers(response.headers);
+  headers.set("X-Robots-Tag", "noindex, nofollow, noarchive");
+
+  return new Response(response.body, {
+    status: response.status,
+    statusText: response.statusText,
+    headers,
+  });
+}
+
 function selectSection(markdown: string, page: MarkdownPage) {
   if (!page.start) return markdown.trim();
 
@@ -118,16 +129,28 @@ export default {
     context: Parameters<typeof openNextWorker.fetch>[2],
   ) {
     const url = new URL(request.url);
+    const isShadow = url.hostname.endsWith(".workers.dev");
     const page = markdownPages[url.pathname.replace(/\/$/, "") || "/"];
+
+    if (isShadow && url.pathname === "/robots.txt") {
+      return new Response("User-agent: *\nDisallow: /\n", {
+        headers: {
+          "Cache-Control": "no-store",
+          "Content-Type": "text/plain; charset=utf-8",
+          "X-Robots-Tag": "noindex, nofollow, noarchive",
+        },
+      });
+    }
 
     if ((request.method === "GET" || request.method === "HEAD") && page && acceptsMarkdown(request)) {
       const response = await markdownResponse(request, environment, page);
-      if (response) return response;
+      if (response) return isShadow ? withShadowHeaders(response) : response;
     }
 
     const response = await openNextWorker.fetch(request, environment, context);
     const isHtml = response.headers.get("content-type")?.includes("text/html") ?? false;
+    const enrichedResponse = page && isHtml ? withDiscoveryHeaders(response) : response;
 
-    return page && isHtml ? withDiscoveryHeaders(response) : response;
+    return isShadow ? withShadowHeaders(enrichedResponse) : enrichedResponse;
   },
 };

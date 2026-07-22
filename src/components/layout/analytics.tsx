@@ -21,6 +21,7 @@ type WebVitalMetric = {
 
 function isLocalHostname(hostname: string) {
   if (["localhost", "127.0.0.1", "0.0.0.0", "::1", "[::1]"].includes(hostname)) return true;
+  if (hostname.endsWith(".workers.dev")) return true;
   if (hostname.endsWith(".local") || hostname.startsWith("127.")) return true;
   if (hostname.startsWith("10.") || hostname.startsWith("192.168.")) return true;
   const match = hostname.match(/^172\.(\d+)\./);
