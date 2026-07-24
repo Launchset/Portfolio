@@ -49,12 +49,10 @@
 .services .sectionLabel { border-color: rgba(238,241,235,.2); color: #91a097; }
 .serviceIntro { padding: 100px 0 65px; }
 .serviceIntro em { color: var(--green); font-family: Georgia, serif; font-weight: 400; }
-.serviceList article { position: relative; padding: 42px 55px 42px 0; display: grid; grid-template-columns: 90px 1fr 1fr 35px; align-items: center; border-top: 1px solid rgba(238,241,235,.16); }
+.serviceList article { position: relative; padding: 42px 0; display: grid; grid-template-columns: 90px 1fr 1fr; align-items: center; border-top: 1px solid rgba(238,241,235,.16); }
 .serviceList article > span { color: var(--green); font-size: 11px; }
 .serviceList h3 { margin: 0; font-family: "Avenir Next", "Noto Sans", "Segoe UI", sans-serif; font-size: clamp(20px, 2vw, 29px); letter-spacing: -.04em; }
 .serviceList p { max-width: 330px; margin: 0; color: #8f9c95; font-size: 13px; line-height: 1.55; }
-.serviceList b { width: 34px; height: 34px; display: grid; place-items: center; border: 1px solid #506059; border-radius: 50%; color: var(--green); transition: transform .2s, background .2s; }
-.serviceList article:hover b { transform: rotate(45deg); background: var(--green); color: #07120d; }
 
 .process { min-height: 95vh; display: flex; flex-direction: column; justify-content: center; background: #d8ff67; color: #17200c; }
 .kicker { font-size: 10px; font-weight: 700; letter-spacing: .18em; }
@@ -84,9 +82,8 @@
   .projectMeta { grid-template-columns: 1fr; }
   .moreWork { align-items: stretch; flex-direction: column; gap: 20px; }
   .moreWork a { width: 100%; }
-  .serviceList article { grid-template-columns: 45px 1fr 30px; gap: 10px; padding-right: 0; }
+  .serviceList article { grid-template-columns: 45px 1fr; gap: 10px; }
   .serviceList p { grid-column: 2; margin-top: 12px; }
-  .serviceList b { grid-column: 3; grid-row: 1; }
   .process { min-height: 85vh; }
   .processBottom { grid-template-columns: 1fr; gap: 45px; }
   .processBottom a { justify-self: start; }
