@@ -222,7 +222,6 @@ export default function Home() {
               <span>{number}</span>
               <h3>{title}</h3>
               <p>{copy}</p>
-              <b aria-hidden="true">↗</b>
             </article>
           ))}
         </div>
