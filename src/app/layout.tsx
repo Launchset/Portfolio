@@ -1,7 +1,5 @@
 import type { Metadata } from "next";
-import Analytics from "@/src/components/layout/analytics";
-import CookieBanner from "@/src/components/layout/cookie-banner";
-import Footer from "@/src/components/layout/footer";
+import PublicSiteChrome from "@/src/components/layout/public-site-chrome";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -50,9 +48,7 @@ export default function RootLayout({
     <html lang="en">
       <body>
         {children}
-        <Footer />
-        <CookieBanner />
-        <Analytics />
+        <PublicSiteChrome />
       </body>
     </html>
   );

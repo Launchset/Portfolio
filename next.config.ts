@@ -1,4 +1,7 @@
 import type { NextConfig } from "next";
+import { initOpenNextCloudflareForDev } from "@opennextjs/cloudflare";
+
+initOpenNextCloudflareForDev();
 
 const contentSecurityPolicy = [
   "default-src 'self'",
@@ -6,11 +9,12 @@ const contentSecurityPolicy = [
   "object-src 'none'",
   "frame-ancestors 'none'",
   "form-action 'self'",
-  "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com",
+  "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://js.stripe.com",
   "style-src 'self' 'unsafe-inline'",
-  "img-src 'self' data: blob: https://www.google-analytics.com https://*.google-analytics.com",
+  "img-src 'self' data: blob: https://www.google-analytics.com https://*.google-analytics.com https://*.stripe.com",
   "font-src 'self' data:",
-  "connect-src 'self' https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com",
+  "connect-src 'self' https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com https://api.stripe.com https://r.stripe.com https://m.stripe.network",
+  "frame-src 'self' https://js.stripe.com https://hooks.stripe.com https://checkout.stripe.com",
   "manifest-src 'self'",
   "worker-src 'self' blob:",
 ].join("; ");
@@ -35,6 +39,12 @@ const nextConfig: NextConfig = {
           { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
           { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=()" },
           { key: "Content-Security-Policy-Report-Only", value: contentSecurityPolicy },
+        ],
+      },
+      {
+        source: "/api/contracts/:id/file",
+        headers: [
+          { key: "X-Frame-Options", value: "SAMEORIGIN" },
         ],
       },
       {

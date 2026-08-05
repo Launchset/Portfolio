@@ -17,7 +17,11 @@
     "verify:production": "node scripts/verify-production.mjs"
   },
   "dependencies": {
+    "@stripe/react-stripe-js": "^6.8.0",
+    "@stripe/stripe-js": "^9.12.1",
+    "better-auth": "^1.6.25",
     "next": "^16.2.11",
+    "pdf-lib": "^1.17.1",
     "react": "19.2.3",
     "react-dom": "19.2.3"
   },
