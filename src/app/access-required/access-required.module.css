@@ -1,0 +1,17 @@
+.page { min-height:100vh; padding:28px max(24px,calc((100vw - 1180px)/2)); background:radial-gradient(circle at 18% 20%,rgba(37,211,138,.13),transparent 30%),radial-gradient(circle at 80% 72%,rgba(91,76,220,.16),transparent 33%),#080d12; }
+.topbar { height:64px; padding:0 14px 0 20px; display:flex; align-items:center; justify-content:space-between; border:1px solid rgba(223,255,245,.15); border-radius:18px; background:rgba(15,24,29,.82); }
+.topbar>a:last-child { color:#aeb9b3; font-size:13px; }
+.logo { font-family:Impact,"Arial Narrow",sans-serif; font-size:23px; letter-spacing:.025em; }
+.logo span { color:var(--green); }
+.panel { width:min(720px,100%); margin:clamp(70px,12vh,140px) auto 50px; padding:clamp(32px,6vw,68px); border:1px solid rgba(223,255,245,.16); border-radius:20px; background:linear-gradient(145deg,rgba(22,33,39,.96),rgba(11,18,23,.98)); box-shadow:0 34px 80px rgba(0,0,0,.35); text-align:center; }
+.eyebrow { color:var(--green); font-size:10px; font-weight:750; letter-spacing:.2em; }
+.panel h1 { max-width:620px; margin:24px auto 20px; font-family:"Avenir Next","Noto Sans","Segoe UI",sans-serif; font-size:clamp(42px,6vw,68px); font-weight:600; line-height:.98; letter-spacing:-.055em; }
+.panel>p { max-width:560px; margin:0 auto; color:#aeb9b3; font-size:15px; line-height:1.7; }
+.identity { margin:30px auto 0; padding:15px 18px; display:grid; gap:5px; border:1px solid rgba(223,255,245,.11); border-radius:10px; background:rgba(255,255,255,.025); overflow-wrap:anywhere; }
+.identity span { color:#718078; font-size:10px; letter-spacing:.1em; text-transform:uppercase; }
+.identity strong { font-size:14px; }
+.actions { margin-top:26px; display:flex; align-items:center; justify-content:center; gap:12px; flex-wrap:wrap; }
+.actions a,.actions button { min-height:48px; padding:0 18px; display:inline-flex; align-items:center; justify-content:center; border-radius:10px; font-size:12px; font-weight:750; cursor:pointer; }
+.actions a { background:var(--green); color:#06110c; }
+.actions button { border:1px solid rgba(223,255,245,.16); background:transparent; color:#eef2f1; }
+@media(max-width:560px){.page{padding:12px}.topbar{height:58px}.panel{margin-top:55px;padding:30px 20px}.panel h1{font-size:44px}.actions{align-items:stretch;flex-direction:column}.actions a,.actions button{width:100%}}

@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import AccountLink from "@/src/components/account-link";
 import styles from "./work.module.css";
 
 export default function SmartHeader() {
@@ -69,6 +70,7 @@ export default function SmartHeader() {
         <Link href="/#services" onClick={() => setMenuOpen(false)}>Services</Link>
         <Link href="/#process" onClick={() => setMenuOpen(false)}>Process</Link>
         <Link href="/founder" onClick={() => setMenuOpen(false)}>Founder</Link>
+        <Link href="/login" onClick={() => setMenuOpen(false)}>Sign in</Link>
         <Link className={styles.mobileNavCta} href="/#contact" onClick={() => setMenuOpen(false)}>Start a project ↗</Link>
       </nav>
       <button
@@ -81,7 +83,10 @@ export default function SmartHeader() {
       >
         <i /><i />
       </button>
-      <Link className={styles.headerCta} href="/#contact">Start a project ↗</Link>
+      <div className={styles.headerActions}>
+        <Link className={styles.headerCta} href="/#contact">Start a project ↗</Link>
+        <AccountLink className={styles.accountLink} />
+      </div>
     </header>
   );
 }

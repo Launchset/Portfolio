@@ -1,0 +1,32 @@
+.page { min-height:100vh; padding:28px max(24px,calc((100vw - 1180px)/2)); background:radial-gradient(circle at 18% 20%,rgba(37,211,138,.13),transparent 30%),radial-gradient(circle at 80% 72%,rgba(91,76,220,.16),transparent 33%),#080d12; }
+.topbar { height:64px; padding:0 14px 0 20px; display:flex; align-items:center; justify-content:space-between; border:1px solid rgba(223,255,245,.15); border-radius:18px; background:rgba(15,24,29,.82); }
+.topbar>a:last-child { color:#aeb9b3; font-size:13px; }
+.logo { font-family:Impact,"Arial Narrow",sans-serif; font-size:23px; letter-spacing:.025em; }
+.logo span,.intro h1 em { color:var(--green); }
+.loginGrid { min-height:calc(100vh - 120px); display:grid; grid-template-columns:minmax(0,1fr) minmax(420px,520px); align-items:center; gap:clamp(60px,9vw,150px); padding:70px 30px; }
+.intro { max-width:600px; }
+.eyebrow { color:var(--green); font-size:10px; font-weight:750; letter-spacing:.2em; }
+.intro h1 { margin:25px 0; font-family:"Avenir Next","Noto Sans","Segoe UI",sans-serif; font-size:clamp(52px,6vw,88px); font-weight:600; line-height:.94; letter-spacing:-.065em; }
+.intro h1 em { font-family:Georgia,serif; font-weight:400; }
+.intro>p { max-width:510px; color:#aeb9b3; font-size:16px; line-height:1.7; }
+.securityNote { margin-top:36px; display:flex; align-items:center; gap:11px; color:#76847d; font-size:12px; }
+.securityNote i { width:8px; height:8px; border-radius:50%; background:var(--green); box-shadow:0 0 0 5px rgba(37,211,138,.1); }
+.card { padding:34px; border:1px solid rgba(223,255,245,.16); border-radius:20px; background:linear-gradient(145deg,rgba(22,33,39,.96),rgba(11,18,23,.98)); box-shadow:0 34px 80px rgba(0,0,0,.35); }
+.socialStack { display:grid; gap:10px; }
+.socialStack button { min-height:54px; padding:0 18px; display:grid; grid-template-columns:28px 1fr 28px; align-items:center; border:1px solid rgba(223,255,245,.14); border-radius:11px; background:rgba(255,255,255,.035); color:#eef2f1; cursor:pointer; transition:border-color .2s ease,background .2s ease,transform .2s ease; }
+.socialStack button::after { content:"→"; color:#738079; }
+.socialStack button:hover { border-color:rgba(37,211,138,.55); background:rgba(37,211,138,.06); transform:translateY(-1px); }
+.socialStack button:disabled,.emailRow button:disabled { cursor:wait; opacity:.65; }
+.providerMark { width:22px; height:22px; display:grid; place-items:center; font-weight:800; }
+.google { border-radius:50%; background:conic-gradient(from -45deg,#4285f4 0 25%,#34a853 0 42%,#fbbc05 0 67%,#ea4335 0); color:white; font-size:12px; }
+.divider { margin:25px 0; display:flex; align-items:center; gap:12px; color:#718078; font-size:10px; letter-spacing:.08em; text-transform:uppercase; }
+.divider::before,.divider::after { content:""; height:1px; flex:1; background:rgba(223,255,245,.11); }
+.card form label { display:block; margin-bottom:9px; color:#aeb9b3; font-size:12px; }
+.emailRow { display:grid; grid-template-columns:1fr auto; gap:9px; }
+.emailRow input { min-width:0; height:50px; padding:0 14px; border:1px solid rgba(223,255,245,.15); border-radius:10px; outline:0; background:#0a1116; color:#fff; }
+.emailRow input:focus { border-color:var(--green); box-shadow:0 0 0 3px rgba(37,211,138,.1); }
+.emailRow button { padding:0 16px; border:0; border-radius:10px; background:var(--green); color:#06110c; font-size:12px; font-weight:750; cursor:pointer; }
+.message { margin:18px 0 0; padding:12px 14px; border-radius:8px; background:rgba(37,211,138,.09); color:#bcebd7; font-size:12px; line-height:1.55; }
+.finePrint { margin:18px 0 0; color:#69766f; font-size:10px; line-height:1.55; text-align:center; }
+@media(max-width:900px){.loginGrid{grid-template-columns:1fr;padding:70px 10px;gap:45px}.intro{text-align:center;margin:auto}.intro>p{margin-inline:auto}.securityNote{justify-content:center}.card{width:min(520px,100%);margin:auto}}
+@media(max-width:560px){.page{padding:12px}.topbar{height:58px}.loginGrid{padding:55px 0}.intro h1{font-size:50px}.card{padding:20px}.emailRow{grid-template-columns:1fr}.emailRow button{height:48px}}

@@ -2,6 +2,7 @@
 
 import dynamic from "next/dynamic";
 import { useEffect, useRef, useState } from "react";
+import AccountLink from "./account-link";
 import styles from "./scroll-hero.module.css";
 
 const DesktopHeroVisual = dynamic(() => import("./desktop-hero-visual"), { ssr: false });
@@ -118,7 +119,14 @@ export default function ScrollHero() {
         0.72,
         (startWidth / viewportWidth + startHeight / viewportHeight) / 2,
       );
-      const startX = viewportWidth * (compact ? 0.5 : 0.77);
+      const contentGutter = Math.max(
+        viewportWidth * 0.06,
+        (viewportWidth - 1180) / 2,
+      );
+      const contentWidth = Math.min(1180, viewportWidth - contentGutter * 2);
+      const startX = compact
+        ? viewportWidth * 0.5
+        : contentGutter + contentWidth * 0.76;
       const startY = viewportHeight * (compact ? 0.76 : 0.53);
       const mix = (start: number, end: number) =>
         start + (end - start) * smoothHandoff;
@@ -325,7 +333,7 @@ export default function ScrollHero() {
     <>
       <nav className={styles.handoffNav} ref={navRef} data-visible="false" aria-label="Main navigation">
         <a href="#top" aria-label="Launchset home">LAUNCHSET<span>.</span></a>
-        <div>
+        <div className={styles.handoffLinks}>
           <a href="#work">Work</a>
           <a href="#services">Services</a>
           <a href="#process">Process</a>
@@ -339,7 +347,10 @@ export default function ScrollHero() {
           aria-label={mobileMenuOpen ? "Close navigation" : "Open navigation"}
           onClick={() => setMobileMenuOpen((current) => !current)}
         ><i /><i /></button>
-        <a href="#contact">Start a project ↗</a>
+        <div className={styles.navActions}>
+          <a className={styles.handoffCta} href="#contact">Start a project ↗</a>
+          <AccountLink className={styles.accountLink} />
+        </div>
       </nav>
 
       <nav id="home-mobile-navigation" className={styles.mobileNavPanel} data-open={mobileMenuOpen ? "true" : "false"} aria-label="Mobile navigation">
@@ -347,6 +358,7 @@ export default function ScrollHero() {
         <a href="#services" onClick={() => setMobileMenuOpen(false)}>Services</a>
         <a href="#process" onClick={() => setMobileMenuOpen(false)}>Process</a>
         <a href="/founder" onClick={() => setMobileMenuOpen(false)}>Founder</a>
+        <a href="/login" onClick={() => setMobileMenuOpen(false)}>Sign in <span>→</span></a>
         <a href="#contact" onClick={() => setMobileMenuOpen(false)}>Start a project <span>↗</span></a>
       </nav>
 
@@ -370,7 +382,10 @@ export default function ScrollHero() {
               aria-label={mobileMenuOpen ? "Close navigation" : "Open navigation"}
               onClick={() => setMobileMenuOpen((current) => !current)}
             ><i /><i /></button>
-            <a className={styles.navCta} href="#contact">Start a project <span>↗</span></a>
+            <div className={styles.navActions}>
+              <a className={styles.navCta} href="#contact">Start a project <span>↗</span></a>
+              <AccountLink className={styles.accountLink} />
+            </div>
           </nav>
 
         <div className={styles.intro} id="top">

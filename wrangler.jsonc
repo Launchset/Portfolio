@@ -8,6 +8,36 @@
     "directory": ".open-next/assets",
     "binding": "ASSETS"
   },
+  "d1_databases": [
+    {
+      "binding": "AUTH_DB",
+      "database_name": "launchset-auth",
+      "database_id": "3e5040af-c1cb-4f56-8ce9-39d0df16ee89",
+      "migrations_dir": "migrations/auth"
+    },
+    {
+      "binding": "APP_DB",
+      "database_name": "launchset-app",
+      "database_id": "f9367c31-0751-41d4-ac05-de113cf3d7b0",
+      "migrations_dir": "migrations/app"
+    }
+  ],
+  "r2_buckets": [
+    {
+      "binding": "CONTRACTS",
+      "bucket_name": "launchset-contracts"
+    }
+  ],
+  "send_email": [
+    {
+      "name": "AUTH_EMAIL"
+    }
+  ],
+  "vars": {
+    "AUTH_ADMIN_EMAIL": "launchsetfreelancer@gmail.com",
+    "AUTH_EMAIL_FROM": "Launchset <login@launchset.dev>",
+    "BETTER_AUTH_URL": "https://launchset.dev"
+  },
   "routes": [
     {
       "pattern": "launchset.dev/*",

@@ -26,6 +26,14 @@
 .header nav a { transition: color .2s ease; }
 .header nav a:hover { color: #fff; }
 .headerCta { padding: 10px 14px; border-radius: 8px; background: var(--green); color: #07150e; font-size: 12px; font-weight: 700; }
+.headerActions { display:flex; align-items:center; gap:9px; }
+.accountLink { width:40px; height:40px; display:grid; place-items:center; border:1px solid rgba(226,255,238,.2); border-radius:50%; color:#eef4f0; transition:border-color .2s ease,background .2s ease,color .2s ease; }
+.accountLink svg { width:19px; height:19px; fill:none; stroke:currentColor; stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round; }
+.accountLink[data-auth-state="authenticated"] { padding:2px; border-color:rgba(37,211,138,.7); background:rgba(37,211,138,.1); }
+.accountLink[data-auth-state="authenticated"] svg { display:none; }
+.accountLink [data-profile-image],.accountLink [data-account-initial] { width:100%; height:100%; display:grid; place-items:center; overflow:hidden; border-radius:50%; background-position:center; background-size:cover; }
+.accountLink [data-account-initial] { background:#17251e; color:var(--green); font-size:12px; font-weight:800; }
+.accountLink:hover { border-color:var(--green); background:rgba(37,211,138,.09); color:var(--green); }
 .menuButton,.mobileNavCta { display:none; }
 
 .hero { min-height: calc(92vh - 68px); padding: 70px max(6vw, calc((100vw - 1180px) / 2)) 58px; display: flex; flex-direction: column; justify-content: space-between; background: #101815; color: #eef1eb; }
@@ -132,6 +140,7 @@
   .menuButton[aria-expanded="true"] i:first-child { transform:translateY(3.5px) rotate(45deg); }
   .menuButton[aria-expanded="true"] i:last-child { transform:translateY(-3.5px) rotate(-45deg); }
   .menuButton:focus-visible { outline:2px solid var(--green); outline-offset:3px; }
+  .headerActions { display:none; }
   .hero { min-height: 82vh; padding: 48px 22px; }
   .heroCopy { padding: 55px 0; grid-template-columns: 1fr; gap: 34px; }
   .heroCopy h1 { font-size: clamp(59px,19vw,92px); }

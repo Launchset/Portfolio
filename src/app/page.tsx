@@ -240,6 +240,39 @@ export default function Home() {
         </div>
       </section>
 
+      <section aria-labelledby="faq-heading" className={styles.faq} id="faq">
+        <div className={styles.sectionLabel}>
+          <span>Common questions</span>
+          <span>Before we get started</span>
+        </div>
+        <div className={styles.faqIntro}>
+          <h2 id="faq-heading">A few things<br /><em>worth knowing.</em></h2>
+          <p>
+            Straight answers about how we approach the work, where we can help
+            and what working together looks like.
+          </p>
+        </div>
+        <div className={styles.faqList}>
+          {[
+            ["01", "What can Launchset help us improve?", "We look for the digital friction costing your business time or holding back a good idea. That might be a website, an internal process or the automation connecting them."],
+            ["02", "Can you work with our existing website or systems?", "Yes. We can improve what already works, connect tools that have become disconnected or rebuild only the part that is holding everything else back."],
+            ["03", "How does a project begin?", "We start with a focused conversation about the result you need, what is slowing you down and where the clearest value can be created."],
+            ["04", "What happens after launch?", "We make the handover clear, check that the work is doing its job and can continue supporting or improving it where that creates useful value."],
+          ].map(([number, question, answer], index) => (
+            <details key={number} open={index === 0}>
+              <summary>
+                <span className={styles.faqNumber}>{number}</span>
+                <span className={styles.faqQuestion}>{question}</span>
+                <span aria-hidden="true" className={styles.faqToggle} />
+              </summary>
+              <div className={styles.faqAnswer}>
+                <p>{answer}</p>
+              </div>
+            </details>
+          ))}
+        </div>
+      </section>
+
       <section className={styles.contact} id="contact">
         <p>HAVE A PROJECT IN MIND?</p>
         <h2>Let&apos;s make something<br /><em>worth noticing.</em></h2>
