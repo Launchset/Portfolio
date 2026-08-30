@@ -106,7 +106,7 @@ export default async function AccountPage({ searchParams }: { searchParams: Prom
                   {client.stripe_subscription_id ? <form action="/api/billing/portal" method="post"><button>Cancel billing</button></form> : <button disabled>Cancel billing</button>}
                   <div className={styles.invoiceSection}>
                     <h3>Past invoices</h3>
-                    {invoices.length === 0 ? <p>No invoices yet.</p> : <ul>{invoices.map((invoice) => <li key={invoice.id}><div><strong>{invoice.number ?? "Stripe invoice"}</strong><span>{new Date(invoice.created_at).toLocaleDateString("en-GB")} · {invoice.status}</span></div><span>{formatMoney(invoice.amount_paid || invoice.amount_due, invoice.currency)}</span>{(invoice.hosted_invoice_url || invoice.invoice_pdf) && <a href={invoice.hosted_invoice_url ?? invoice.invoice_pdf ?? "#"} rel="noreferrer" target="_blank">Open</a>}</li>)}</ul>}
+                    {invoices.length === 0 ? <p>No invoices yet.</p> : <ul>{invoices.map((invoice: InvoiceRow) => <li key={invoice.id}><div><strong>{invoice.number ?? "Stripe invoice"}</strong><span>{new Date(invoice.created_at).toLocaleDateString("en-GB")} · {invoice.status}</span></div><span>{formatMoney(invoice.amount_paid || invoice.amount_due, invoice.currency)}</span>{(invoice.hosted_invoice_url || invoice.invoice_pdf) && <a href={invoice.hosted_invoice_url ?? invoice.invoice_pdf ?? "#"} rel="noreferrer" target="_blank">Open</a>}</li>)}</ul>}
                   </div>
                   </section>
                 </div>
