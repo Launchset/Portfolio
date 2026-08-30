@@ -18,10 +18,8 @@ export default function LoginPage() {
       </nav>
       <section className={styles.loginGrid}>
         <div className={styles.intro}>
-          <span className={styles.eyebrow}>SECURE ACCESS</span>
-          <h1>One account.<br /><em>No password.</em></h1>
-          <p>Use Google or request a one-time link that verifies your email as you sign in.</p>
-          <div className={styles.securityNote}><i /> Authentication runs on Launchset&apos;s Cloudflare infrastructure.</div>
+          <h1>Login</h1>
+          <p>Use Google or request a one-time link that verifies your email to sign you in.</p>
         </div>
         <LoginForm />
       </section>
