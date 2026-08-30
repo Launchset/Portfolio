@@ -70,7 +70,6 @@ export default function SmartHeader() {
         <Link href="/#services" onClick={() => setMenuOpen(false)}>Services</Link>
         <Link href="/#process" onClick={() => setMenuOpen(false)}>Process</Link>
         <Link href="/founder" onClick={() => setMenuOpen(false)}>Founder</Link>
-        <Link href="/login" onClick={() => setMenuOpen(false)}>Sign in</Link>
         <Link className={styles.mobileNavCta} href="/#contact" onClick={() => setMenuOpen(false)}>Start a project ↗</Link>
       </nav>
       <button
