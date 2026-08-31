@@ -30,7 +30,7 @@
 .browserBar i:nth-child(3) { background:#65ce81; }
 .visual { position:relative; min-height:560px; overflow:hidden; }
 .browserFrame .visual { min-height:0; aspect-ratio:1.55; }
-.prestigeFrame .visual { aspect-ratio:16 / 9; }
+.fullImageFrame .visual { aspect-ratio:16 / 9; }
 .visual > img { object-fit:cover; object-position:top center; }
 
 .voiceVisual { position:absolute; inset:7%; padding:clamp(22px,4vw,46px); display:grid; grid-template-columns:1fr 1fr; gap:18px; border:1px solid rgba(255,255,255,.14); border-radius:16px; background:rgba(5,10,8,.82); color:#eef4f0; box-shadow:0 35px 75px rgba(0,0,0,.36); }
@@ -241,7 +241,7 @@
   .showcase { min-height:0; padding:38px 22px; }
   .visual { min-height:430px; }
   .browserFrame .visual { aspect-ratio:1.15; }
-  .prestigeFrame .visual { aspect-ratio:16 / 9; }
+  .fullImageFrame .visual { aspect-ratio:16 / 9; }
   .voiceVisual { inset:4%; padding:18px; grid-template-columns:1fr; }
   .voiceVisual header,.voiceVisual footer { grid-column:auto; }
   .voiceVisual footer { gap:8px; flex-wrap:wrap; }

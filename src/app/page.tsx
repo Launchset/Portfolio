@@ -27,10 +27,10 @@ const projects = [
     type: "MEDICAL TRAVEL / SUPPORT",
     title: "Vietmed Travel",
     result: "A clearer trustworthy built site for a more reassuring journey for international patients.",
-    image: "/projects/vietmed-travel.webp",
-    imagePosition: "center top",
+    image: "/projects/vietmed-travel-current.webp",
+    imagePosition: "center center",
     imageFit: "cover",
-    showBrowserBar: true,
+    showBrowserBar: false,
     className: styles.projectViolet,
   },
 ] as const;
@@ -185,7 +185,7 @@ export default function Home() {
                       src={project.image}
                       alt={`${project.title} website homepage`}
                       fill
-                      quality={project.number === "01" ? 100 : 75}
+                      quality={100}
                       sizes="(max-width: 760px) 72vw, 38vw"
                       style={{ objectFit: project.imageFit, objectPosition: project.imagePosition }}
                     />

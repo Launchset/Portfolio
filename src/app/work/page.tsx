@@ -63,7 +63,7 @@ function ProjectPreview({ project }: { project: (typeof workProjects)[number] })
         src={project.image}
         alt={project.imageAlt ?? ""}
         fill
-        quality={project.slug === "prestige-kitchens" ? 100 : 75}
+        quality={project.slug === "prestige-kitchens" || project.slug === "vietmed-travel" ? 100 : 75}
         sizes="(max-width: 760px) 92vw, 44vw"
         className={styles.cardImage}
       />

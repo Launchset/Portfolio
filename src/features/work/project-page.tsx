@@ -14,7 +14,7 @@ import {
 
 function ProjectVisual({ slug, image, imageAlt }: { slug: string; image?: string; imageAlt?: string }) {
   if (image) {
-    return <Image src={image} alt={imageAlt ?? ""} fill priority quality={slug === "prestige-kitchens" ? 100 : 75} sizes="100vw" />;
+    return <Image src={image} alt={imageAlt ?? ""} fill priority quality={slug === "prestige-kitchens" || slug === "vietmed-travel" ? 100 : 75} sizes="100vw" />;
   }
 
   if (slug === "vietnamese-voice-translator") {
@@ -302,6 +302,7 @@ function PrestigeOutcome() {
 
 export default function ProjectPageContent({ project }: { project: ProjectDetail }) {
   const pageUrl = absoluteUrl(project.href);
+  const usesFullImageFrame = project.slug === "prestige-kitchens" || project.slug === "vietmed-travel";
   const projectJsonLd = {
     "@context": "https://schema.org",
     "@graph": [
@@ -369,8 +370,8 @@ export default function ProjectPageContent({ project }: { project: ProjectDetail
       </section>
 
       <section className={`${styles.showcase} ${styles[project.theme]}`}>
-        <div className={`${styles.showcaseInner} ${project.image ? styles.browserFrame : ""} ${project.slug === "prestige-kitchens" ? styles.prestigeFrame : ""}`}>
-          {project.image && project.slug !== "prestige-kitchens" && (
+        <div className={`${styles.showcaseInner} ${project.image ? styles.browserFrame : ""} ${usesFullImageFrame ? styles.fullImageFrame : ""}`}>
+          {project.image && !usesFullImageFrame && (
             <div className={styles.browserBar}><i /><i /><i /></div>
           )}
           <div className={styles.visual}>

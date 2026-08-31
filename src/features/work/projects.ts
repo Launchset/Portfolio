@@ -55,7 +55,7 @@ export const workProjects: readonly WorkProject[] = [
     summary:
       "A calm, reassuring landing experience for international patients considering medical care in Vietnam.",
     href: "/work/vietmed-travel",
-    image: "/projects/vietmed-travel.webp",
+    image: "/projects/vietmed-travel-current.webp",
     imageAlt: "Vietmed Travel website homepage",
     theme: "aqua",
     tags: ["Website", "Content hierarchy", "Patient support"],
