@@ -1,6 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
+import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import AccountLink from "./account-link";
 import styles from "./scroll-hero.module.css";
@@ -334,7 +335,7 @@ export default function ScrollHero() {
       <nav className={styles.handoffNav} ref={navRef} data-visible="false" aria-label="Main navigation">
         <a href="#top" aria-label="Launchset home">LAUNCHSET<span>.</span></a>
         <div className={styles.handoffLinks}>
-          <a href="#work">Work</a>
+          <Link href="/work">Work</Link>
           <a href="#services">Services</a>
           <a href="#process">Process</a>
           <a href="/founder">Founder</a>
@@ -354,7 +355,7 @@ export default function ScrollHero() {
       </nav>
 
       <nav id="home-mobile-navigation" className={styles.mobileNavPanel} data-open={mobileMenuOpen ? "true" : "false"} aria-label="Mobile navigation">
-        <a href="#work" onClick={() => setMobileMenuOpen(false)}>Our work</a>
+        <Link href="/work" onClick={() => setMobileMenuOpen(false)}>Our work</Link>
         <a href="#services" onClick={() => setMobileMenuOpen(false)}>Services</a>
         <a href="#process" onClick={() => setMobileMenuOpen(false)}>Process</a>
         <a href="/founder" onClick={() => setMobileMenuOpen(false)}>Founder</a>
@@ -368,7 +369,7 @@ export default function ScrollHero() {
           <nav className={styles.nav} aria-label="Intro navigation">
             <a className={styles.logo} href="#top" aria-label="Launchset home">LAUNCHSET<span>.</span></a>
             <div className={styles.navLinks}>
-              <a href="#work">Work</a>
+              <Link href="/work">Work</Link>
               <a href="#services">Services</a>
               <a href="#process">Process</a>
               <a href="/founder">Founder</a>
