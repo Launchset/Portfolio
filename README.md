@@ -2,6 +2,8 @@
 
 The production website for [launchset.dev](https://launchset.dev), built with Next.js and the App Router.
 
+Start with [ARCHITECTURE.md](./ARCHITECTURE.md) for the system map and [AGENTS.md](./AGENTS.md) for change and validation conventions.
+
 ## Local development
 
 ```bash
@@ -14,7 +16,7 @@ The default local URL is `http://localhost:3000`. Google Analytics is automatica
 ## Production checks
 
 ```bash
-npm run lint
+npm run check
 npm run build
 ```
 
@@ -51,6 +53,6 @@ Build and deploy the shadow environment with:
 npm run deploy:shadow
 ```
 
-For production, build first and upload a dormant Worker version for review. Promote that exact version with `wrangler versions deploy` only after explicit approval. Production secrets are stored as encrypted Worker secrets and must never be added to an env file committed to Git.
+For production, review the exact change set and validate the isolated shadow Worker first. Run `npm run deploy` only after explicit production approval, then verify the affected live routes with `npm run verify:production`. Production secrets are stored as encrypted Worker secrets and must never be added to an env file committed to Git.
 
 Search and agent discovery routes are generated at `/sitemap.xml`, `/robots.txt`, `/llms.txt`, `/llms-full.txt` and `/agents.txt`.

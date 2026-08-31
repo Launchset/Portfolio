@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getPortalEnvironment, normalizeEmail, requirePageClient } from "@/src/lib/portal";
+import { getPortalEnvironment, normalizeEmail, requirePageClient } from "@/src/features/portal/access";
 import SignaturePad from "./signature-pad";
 import styles from "./sign.module.css";
 

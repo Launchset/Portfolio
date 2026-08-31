@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 import DashboardTopbar from "@/src/components/dashboard/dashboard-topbar";
-import { formatMoney, getPortalEnvironment, normalizeEmail, requirePageClient } from "@/src/lib/portal";
+import { formatMoney, getPortalEnvironment, normalizeEmail, requirePageClient } from "@/src/features/portal/access";
 import LaunchsetCustomCheckout from "./custom-checkout";
 import styles from "./setup.module.css";
 

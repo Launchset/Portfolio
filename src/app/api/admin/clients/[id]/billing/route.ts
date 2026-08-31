@@ -1,5 +1,5 @@
-import { getPortalEnvironment, getRequestUser, requestUserIsAdmin } from "@/src/lib/portal";
-import { stripeRequest, subscriptionPeriodEnd } from "@/src/lib/stripe";
+import { getPortalEnvironment, getRequestUser, requestUserIsAdmin } from "@/src/features/portal/access";
+import { stripeRequest, subscriptionPeriodEnd } from "@/src/platform/stripe/stripe";
 
 type BillingClient = {
   stripe_subscription_id: string | null;

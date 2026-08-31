@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { formatMoney, getPortalEnvironment } from "@/src/lib/portal";
-import { billingStatusLabel } from "@/src/lib/stripe";
+import { formatMoney, getPortalEnvironment } from "@/src/features/portal/access";
+import { billingStatusLabel } from "@/src/platform/stripe/stripe";
 import styles from "../../admin.module.css";
 import PaymentActions from "../payment-actions";
 

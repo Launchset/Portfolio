@@ -5,7 +5,7 @@ import styles from "./work.module.css";
 import SmartHeader from "./smart-header";
 import JsonLd from "@/src/components/seo/json-ld";
 import { absoluteUrl, breadcrumbList, studioReference, websiteReference } from "@/src/lib/structured-data";
-import { workProjects } from "@/src/lib/work-projects";
+import { workProjects } from "@/src/features/work/projects";
 
 export const metadata: Metadata = {
   title: "Our Work | Launchset",

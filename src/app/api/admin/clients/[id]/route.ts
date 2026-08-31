@@ -1,4 +1,4 @@
-import { getPortalEnvironment, getRequestUser, requestUserIsAdmin } from "@/src/lib/portal";
+import { getPortalEnvironment, getRequestUser, requestUserIsAdmin } from "@/src/features/portal/access";
 
 type RemovableClient = {
   stripe_subscription_status: string | null;

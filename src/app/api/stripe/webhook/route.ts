@@ -1,5 +1,5 @@
-import { getPortalEnvironment } from "@/src/lib/portal";
-import { stripeId, stripeTimestamp, subscriptionPeriodEnd, verifyStripeSignature } from "@/src/lib/stripe";
+import { getPortalEnvironment } from "@/src/features/portal/access";
+import { stripeId, stripeTimestamp, subscriptionPeriodEnd, verifyStripeSignature } from "@/src/platform/stripe/stripe";
 
 type StripeEvent = {
   id: string;

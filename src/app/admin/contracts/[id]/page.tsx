@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getPortalEnvironment } from "@/src/lib/portal";
+import { getPortalEnvironment } from "@/src/features/portal/access";
 import styles from "../../admin.module.css";
 
 type ContractDetail = { id: string; title: string; status: string; signed_at: number | null; signer_name: string | null; signer_email: string | null; original_sha256: string; signed_sha256: string | null; client_id: string; client_name: string; client_email: string };

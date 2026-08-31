@@ -1,9 +1,8 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-import AccountLink from "./account-link";
+import { HandoffNavigation, IntroNavigation, MobileNavigation } from "./home-navigation";
 import styles from "./scroll-hero.module.css";
 
 const DesktopHeroVisual = dynamic(() => import("./desktop-hero-visual"), { ssr: false });
@@ -20,6 +19,8 @@ export default function ScrollHero() {
   const navRef = useRef<HTMLElement>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [showDesktopVisual, setShowDesktopVisual] = useState(false);
+  const toggleMobileMenu = () => setMobileMenuOpen((current) => !current);
+  const closeMobileMenu = () => setMobileMenuOpen(false);
 
   useEffect(() => {
     const media = window.matchMedia("(min-width: 701px)");
@@ -332,61 +333,14 @@ export default function ScrollHero() {
 
   return (
     <>
-      <nav className={styles.handoffNav} ref={navRef} data-visible="false" aria-label="Main navigation">
-        <a href="#top" aria-label="Launchset home">LAUNCHSET<span>.</span></a>
-        <div className={styles.handoffLinks}>
-          <Link href="/work">Work</Link>
-          <a href="#services">Services</a>
-          <a href="#process">Process</a>
-          <a href="/founder">Founder</a>
-        </div>
-        <button
-          className={styles.heroMenuButton}
-          type="button"
-          aria-expanded={mobileMenuOpen}
-          aria-controls="home-mobile-navigation"
-          aria-label={mobileMenuOpen ? "Close navigation" : "Open navigation"}
-          onClick={() => setMobileMenuOpen((current) => !current)}
-        ><i /><i /></button>
-        <div className={styles.navActions}>
-          <a className={styles.handoffCta} href="#contact">Start a project ↗</a>
-          <AccountLink className={styles.accountLink} />
-        </div>
-      </nav>
-
-      <nav id="home-mobile-navigation" className={styles.mobileNavPanel} data-open={mobileMenuOpen ? "true" : "false"} aria-label="Mobile navigation">
-        <Link href="/work" onClick={() => setMobileMenuOpen(false)}>Our work</Link>
-        <a href="#services" onClick={() => setMobileMenuOpen(false)}>Services</a>
-        <a href="#process" onClick={() => setMobileMenuOpen(false)}>Process</a>
-        <a href="/founder" onClick={() => setMobileMenuOpen(false)}>Founder</a>
-        <a href="#contact" onClick={() => setMobileMenuOpen(false)}>Start a project <span>↗</span></a>
-      </nav>
+      <HandoffNavigation menuOpen={mobileMenuOpen} navRef={navRef} onToggleMenu={toggleMobileMenu} />
+      <MobileNavigation menuOpen={mobileMenuOpen} onClose={closeMobileMenu} />
 
       <section className={styles.scrollSection} ref={sectionRef}>
         <div className={styles.stage} ref={stageRef}>
           <div className={styles.aurora} aria-hidden="true" />
 
-          <nav className={styles.nav} aria-label="Intro navigation">
-            <a className={styles.logo} href="#top" aria-label="Launchset home">LAUNCHSET<span>.</span></a>
-            <div className={styles.navLinks}>
-              <Link href="/work">Work</Link>
-              <a href="#services">Services</a>
-              <a href="#process">Process</a>
-              <a href="/founder">Founder</a>
-            </div>
-            <button
-              className={styles.heroMenuButton}
-              type="button"
-              aria-expanded={mobileMenuOpen}
-              aria-controls="home-mobile-navigation"
-              aria-label={mobileMenuOpen ? "Close navigation" : "Open navigation"}
-              onClick={() => setMobileMenuOpen((current) => !current)}
-            ><i /><i /></button>
-            <div className={styles.navActions}>
-              <a className={styles.navCta} href="#contact">Start a project <span>↗</span></a>
-              <AccountLink className={styles.accountLink} />
-            </div>
-          </nav>
+          <IntroNavigation menuOpen={mobileMenuOpen} onToggleMenu={toggleMobileMenu} />
 
           <div className={styles.intro} id="top">
             <h1>

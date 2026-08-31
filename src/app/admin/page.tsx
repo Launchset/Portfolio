@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { getPortalEnvironment } from "@/src/lib/portal";
-import { billingStatusLabel } from "@/src/lib/stripe";
+import { getPortalEnvironment } from "@/src/features/portal/access";
+import { billingStatusLabel } from "@/src/platform/stripe/stripe";
 import styles from "./admin.module.css";
 
 type OverviewRow = {

@@ -1,5 +1,5 @@
 import DashboardTopbar from "@/src/components/dashboard/dashboard-topbar";
-import { requirePageAdmin } from "@/src/lib/portal";
+import { requirePageAdmin } from "@/src/features/portal/access";
 import AdminNavigation from "./admin-navigation";
 import styles from "./admin.module.css";
 

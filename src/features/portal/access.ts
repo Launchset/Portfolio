@@ -1,8 +1,13 @@
 import { getCloudflareContext } from "@opennextjs/cloudflare";
 import { headers } from "next/headers";
 import { notFound, redirect } from "next/navigation";
-import { createAuth, getAdminEmail, isLaunchsetAdmin } from "./auth";
-import type { StripeEnvironment } from "./stripe";
+import { createAuth, getAdminEmail, isLaunchsetAdmin } from "@/src/lib/auth";
+import type { StripeEnvironment } from "@/src/platform/stripe/stripe";
+import { normalizeEmail } from "./email";
+
+export { formatMoney } from "@/src/shared/format/money";
+export { sha256Hex } from "@/src/shared/security/digests";
+export { normalizeEmail } from "./email";
 
 export type PortalEnvironment = CloudflareEnv & {
   APP_DB: D1Database;
@@ -69,21 +74,4 @@ export async function getRequestUser(request: Request) {
 
 export async function requestUserIsAdmin(user: PortalUser) {
   return user.emailVerified && isLaunchsetAdmin(user.email, await getAdminEmail());
-}
-
-export function normalizeEmail(email: string) {
-  return email.trim().toLowerCase();
-}
-
-export function formatMoney(cents: number, currency = "gbp") {
-  return new Intl.NumberFormat("en-GB", {
-    style: "currency",
-    currency: currency.toUpperCase(),
-  }).format(cents / 100);
-}
-
-export async function sha256Hex(value: ArrayBuffer | Uint8Array) {
-  const bytes = value instanceof Uint8Array ? value : new Uint8Array(value);
-  const digest = await crypto.subtle.digest("SHA-256", bytes as BufferSource);
-  return Array.from(new Uint8Array(digest), (byte) => byte.toString(16).padStart(2, "0")).join("");
 }

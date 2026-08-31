@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore The OpenNext worker is generated during the Cloudflare build.
 import openNextWorker from "./.open-next/worker.js";
 
@@ -122,7 +123,7 @@ async function markdownResponse(request: Request, environment: WorkerEnvironment
   });
 }
 
-export default {
+const launchsetWorker = {
   async fetch(
     request: Request,
     environment: WorkerEnvironment,
@@ -154,3 +155,5 @@ export default {
     return isShadow ? withShadowHeaders(enrichedResponse) : enrichedResponse;
   },
 };
+
+export default launchsetWorker;

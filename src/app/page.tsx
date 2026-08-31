@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./page.module.css";
-import ScrollHero from "@/src/components/scroll-hero";
+import ScrollHero from "@/src/features/home/scroll-hero";
 import JsonLd from "@/src/components/seo/json-ld";
 import { founderId, siteUrl, studioId, websiteId } from "@/src/lib/structured-data";
 

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import AccountControls from "@/src/app/account/account-controls";
-import { getPageUser } from "@/src/lib/portal";
+import { getPageUser } from "@/src/features/portal/access";
 import styles from "./access-required.module.css";
 
 export const dynamic = "force-dynamic";

@@ -1,6 +1,6 @@
 import { NextRequest } from "next/server";
 import { decodeSignatureDataUrl, stampSignature } from "@/src/lib/contracts";
-import { clientStatusAllowsAccess, getPortalEnvironment, getRequestUser, normalizeEmail, sha256Hex } from "@/src/lib/portal";
+import { clientStatusAllowsAccess, getPortalEnvironment, getRequestUser, normalizeEmail, sha256Hex } from "@/src/features/portal/access";
 
 type SignableContractRow = {
   id: string;

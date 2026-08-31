@@ -1,5 +1,5 @@
-import { getClientAccess, getPortalEnvironment, getRequestUser } from "@/src/lib/portal";
-import { stripeRequest } from "@/src/lib/stripe";
+import { getClientAccess, getPortalEnvironment, getRequestUser } from "@/src/features/portal/access";
+import { stripeRequest } from "@/src/platform/stripe/stripe";
 
 type PortalClient = { stripe_customer_id: string | null; stripe_subscription_id: string | null };
 type StripePortalSession = { url: string };

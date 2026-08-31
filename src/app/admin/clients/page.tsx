@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { formatMoney, getPortalEnvironment } from "@/src/lib/portal";
+import { formatMoney, getPortalEnvironment } from "@/src/features/portal/access";
 import styles from "../admin.module.css";
 import AddClientForm from "../add-client-form";
 import ClientActions from "./client-actions";

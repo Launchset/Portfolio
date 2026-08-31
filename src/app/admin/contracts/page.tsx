@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { getPortalEnvironment } from "@/src/lib/portal";
+import { getPortalEnvironment } from "@/src/features/portal/access";
 import styles from "../admin.module.css";
 
 type ContractRow = { id: string; title: string; status: string; signed_at: number | null; client_id: string; client_name: string; client_email: string };

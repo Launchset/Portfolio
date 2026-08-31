@@ -1,5 +1,5 @@
 import { NextRequest } from "next/server";
-import { clientStatusAllowsAccess, getPortalEnvironment, getRequestUser, normalizeEmail, requestUserIsAdmin } from "@/src/lib/portal";
+import { clientStatusAllowsAccess, getPortalEnvironment, getRequestUser, normalizeEmail, requestUserIsAdmin } from "@/src/features/portal/access";
 
 type ContractFileRow = {
   title: string;

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { formatMoney, getPortalEnvironment } from "@/src/lib/portal";
-import { billingStatusLabel } from "@/src/lib/stripe";
+import { formatMoney, getPortalEnvironment } from "@/src/features/portal/access";
+import { billingStatusLabel } from "@/src/platform/stripe/stripe";
 import styles from "../../admin.module.css";
 
 type ClientDetail = { id: string; name: string; email: string; status: string; monthly_fee_cents: number; currency: string; invited_at: number | null; contract_id: string | null; contract_title: string | null; contract_status: string | null; stripe_subscription_status: string | null; stripe_cancel_at_period_end: number; stripe_collection_paused: number };

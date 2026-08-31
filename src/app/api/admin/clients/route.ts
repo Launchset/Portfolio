@@ -1,5 +1,5 @@
 import { PDFDocument } from "pdf-lib";
-import { getPortalEnvironment, getRequestUser, normalizeEmail, requestUserIsAdmin, sha256Hex } from "@/src/lib/portal";
+import { getPortalEnvironment, getRequestUser, normalizeEmail, requestUserIsAdmin, sha256Hex } from "@/src/features/portal/access";
 
 type EmailEnvironment = Awaited<ReturnType<typeof getPortalEnvironment>> & {
   AUTH_EMAIL: { send(message: { from: string; to: string; subject: string; text: string; html: string }): Promise<unknown> };
