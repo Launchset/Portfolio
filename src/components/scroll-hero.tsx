@@ -358,7 +358,6 @@ export default function ScrollHero() {
         <a href="#services" onClick={() => setMobileMenuOpen(false)}>Services</a>
         <a href="#process" onClick={() => setMobileMenuOpen(false)}>Process</a>
         <a href="/founder" onClick={() => setMobileMenuOpen(false)}>Founder</a>
-        <a href="/login" onClick={() => setMobileMenuOpen(false)}>Sign in <span>→</span></a>
         <a href="#contact" onClick={() => setMobileMenuOpen(false)}>Start a project <span>↗</span></a>
       </nav>
 
@@ -388,26 +387,27 @@ export default function ScrollHero() {
             </div>
           </nav>
 
-        <div className={styles.intro} id="top">
-          <div className={styles.eyebrow}><i /> DIGITAL DESIGN &amp; AUTOMATION STUDIO</div>
-          <h1>Your business deserves more than a template<span>.</span></h1>
-          <p>
-            Distinctive websites and smart automations that create value, remove
-            repetitive work and give your team more time for what matters.
-          </p>
-          <div className={styles.actions}>
-            <a href="#work">Explore our work <span>→</span></a>
-            <a href="#contact">Book a free call</a>
+          <div className={styles.intro} id="top">
+            <h1>
+              <span className={styles.heroMain}>Solving business problems</span>
+              <span className={styles.heroAccent}>with practical software.</span>
+            </h1>
+            <p>
+              Including websites, e-commerce, automation and business tooling as well as a lot more. Send us an email explaining your problem and we will tell you what our plan would be.
+            </p>
+            <div className={styles.actions}>
+              <a href="#work">Explore our work <span>→</span></a>
+              <a href="#contact">Send us an email</a>
+            </div>
           </div>
-        </div>
 
-        <div className={styles.mobilePlanet} aria-hidden="true">
-          <div className={styles.mobilePlanetGlow} />
-          <div className={styles.orbit}><i /><i /><i /></div>
-          <div className={styles.sphere} />
-        </div>
+          <div className={styles.mobilePlanet} aria-hidden="true">
+            <div className={styles.mobilePlanetGlow} />
+            <div className={styles.orbit}><i /><i /><i /></div>
+            <div className={styles.sphere} />
+          </div>
 
-        {showDesktopVisual && <DesktopHeroVisual />}
+          {showDesktopVisual && <DesktopHeroVisual />}
 
         </div>
       </section>

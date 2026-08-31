@@ -17,7 +17,7 @@ export default function DesktopHeroVisual() {
               <div className={styles.visualGlow} />
               <div className={styles.designMessage}>
                 <span>01 / DIGITAL EXPERIENCES</span>
-                <h2>Reactive,<br />clean designs.</h2>
+                <h2>Design focused.</h2>
               </div>
               <div className={styles.monolith}>
                 <div className={styles.monolithWash} />
@@ -36,20 +36,14 @@ export default function DesktopHeroVisual() {
               <div className={styles.automationScreen}>
                 <div className={styles.automationChrome}>
                   <div><i /><i /><i /></div>
-                  <span>Launchset / Flow</span>
                 </div>
                 <div className={styles.automationContent}>
                   <div className={styles.automationCopy}>
                     <span>02 / SMARTER SYSTEMS</span>
-                    <h2>As well as<br />useful automations.</h2>
-                    <p>
-                      Enquiries sorted, replies sent, and your team kept up
-                      to date—automatically.
-                    </p>
+                    <h2>Useful automations.</h2>
                   </div>
                   <div className={styles.automationVisual}>
                     <div className={styles.workflowHeader}>
-                      <div><i /> Enquiry workflow</div>
                       <span>ACTIVE</span>
                     </div>
                     <div className={styles.workflowCanvas}>

@@ -12,6 +12,7 @@ export type WorkProject = {
 
 export type ProjectDetail = WorkProject & {
   intro: string;
+  introParagraphs?: readonly string[];
   evidence?: readonly {
     value: string;
     label: string;
@@ -27,6 +28,12 @@ export type ProjectDetail = WorkProject & {
   metrics?: readonly { value: string; label: string }[];
   metricNote?: string;
 };
+
+const prestigeIntroParagraphs = [
+  "I was introduced to Prestige Kitchens & Bedrooms by a previous client, Prestige Barbers, when the business had no website.",
+  "The project began by establishing its online presence, then grew into an e-commerce platform supported by systems for processing supplier catalogues and organising more than 70GB of product files.",
+  "The products Prestige has prioritised so far are now available on the site, and the platform continues to expand across more ranges. I continue to develop the platform and support the team at Prestige Kitchens & Bedrooms, helping the business grow while learning more about its needs along the way.",
+] as const;
 
 export const workProjects: readonly WorkProject[] = [
   {
@@ -117,8 +124,8 @@ export const projectDetails: Record<string, ProjectDetail> = {
     type: "E-COMMERCE / DATA INFRASTRUCTURE",
     title: "Prestige Kitchens & Bedrooms",
     tags: ["E-commerce", "Product data", "Automation", "Cloud infrastructure"],
-    intro:
-      "Prestige needed more than a website. I built the e-commerce platform and underlying product-data infrastructure used to process large supplier catalogues, organise 70GB+ of assets and turn inconsistent information into customer-ready products.",
+    intro: prestigeIntroParagraphs.join(" "),
+    introParagraphs: prestigeIntroParagraphs,
     evidence: [
       { value: "306", label: "Validated products", icon: "product" },
       { value: "786", label: "Organised supplier images", icon: "image" },
@@ -133,8 +140,8 @@ export const projectDetails: Record<string, ProjectDetail> = {
         items: [
           "Large, inconsistent supplier datasets",
           "Thousands of images and documents",
-          "Different structures between suppliers",
-          "Manual product creation was difficult to scale",
+          "Inconsistent supplier formats",
+          "Adding products by hand was slow",
           "Products required validation before publication",
         ],
       },

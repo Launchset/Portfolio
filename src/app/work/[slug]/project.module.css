@@ -1,13 +1,18 @@
 .page { background:#e8e9e2; color:#142019; }
 .hero { padding:48px max(6vw,calc((100vw - 1180px)/2)) 58px; background:#101815; color:#eef1eb; }
+.prestigeHero { padding-inline:max(3.5vw,calc((100vw - 1320px)/2)); }
 .back { color:#a1afa7; font-size:11px; transition:color .2s ease; }
 .back:hover { color:var(--green); }
 .heroGrid { margin-top:60px; display:grid; grid-template-columns:minmax(0,1.35fr) minmax(280px,.65fr); grid-template-areas:"type ." "title description"; column-gap:70px; row-gap:16px; align-items:start; }
 .projectType { grid-area:type; color:var(--green); font-size:9px; font-weight:750; letter-spacing:.16em; }
 .heroGrid h1 { grid-area:title; max-width:850px; margin:0; font-family:"Avenir Next","Noto Sans","Segoe UI",sans-serif; font-size:clamp(48px,6vw,82px); line-height:.92; letter-spacing:-.065em; font-weight:600; text-wrap:balance; }
-.heroGrid .prestigeTitle { font-size:clamp(27px,5.4vw,72px); }
+.prestigeHeroGrid { grid-template-columns:minmax(0,.82fr) minmax(460px,1.18fr); grid-template-areas:"title description"; column-gap:clamp(42px,5vw,70px); align-items:center; }
+.heroGrid .prestigeTitle { font-size:clamp(27px,4vw,54px); transform:translateY(-24px); }
 .prestigeTitle span { display:block; white-space:nowrap; }
 .heroGrid > p { grid-area:description; align-self:center; max-width:420px; margin:0; color:#a2aea7; font-size:15px; line-height:1.7; }
+.prestigeStory { grid-area:description; align-self:center; max-width:700px; display:grid; gap:16px; }
+.prestigeStory p { margin:0; color:#a2aea7; font-size:14px; line-height:1.65; }
+.prestigeStory p:first-child { color:#d5ddd8; font-size:16px; line-height:1.6; }
 .hero > ul { margin:58px 0 0; padding:18px 0 0; display:flex; flex-wrap:wrap; gap:8px; border-top:1px solid rgba(238,241,235,.18); list-style:none; }
 .hero > ul li { padding:7px 10px; border:1px solid rgba(238,241,235,.2); border-radius:999px; color:#b3beb8; font-size:9px; }
 
@@ -229,7 +234,9 @@
   .hero { padding:42px 22px 48px; }
   .heroGrid { margin-top:45px; grid-template-columns:1fr; grid-template-areas:"type" "title" "description"; gap:16px; }
   .heroGrid h1 { font-size:clamp(40px,12vw,64px); }
+  .heroGrid .prestigeTitle { font-size:clamp(27px,8.7vw,46px); transform:none; }
   .heroGrid > p { margin-top:14px; }
+  .prestigeStory { margin-top:14px; }
   .hero > ul { margin-top:42px; }
   .showcase { min-height:0; padding:38px 22px; }
   .visual { min-height:430px; }

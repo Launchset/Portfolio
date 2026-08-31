@@ -13,7 +13,6 @@ export default function Footer() {
       <div className={styles.footerTop}>
         <div className={styles.identity}>
           <Link href="/" className={styles.logo}>LAUNCHSET<span>.</span></Link>
-          <p>Distinctive websites and useful automations designed to save time and create measurable value.</p>
         </div>
 
         <nav className={styles.siteLinks} aria-label="Footer navigation">
@@ -28,7 +27,6 @@ export default function Footer() {
           <span>START A CONVERSATION</span>
           <a href="mailto:launchsetfreelancer@gmail.com">launchsetfreelancer@gmail.com <b>↗</b></a>
           <a className={styles.socialLink} href="https://www.linkedin.com/in/johnhelyar1/" target="_blank" rel="noreferrer">LinkedIn <b>↗</b></a>
-          <p>Have a problem worth simplifying? Tell us where the time is going.</p>
         </div>
       </div>
 

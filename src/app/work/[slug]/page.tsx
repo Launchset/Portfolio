@@ -85,29 +85,29 @@ const prestigeBuildAreas = [
       ["Catalogue browsing", "Category pages help customers find the right products."],
       ["Product pages", "Images, features, specifications and compatible accessories stay together."],
       ["Basket and checkout", "Customers can build an order and pay through secure Stripe checkout."],
-      ["Accounts and orders", "Passwordless accounts keep payments and order history accessible."],
+      ["Accounts and orders", "Customers can securely access payments and order history using Google or a one-time email link."],
     ],
   },
   {
     label: "PRODUCT SYSTEM",
     title: "Product review and publishing",
-    copy: "Internal tools were built to inspect, approve and publish supplier data without exposing unfinished products.",
+    copy: "I built internal tools to review and approve supplier information before products appeared on the website.",
     details: [
-      ["Catalogue review", "Scraped details, images, features and linked accessories can be inspected together."],
-      ["Image ordering", "Images are approved and placed in their storefront display order."],
-      ["Feature review", "Extracted PDF features are compared with supplier data before import."],
-      ["Publishing controls", "Publication states and database policies keep unfinished products off the live website."],
+      ["Catalogue review", "Product details, images, features and accessories can all be checked in one place."],
+      ["Image ordering", "Product images can be approved and placed in the correct order."],
+      ["Feature review", "Features extracted from supplier PDFs are checked before being added to the product catalogue."],
+      ["Publishing controls", "Products must be reviewed and approved before appearing on the live website."],
     ],
   },
   {
     label: "DATA PIPELINES",
     title: "Supplier information",
-    copy: "Tooling processes large supplier catalogues while keeping questionable data out of production.",
+    copy: "I built tools to process large supplier catalogues and flag uncertain information for review.",
     details: [
-      ["Scraping", "Supplier pages were collected with bounded retries and resumable checkpoints."],
-      ["Cleaning", "Navigation text, duplicate values and inconsistent formatting were highlighted for manual review."],
-      ["Product matching", "SKUs were used to connect products with the correct categories, images and accessories."],
-      ["Importing", "Approved products, images, specifications and relationships were written to the catalogue database."],
+      ["Scraping", "Supplier pages were collected automatically, with failed requests retried and progress saved along the way."],
+      ["Cleaning", "Unwanted page text, duplicate information and inconsistent formatting were flagged for review."],
+      ["Product matching", "Supplier product codes were used to connect each product with the correct category, images and accessories."],
+      ["Importing", "Once approved, products were added to the catalogue with their images, specifications and links to compatible accessories and related products."],
     ],
   },
   {
@@ -115,8 +115,8 @@ const prestigeBuildAreas = [
     title: "Website infrastructure",
     copy: "The website and its data run on infrastructure designed for a growing business.",
     details: [
-      ["Cloudflare Workers", "Runs the Next.js application as a Cloudflare Worker, with OpenNext adapting the server-side code for Cloudflare’s runtime."],
-      ["D1 and R2", "Stores the structured data and images."],
+      ["Cloudflare Workers", "Runs the website on Cloudflare’s global network so pages respond quickly. OpenNext adapts the Next.js server code to run inside Cloudflare Workers."],
+      ["D1 and R2", "D1 holds the product information, while R2 holds the images and documents. Technically, D1 is Cloudflare’s serverless SQL database and R2 is its object-storage service."],
       ["Stripe", "Creates secure checkout sessions and records payment status."],
       ["Transactional email", "Sends sign-in links, customer messages and enquiry notifications."],
     ],
@@ -128,25 +128,25 @@ const prestigeTechnicalChallenges = [
     title: "Turning 70GB of supplier files into a usable media system",
     titleLines: ["Turning", "70GB of supplier files", "into a usable media system"],
     visual: "assets",
-    problem: "More than 70GB of supplier assets arrived across inconsistent folders, formats and file sizes. The files could not be safely matched to products or served directly.",
-    decision: "I built rerunnable processing jobs that converted approved images to WebP, assigned stable R2 paths and recorded each asset’s dimensions, SKU and display order.",
-    result: "Prestige gained an organised media layer connected directly to its product catalogue.",
+    problem: "Prestige was given more than 70GB of product images and documents by its suppliers. They were difficult to organise and match to the right products. Technically, the files arrived in inconsistent folders, formats, sizes and resolutions, so they could not be safely used on the website.",
+    decision: "I built a repeatable system to prepare and organise every approved image. Processing jobs converted files to WebP, assigned stable Cloudflare R2 locations and recorded their dimensions, supplier product codes and display order.",
+    result: "Prestige now has an organised image library connected to the correct products. Each catalogue entry points to consistent, web-ready files stored in R2.",
   },
   {
     title: "Turning supplier PDFs into reviewed product data",
     titleLines: ["Turning", "supplier PDFs", "into reviewed product data"],
     visual: "pdf",
-    problem: "Supplier PDFs were designed for people, not software. Product features were mixed with dimensions, warranty information and repeated page content.",
-    decision: "I combined deterministic PDF parsing with constrained local AI extraction. Every proposed feature passed through a review interface and AI was never allowed to publish directly.",
-    result: "Approved features became structured catalogue data backed by a visible human decision and audit trail.",
+    problem: "Important product details were locked inside supplier PDFs and had to be separated before use. Technically, features, physical dimensions, warranty information and repeated page content were mixed within layouts designed for people rather than software.",
+    decision: "I built a system that extracts possible product features and presents them for human approval. Deterministic PDF parsing handles predictable content. When PDF formats vary, a locally run AI model identifies likely product features within less predictable text. Its output is restricted to a defined structure and sent for human review; neither the parser nor the AI can write directly to the live catalogue.",
+    result: "Approved information can be added to the catalogue without blindly trusting automation. Every feature is stored as structured catalogue data with a recorded human decision and audit trail.",
   },
   {
     title: "Making Stripe reliable on Cloudflare Workers",
     titleLines: ["Making", "Stripe reliable", "on Cloudflare Workers"],
     visual: "payments",
-    problem: "Stripe’s default Node transport could leave production checkout waiting indefinitely inside the Cloudflare Worker runtime.",
-    decision: "I moved Stripe to its Fetch transport, added explicit timeouts and idempotency controls, and recalculated pricing on the server.",
-    result: "Checkout failures now surface clearly, duplicate sessions are controlled and order history reflects confirmed payment state.",
+    problem: "Customers could be left waiting at checkout because the connection to Stripe did not always complete correctly. Technically, Stripe’s default Node.js transport was unreliable inside the Cloudflare Worker runtime and could leave requests open indefinitely.",
+    decision: "I changed how the website communicates with Stripe and added safeguards so checkout either completes or returns a clear error. The Stripe SDK now uses Fetch transport with explicit timeouts, idempotency keys prevent duplicate checkout sessions, and prices are recalculated securely on the server.",
+    result: "Customers receive a more dependable checkout and a clear response when something goes wrong. Duplicate sessions are controlled, and order history is updated only when the payment state has been confirmed.",
   },
 ] as const;
 
@@ -159,7 +159,7 @@ const prestigeScreenshots = [
   },
   {
     src: "/projects/prestige-screenshots/product-detail.png",
-    alt: "Prestige product page for a grey granite sink with price, dimensions, features and basket controls",
+    alt: "Prestige product page for a grey granite sink with price, physical dimensions, features and basket controls",
     width: 1440,
     height: 1000,
   },
@@ -481,10 +481,10 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
       <JsonLd data={projectJsonLd} />
       <SmartHeader />
 
-      <section className={styles.hero}>
+      <section className={`${styles.hero} ${project.slug === "prestige-kitchens" ? styles.prestigeHero : ""}`}>
         <Link href="/work" className={styles.back}>← Back to our work</Link>
-        <div className={styles.heroGrid}>
-          <span className={styles.projectType}>{project.type}</span>
+        <div className={`${styles.heroGrid} ${project.slug === "prestige-kitchens" ? styles.prestigeHeroGrid : ""}`}>
+          {project.slug !== "prestige-kitchens" && <span className={styles.projectType}>{project.type}</span>}
           {project.slug === "prestige-kitchens" ? (
             <h1 className={styles.prestigeTitle}>
               <span>Prestige</span>
@@ -493,11 +493,19 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
           ) : (
             <h1>{project.title}</h1>
           )}
-          <p>{project.intro}</p>
+          {project.introParagraphs ? (
+            <div className={styles.prestigeStory}>
+              {project.introParagraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+            </div>
+          ) : (
+            <p>{project.intro}</p>
+          )}
         </div>
-        <ul aria-label="Project areas">
-          {project.tags.map((tag) => <li key={tag}>{tag}</li>)}
-        </ul>
+        {project.slug !== "prestige-kitchens" && (
+          <ul aria-label="Project areas">
+            {project.tags.map((tag) => <li key={tag}>{tag}</li>)}
+          </ul>
+        )}
       </section>
 
       <section className={`${styles.showcase} ${styles[project.theme]}`}>
