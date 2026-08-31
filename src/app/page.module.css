@@ -30,11 +30,13 @@
 .projectVisual::after { content: ""; position: absolute; inset: 0; background: linear-gradient(125deg, rgba(255,255,255,.18), transparent 45%); }
 .projectNumber { position: absolute; z-index: 3; left: 22px; top: 20px; padding: 7px 11px; border-radius: 20px; background: rgba(255,255,255,.8); color: #172017; font-size: 9px; font-weight: 700; }
 .projectBrowser { position: absolute; z-index: 2; width: 77%; height: 65%; top: 18%; left: 12%; overflow: hidden; border: 1px solid rgba(255,255,255,.55); border-radius: 10px; background: #ece9dc; box-shadow: 0 35px 55px rgba(30,24,16,.35); transform: perspective(900px) rotateY(-5deg) rotateX(2deg); transition: transform .5s ease; }
+.projectBrowserImage { height:auto; aspect-ratio:16 / 9; top:24%; }
 .project:hover .projectBrowser { transform: perspective(900px) rotateY(0) rotateX(0) scale(1.025); }
 .projectBar { height: 26px; padding: 0 10px; display: flex; align-items: center; gap: 4px; background: #1c2525; }
 .projectBar i { width: 5px; height: 5px; border-radius: 50%; background: #f17f65; }
 .projectBar i:nth-child(2) { background:#e9c068; }.projectBar i:nth-child(3) { background:#65ce81; }
 .projectScreen { position: relative; height: calc(100% - 26px); overflow: hidden; background: #eef1ed; }
+.projectBrowserImage .projectScreen { height:100%; }
 .projectScreenshot { object-fit: cover; }
 .projectMeta { padding: 25px 1px 40px; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
 .projectMeta span { color: #58665e; font-size: 9px; letter-spacing: .1em; }
@@ -100,6 +102,7 @@
   .projectGrid { grid-template-columns: 1fr; }
   .projectVisual { height: auto; aspect-ratio: 1.06; }
   .projectBrowser { width: 90%; height: auto; aspect-ratio: 1.28; left: 5%; top: 50%; border-radius: 7px; transform: translateY(-50%); box-shadow: 0 22px 38px rgba(30,24,16,.3); }
+  .projectBrowser.projectBrowserImage { aspect-ratio:16 / 9; }
   .project:hover .projectBrowser { transform: translateY(-50%); }
   .projectMeta { grid-template-columns: 1fr; }
   .moreWork { align-items: stretch; flex-direction: column; gap: 20px; }

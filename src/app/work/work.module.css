@@ -43,8 +43,7 @@
 .projectGrid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); column-gap:28px; row-gap:76px; }
 .projectCard { min-width:0; scroll-margin-top:90px; }
 .projectCard a { display:block; }
-.cardMedia { position:relative; aspect-ratio:36 / 25; overflow:hidden; border-radius:8px; background:#18241f; isolation:isolate; }
-.projectCard[id="prestige-kitchens"] .cardMedia { aspect-ratio:16 / 9; }
+.cardMedia { position:relative; aspect-ratio:16 / 9; overflow:hidden; border-radius:8px; background:#18241f; isolation:isolate; }
 .cardMedia::after { content:""; position:absolute; inset:0; z-index:2; background:linear-gradient(180deg,rgba(4,9,7,.05) 52%,rgba(4,9,7,.66)); pointer-events:none; }
 .cardImage { z-index:1; object-fit:contain; object-position:center; transition:transform .65s cubic-bezier(.2,.75,.25,1),filter .3s ease; }
 .projectCard:hover .cardImage { transform:scale(1.025); }

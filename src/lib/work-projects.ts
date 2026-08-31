@@ -43,7 +43,7 @@ export const workProjects: readonly WorkProject[] = [
     summary:
       "A premium, catalogue-led website that helps customers move from inspiration to the right kitchen, bedroom or product without getting lost.",
     href: "/work/prestige-kitchens",
-    image: "/projects/prestige-kitchens-ferndown.webp",
+    image: "/projects/prestige-kitchens-ferndown-hq.webp",
     imageAlt: "Prestige Kitchens website homepage",
     theme: "warm",
     tags: ["Website", "E-commerce", "Product discovery"],

@@ -9,7 +9,7 @@ import { absoluteUrl, breadcrumbList, founderId, studioReference, websiteReferen
 export const metadata: Metadata = {
   title: "Founder | Launchset",
   description:
-    "Meet the founder of Launchset and discover how a different way of thinking shapes practical, time-saving solutions.",
+    "Meet John Helyar, the finance-literate software developer and systems architect behind Launchset.",
   alternates: { canonical: "/founder" },
 };
 
@@ -21,7 +21,7 @@ const founderJsonLd = {
       "@id": absoluteUrl("/founder#webpage"),
       url: absoluteUrl("/founder"),
       name: "Founder | Launchset",
-      description: "Meet John Helyar, the founder of Launchset, and the problem-solving perspective behind the studio.",
+      description: "Meet John Helyar, the founder of Launchset, and learn how he approaches complex business software and systems architecture.",
       isPartOf: websiteReference,
       mainEntity: { "@id": founderId },
       breadcrumb: { "@id": absoluteUrl("/founder#breadcrumb") },
@@ -43,11 +43,15 @@ const founderJsonLd = {
         caption: "John Helyar, founder of Launchset",
       },
       jobTitle: "Founder",
-      description: "Founder of Launchset, applying a dyslexic problem-solving perspective to websites, automation and practical business systems.",
+      description: "Founder of Launchset, Accounting and Finance graduate, and self-taught software developer and systems architect focused on complex business systems.",
       worksFor: studioReference,
       sameAs: ["https://www.linkedin.com/in/johnhelyar1/"],
       knowsAbout: [
         "Problem solving",
+        "Accounting and finance",
+        "ERP architecture",
+        "AI-assisted accounting",
+        "Software systems architecture",
         "Web design and development",
         "Business automation",
         "Internal tools",
@@ -77,36 +81,51 @@ export default function FounderPage() {
 
         <div className={styles.story}>
           <div className={styles.storyBody}>
-            <p className={styles.eyebrow}>A DIFFERENT WAY OF THINKING</p>
-            <h1>Dyslexia taught me to look for a <em>better way.</em></h1>
+            <p className={styles.eyebrow}>FOUNDER / JOHN HELYAR</p>
+            <h1 className={styles.visuallyHidden}>John Helyar, founder of Launchset</h1>
 
             <div className={styles.copy}>
               <p>
-                Dyslexia has meant that succeeding—especially with English—has
-                often taken more effort. It taught me to break problems down,
-                look at them from different angles and keep searching until I
-                find the clearest way through.
+                I&apos;m John Helyar, the founder of Launchset and a self-taught
+                software developer and systems architect. I enjoy difficult
+                problems where software, operations, money and people overlap.
               </p>
               <p>
-                That habit now shapes the way I build for businesses. I notice
-                friction, question processes that take longer than they should
-                and look for the fastest useful solution—not just the most
-                obvious one.
+                That interest has led my current work towards complex ERP
+                architecture and exploring new ways accounting can work with
+                software and AI. Before moving in this direction, I built
+                experience across web development, e-commerce, automation, data
+                processing, cloud infrastructure and wider systems architecture.
+                I enjoy understanding how information moves through a business
+                and designing systems that make operations more efficient,
+                reliable and controlled.
               </p>
               <p>
-                What once made some things harder has become something I bring
-                to every project: persistence, a different perspective and a
-                drive to create systems that save time and make work easier.
+                I&apos;m an Accounting and Finance graduate and highly financially
+                literate. My degree improved how I think about costs, risks,
+                controls and auditability in both software and business
+                operations. It helps me approach software as a critical part of
+                the wider business rather than an isolated product.
+              </p>
+              <p>
+                Connecting with people and businesses in person is an important
+                part of how I like to work. I believe it builds trust,
+                demonstrates responsibility for the work I produce and creates
+                closer business relationships. That direct communication can
+                move projects forward faster and help ensure the work is seen
+                through to the end.
+              </p>
+              <p>
+                Dyslexia has also influenced how I approach my work. It taught
+                me to break complicated problems into understandable parts,
+                examine them from angles others might miss and place a strong
+                focus on optimisation and efficiency.
               </p>
             </div>
-
-            <blockquote>
-              Tools change. The way you see a problem is the value.
-            </blockquote>
           </div>
 
           <div className={styles.storyBottom}>
-            <p>SPOT THE PROBLEM · REMOVE THE FRICTION · RETURN THE TIME</p>
+            <p>UNDERSTAND THE BUSINESS · DESIGN THE SYSTEM · SEE IT THROUGH</p>
             <div>
               <Link href="/work">Our work <span>→</span></Link>
               <a className={styles.primaryLink} href="mailto:launchsetfreelancer@gmail.com">Email <span>↗</span></a>

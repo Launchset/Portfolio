@@ -10,9 +10,9 @@
 .heroGrid .prestigeTitle { font-size:clamp(27px,4vw,54px); transform:translateY(-24px); }
 .prestigeTitle span { display:block; white-space:nowrap; }
 .heroGrid > p { grid-area:description; align-self:center; max-width:420px; margin:0; color:#a2aea7; font-size:15px; line-height:1.7; }
-.prestigeStory { grid-area:description; align-self:center; max-width:700px; display:grid; gap:16px; }
-.prestigeStory p { margin:0; color:#a2aea7; font-size:14px; line-height:1.65; }
-.prestigeStory p:first-child { color:#d5ddd8; font-size:16px; line-height:1.6; }
+.prestigeHeroStory { grid-area:description; align-self:center; max-width:700px; display:grid; gap:16px; }
+.prestigeHeroStory p { margin:0; color:#a2aea7; font-size:14px; line-height:1.65; }
+.prestigeHeroStory p:first-child { color:#d5ddd8; font-size:16px; line-height:1.6; }
 .hero > ul { margin:58px 0 0; padding:18px 0 0; display:flex; flex-wrap:wrap; gap:8px; border-top:1px solid rgba(238,241,235,.18); list-style:none; }
 .hero > ul li { padding:7px 10px; border:1px solid rgba(238,241,235,.2); border-radius:999px; color:#b3beb8; font-size:9px; }
 
@@ -236,7 +236,7 @@
   .heroGrid h1 { font-size:clamp(40px,12vw,64px); }
   .heroGrid .prestigeTitle { font-size:clamp(27px,8.7vw,46px); transform:none; }
   .heroGrid > p { margin-top:14px; }
-  .prestigeStory { margin-top:14px; }
+  .prestigeHeroStory { margin-top:14px; }
   .hero > ul { margin-top:42px; }
   .showcase { min-height:0; padding:38px 22px; }
   .visual { min-height:430px; }

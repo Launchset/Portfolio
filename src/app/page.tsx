@@ -16,8 +16,10 @@ const projects = [
     type: "CONSTRUCTION / E-COMMERCE",
     title: "Prestige Kitchens",
     result: "An e-commerce site for a growing interior business.",
-    image: "/projects/prestige-kitchens.webp",
-    imagePosition: "center top",
+    image: "/projects/prestige-kitchens-ferndown-hq.webp",
+    imagePosition: "center center",
+    imageFit: "cover",
+    showBrowserBar: false,
     className: styles.projectWarm,
   },
   {
@@ -27,9 +29,11 @@ const projects = [
     result: "A clearer trustworthy built site for a more reassuring journey for international patients.",
     image: "/projects/vietmed-travel.webp",
     imagePosition: "center top",
+    imageFit: "cover",
+    showBrowserBar: true,
     className: styles.projectViolet,
   },
-];
+] as const;
 
 const homeJsonLd = {
   "@context": "https://schema.org",
@@ -173,16 +177,17 @@ export default function Home() {
             <article className={styles.project} key={project.title}>
               <div className={`${styles.projectVisual} ${project.className}`}>
                 <span className={styles.projectNumber}>{project.number}</span>
-                <div className={styles.projectBrowser}>
-                  <div className={styles.projectBar}><i /><i /><i /></div>
+                <div className={`${styles.projectBrowser} ${!project.showBrowserBar ? styles.projectBrowserImage : ""}`}>
+                  {project.showBrowserBar && <div className={styles.projectBar}><i /><i /><i /></div>}
                   <div className={styles.projectScreen}>
                     <Image
                       className={styles.projectScreenshot}
                       src={project.image}
                       alt={`${project.title} website homepage`}
                       fill
+                      quality={project.number === "01" ? 100 : 75}
                       sizes="(max-width: 760px) 72vw, 38vw"
-                      style={{ objectPosition: project.imagePosition }}
+                      style={{ objectFit: project.imageFit, objectPosition: project.imagePosition }}
                     />
                   </div>
                 </div>

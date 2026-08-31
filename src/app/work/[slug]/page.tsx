@@ -26,7 +26,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 function ProjectVisual({ slug, image, imageAlt }: { slug: string; image?: string; imageAlt?: string }) {
   if (image) {
-    return <Image src={image} alt={imageAlt ?? ""} fill priority sizes="100vw" />;
+    return <Image src={image} alt={imageAlt ?? ""} fill priority quality={slug === "prestige-kitchens" ? 100 : 75} sizes="100vw" />;
   }
 
   if (slug === "vietnamese-voice-translator") {
@@ -494,7 +494,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
             <h1>{project.title}</h1>
           )}
           {project.introParagraphs ? (
-            <div className={styles.prestigeStory}>
+            <div className={styles.prestigeHeroStory}>
               {project.introParagraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
             </div>
           ) : (

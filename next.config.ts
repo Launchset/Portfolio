@@ -26,6 +26,7 @@ const nextConfig: NextConfig = {
   compress: true,
   images: {
     minimumCacheTTL: 60 * 60 * 24 * 30,
+    qualities: [75, 100],
   },
   async headers() {
     return [
