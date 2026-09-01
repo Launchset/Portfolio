@@ -12,7 +12,13 @@ type PaymentActionsProps = {
   cancelling?: boolean;
 };
 
-export default function PaymentActions({ clientId, clientName, hasSubscription, frozen, cancelling = false }: PaymentActionsProps) {
+export default function PaymentActions({
+  clientId,
+  clientName,
+  hasSubscription,
+  frozen,
+  cancelling = false,
+}: PaymentActionsProps) {
   const router = useRouter();
   const [busy, setBusy] = useState(false);
 
@@ -30,22 +36,39 @@ export default function PaymentActions({ clientId, clientName, hasSubscription, 
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ action }),
       });
-      const payload = await response.json() as { error?: string };
+      const payload = (await response.json()) as { error?: string };
       if (!response.ok) {
         window.alert(payload.error ?? "Stripe billing could not be updated.");
         return;
       }
       router.refresh();
     } catch {
-      window.alert("Stripe billing could not be updated. Check your connection and try again.");
+      window.alert(
+        "Stripe billing could not be updated. Check your connection and try again.",
+      );
     } finally {
       setBusy(false);
     }
   };
 
-  if (!hasSubscription) return <span className={styles.paymentActionUnavailable}>Not available</span>;
-  if (cancelling) return <span className={styles.paymentActionUnavailable}>Cancellation scheduled</span>;
-  return <button className={frozen ? styles.unfreezeButton : styles.freezeButton} disabled={busy} onClick={changeCollection} type="button">
-    {busy ? "Updating…" : frozen ? "Unfreeze" : "Freeze"}
-  </button>;
+  if (!hasSubscription)
+    return (
+      <span className={styles.paymentActionUnavailable}>Not available</span>
+    );
+  if (cancelling)
+    return (
+      <span className={styles.paymentActionUnavailable}>
+        Cancellation scheduled
+      </span>
+    );
+  return (
+    <button
+      className={frozen ? styles.unfreezeButton : styles.freezeButton}
+      disabled={busy}
+      onClick={changeCollection}
+      type="button"
+    >
+      {busy ? "Updating…" : frozen ? "Unfreeze" : "Freeze"}
+    </button>
+  );
 }

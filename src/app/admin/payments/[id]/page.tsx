@@ -1,19 +1,170 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { formatMoney, getPortalEnvironment } from "@/src/features/portal/access";
+import {
+  formatMoney,
+  getPortalEnvironment,
+} from "@/src/features/portal/access";
 import { billingStatusLabel } from "@/src/platform/stripe/stripe";
 import styles from "../../admin.module.css";
 import PaymentActions from "../payment-actions";
 
-type PaymentDetail = { id: string; name: string; email: string; monthly_fee_cents: number; currency: string; stripe_customer_id: string | null; stripe_subscription_id: string | null; stripe_subscription_status: string | null; stripe_current_period_end: number | null; stripe_cancel_at_period_end: number; stripe_collection_paused: number };
-type InvoiceRow = { id: string; number: string | null; status: string; amount_paid: number; amount_due: number; currency: string; hosted_invoice_url: string | null; invoice_pdf: string | null; created_at: number };
+type PaymentDetail = {
+  id: string;
+  name: string;
+  email: string;
+  monthly_fee_cents: number;
+  currency: string;
+  stripe_customer_id: string | null;
+  stripe_subscription_id: string | null;
+  stripe_subscription_status: string | null;
+  stripe_current_period_end: number | null;
+  stripe_cancel_at_period_end: number;
+  stripe_collection_paused: number;
+};
+type InvoiceRow = {
+  id: string;
+  number: string | null;
+  status: string;
+  amount_paid: number;
+  amount_due: number;
+  currency: string;
+  hosted_invoice_url: string | null;
+  invoice_pdf: string | null;
+  created_at: number;
+};
 
-export default async function PaymentPage({ params }: { params: Promise<{ id: string }> }) {
+export default async function PaymentPage({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
   const { id } = await params;
   const { APP_DB } = await getPortalEnvironment();
-  const client = await APP_DB.prepare("SELECT id, name, email, monthly_fee_cents, currency, stripe_customer_id, stripe_subscription_id, stripe_subscription_status, stripe_current_period_end, stripe_cancel_at_period_end, stripe_collection_paused FROM clients WHERE id = ? AND archived_at IS NULL").bind(id).first<PaymentDetail>();
+  const client = await APP_DB.prepare(
+    "SELECT id, name, email, monthly_fee_cents, currency, stripe_customer_id, stripe_subscription_id, stripe_subscription_status, stripe_current_period_end, stripe_cancel_at_period_end, stripe_collection_paused FROM clients WHERE id = ? AND archived_at IS NULL",
+  )
+    .bind(id)
+    .first<PaymentDetail>();
   if (!client) notFound();
-  const invoices = (await APP_DB.prepare("SELECT id, number, status, amount_paid, amount_due, currency, hosted_invoice_url, invoice_pdf, created_at FROM billing_invoices WHERE client_id = ? ORDER BY created_at DESC LIMIT 24").bind(id).all<InvoiceRow>()).results ?? [];
-  const billDate = client.stripe_current_period_end ? new Date(client.stripe_current_period_end).toLocaleDateString("en-GB") : "Not scheduled";
-  return <><Link className={styles.backLink} href="/admin/payments">← Payments</Link><section className={styles.detailHeader}><span>PAYMENT</span><h1>{client.name}</h1><p>{client.email}</p></section><div className={styles.detailGrid}><section className={styles.detailPanel}><h2>Maintenance</h2><dl><div><dt>Price</dt><dd>{formatMoney(client.monthly_fee_cents, client.currency)} / month</dd></div><div><dt>Status</dt><dd>{billingStatusLabel(client.stripe_subscription_status, Boolean(client.stripe_cancel_at_period_end), Boolean(client.stripe_collection_paused))}</dd></div><div><dt>{client.stripe_cancel_at_period_end ? "Ends" : client.stripe_collection_paused ? "Collection" : "Next bill"}</dt><dd>{client.stripe_collection_paused ? "Frozen" : billDate}</dd></div></dl><div className={styles.paymentDetailAction}><PaymentActions cancelling={Boolean(client.stripe_cancel_at_period_end)} clientId={client.id} clientName={client.name} frozen={Boolean(client.stripe_collection_paused)} hasSubscription={Boolean(client.stripe_subscription_id)} /></div></section><section className={styles.detailPanel}><h2>Stripe</h2><p>{client.stripe_subscription_id ? "The subscription is connected and updated by Stripe webhooks." : "The client must sign the contract and complete Stripe Checkout."}</p><dl><div><dt>Customer</dt><dd>{client.stripe_customer_id ?? "Not created"}</dd></div><div><dt>Subscription</dt><dd>{client.stripe_subscription_id ?? "Not created"}</dd></div></dl><Link href={`/admin/clients/${client.id}`}>View client</Link></section><section className={styles.detailPanel}><h2>Invoices</h2>{invoices.length === 0 ? <p>No invoices yet.</p> : <dl>{invoices.map((invoice) => <div key={invoice.id}><dt>{invoice.number ?? new Date(invoice.created_at).toLocaleDateString("en-GB")}</dt><dd>{formatMoney(invoice.amount_paid || invoice.amount_due, invoice.currency)} · {invoice.status} {(invoice.hosted_invoice_url || invoice.invoice_pdf) && <a href={invoice.hosted_invoice_url ?? invoice.invoice_pdf ?? "#"} rel="noreferrer" target="_blank">Open</a>}</dd></div>)}</dl>}</section></div></>;
+  const invoices =
+    (
+      await APP_DB.prepare(
+        "SELECT id, number, status, amount_paid, amount_due, currency, hosted_invoice_url, invoice_pdf, created_at FROM billing_invoices WHERE client_id = ? ORDER BY created_at DESC LIMIT 24",
+      )
+        .bind(id)
+        .all<InvoiceRow>()
+    ).results ?? [];
+  const billDate = client.stripe_current_period_end
+    ? new Date(client.stripe_current_period_end).toLocaleDateString("en-GB")
+    : "Not scheduled";
+  return (
+    <>
+      <Link className={styles.backLink} href="/admin/payments">
+        ← Payments
+      </Link>
+      <section className={styles.detailHeader}>
+        <span>PAYMENT</span>
+        <h1>{client.name}</h1>
+        <p>{client.email}</p>
+      </section>
+      <div className={styles.detailGrid}>
+        <section className={styles.detailPanel}>
+          <h2>Maintenance</h2>
+          <dl>
+            <div>
+              <dt>Price</dt>
+              <dd>
+                {formatMoney(client.monthly_fee_cents, client.currency)} / month
+              </dd>
+            </div>
+            <div>
+              <dt>Status</dt>
+              <dd>
+                {billingStatusLabel(
+                  client.stripe_subscription_status,
+                  Boolean(client.stripe_cancel_at_period_end),
+                  Boolean(client.stripe_collection_paused),
+                )}
+              </dd>
+            </div>
+            <div>
+              <dt>
+                {client.stripe_cancel_at_period_end
+                  ? "Ends"
+                  : client.stripe_collection_paused
+                    ? "Collection"
+                    : "Next bill"}
+              </dt>
+              <dd>{client.stripe_collection_paused ? "Frozen" : billDate}</dd>
+            </div>
+          </dl>
+          <div className={styles.paymentDetailAction}>
+            <PaymentActions
+              cancelling={Boolean(client.stripe_cancel_at_period_end)}
+              clientId={client.id}
+              clientName={client.name}
+              frozen={Boolean(client.stripe_collection_paused)}
+              hasSubscription={Boolean(client.stripe_subscription_id)}
+            />
+          </div>
+        </section>
+        <section className={styles.detailPanel}>
+          <h2>Stripe</h2>
+          <p>
+            {client.stripe_subscription_id
+              ? "The subscription is connected and updated by Stripe webhooks."
+              : "The client must sign the contract and complete Stripe Checkout."}
+          </p>
+          <dl>
+            <div>
+              <dt>Customer</dt>
+              <dd>{client.stripe_customer_id ?? "Not created"}</dd>
+            </div>
+            <div>
+              <dt>Subscription</dt>
+              <dd>{client.stripe_subscription_id ?? "Not created"}</dd>
+            </div>
+          </dl>
+          <Link href={`/admin/clients/${client.id}`}>View client</Link>
+        </section>
+        <section className={styles.detailPanel}>
+          <h2>Invoices</h2>
+          {invoices.length === 0 ? (
+            <p>No invoices yet.</p>
+          ) : (
+            <dl>
+              {invoices.map((invoice) => (
+                <div key={invoice.id}>
+                  <dt>
+                    {invoice.number ??
+                      new Date(invoice.created_at).toLocaleDateString("en-GB")}
+                  </dt>
+                  <dd>
+                    {formatMoney(
+                      invoice.amount_paid || invoice.amount_due,
+                      invoice.currency,
+                    )}{" "}
+                    · {invoice.status}{" "}
+                    {(invoice.hosted_invoice_url || invoice.invoice_pdf) && (
+                      <a
+                        href={
+                          invoice.hosted_invoice_url ??
+                          invoice.invoice_pdf ??
+                          "#"
+                        }
+                        rel="noreferrer"
+                        target="_blank"
+                      >
+                        Open
+                      </a>
+                    )}
+                  </dd>
+                </div>
+              ))}
+            </dl>
+          )}
+        </section>
+      </div>
+    </>
+  );
 }

@@ -13,8 +13,24 @@ const items = [
 
 export default function AdminNavigation() {
   const pathname = usePathname();
-  return <nav aria-label="Admin navigation">{items.map((item) => {
-    const active = item.href === "/admin" ? pathname === item.href : pathname.startsWith(item.href);
-    return <Link className={active ? styles.active : undefined} href={item.href} key={item.href}><span>{item.number}</span>{item.label}</Link>;
-  })}</nav>;
+  return (
+    <nav aria-label="Admin navigation">
+      {items.map((item) => {
+        const active =
+          item.href === "/admin"
+            ? pathname === item.href
+            : pathname.startsWith(item.href);
+        return (
+          <Link
+            className={active ? styles.active : undefined}
+            href={item.href}
+            key={item.href}
+          >
+            <span>{item.number}</span>
+            {item.label}
+          </Link>
+        );
+      })}
+    </nav>
+  );
 }

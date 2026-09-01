@@ -31,20 +31,80 @@ export default async function AdminPage() {
   ).all<OverviewRow>();
   const rows = result.results ?? [];
 
-  return <>
-    <section className={styles.pageHeader}>
-      <div><span>ADMIN</span><h1>Overview</h1><p>Open a client, contract or payment record directly.</p></div>
-    </section>
-    <section className={styles.clients}>
-      <div className={styles.sectionHeading}><h2>Overview</h2><span>{rows.length} clients</span></div>
-      {rows.length === 0 ? <div className={styles.empty}><h3>No clients yet</h3><p>Add your first client to begin.</p></div> :
-        <div className={styles.tableWrap}><table><thead><tr><th>Client</th><th>Contract</th><th>Payment</th></tr></thead><tbody>
-          {rows.map((row) => <tr key={row.id}>
-            <td><Link className={styles.recordLink} href={`/admin/clients/${row.id}`}><strong>{row.name}</strong><span>{row.email}</span></Link></td>
-            <td>{row.contract_id ? <Link className={styles.tableValueLink} href={`/admin/contracts/${row.contract_id}`}>{row.contract_status === "signed" ? "Signed" : "Awaiting signature"}</Link> : <span className={styles.unavailable}>No contract</span>}</td>
-            <td><Link className={styles.tableValueLink} href={`/admin/payments/${row.id}`}>{billingStatusLabel(row.stripe_subscription_status, Boolean(row.stripe_cancel_at_period_end), Boolean(row.stripe_collection_paused))}</Link></td>
-          </tr>)}
-        </tbody></table></div>}
-    </section>
-  </>;
+  return (
+    <>
+      <section className={styles.pageHeader}>
+        <div>
+          <span>ADMIN</span>
+          <h1>Overview</h1>
+          <p>Open a client, contract or payment record directly.</p>
+        </div>
+      </section>
+      <section className={styles.clients}>
+        <div className={styles.sectionHeading}>
+          <h2>Overview</h2>
+          <span>{rows.length} clients</span>
+        </div>
+        {rows.length === 0 ? (
+          <div className={styles.empty}>
+            <h3>No clients yet</h3>
+            <p>Add your first client to begin.</p>
+          </div>
+        ) : (
+          <div className={styles.tableWrap}>
+            <table>
+              <thead>
+                <tr>
+                  <th>Client</th>
+                  <th>Contract</th>
+                  <th>Payment</th>
+                </tr>
+              </thead>
+              <tbody>
+                {rows.map((row) => (
+                  <tr key={row.id}>
+                    <td>
+                      <Link
+                        className={styles.recordLink}
+                        href={`/admin/clients/${row.id}`}
+                      >
+                        <strong>{row.name}</strong>
+                        <span>{row.email}</span>
+                      </Link>
+                    </td>
+                    <td>
+                      {row.contract_id ? (
+                        <Link
+                          className={styles.tableValueLink}
+                          href={`/admin/contracts/${row.contract_id}`}
+                        >
+                          {row.contract_status === "signed"
+                            ? "Signed"
+                            : "Awaiting signature"}
+                        </Link>
+                      ) : (
+                        <span className={styles.unavailable}>No contract</span>
+                      )}
+                    </td>
+                    <td>
+                      <Link
+                        className={styles.tableValueLink}
+                        href={`/admin/payments/${row.id}`}
+                      >
+                        {billingStatusLabel(
+                          row.stripe_subscription_status,
+                          Boolean(row.stripe_cancel_at_period_end),
+                          Boolean(row.stripe_collection_paused),
+                        )}
+                      </Link>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </section>
+    </>
+  );
 }
