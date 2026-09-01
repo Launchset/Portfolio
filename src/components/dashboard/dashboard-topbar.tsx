@@ -11,7 +11,11 @@ type DashboardTopbarProps = {
   name?: string | null;
 };
 
-export default function DashboardTopbar({ email, image, name }: DashboardTopbarProps) {
+export default function DashboardTopbar({
+  email,
+  image,
+  name,
+}: DashboardTopbarProps) {
   const [open, setOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   const displayName = name?.trim() || email.split("@")[0];
@@ -32,19 +36,47 @@ export default function DashboardTopbar({ email, image, name }: DashboardTopbarP
     };
   }, []);
 
-  const signOut = () => authClient.signOut({
-    fetchOptions: { onSuccess: () => { window.location.href = "/"; } },
-  });
+  const signOut = () =>
+    authClient.signOut({
+      fetchOptions: {
+        onSuccess: () => {
+          window.location.href = "/";
+        },
+      },
+    });
 
   return (
     <header className={styles.bar}>
-      <Link className={styles.brand} href="/" aria-label="Launchset home">LAUNCHSET<span>.</span></Link>
+      <Link className={styles.brand} href="/" aria-label="Launchset home">
+        LAUNCHSET<span>.</span>
+      </Link>
       <div className={styles.profile} ref={menuRef}>
-        <button aria-expanded={open} aria-haspopup="menu" className={styles.profileButton} onClick={() => setOpen((value) => !value)} type="button">
+        <button
+          aria-expanded={open}
+          aria-haspopup="menu"
+          className={styles.profileButton}
+          onClick={() => setOpen((value) => !value)}
+          type="button"
+        >
           <span className={styles.name}>{displayName}</span>
-          <span className={styles.avatar} style={image ? { backgroundImage: `url(${JSON.stringify(image)})` } : undefined}>{!image && initial}</span>
+          <span
+            className={styles.avatar}
+            style={
+              image
+                ? { backgroundImage: `url(${JSON.stringify(image)})` }
+                : undefined
+            }
+          >
+            {!image && initial}
+          </span>
         </button>
-        {open && <div className={styles.menu} role="menu"><button onClick={signOut} role="menuitem" type="button">Log out</button></div>}
+        {open && (
+          <div className={styles.menu} role="menu">
+            <button onClick={signOut} role="menuitem" type="button">
+              Log out
+            </button>
+          </div>
+        )}
       </div>
     </header>
   );

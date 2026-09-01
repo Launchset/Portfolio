@@ -17,5 +17,7 @@ export function billingStatusLabel(
     canceled: "Cancelled",
   };
 
-  return status ? labels[status] ?? status.replaceAll("_", " ") : "Setup required";
+  return status
+    ? (labels[status] ?? status.replaceAll("_", " "))
+    : "Setup required";
 }

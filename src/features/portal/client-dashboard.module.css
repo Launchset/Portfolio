@@ -1,0 +1,422 @@
+.dashboardPage {
+  min-height: 100vh;
+  background: #080d12;
+  color: #eef2f1;
+}
+.clientShell {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 260px minmax(0, 1fr);
+  grid-template-rows: 68px minmax(calc(100vh - 68px), auto);
+  align-items: start;
+}
+.clientShell > header {
+  grid-column: 1/-1;
+  grid-row: 1;
+}
+.clientWorkspace {
+  grid-column: 2;
+  grid-row: 2;
+  min-height: calc(100vh - 68px);
+  padding: 0;
+  background: linear-gradient(
+    145deg,
+    rgba(16, 24, 30, 0.98),
+    rgba(8, 13, 18, 0.96)
+  );
+}
+.clientContent {
+  padding: 52px clamp(22px, 4vw, 64px) 72px;
+}
+.dashboardHero {
+  margin-bottom: 38px;
+}
+.dashboardHero > span,
+.cardHeading span,
+.billingCard > span {
+  color: #25d38a;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+}
+.dashboardHero h1 {
+  max-width: 760px;
+  margin: 15px 0 13px;
+  font-size: clamp(42px, 6vw, 74px);
+  line-height: 0.95;
+  letter-spacing: -0.055em;
+}
+.dashboardHero p {
+  max-width: 650px;
+  color: #94a19c;
+}
+.dashboardGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(260px, 0.75fr);
+  gap: 16px;
+}
+.onboarding,
+.billingCard {
+  padding: 28px;
+  border: 1px solid rgba(224, 255, 244, 0.12);
+  border-radius: 2px;
+  background: #0d151a;
+}
+.cardHeading {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+}
+.cardHeading h2 {
+  margin: 8px 0 0;
+}
+.cardHeading > strong {
+  padding: 8px 10px;
+  border: 1px solid rgba(37, 211, 138, 0.32);
+  border-radius: 2px;
+  background: rgba(37, 211, 138, 0.08);
+  color: #25d38a;
+  font-size: 11px;
+}
+.onboarding ol {
+  list-style: none;
+  padding: 0;
+  margin: 28px 0 0;
+}
+.onboarding li {
+  display: grid;
+  grid-template-columns: 40px 1fr auto;
+  align-items: center;
+  gap: 14px;
+  padding: 20px 0;
+  border-top: 1px solid rgba(224, 255, 244, 0.09);
+}
+.onboarding li > i {
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(224, 255, 244, 0.13);
+  border-radius: 2px;
+  background: #111b20;
+  color: #8d9b95;
+  font-style: normal;
+  font-weight: 800;
+}
+.onboarding li > div {
+  display: grid;
+  gap: 4px;
+}
+.onboarding li span {
+  color: #82908a;
+  font-size: 12px;
+}
+.onboarding li a,
+.onboarding li button,
+.onboarding li form button {
+  border: 1px solid #25d38a;
+  border-radius: 2px;
+  padding: 10px 13px;
+  background: #25d38a;
+  color: #06110c;
+  text-decoration: none;
+  font: inherit;
+  font-size: 11px;
+  font-weight: 800;
+}
+.onboarding li button:disabled,
+.onboarding li form button:disabled {
+  border-color: rgba(224, 255, 244, 0.1);
+  background: #151f24;
+  color: #68756f;
+}
+.onboarding .stepDone > i {
+  border-color: #25d38a;
+  background: rgba(37, 211, 138, 0.1);
+  color: #25d38a;
+}
+.onboarding .stepCurrent > i {
+  border-color: #25d38a;
+  color: #25d38a;
+}
+.onboarding .stepLocked {
+  opacity: 0.66;
+}
+.completeLabel {
+  color: #25d38a !important;
+  font-size: 11px !important;
+  font-weight: 800;
+}
+.billingCard h2 {
+  margin: 20px 0 30px;
+  font-size: 40px;
+  letter-spacing: -0.04em;
+}
+.billingCard h2 small {
+  color: #73817a;
+  font-size: 13px;
+  font-weight: 500;
+}
+.billingCard dl {
+  margin: 0;
+}
+.billingCard dl div {
+  display: flex;
+  justify-content: space-between;
+  padding: 14px 0;
+  border-top: 1px solid rgba(224, 255, 244, 0.09);
+}
+.billingCard dt {
+  color: #75837c;
+}
+.billingCard dd {
+  margin: 0;
+  font-weight: 700;
+  text-align: right;
+}
+.billingAction,
+.onboarding li form {
+  margin: 0;
+}
+.billingAction button {
+  width: 100%;
+  margin-top: 25px;
+  padding: 12px;
+  border: 1px solid rgba(224, 255, 244, 0.1);
+  border-radius: 2px;
+  background: #151f24;
+  color: #eef2f1;
+  font-weight: 750;
+  cursor: pointer;
+}
+.billingAction button:disabled {
+  color: #68756f;
+  cursor: default;
+}
+.clientNav {
+  position: sticky;
+  grid-column: 1;
+  grid-row: 2;
+  top: 68px;
+  height: calc(100vh - 68px);
+  padding: 28px 22px;
+  border-right: 1px solid rgba(224, 255, 244, 0.1);
+  background: #0c1217;
+  display: flex;
+  flex-direction: column;
+}
+.clientNavLabel {
+  margin-bottom: 12px;
+  color: #6f7c76;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+.clientNav nav {
+  display: grid;
+}
+.clientNav nav a {
+  display: grid;
+  grid-template-columns: 28px 1fr;
+  align-items: center;
+  min-height: 50px;
+  border-top: 1px solid rgba(224, 255, 244, 0.09);
+  color: #91a09a;
+  font-size: 13px;
+}
+.clientNav nav a span {
+  color: #57645e;
+  font-size: 9px;
+}
+.clientNav nav .clientActive {
+  border-left: 2px solid #25d38a;
+  padding-left: 12px;
+  color: #eef2f1;
+  background: linear-gradient(90deg, rgba(37, 211, 138, 0.09), transparent);
+}
+.billingNotice {
+  margin-top: 18px !important;
+  padding: 12px 14px;
+  border-left: 2px solid #25d38a;
+  background: rgba(37, 211, 138, 0.08);
+  color: #cce1d8 !important;
+}
+.invoiceSection {
+  margin-top: 30px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(224, 255, 244, 0.09);
+}
+.invoiceSection h3 {
+  margin: 0 0 14px;
+}
+.invoiceSection > p {
+  color: #75837c;
+}
+.invoiceSection ul {
+  display: grid;
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.invoiceSection li {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  align-items: center;
+  gap: 12px;
+  padding: 13px 0;
+  border-top: 1px solid rgba(224, 255, 244, 0.08);
+  font-size: 12px;
+}
+.invoiceSection li div {
+  display: grid;
+  gap: 3px;
+}
+.invoiceSection li div span {
+  color: #75837c;
+}
+.invoiceSection li > a {
+  color: #25d38a;
+  font-weight: 750;
+  text-decoration: none;
+}
+.completedOverview {
+  padding: 28px 30px;
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 32px;
+  border: 1px solid rgba(224, 255, 244, 0.12);
+  border-radius: 2px;
+  background: #0d151a;
+}
+.completedOverview > div {
+  max-width: 680px;
+}
+.completedOverview > div > span {
+  color: #25d38a;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+}
+.completedOverview h1 {
+  margin: 10px 0 9px;
+  font-size: clamp(30px, 4vw, 45px);
+  line-height: 1;
+  letter-spacing: -0.045em;
+}
+.completedOverview > div > p {
+  margin: 0;
+  color: #94a19c;
+  font-size: 13px;
+  line-height: 1.55;
+}
+.completedOverview nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.completedOverview nav a {
+  padding: 11px 14px;
+  border: 1px solid rgba(224, 255, 244, 0.14);
+  border-radius: 2px;
+  background: #151f24;
+  color: #eef2f1;
+  font-size: 11px;
+  font-weight: 750;
+  white-space: nowrap;
+}
+.completedOverview nav a:first-child {
+  border-color: #25d38a;
+  background: #25d38a;
+  color: #06110c;
+}
+@media (max-width: 900px) {
+  .dashboardPage {
+    padding: 0;
+  }
+  .clientShell {
+    grid-template-columns: 1fr;
+    grid-template-rows: 60px auto auto;
+    gap: 0;
+  }
+  .clientShell > header {
+    grid-column: 1;
+    grid-row: 1;
+  }
+  .clientNav {
+    position: relative;
+    grid-column: 1;
+    grid-row: 2;
+    top: 0;
+    order: -1;
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    padding: 18px 20px;
+  }
+  .clientNav nav {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .clientNav nav a {
+    display: flex;
+    gap: 8px;
+    padding: 12px 8px;
+  }
+  .clientNav nav .clientActive {
+    padding-left: 8px;
+  }
+  .clientWorkspace {
+    grid-column: 1;
+    grid-row: 3;
+    min-height: 0;
+    border-left: 0;
+    border-right: 0;
+  }
+  .dashboardGrid {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 600px) {
+  .clientNav nav a span {
+    display: none;
+  }
+  .clientContent {
+    padding-top: 38px;
+  }
+  .onboarding,
+  .billingCard {
+    padding: 20px;
+  }
+  .completedOverview {
+    padding: 22px 20px;
+    align-items: start;
+    flex-direction: column;
+  }
+  .completedOverview nav {
+    width: 100%;
+  }
+  .completedOverview nav a {
+    flex: 1;
+    text-align: center;
+  }
+  .onboarding li {
+    grid-template-columns: 36px 1fr;
+  }
+  .onboarding li > a,
+  .onboarding li > button,
+  .onboarding li > form,
+  .onboarding li > .completeLabel {
+    grid-column: 2;
+  }
+  .dashboardHero h1 {
+    font-size: 50px;
+  }
+  .invoiceSection li {
+    grid-template-columns: 1fr auto;
+  }
+  .invoiceSection li > a {
+    grid-column: 1/-1;
+  }
+}

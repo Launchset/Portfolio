@@ -49,20 +49,31 @@ export async function getClientAccess(email: string) {
   const { APP_DB } = await getPortalEnvironment();
   const client = await APP_DB.prepare(
     "SELECT id, status FROM clients WHERE email = ? AND archived_at IS NULL",
-  ).bind(normalizeEmail(email)).first<PortalClientAccess>();
+  )
+    .bind(normalizeEmail(email))
+    .first<PortalClientAccess>();
 
   return client && clientStatusAllowsAccess(client.status) ? client : null;
 }
 
 export async function requirePageClient() {
+  return (await requirePageClientContext()).user;
+}
+
+export async function requirePageClientContext() {
   const user = await getPageUser();
-  if (!user.emailVerified || !await getClientAccess(user.email)) redirect("/access-required");
-  return user;
+  const access = user.emailVerified ? await getClientAccess(user.email) : null;
+  if (!access) redirect("/access-required");
+  return { access, user };
 }
 
 export async function requirePageAdmin() {
   const user = await getPageUser();
-  if (!user.emailVerified || !isLaunchsetAdmin(user.email, await getAdminEmail())) notFound();
+  if (
+    !user.emailVerified ||
+    !isLaunchsetAdmin(user.email, await getAdminEmail())
+  )
+    notFound();
   return user;
 }
 
@@ -73,5 +84,7 @@ export async function getRequestUser(request: Request) {
 }
 
 export async function requestUserIsAdmin(user: PortalUser) {
-  return user.emailVerified && isLaunchsetAdmin(user.email, await getAdminEmail());
+  return (
+    user.emailVerified && isLaunchsetAdmin(user.email, await getAdminEmail())
+  );
 }

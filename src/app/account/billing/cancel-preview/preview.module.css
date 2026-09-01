@@ -1,0 +1,254 @@
+.page {
+  min-height: 100vh;
+  background: #080d12;
+}
+.previewControls {
+  position: fixed;
+  z-index: 20;
+  right: 18px;
+  bottom: 18px;
+  width: min(470px, calc(100vw - 36px));
+  padding: 11px 13px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  border: 1px solid rgba(224, 255, 244, 0.18);
+  border-radius: 4px;
+  background: rgba(13, 21, 26, 0.96);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.35);
+  color: #eef2f1;
+  backdrop-filter: blur(14px);
+}
+.previewControls > div {
+  display: grid;
+  gap: 2px;
+}
+.previewControls strong {
+  color: #25d38a;
+  font-size: 9px;
+  letter-spacing: 0.14em;
+}
+.previewControls > div span {
+  color: #8f9d97;
+  font-size: 10px;
+}
+.previewControls nav {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-left: auto;
+}
+.previewControls nav span {
+  color: #65736d;
+  font-size: 10px;
+}
+.previewControls nav span[data-active="true"] {
+  color: #eef2f1;
+}
+.previewControls nav i {
+  color: #35423d;
+  font-size: 10px;
+  font-style: normal;
+}
+.previewControls button {
+  padding: 7px 9px;
+  border: 1px solid rgba(224, 255, 244, 0.14);
+  border-radius: 2px;
+  background: #151f24;
+  color: #c7d0cc;
+  font-size: 10px;
+  cursor: pointer;
+}
+.stripeStage {
+  min-height: 100vh;
+  padding: 45px 18px 100px;
+  display: grid;
+  place-items: start center;
+  background: #f5f6f8;
+  color: #1f2430;
+}
+.stripePage {
+  width: min(560px, 100%);
+  padding: 37px 40px 30px;
+  border: 1px solid #e1e3e7;
+  border-radius: 9px;
+  background: #fff;
+  box-shadow: 0 16px 45px rgba(30, 38, 55, 0.1);
+}
+.stripeHeader {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 23px;
+}
+.stripeLaunchset {
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border-radius: 7px;
+  background: #142019;
+  color: #25d38a;
+  font-weight: 900;
+}
+.stripeHeader > strong {
+  font-size: 15px;
+}
+.stripeHeader > span {
+  margin-left: auto;
+  padding: 5px 7px;
+  border-radius: 4px;
+  background: #fff2c6;
+  color: #755b00;
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+.stripeDisclosure {
+  margin: 0 0 28px;
+  padding: 9px 11px;
+  border-radius: 5px;
+  background: #fff7dc;
+  color: #755b00;
+  font-size: 11px;
+  line-height: 1.4;
+}
+.stripeBack {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #616875;
+  font-size: 12px;
+  cursor: pointer;
+}
+.stripePage h1 {
+  margin: 25px 0 10px;
+  font-size: 30px;
+  letter-spacing: -0.035em;
+}
+.stripeIntro {
+  margin: 0;
+  color: #68707d;
+  font-size: 14px;
+  line-height: 1.55;
+}
+.planCard {
+  margin-top: 27px;
+  padding: 18px;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  border: 1px solid #dee1e6;
+  border-radius: 7px;
+}
+.planCard > div {
+  display: grid;
+  gap: 5px;
+}
+.planCard span {
+  color: #747b87;
+  font-size: 12px;
+}
+.planCard small {
+  color: #8a909a;
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+}
+.planCard > div:last-child {
+  text-align: right;
+}
+.reasons {
+  margin: 26px 0 0;
+  padding: 0;
+  border: 0;
+}
+.reasons legend {
+  margin-bottom: 13px;
+  font-size: 13px;
+  font-weight: 750;
+}
+.reasons label {
+  padding: 11px 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-top: 1px solid #eceef1;
+  color: #4b5260;
+  font-size: 13px;
+  cursor: pointer;
+}
+.reasons input {
+  accent-color: #635bff;
+}
+.stripeSummary {
+  margin: 24px 0 18px;
+  padding: 16px;
+  border-radius: 6px;
+  background: #f6f7f9;
+}
+.stripeSummary strong {
+  font-size: 12px;
+}
+.stripeSummary p {
+  margin: 7px 0 0;
+  color: #68707d;
+  font-size: 12px;
+  line-height: 1.55;
+}
+.confirmCancel,
+.keepPlan {
+  width: 100%;
+  padding: 12px;
+  border-radius: 6px;
+  font-weight: 750;
+  cursor: pointer;
+}
+.confirmCancel {
+  border: 1px solid #d63d54;
+  background: #d63d54;
+  color: #fff;
+}
+.confirmCancel:disabled {
+  border-color: #d7d9dd;
+  background: #d7d9dd;
+  color: #fff;
+  cursor: not-allowed;
+}
+.keepPlan {
+  margin-top: 9px;
+  border: 1px solid #dfe1e5;
+  background: #fff;
+  color: #3e4551;
+}
+.stripePage footer {
+  margin-top: 27px;
+  color: #959ba5;
+  text-align: center;
+  font-size: 10px;
+}
+.stripePage footer strong {
+  color: #635bff;
+  font-size: 14px;
+}
+@media (max-width: 620px) {
+  .previewControls {
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+  .previewControls nav {
+    order: 3;
+    width: 100%;
+    margin-left: 0;
+  }
+  .stripePage {
+    padding: 27px 20px;
+  }
+  .planCard {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  .planCard > div:last-child {
+    text-align: left;
+  }
+}
