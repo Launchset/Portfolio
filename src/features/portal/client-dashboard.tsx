@@ -9,7 +9,8 @@ export type ClientDashboardInvoice = {
   label: string;
   detail: string;
   amount: string;
-  url?: string | null;
+  viewUrl?: string | null;
+  downloadUrl?: string | null;
 };
 
 type ClientDashboardProps = {
@@ -92,11 +93,20 @@ export default function ClientDashboard({
                   <span>{invoice.detail}</span>
                 </div>
                 <span>{invoice.amount}</span>
-                {invoice.url && (
-                  <a href={invoice.url} rel="noreferrer" target="_blank">
-                    Open
-                  </a>
-                )}
+                <span className={styles.invoiceActions}>
+                  {invoice.viewUrl && (
+                    <a href={invoice.viewUrl}>View</a>
+                  )}
+                  {invoice.downloadUrl && (
+                    <a
+                      href={invoice.downloadUrl}
+                      rel="noreferrer"
+                      target="_blank"
+                    >
+                      Download PDF
+                    </a>
+                  )}
+                </span>
               </li>
             ))}
           </ul>

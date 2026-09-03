@@ -276,10 +276,17 @@
 .invoiceSection li div span {
   color: #75837c;
 }
-.invoiceSection li > a {
+.invoiceActions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+}
+.invoiceActions a {
   color: #25d38a;
   font-weight: 750;
   text-decoration: none;
+  white-space: nowrap;
 }
 .completedOverview {
   padding: 28px 30px;
@@ -416,7 +423,8 @@
   .invoiceSection li {
     grid-template-columns: 1fr auto;
   }
-  .invoiceSection li > a {
+  .invoiceActions {
     grid-column: 1/-1;
+    justify-content: flex-start;
   }
 }

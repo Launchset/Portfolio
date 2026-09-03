@@ -152,9 +152,16 @@
 .invoiceCard li div span {
   color: #75837c;
 }
-.invoiceCard li > a {
+.invoiceActions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+}
+.invoiceActions a {
   color: #25d38a;
   font-weight: 750;
+  white-space: nowrap;
 }
 @media (max-width: 760px) {
   .billingGrid {
@@ -172,7 +179,8 @@
   .invoiceCard li {
     grid-template-columns: 1fr auto;
   }
-  .invoiceCard li > a {
+  .invoiceActions {
     grid-column: 1/-1;
+    justify-content: flex-start;
   }
 }

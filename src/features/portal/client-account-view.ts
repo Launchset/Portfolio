@@ -40,6 +40,7 @@ export function getClientInvoiceViews(
       invoice.amount_paid || invoice.amount_due,
       invoice.currency,
     ),
-    url: invoice.hosted_invoice_url ?? invoice.invoice_pdf,
+    viewUrl: invoice.hosted_invoice_url ?? invoice.invoice_pdf,
+    downloadUrl: invoice.invoice_pdf,
   }));
 }
