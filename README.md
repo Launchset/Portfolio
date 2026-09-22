@@ -1,6 +1,24 @@
 # Launchset
 
-The production website for [launchset.dev](https://launchset.dev), built with Next.js and the App Router.
+Launchset builds production websites, internal tools and workflow automation for small businesses.
+
+**[View the live site](https://launchset.dev)**
+
+This repository contains the public website and invite-only client platform. It demonstrates the same concerns that shape Launchset's client work: clear product presentation, controlled access, auditable workflows and deliberate releases.
+
+## What this project demonstrates
+
+- A responsive portfolio with structured project and tool case studies.
+- An invite-only client portal with Google and magic-link authentication.
+- Client, contract, billing and file workflows backed by Cloudflare D1 and R2.
+- Consent-aware analytics, structured metadata and search/agent discovery routes.
+- Isolated shadow and production environments with explicit release checks.
+
+## Stack
+
+Next.js, React, TypeScript, Better Auth, Stripe, Cloudflare Workers, D1 and R2.
+
+## Repository guide
 
 Start with [ARCHITECTURE.md](./ARCHITECTURE.md) for the system map and [AGENTS.md](./AGENTS.md) for change and validation conventions.
 
