@@ -6,6 +6,8 @@ Launchset builds production websites, internal tools and workflow automation for
 
 This repository contains the public website and invite-only client platform. It demonstrates the same concerns that shape Launchset's client work: clear product presentation, controlled access, auditable workflows and deliberate releases.
 
+![Supplier files transformed into validated catalogue products](public/projects/prestige-concept/prestige-data-flow-v3.svg)
+
 ## What this project demonstrates
 
 - A responsive portfolio with structured project and tool case studies.
