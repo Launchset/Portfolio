@@ -12,6 +12,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${baseUrl}/work/tools/lead-audit-review`, lastModified, changeFrequency: "monthly", priority: 0.75 },
     { url: `${baseUrl}/privacy`, lastModified, changeFrequency: "yearly", priority: 0.3 },
     { url: `${baseUrl}/cookies`, lastModified, changeFrequency: "yearly", priority: 0.3 },
-    { url: `${baseUrl}/terms`, lastModified, changeFrequency: "yearly", priority: 0.3 },
+    { url: `${baseUrl}/terms`, lastModified: new Date("2026-09-30"), changeFrequency: "yearly", priority: 0.3 },
+    { url: `${baseUrl}/launchset-connect/privacy`, lastModified: new Date("2026-09-30"), changeFrequency: "yearly", priority: 0.3 },
+    { url: `${baseUrl}/launchset-connect/terms`, lastModified: new Date("2026-09-30"), changeFrequency: "yearly", priority: 0.3 },
   ];
 }
