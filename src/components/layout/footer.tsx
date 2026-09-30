@@ -35,6 +35,7 @@ export default function Footer() {
         <div className={styles.legalLinks}>
           <Link href="/privacy">Privacy</Link>
           <Link href="/launchset-connect/privacy">Launchset Connect privacy</Link>
+          <Link href="/launchset-connect/terms">Launchset Connect terms</Link>
           <Link href="/cookies">Cookies</Link>
           <Link href="/terms">Website terms</Link>
           <button type="button" onClick={openCookieSettings}>Cookie settings</button>
