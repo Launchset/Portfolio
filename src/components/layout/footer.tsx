@@ -34,6 +34,7 @@ export default function Footer() {
         <p>© {new Date().getFullYear()} Launchset</p>
         <div className={styles.legalLinks}>
           <Link href="/privacy">Privacy</Link>
+          <Link href="/launchset-connect/privacy">Launchset Connect privacy</Link>
           <Link href="/cookies">Cookies</Link>
           <Link href="/terms">Website terms</Link>
           <button type="button" onClick={openCookieSettings}>Cookie settings</button>
