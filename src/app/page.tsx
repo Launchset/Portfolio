@@ -8,6 +8,7 @@ import { founderId, siteUrl, studioId, websiteId } from "@/src/lib/structured-da
 
 export const metadata: Metadata = {
   alternates: { canonical: "/" },
+  other: { "facebook-domain-verification": "gxqaejs0ze30zr4qazcvdocu8eb0lm" },
 };
 
 const projects = [
