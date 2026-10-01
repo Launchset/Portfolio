@@ -26,7 +26,9 @@ The Telegram bot `@LaunchsetConnectAlertsBot` was created through the verified B
 
 John sent `accounting test` to the Meta test number. Connect received it at 09:48:33 UTC, selected the Accounting label and queued only backend delivery. Initial attempts failed because Cloudflare rejects `redirect: "error"` when constructing a request. A disposable check using the installed Workerd confirmed `error` fails and `manual` succeeds. Backend and Meta adapters now use manual redirect handling and reject non-success responses; the shadow also enables public Worker-to-Worker fetch and identifies backend requests with a User-Agent. All 26 regression checks, lint, TypeScript, Next.js and Cloudflare builds passed. The original queued event succeeded on attempt seven after deployment and a signed empty dispatcher trigger; no replacement message event was created. Accounting's configured fictional scope contains exactly one corresponding text submission with the Accounting label. This verifies real Meta-to-Connect-to-Accounting text delivery. No document has yet been sent through that complete path.
 
-Meta's private `debug_token` check confirmed the temporary test token is invalid after its 10:00 UTC expiry on 1 October 2026. A fresh browser-upgrade request is awaiting John so the test token can be refreshed for document downloads and outbound replies. Actual email inbox arrival, real document delivery, backend reply, the signed-in delivery monitor and mobile presentation remain unverified. These checks do not establish every intended workflow or review readiness.
+Meta's private `debug_token` check confirmed the first temporary test token became invalid after its 10:00 UTC expiry on 1 October 2026. John approved a replacement signed-in tab. A fresh Explorer token was captured privately; validation confirmed the correct app, both existing WhatsApp scopes and access to the exact test sender. Only the refreshed token was installed on the Connect Worker. It expires at 12:00 UTC on 1 October 2026, so durable credentials remain later work.
+
+The deployed Accounting API then issued one signed reply request for its stored test submission, using a stable UUID and its private callback secret. Connect returned HTTP 200 / `accepted` with a provider message ID. This proves the connected-backend-to-Connect-to-Meta API path; John's receipt confirmation is pending. Actual email inbox arrival, real document delivery, WhatsApp reply receipt, the signed-in delivery monitor and mobile presentation remain unverified. These checks do not establish every intended workflow or review readiness.
 
 ## First-release description
 
@@ -78,7 +80,8 @@ These are draft explanations, not completed certifications. API tests must be ma
 - [ ] Email alert inbox arrival confirmed (provider acceptance passed).
 - [x] Accounting's deployed signed callback accepts fictional text/PDF and deduplicates replay.
 - [x] Real Meta text reaches Accounting through Connect and is durably stored in the configured fictional scope.
-- [ ] Expired Meta test token refreshed; real document delivery and backend-requested text reply verified.
+- [x] Meta test token refreshed and backend-requested text reply accepted by Meta.
+- [ ] Real document delivery and WhatsApp reply receipt confirmed.
 - [ ] Signed-in browser review, mobile layout and member isolation verified.
 - [ ] Final review host/platform, reviewer sign-in, permission scope and screencast prepared.
 - [ ] Accurate data handling answers confirmed.
