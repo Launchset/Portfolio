@@ -22,7 +22,7 @@ The first sample send was rejected with 133010: the Meta test sender was still p
 
 The Accounting receiver was deployed to its fictional shadow API at revision `11cf977a4eb649bbcf1e72c75e5707df09c320c4`, with migration 033. Real HTTP requests through its public Worker proxy accepted signed fictional text and PDF deliveries; repeated requests returned the same records. PostgreSQL confirmed durable submissions and WhatsApp document provenance. This verifies the receiver transport, not a WhatsApp webhook or Connect outbox delivery.
 
-A Telegram bot has not been created. Telegram delivery, actual Accounting receipt through Connect, backend reply, the signed-in delivery monitor and mobile presentation remain unverified. John accidentally closed the work tab while BotFather search results were open; the old lease was released and a replacement tab is being acquired. These checks do not establish every intended workflow or review readiness.
+The Telegram bot `@LaunchsetConnectAlertsBot` was created through the verified BotFather chat on an approved replacement work tab. Its identity was verified with `getMe`, and its token was captured without displaying it and installed as an encrypted secret on the isolated Connect Worker. John still needs to start the bot before his private chat can be configured. Telegram delivery, actual Accounting receipt through Connect, backend reply, the signed-in delivery monitor and mobile presentation remain unverified. These checks do not establish every intended workflow or review readiness.
 
 ## First-release description
 
@@ -62,7 +62,8 @@ These are draft explanations, not completed certifications. API tests must be ma
 
 - [ ] Business verification result checked.
 - [x] Meta credentials securely installed in the isolated preview (test token; durable production token remains later work).
-- [ ] New Telegram bot created, started by John and securely configured.
+- [x] New Telegram bot created and its token securely installed in the preview.
+- [ ] John's private Telegram chat identified and configured after a setup message reaches the bot.
 - [x] Actual Meta management calls succeed for the test WABA/phone.
 - [x] Callback verified and test WABA/messages subscription confirmed.
 - [x] Permitted test recipient verified by John.
