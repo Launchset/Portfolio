@@ -2,7 +2,7 @@
 
 App: Launchset Connect (`1003785039392939`). Business: John Helyar trading as Launchset. Business portfolio: `786110224586080`.
 
-Last confirmed business verification: **In review**. Domain ownership: `launchset.dev` verified. App Review: **Not submitted**. Refresh these statuses in Meta before submission.
+Business verification checked live on 1 October 2026: **In review**. Meta blocks Tech Provider access verification until business verification is complete. Domain ownership: `launchset.dev` verified. App Review: **Not submitted**. Refresh these statuses before submission.
 
 ## Preview validation on 1 October 2026
 
@@ -56,6 +56,14 @@ These are draft explanations, not completed certifications. API tests must be ma
 
 Use these paragraphs as drafts for the matching live permission questions. They do not replace the requested screencast, reviewer access, business verification or Meta's other application requirements. Final data-handling answers and submission require John's review.
 
+### Live form preparation on 1 October 2026
+
+Meta's draft requests `whatsapp_business_messaging`, `public_profile` and `whatsapp_business_management`. Both WhatsApp permission dialogs now report required API test calls **Completed**. The messaging explanation was entered, discussed with John in plain English, approved by him and saved as a draft. Reopening the dialog returned the matching explanation. Its policy agreement remains unchecked and no recording has been uploaded. The management explanation and any future need for `public_profile` still need John's review.
+
+The data-handling form asks about processors, the responsible person/entity and country, national-security disclosures during the preceding twelve months, and procedures for requests from public authorities. John answered **No** to the disclosure-history question. After the four rules were explained and the draft was provided for review, John agreed to adopt the [public-authority request procedure](platform-data-requests.md) on 1 October 2026. The procedure covers legality checks, questioning unlawful or excessive requests where permitted, minimum necessary disclosure and a private decision record. John remains the decision-maker for any disclosure; no actual request records have been created. The No disclosure-history answer and all four procedure boxes were entered in Meta. The form reported Auto-saved; a full reload and reopening the section confirmed all five choices persisted. Processor, responsible-person/entity and country answers remain blank pending review. No final submission was made.
+
+Reviewer instructions remain blocked until an app platform is configured. Basic settings have the Launchset Connect name, icon, Messaging category, public privacy/terms URLs and privacy-page deletion instructions. The Website platform is not selected and its site URL is empty. Agree the actual review URL and workable reviewer access before saving that configuration. John requires discussion of the exact proposed submission and explicit approval before final submission; approval of one explanation is not approval to submit or certify other answers.
+
 ## Reviewer access and recording
 
 1. Add the appropriate Website platform and URL in Meta. The last inspected reviewer-instructions page said no app platforms were configured.
@@ -72,15 +80,16 @@ Use these paragraphs as drafts for the matching live permission questions. They 
 - Email/Telegram notifications carry only the generic alert. Recipient addresses/chat IDs and bot credentials are configured by the business/Launchset.
 - No LLM provider receives data in this release. Update the workflow, agreements, notices and data handling answers before enabling one.
 - Launchset controls its service administration data; each connected business controls its customer communication purposes. Confirm the legal entity/controller wording appropriate to the exact Meta form instead of blindly pasting this summary.
-- Public-authority disclosure history and internal request-handling policies need John's actual answers. Do not assume these from code or from a drafted privacy notice.
+- John confirmed no national-security disclosures of Meta user data in the preceding twelve months and adopted the four-rule public-authority request procedure on 1 October 2026. These answers come from his explicit responses, not from code or a privacy notice.
 
 ## Remaining live gates
 
-- [ ] Business verification result checked.
+- [x] Business verification checked live (still In review; recheck for approval).
 - [x] Meta credentials securely installed in the isolated preview (test token; durable production token remains later work).
 - [x] New Telegram bot created and its token securely installed in the preview.
 - [x] John's private Telegram chat identified and configured after a setup message reaches the bot.
 - [x] Actual Meta management calls succeed for the test WABA/phone.
+- [x] Meta reports both WhatsApp permission API tests Completed.
 - [x] Callback verified and test WABA/messages subscription confirmed.
 - [x] Permitted test recipient verified by John.
 - [x] Test sender registered by John; sample API send and receipt confirmed.
@@ -95,7 +104,8 @@ Use these paragraphs as drafts for the matching live permission questions. They 
 - [ ] WhatsApp receipt of the backend-requested reply confirmed.
 - [ ] Signed-in browser review, mobile layout and member isolation verified.
 - [ ] Final review host/platform, reviewer sign-in, permission scope and screencast prepared.
-- [ ] Accurate data handling answers confirmed.
+- [x] Disclosure-history answer and adopted public-authority procedure entered and persistence verified.
+- [ ] Remaining processor/controller/country answers confirmed.
 - [ ] Exact production release and final Meta submission approved.
 
 References: [Meta Tech Provider overview](https://whatsappbusiness.com/partners/become-a-partner/), [WhatsApp Business Messaging Policy](https://whatsappbusiness.com/policy/), [Telegram Bot API](https://core.telegram.org/bots/api), [Cloudflare Email Workers API](https://developers.cloudflare.com/email-service/api/send-emails/workers-api/). Follow the live app review form for the precise requirements of this submission.
