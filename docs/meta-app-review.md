@@ -14,13 +14,15 @@ Lint, TypeScript, the Next.js production build and the Cloudflare runtime build 
 
 Meta created test WABA `1373012368376197` with phone `1427558373768262`, display number `+1 555-163-2129`. A real token generated in the Launchset Connect Graph API Explorer was captured securely. Authenticated `v25.0` GET calls to the phone and WABA phone list both returned 200 with that test number. John confirmed the Meta password prompt; the app secret was then captured securely. The access token, app secret, private callback token, API version and test workflow registry are installed as encrypted secrets on the isolated Connect Worker. No real business phone was connected.
 
-The backend's private challenge check returned 200 with the exact challenge. Meta's app subscription POST returned success; read-back showed an active `whatsapp_business_account` callback at `https://launchset-connect-shadow.jhelyar04.workers.dev/api/connect/webhooks/whatsapp`, subscribed only to `messages`. Meta reported that field's webhook version as `v26.0`; outbound/account API calls remain explicitly configured as the setup page's `v25.0`. Subscribing the test WABA also returned success; read-back showed Launchset Connect alongside Meta's existing DevX test app. The permitted recipient phone is awaiting John's direct entry/code verification.
+The backend's private challenge check returned 200 with the exact challenge. Meta's app subscription POST returned success; read-back showed an active `whatsapp_business_account` callback at `https://launchset-connect-shadow.jhelyar04.workers.dev/api/connect/webhooks/whatsapp`, subscribed only to `messages`. Meta reported that field's webhook version as `v26.0`; outbound/account API calls remain explicitly configured as the setup page's `v25.0`. Subscribing the test WABA also returned success; read-back showed Launchset Connect alongside Meta's existing DevX test app. John added and verified the permitted recipient directly in Meta.
 
-The final code shadow deployment version is `67288cff-2f25-4431-8207-84b7cc5491ed`. Its product route returned 200 with backend copy/noindex, and the unconfigured backend reply request returned 403. The test connection is created paused. Documents and text containing `invoice` or `accounting` route to Accounting with alerts disabled; other types use the default Tubudd label and configured generic alert recipients. These are test routing rules, not permanent customer/business assignments.
+The final code shadow deployment version is `67288cff-2f25-4431-8207-84b7cc5491ed`. Its product route returned 200 with backend copy/noindex, and the unconfigured backend reply request returned 403. The test connection was created paused, then activated after the application's actual Meta account-access function passed. Documents and text containing `invoice` or `accounting` route to Accounting with alerts disabled; other types use the default Tubudd label and configured generic alert recipients. These are test routing rules, not permanent customer/business assignments.
+
+The first sample send was rejected with 133010: the Meta test sender was still pending. John manually registered only that test sender through Graph API Explorer, choosing his private PIN. A subsequent phone query reported `CONNECTED` and `CLOUD_API`. The `hello_world` sample send returned 200 with a message ID; John confirmed receipt and replied. Connect recorded one incoming text event, label `Tubudd`, and an email delivery marked `sent` without error. This proves real Meta receipt and email service acceptance; actual email inbox arrival still needs confirmation. Meta included the registration PIN in the Explorer URL and the browser resume response echoed it. The agent removed those URL parameters without reading the form or repeating/storing the PIN. That test PIN needs replacement; no PIN value belongs in these evidence records.
 
 The Accounting receiver was deployed to its fictional shadow API at revision `11cf977a4eb649bbcf1e72c75e5707df09c320c4`, with migration 033. Real HTTP requests through its public Worker proxy accepted signed fictional text and PDF deliveries; repeated requests returned the same records. PostgreSQL confirmed durable submissions and WhatsApp document provenance. This verifies the receiver transport, not a WhatsApp webhook or Connect outbox delivery.
 
-A Telegram bot has not been created. Actual Meta message receipt, email/Telegram delivery, backend reply, the signed-in delivery monitor and mobile presentation remain unverified. These checks do not establish end-to-end WhatsApp functionality or review readiness.
+A Telegram bot has not been created. Telegram delivery, actual Accounting receipt through Connect, backend reply, the signed-in delivery monitor and mobile presentation remain unverified. John accidentally closed the work tab while BotFather search results were open; the old lease was released and a replacement tab is being acquired. These checks do not establish every intended workflow or review readiness.
 
 ## First-release description
 
@@ -63,7 +65,10 @@ These are draft explanations, not completed certifications. API tests must be ma
 - [ ] New Telegram bot created, started by John and securely configured.
 - [x] Actual Meta management calls succeed for the test WABA/phone.
 - [x] Callback verified and test WABA/messages subscription confirmed.
-- [ ] Permitted test recipient verified by John.
+- [x] Permitted test recipient verified by John.
+- [x] Test sender registered by John; sample API send and receipt confirmed.
+- [x] Real reply reaches Connect; generic email service accepts its alert.
+- [ ] Test sender's exposed registration PIN replaced privately by John.
 - [ ] Real test message produces a delivery-monitor event and actual email/Telegram notifications.
 - [x] Accounting's deployed signed callback accepts fictional text/PDF and deduplicates replay.
 - [ ] Real Meta text/document reaches Accounting through Connect; backend-requested text reply succeeds.
