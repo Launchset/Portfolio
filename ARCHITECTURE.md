@@ -67,7 +67,9 @@ Contracts are stored in the `CONTRACTS` R2 bucket. Stripe is called from server 
 
 ## Launchset Connect
 
-`src/features/connect/` owns business connections, member isolation, message-alert intake and its delivery outbox. `src/platform/meta/` verifies WhatsApp signatures and checks WABA phone access; `src/platform/notifications/` sends generic alerts. Thin `/api/connect/` routes enforce authentication/origin or provider signature checks. `/launchset-connect/workspace` is a separate verified-email workspace; its membership does not depend on billing-contract status. The custom Worker's scheduled handler retries outbox jobs and clears 30-day records. Migration `0005_launchset_connect.sql` is authoritative. See `docs/launchset-connect.md` for the boundaries and remaining live setup.
+`src/features/connect/` owns business connections, existing member isolation, routing rules and durable alert/backend delivery queues. `workflow-settings.ts` reads the private test workflow registry; `message-workflows.ts` selects labels and destinations, retains content only for configured backend routes, dispatches deliveries and enforces reply deduplication and the service window. No new customer permission model or conversation inbox is implemented.
+
+`src/platform/meta/` verifies WhatsApp signatures, checks WABA phone access, downloads documents and sends text replies. `src/platform/notifications/` sends generic alerts and signs backend callbacks. Thin `/api/connect/` routes enforce authentication/origin, provider signatures or backend signatures. `/launchset-connect/workspace` is an operator delivery monitor with verified-email access independent of billing-contract status. The custom Worker's scheduled handler retries queued jobs and clears 30-day event/content/reply records. Migrations `0005_launchset_connect.sql` and `0006_connect_message_workflows.sql` are authoritative. See `docs/launchset-connect.md` and `docs/connect-backend-workflows.md` for protocols, boundaries and remaining live setup.
 
 ## Dependency direction
 

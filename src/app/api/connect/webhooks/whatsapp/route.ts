@@ -2,6 +2,7 @@ import { getCloudflareContext } from "@opennextjs/cloudflare";
 import type { ConnectEnvironment } from "@/src/features/connect/types";
 import { dispatchConnectAlerts, receiveWhatsAppEvents } from "@/src/features/connect/inbox";
 import { readWebhookBody, verifyWhatsAppSignature } from "@/src/platform/meta/whatsapp-webhook";
+import { dispatchBackendMessages } from "@/src/features/connect/message-workflows";
 
 export const dynamic = "force-dynamic";
 
@@ -30,6 +31,7 @@ export async function POST(request: Request) {
   try {
     await receiveWhatsAppEvents(environment, payload);
     ctx.waitUntil(dispatchConnectAlerts(environment).catch(() => { /* Durable outbox is recovered by the scheduled worker. */ }));
+    ctx.waitUntil(dispatchBackendMessages(environment).catch(() => { /* Durable backend deliveries are recovered by the scheduled worker. */ }));
     return new Response("EVENT_RECEIVED", { headers: { "Cache-Control": "no-store" } });
   } catch {
     return new Response("Intake temporarily unavailable", { status: 503 });

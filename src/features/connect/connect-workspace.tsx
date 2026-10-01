@@ -19,7 +19,7 @@ function EventItem({ event, mutate, busy }: { event: ConnectEvent; mutate: (url:
       <p>{new Date(event.received_at).toLocaleString("en-GB", { timeZone: "UTC" })} UTC · {event.message_type}</p>
       <p className={styles.delivery}>{event.deliveries || "Website inbox only"}</p></div>
     <form className={styles.eventControls} onSubmit={async (e) => { e.preventDefault(); await mutate(`/api/connect/events/${event.id}`, "PATCH", { route_label: route, status }); }}>
-      <label>Route to<input value={route} onChange={(e) => setRoute(e.target.value)} required maxLength={100} /></label>
+      <label>Routing label<input value={route} onChange={(e) => setRoute(e.target.value)} required maxLength={100} /></label>
       <label>Status<select value={status} onChange={(e) => setStatus(e.target.value as ConnectEvent["status"])}>
         {Object.entries(statusLabels).map(([value, label]) => <option key={value} value={value}>{label}</option>)}</select></label>
       <button disabled={busy} type="submit">Save</button>
@@ -54,9 +54,9 @@ export default function ConnectWorkspace({ initial, email }: { initial: Inbox; e
   return <main className={styles.workspace}>
     <header className={styles.topbar}><Link href="/launchset-connect">Launchset <strong>Connect</strong></Link><span>{email}</span>{inbox.admin && <Link href="/admin">Admin</Link>}</header>
     <div className={styles.shell}>
-      <header className={styles.heading}><div><span className={styles.kicker}>CONNECTED MESSAGING</span><h1>Your message alerts.</h1>
-        <p>Track new messages, route the work and check alert delivery. Read and reply to the conversation in WhatsApp Business.</p></div>
-        <button disabled={busy} onClick={() => reload().catch((e) => setMessage(e.message))}>Refresh inbox</button></header>
+      <header className={styles.heading}><div><span className={styles.kicker}>CONNECTED MESSAGING</span><h1>Delivery monitor.</h1>
+        <p>Check connection status, routing labels and delivery results. Connected applications handle customer messages and documents.</p></div>
+        <button disabled={busy} onClick={() => reload().catch((e) => setMessage(e.message))}>Refresh events</button></header>
       {message && <p role="status" className={styles.notice}>{message}</p>}
       <section className={styles.panel}><div className={styles.sectionHeading}><h2>Businesses</h2>{inbox.admin && <button onClick={() => setForm({ ...emptyBusiness })}>Add business</button>}</div>
         {inbox.businesses.length === 0 ? <p>No businesses connected yet.{!inbox.admin && " Ask Launchset to add this email to your business connection."}</p> :
@@ -79,14 +79,14 @@ export default function ConnectWorkspace({ initial, email }: { initial: Inbox; e
                 type={name.includes("email") || name === "email_to" ? "email" : "text"} required={["name", "waba_id", "phone_number_id", "route_label"].includes(name)}
                 disabled={Boolean(form.id) && (name === "waba_id" || name === "phone_number_id")} maxLength={name.includes("email") || name === "email_to" ? 254 : 100} /></label>)}
           <label className={styles.checkbox}><input type="checkbox" checked={form.enabled} onChange={(e) => setForm({ ...form, enabled: e.target.checked })} />Enable incoming message alerts</label>
-          <p className={styles.formHelp}>Save a new business paused, check its Meta account access, then enable it. The member email controls who can see this business’s inbox. Email and Telegram receive a generic alert with no customer details. Routing labels organise work inside this inbox.</p>
+          <p className={styles.formHelp}>Save a new business paused, check its Meta account access, then enable it. The member email controls who can see this business’s inbox. Email and Telegram receive a generic alert with no customer details. Backend rules select routing labels and destinations. Editing a monitor label does not replay deliveries.</p>
           <div className={styles.actions}><button disabled={busy} type="submit">{busy ? "Saving…" : "Save business"}</button><button type="button" onClick={() => setForm(null)}>Cancel</button></div>
         </form></section>}
-      <section className={styles.panel}><div className={styles.sectionHeading}><h2>Inbox <span>{events.filter((e) => e.status === "new").length} new</span></h2>
+      <section className={styles.panel}><div className={styles.sectionHeading}><h2>Events <span>{events.filter((e) => e.status === "new").length} new</span></h2>
         <label>Business<select aria-label="Filter inbox by business" value={filter} onChange={(e) => setFilter(e.target.value)}><option value="">All your businesses</option>
           {inbox.businesses.map((business) => <option key={business.id} value={business.id}>{business.name}</option>)}</select></label></div>
         {events.length ? events.map((event) => <EventItem event={event} key={`${event.id}:${event.status}:${event.route_label}`} mutate={mutate} busy={busy} />) : <div className={styles.empty}><h3>No message alerts yet</h3><p>Incoming messages appear here once your business connection and Meta webhook are enabled.</p></div>}
-        <p className={styles.formHelp}>The inbox refreshes every 30 seconds and shows the latest 100 alerts. Alert records are kept for 30 days.</p>
+        <p className={styles.formHelp}>The monitor refreshes every 30 seconds and shows the latest 100 alerts. Alert records are kept for 30 days.</p>
       </section>
       {inbox.admin && <details className={styles.panel}><summary>Connection setup</summary><p>Webhook configuration: {inbox.configuration?.metaReady ? "Ready" : "Needs secrets"} · Meta account access: {inbox.configuration?.accountAccessReady ? "Ready" : "Needs token and API version"} · Telegram bot: {inbox.configuration?.telegramReady ? "Ready" : "Needs token"}</p>
         <p>Meta callback: <code>/api/connect/webhooks/whatsapp</code>. Subscribe to incoming <code>messages</code> events. Store credentials as Worker secrets; never enter them in this form.</p></details>}

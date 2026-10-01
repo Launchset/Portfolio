@@ -31,6 +31,7 @@ export type ConnectEnvironment = {
   CONNECT_META_ACCESS_TOKEN?: string;
   CONNECT_META_GRAPH_API_VERSION?: string;
   CONNECT_TELEGRAM_BOT_TOKEN?: string;
+  CONNECT_WORKFLOWS?: string;
   AUTH_EMAIL_FROM: string;
   AUTH_EMAIL: {
     send(message: { from: string; to: string; subject: string; text: string }): Promise<unknown>;

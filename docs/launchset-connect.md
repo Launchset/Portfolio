@@ -1,8 +1,6 @@
-# Launchset Connect: first release
+# Launchset Connect: backend test release
 
-This release receives authorised WhatsApp Business message events, creates a private website alert, sends optional generic email and Telegram alerts, and lets the business label the work and track its status. Customer conversations remain in WhatsApp Business. Routing labels organise the inbox; they do not forward customer content or transfer a WhatsApp conversation to another number.
-
-Future scope: LLM customer service, human handover, site integrations for Tubudd and the accounting product, and Embedded Signup for client onboarding. Those features are not implemented or represented as available in this release.
+Connect is a messaging backend for connected applications. Tubudd routes receive generic email/Telegram alerts. Accounting routes receive message text and document files through a signed backend callback. A connected backend can send a text reply through Connect. Launchset supplies an operator delivery monitor; no customer conversation UI is being built. LLM chatbots and client self-service onboarding remain future work.
 
 ## Routes and access
 
@@ -21,7 +19,7 @@ All user mutations require an exact same-origin header and an authenticated, ver
 
 1. Build the isolated preview from this branch, retaining existing bindings and production routes.
    `npm run deploy:connect-shadow` uses `wrangler.connect-shadow.jsonc` and the dedicated `launchset-connect-shadow` Worker. It reuses the existing shadow-only D1/R2 bindings while preserving the current `launchset-shadow` website deployment. Its authentication URL and trusted origin are explicitly configured for the new hostname.
-2. Apply `migrations/app/0005_launchset_connect.sql` only to its shadow `APP_DB` before deployment. Production needs separate approval and its own migration.
+2. Apply migrations `0005_launchset_connect.sql` and `0006_connect_message_workflows.sql` only to its shadow `APP_DB` before deployment. Production needs separate approval and its own migration.
 3. Store the following as encrypted Worker secrets using a private CLI prompt or protected secret file, never chat, a browser form, Git or command arguments:
    - `CONNECT_META_APP_SECRET`: the Launchset Connect app secret.
    - `CONNECT_META_VERIFY_TOKEN`: a fresh random callback verification token.
@@ -37,13 +35,13 @@ All user mutations require an exact same-origin header and an authenticated, ver
 
 ## Delivery and retention
 
-The signed webhook commits each event and its outbox entries together before acknowledgement. A stable message/business identifier deduplicates repeated events. Notification destinations are snapshotted when the event first arrives, so replay after a settings change cannot introduce new recipients. No customer names, numbers, text or media are stored or sent to notification services.
+The signed webhook commits each event and its outbox entries together before acknowledgement. A stable message/business identifier deduplicates repeated events. Notification destinations are snapshotted when the event first arrives, so replay after a settings change cannot introduce new recipients. No customer names, numbers, text or media are sent to email or Telegram. Alert-only routes retain no customer content. Explicitly configured backend routes retain only the text, sender identifier, message time and document reference needed for delivery and replies.
 
-Email and Telegram receive `New WhatsApp Business message`. The website inbox holds the business name, routing label, message type and receipt time. A one-minute scheduled job recovers delivery failures independently of a laptop. Each delivery has a claim to prevent concurrent workers from sending it together, a ten-second Telegram timeout and backoff between attempts. After eight attempts it is marked failed and can be retried explicitly in the workspace. A claim interrupted by worker termination becomes eligible again after two minutes.
+Email and Telegram receive `New WhatsApp Business message`. The delivery monitor holds the business name, routing label, message type and receipt time. A one-minute scheduled job recovers delivery failures independently of a laptop. Each delivery has a claim to prevent concurrent workers from sending it together, a ten-second Telegram timeout and backoff between attempts. After eight attempts it is marked failed and can be retried explicitly in the workspace. A claim interrupted by worker termination becomes eligible again after two minutes.
 
 Delivery is at least once: a provider may accept an alert immediately before a database acknowledgement fails, causing a duplicate on recovery. Pausing a business stops new intake and cancels queued alerts; an already-running provider request can finish. Resuming does not resend cancelled historical jobs. Removing the connection deletes its records; revoke the app's Meta access separately when ending an account relationship.
 
-Technical inbox records and their deliveries are deleted after 30 days, before old jobs can be dispatched. Business settings and member/notification email addresses remain while the connection is configured. Credentials stay in encrypted Worker configuration. Do not log webhook bodies, provider access tokens or token-bearing Telegram URLs.
+Event records, retained backend message content, reply records and their deliveries are deleted after 30 days, before old jobs can be dispatched. Business settings and member/notification email addresses remain while the connection is configured. Credentials stay in encrypted Worker configuration. A receiving application controls its own retention. Do not log webhook bodies, provider access tokens or token-bearing Telegram URLs.
 
 ## Checks
 
@@ -54,6 +52,6 @@ npm run build
 git diff --check
 ```
 
-The integration checks execute the migration and real SQLite queries, with simulated provider responses. They cover webhook signatures, mixed/status/media payloads, duplicate intake, account matching, business isolation, concurrent claims, retry recovery/exhaustion, recipient snapshots, activation checks and cascading retention/deletion. They do not prove live Meta or Telegram access.
+The 26 integration checks execute the migrations and real SQLite queries, with simulated provider responses. They cover webhook signatures, mixed/status/media payloads, duplicate intake, account matching, business isolation, concurrent claims, retry recovery/exhaustion, recipient snapshots, routing rules, signed callbacks/replies, document validation and cascading retention/deletion. They do not prove live message delivery.
 
-Before claiming the first release is working end to end, run a real test-number message through the signed Meta webhook, verify the private inbox entry and actual email/Telegram delivery, and check the mobile workspace. Keep a pending item for any provider or authenticated flow that has not been verified.
+Before claiming the first release is working end to end, run real test-number text and document messages through Meta's signed webhook. Verify actual email/Telegram alerts, backend receipt/document storage and a text reply from the receiving backend. Check the delivery monitor in a signed-in browser and on mobile. Keep a pending item for any provider or authenticated flow that has not been verified. See `meta-app-review.md` for factual evidence and `connect-backend-workflows.md` for protocol/configuration details.

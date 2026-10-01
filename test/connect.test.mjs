@@ -10,9 +10,10 @@ import { build } from "esbuild";
 const root = path.resolve(import.meta.dirname, "..");
 const temporary = await mkdtemp(path.join(process.env.TMPDIR || "/home/jhelyar04/.cache/agent-tmp", "connect-test."));
 const bundle = path.join(temporary, "connect.mjs");
-await build({ stdin: { contents: ["src/features/connect/inbox.ts", "src/features/connect/business-settings.ts", "src/platform/meta/whatsapp-webhook.ts", "src/platform/meta/account-access.ts"].map((file) => `export * from './${file}';`).join("\n"), resolveDir: root }, bundle: true, platform: "node", format: "esm", outfile: bundle });
+await build({ stdin: { contents: ["src/features/connect/inbox.ts", "src/features/connect/business-settings.ts", "src/platform/meta/whatsapp-webhook.ts", "src/platform/meta/account-access.ts", "src/features/connect/message-workflows.ts", "src/features/connect/workflow-settings.ts", "src/features/connect/backend-replies.ts", "src/platform/meta/message-actions.ts", "src/platform/notifications/backend-message.ts", "src/platform/notifications/backend-auth.ts"].map((file) => `export * from './${file}';`).join("\n"), resolveDir: root }, bundle: true, platform: "node", format: "esm", outfile: bundle });
 const { receiveWhatsAppEvents, dispatchConnectAlerts, listConnectInbox, updateConnectEvent, maintainConnect, verifyWhatsAppSignature, extractWhatsAppEvents, readWebhookBody, checkWhatsAppAccountAccess, parseBusinessSettings, saveBusinessSettings } = await import(pathToFileURL(bundle).href);
-const schema = await readFile(path.join(root, "migrations/app/0005_launchset_connect.sql"), "utf8");
+const actions = await import(pathToFileURL(bundle).href);
+const schema = await readFile(path.join(root, "migrations/app/0005_launchset_connect.sql"), "utf8") + await readFile(path.join(root, "migrations/app/0006_connect_message_workflows.sql"), "utf8");
 const originalFetch = globalThis.fetch;
 const databases = [];
 afterEach(() => { globalThis.fetch = originalFetch; for (const db of databases.splice(0)) db.close(); });
@@ -170,4 +171,162 @@ test("account check uses management API, handles pagination and rejects an unrel
 test("bounded request reader rejects oversized bodies with and without content length", async () => {
   assert.equal(await readWebhookBody(new Request("https://example.com", { method: "POST", body: "x", headers: { "Content-Length": "262145" } })), null);
   assert.equal(await readWebhookBody(new Request("https://example.com", { method: "POST", body: "x".repeat(262145) })), null);
+});
+
+function workflowFixture(fixtureValue, rules = [{ label: 'Accounting', type: 'document' }, { label: 'Accounting', contains: 'invoice' }]) {
+  const configuration = { testPhoneNumberId: '101', workflows: [{ businessId: 'a', phoneNumberId: '101', rules,
+    destinations: { Accounting: 'accounting' }, alerts: { Support: { emailTo: 'support@example.com', telegramChatId: '' } } }],
+    targets: [{ key: 'accounting', businessId: 'a', url: 'https://accounting.example.com/api/integrations/launchset/events', secret: 'a'.repeat(40) }] };
+  fixtureValue.env.CONNECT_WORKFLOWS = JSON.stringify(configuration);
+  return configuration;
+}
+function workflowPayload(type = 'text', text = 'Please process this invoice', sentAt = Date.now() - 1000) {
+  const value = payload({ type }); const message = value.entry[0].changes[0].value.messages[0];
+  message.timestamp = String(Math.floor(sentAt / 1000)); message.text.body = text;
+  if (type === 'document') message.document = { id: '300', filename: 'invoice.pdf', mime_type: 'application/pdf', caption: text };
+  return value;
+}
+async function intakeWorkflow(f, value = workflowPayload(), now = Date.now()) {
+  await receiveWhatsAppEvents(f.env, value, now);
+  return f.sqlite.prepare('SELECT id FROM connect_events').get().id;
+}
+
+test('test-only registry rejects a real phone, reused secrets, cross-business targets and private URLs', () => {
+  const f = fixture(); const config = workflowFixture(f);
+  assert.ok(actions.workflowConfiguration(f.env));
+  for (const url of ['http://accounting.example.com', 'https://127.0.0.1/events', 'https://localhost/events', 'https://app.internal/events', 'https://user:pass@accounting.example.com']) {
+    config.targets[0].url = url; f.env.CONNECT_WORKFLOWS = JSON.stringify(config); assert.equal(actions.workflowConfiguration(f.env), null);
+  }
+  config.targets[0].url = 'https://accounting.example.com/events'; config.workflows[0].phoneNumberId = '201';
+  f.env.CONNECT_WORKFLOWS = JSON.stringify(config); assert.equal(actions.workflowConfiguration(f.env), null);
+  config.workflows[0].phoneNumberId = '101'; config.targets[0].businessId = 'b';
+  f.env.CONNECT_WORKFLOWS = JSON.stringify(config); assert.equal(actions.workflowConfiguration(f.env), null);
+  config.targets[0].businessId = 'a'; config.targets.push({ ...config.targets[0], key: 'other' });
+  f.env.CONNECT_WORKFLOWS = JSON.stringify(config); assert.equal(actions.workflowConfiguration(f.env), null);
+});
+
+test('rules use first match, AND conditions, person, message type and case-insensitive text', () => {
+  const rules = [{ label: 'VIP documents', sender: '123', type: 'document' }, { label: 'Accounting', contains: 'invoice' }];
+  const workflow = { rules };
+  assert.equal(actions.matchRoutingLabel(workflow, '123', 'document', 'INVOICE', 'General'), 'VIP documents');
+  assert.equal(actions.matchRoutingLabel(workflow, '456', 'document', 'INVOICE', 'General'), 'Accounting');
+  assert.equal(actions.matchRoutingLabel(workflow, '123', 'text', 'hello', 'General'), 'General');
+});
+
+test('alert-only Tubudd routing snapshots selected recipients without storing content', async () => {
+  const f = fixture(); workflowFixture(f, [{ label: 'Support', sender: '84999999999' }]);
+  await intakeWorkflow(f, workflowPayload('text', 'A private booking question'));
+  const event = f.sqlite.prepare('SELECT * FROM connect_events').get();
+  assert.equal(event.route_label, 'Support'); assert.equal(event.email_to, 'support@example.com');
+  assert.equal(f.sqlite.prepare('SELECT count(*) n FROM connect_messages').get().n, 0);
+  assert.deepEqual(f.sqlite.prepare('SELECT channel,destination FROM connect_deliveries').all().map((row) => ({ ...row })), [{ channel: 'email', destination: 'support@example.com' }]);
+  assert.ok(!JSON.stringify(event).includes('84999999999')); assert.ok(!JSON.stringify(event).includes('private booking'));
+});
+
+test('accounting captures required text/document fields once and excludes profile or raw webhook', async () => {
+  const f = fixture(); workflowFixture(f); const value = workflowPayload('document'); const id = await intakeWorkflow(f, value);
+  assert.equal(f.sqlite.prepare('SELECT count(*) n FROM connect_backend_deliveries').get().n, 1);
+  const stored = await actions.getConnectMessage(f.db, id, 'alice@example.com', false);
+  assert.equal(stored.sender_id, '84999999999'); assert.equal(JSON.parse(stored.document_json).id, '300');
+  assert.ok(!JSON.stringify(stored).includes('Private customer'));
+  assert.equal(await actions.getConnectMessage(f.db, id, 'bob@example.com', false), null);
+  value.entry[0].changes[0].value.messages[0].text.body = 'changed invoice';
+  await receiveWhatsAppEvents(f.env, value);
+  assert.equal(f.sqlite.prepare('SELECT text FROM connect_messages').get().text, 'Please process this invoice');
+});
+
+test('old generic events never acquire content or new backend destinations on replay after opt-in', async () => {
+  const f = fixture(); const value = workflowPayload(); await intakeWorkflow(f, value);
+  workflowFixture(f); await receiveWhatsAppEvents(f.env, value);
+  assert.equal(f.sqlite.prepare('SELECT count(*) n FROM connect_messages').get().n, 0);
+  assert.equal(f.sqlite.prepare('SELECT count(*) n FROM connect_backend_deliveries').get().n, 0);
+});
+
+test('backend delivers signed label/content once; receiver can verify exact bytes and reject stale signatures', async () => {
+  const f = fixture(); const config = workflowFixture(f); const id = await intakeWorkflow(f); const calls = [];
+  globalThis.fetch = async (url, options) => { calls.push({ url, options }); return Response.json({ accepted: true }); };
+  await Promise.all([actions.dispatchBackendMessages(f.env), actions.dispatchBackendMessages(f.env)]);
+  assert.equal(calls.length, 1); const { options } = calls[0]; const envelope = JSON.parse(new TextDecoder().decode(options.body));
+  assert.equal(envelope.label, 'Accounting'); assert.equal(envelope.text, 'Please process this invoice');
+  assert.equal(options.headers['Idempotency-Key'], id); assert.equal(options.redirect, 'error');
+  assert.equal(await actions.verifyBackendRequest(config.targets[0].secret, options.headers['X-Launchset-Timestamp'], options.headers['X-Launchset-Signature'], options.body), true);
+  assert.equal(await actions.verifyBackendRequest(config.targets[0].secret, options.headers['X-Launchset-Timestamp'], options.headers['X-Launchset-Signature'], new TextEncoder().encode('changed')), false);
+  assert.equal(await actions.verifyBackendRequest(config.targets[0].secret, options.headers['X-Launchset-Timestamp'], options.headers['X-Launchset-Signature'], options.body, Date.now()+600000), false);
+});
+
+test('changed backend URL is held for review and cannot redirect queued content to a new endpoint', async () => {
+  const f = fixture(); const config = workflowFixture(f); await intakeWorkflow(f);
+  config.targets[0].url = 'https://other.example.com/events'; f.env.CONNECT_WORKFLOWS = JSON.stringify(config);
+  let calls = 0; globalThis.fetch = async () => { calls++; return Response.json({}); };
+  await actions.dispatchBackendMessages(f.env); assert.equal(calls, 0);
+  assert.equal(f.sqlite.prepare('SELECT status,error_code FROM connect_backend_deliveries').get().status, 'failed');
+});
+
+test('document forwarding downloads phone-owned media and sends actual bytes with verified digest', async () => {
+  const f = fixture(); workflowFixture(f); f.env.CONNECT_META_ACCESS_TOKEN='fixture'; f.env.CONNECT_META_GRAPH_API_VERSION='v26.0';
+  await intakeWorkflow(f, workflowPayload('document'));
+  const bytes = new TextEncoder().encode('%PDF-1.4\nfictional invoice\n%%EOF'); const sha256 = (await import('node:crypto')).createHash('sha256').update(bytes).digest('hex');
+  let envelope; globalThis.fetch = async (url, options) => {
+    if (String(url).includes('graph.facebook.com')) { assert.ok(String(url).includes('phone_number_id=101')); return Response.json({url:'https://lookaside.fbsbx.com/file',file_size:bytes.length,mime_type:'application/pdf',sha256}); }
+    if (String(url).includes('lookaside.fbsbx.com')) return new Response(bytes);
+    envelope = JSON.parse(new TextDecoder().decode(options.body)); return Response.json({});
+  };
+  await actions.dispatchBackendMessages(f.env);
+  assert.equal(envelope.document.filename, 'invoice.pdf'); assert.equal(envelope.document.sha256, sha256);
+  assert.deepEqual(Buffer.from(envelope.document.base64,'base64'), Buffer.from(bytes));
+});
+
+test('document download blocks untrusted credential destinations and oversized, truncated or mismatched files', async () => {
+  const f = fixture(); f.env.CONNECT_META_ACCESS_TOKEN='fixture'; f.env.CONNECT_META_GRAPH_API_VERSION='v26.0';
+  let url = 'https://evil.example.com/file', size=1, hash; let calls=0;
+  globalThis.fetch = async (requestUrl) => { calls++; return String(requestUrl).includes('graph.facebook.com')
+    ? Response.json({url,file_size:size,mime_type:'application/pdf',sha256:hash}) : new Response(new Uint8Array([1])); };
+  await assert.rejects(actions.downloadWhatsAppDocument(f.env,'101','300'), /invalid_media_url/); assert.equal(calls,1);
+  url='https://lookaside.fbsbx.com/file'; size=actions.MAX_DOCUMENT_BYTES+1;
+  await assert.rejects(actions.downloadWhatsAppDocument(f.env,'101','300'), /document_too_large/);
+  size=2; await assert.rejects(actions.downloadWhatsAppDocument(f.env,'101','300'), /document_size_mismatch/);
+  size=1; hash='bad'; await assert.rejects(actions.downloadWhatsAppDocument(f.env,'101','300'), /document_hash_mismatch/);
+});
+
+test('backend retry backoff, recovery, retention and business deletion include content jobs', async () => {
+  const f = fixture(); workflowFixture(f); const now = Date.now(); await intakeWorkflow(f, workflowPayload(), now);
+  let calls=0; globalThis.fetch=async()=>{calls++; return new Response('',{status:503});};
+  await actions.dispatchBackendMessages(f.env,now); await actions.dispatchBackendMessages(f.env,now+1000); assert.equal(calls,1);
+  assert.equal(f.sqlite.prepare('SELECT status FROM connect_backend_deliveries').get().status,'pending');
+  globalThis.fetch=async()=>Response.json({}); await actions.dispatchBackendMessages(f.env,now+30001);
+  assert.equal(f.sqlite.prepare('SELECT status FROM connect_backend_deliveries').get().status,'sent');
+  f.sqlite.prepare('UPDATE connect_events SET received_at=1').run(); await maintainConnect(f.env);
+  assert.equal(f.sqlite.prepare('SELECT count(*) n FROM connect_messages').get().n,0);
+  assert.equal(f.sqlite.prepare('SELECT count(*) n FROM connect_backend_deliveries').get().n,0);
+});
+
+test('replies use service window and trusted sender, reject other businesses and deduplicate concurrent sends', async () => {
+  const f=fixture(); workflowFixture(f); f.env.CONNECT_META_ACCESS_TOKEN='fixture'; f.env.CONNECT_META_GRAPH_API_VERSION='v26.0'; const id=await intakeWorkflow(f);
+  let calls=0; globalThis.fetch=async(url,options)=>{calls++; assert.ok(String(url).endsWith('/101/messages')); assert.equal(JSON.parse(options.body).to,'84999999999'); return Response.json({messages:[{id:'wamid.reply'}]});};
+  const requestId=crypto.randomUUID();
+  await assert.rejects(actions.replyToConnectMessage(f.env,id,'bob@example.com',false,requestId,'Hello'),/message_not_found/);
+  const results=await Promise.all([actions.replyToConnectMessage(f.env,id,'alice@example.com',false,requestId,'Hello'),actions.replyToConnectMessage(f.env,id,'alice@example.com',false,requestId,'Hello')]);
+  assert.equal(calls,1); assert.ok(results.some(r=>r.status==='accepted'));
+  await assert.rejects(actions.replyToConnectMessage(f.env,id,'alice@example.com',false,requestId,'Changed'),/reply_id_conflict/);
+  f.sqlite.prepare('UPDATE connect_messages SET sent_at=?').run(Date.now()-86400001);
+  await assert.rejects(actions.replyToConnectMessage(f.env,id,'alice@example.com',false,crypto.randomUUID(),'Late'),/reply_window_closed/);
+});
+
+test('uncertain outbound send is marked unknown and never automatically retried', async () => {
+  const f=fixture(); workflowFixture(f); f.env.CONNECT_META_ACCESS_TOKEN='fixture'; f.env.CONNECT_META_GRAPH_API_VERSION='v26.0'; const id=await intakeWorkflow(f);
+  let calls=0; globalThis.fetch=async()=>{calls++; throw new Error('token-containing provider URL');};
+  const requestId=crypto.randomUUID(); assert.equal((await actions.replyToConnectMessage(f.env,id,'alice@example.com',false,requestId,'Hello')).status,'unknown');
+  assert.equal((await actions.replyToConnectMessage(f.env,id,'alice@example.com',false,requestId,'Hello')).status,'unknown'); assert.equal(calls,1);
+});
+
+test('signed backend replies are scoped to routed events and cannot select a different recipient', async () => {
+  const f=fixture(); const config=workflowFixture(f); f.env.CONNECT_META_ACCESS_TOKEN='fixture'; f.env.CONNECT_META_GRAPH_API_VERSION='v26.0'; const id=await intakeWorkflow(f);
+  const input={operation:'reply',backend_key:'accounting',event_id:id,request_id:crypto.randomUUID(),text:'Document received'};
+  const raw=new TextEncoder().encode(JSON.stringify(input)); const timestamp=String(Math.floor(Date.now()/1000));
+  const signature=`sha256=${await actions.signBackendBody(config.targets[0].secret,timestamp,raw)}`;
+  await assert.rejects(actions.receiveBackendReply(f.env,'accounting',raw,timestamp,'sha256='+'0'.repeat(64)),/backend_not_authorised/);
+  globalThis.fetch=async()=>Response.json({messages:[{id:'wamid.reply'}]});
+  assert.equal((await actions.receiveBackendReply(f.env,'accounting',raw,timestamp,signature)).status,'accepted');
+  config.targets[0].businessId='b'; config.workflows=[]; f.env.CONNECT_WORKFLOWS=JSON.stringify(config);
+  await assert.rejects(actions.receiveBackendReply(f.env,'accounting',raw,timestamp,signature),/backend_not_authorised/);
 });

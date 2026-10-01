@@ -45,6 +45,8 @@ export async function saveBusinessSettings(db: D1Database, input: ReturnType<typ
   const statements = [statement];
   if (!input.enabled) statements.push(db.prepare(`UPDATE connect_deliveries SET status = 'cancelled', claim_token = NULL
     WHERE event_id IN (SELECT id FROM connect_events WHERE business_id = ?) AND status IN ('pending', 'failed')`).bind(id));
+  if (!input.enabled) statements.push(db.prepare(`UPDATE connect_backend_deliveries SET status='cancelled',claim_token=NULL
+    WHERE event_id IN(SELECT id FROM connect_events WHERE business_id=?) AND status IN('pending','failed')`).bind(id));
   await db.batch(statements);
   return id;
 }
