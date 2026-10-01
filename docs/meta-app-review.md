@@ -48,6 +48,14 @@ No LLM, automatic customer reply, bulk campaign, Embedded Signup or new customer
 
 These are draft explanations, not completed certifications. API tests must be made with the actual app/test assets; simulated SQLite or provider fixtures do not count as Meta API evidence.
 
+### Draft permission explanations
+
+`whatsapp_business_management`: Launchset Connect reads the authorised WhatsApp Business Account's phone-number list and checks that the configured number belongs to that account before enabling the connection. This associates the backend with the correct business number. The current demonstration uses Launchset's Meta test account and number; client Embedded Signup has not been implemented. The review recording must show the real account-access check and its result.
+
+`whatsapp_business_messaging`: Launchset Connect receives incoming WhatsApp text and document events through a signed webhook. Configured labels select generic email/Telegram notifications or signed delivery of the text and document bytes to a connected application. The Accounting test backend stores those submissions in its own business scope. A connected backend can request a text reply to the sender within the permitted service window. Alerts contain no customer message content; submissions do not trigger an automatic reply or accounting action. The current demonstration covers real test-number text/document receipt, confirmed Telegram notification, durable Accounting storage and a backend-requested reply accepted by Meta. Email inbox arrival and receipt of that reply still need confirmation.
+
+Use these paragraphs as drafts for the matching live permission questions. They do not replace the requested screencast, reviewer access, business verification or Meta's other application requirements. Final data-handling answers and submission require John's review.
+
 ## Reviewer access and recording
 
 1. Add the appropriate Website platform and URL in Meta. The last inspected reviewer-instructions page said no app platforms were configured.
