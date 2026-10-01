@@ -12,7 +12,11 @@ The isolated Worker was deployed successfully and migrations `0005_launchset_con
 
 Lint, TypeScript, the Next.js production build and the Cloudflare runtime build passed. All 26 SQLite/provider integration checks passed. Earlier signed-out browser checks confirmed the product/privacy/terms pages returned 200, the event API returned 401, business changes returned 403 and unconfigured webhook requests returned 503. All seven responses carried noindex headers, and the workspace redirected to sign-in. The public page was visually inspected in Chromium.
 
-Meta created test WABA `1373012368376197` with phone `1427558373768262`, display number `+1 555-163-2129`. A real token generated in the Launchset Connect Graph API Explorer was securely captured into the private local secret file. Authenticated `v25.0` GET calls to the phone and WABA phone list both returned 200 with that test number. The app secret, callback, WABA subscription and permitted recipient setup remain pending. No real business phone was connected.
+Meta created test WABA `1373012368376197` with phone `1427558373768262`, display number `+1 555-163-2129`. A real token generated in the Launchset Connect Graph API Explorer was captured securely. Authenticated `v25.0` GET calls to the phone and WABA phone list both returned 200 with that test number. John confirmed the Meta password prompt; the app secret was then captured securely. The access token, app secret, private callback token, API version and test workflow registry are installed as encrypted secrets on the isolated Connect Worker. No real business phone was connected.
+
+The backend's private challenge check returned 200 with the exact challenge. Meta's app subscription POST returned success; read-back showed an active `whatsapp_business_account` callback at `https://launchset-connect-shadow.jhelyar04.workers.dev/api/connect/webhooks/whatsapp`, subscribed only to `messages`. Meta reported that field's webhook version as `v26.0`; outbound/account API calls remain explicitly configured as the setup page's `v25.0`. Subscribing the test WABA also returned success; read-back showed Launchset Connect alongside Meta's existing DevX test app. The permitted recipient phone is awaiting John's direct entry/code verification.
+
+The final code shadow deployment version is `67288cff-2f25-4431-8207-84b7cc5491ed`. Its product route returned 200 with backend copy/noindex, and the unconfigured backend reply request returned 403. The test connection is created paused. Documents and text containing `invoice` or `accounting` route to Accounting with alerts disabled; other types use the default Tubudd label and configured generic alert recipients. These are test routing rules, not permanent customer/business assignments.
 
 The Accounting receiver was deployed to its fictional shadow API at revision `11cf977a4eb649bbcf1e72c75e5707df09c320c4`, with migration 033. Real HTTP requests through its public Worker proxy accepted signed fictional text and PDF deliveries; repeated requests returned the same records. PostgreSQL confirmed durable submissions and WhatsApp document provenance. This verifies the receiver transport, not a WhatsApp webhook or Connect outbox delivery.
 
@@ -55,10 +59,11 @@ These are draft explanations, not completed certifications. API tests must be ma
 ## Remaining live gates
 
 - [ ] Business verification result checked.
-- [ ] Meta credentials securely installed in the isolated preview.
+- [x] Meta credentials securely installed in the isolated preview (test token; durable production token remains later work).
 - [ ] New Telegram bot created, started by John and securely configured.
 - [x] Actual Meta management calls succeed for the test WABA/phone.
-- [ ] Callback verified and WABA/messages subscription confirmed.
+- [x] Callback verified and test WABA/messages subscription confirmed.
+- [ ] Permitted test recipient verified by John.
 - [ ] Real test message produces a delivery-monitor event and actual email/Telegram notifications.
 - [x] Accounting's deployed signed callback accepts fictional text/PDF and deduplicates replay.
 - [ ] Real Meta text/document reaches Accounting through Connect; backend-requested text reply succeeds.
