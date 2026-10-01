@@ -10,6 +10,10 @@ The existing signed webhook and existing site authentication remain. This releas
 
 ## Configuration
 
+The Connect shadow uses `global_fetch_strictly_public` so HTTPS callbacks can reach another `workers.dev` Worker in the same Cloudflare account. Backend requests identify themselves as `Launchset-Connect/1.0`. Failed deliveries retain a safe network/HTTP error code; no response body, credential or customer content is logged. See [Cloudflare's Worker-to-Worker fetch guidance](https://developers.cloudflare.com/workers/runtime-apis/fetch/).
+
+Backend and Meta requests use `redirect: "manual"` and reject non-success responses, including redirects. Cloudflare's runtime rejects `redirect: "error"` at request construction even when the destination does not redirect. A disposable check against the installed Workerd confirmed that `error` fails and `manual` succeeds. Redirected media downloads are covered by the existing negative tests. See [the runtime implementation](https://github.com/cloudflare/workerd/blob/main/src/workerd/api/http.c%2B%2B).
+
 Store `CONNECT_WORKFLOWS` as an encrypted Worker secret. Shape:
 
 ```json
@@ -85,6 +89,6 @@ Messages are external submissions, not accepted accountant instructions. No assi
 
 ## Evidence and remaining live setup
 
-Automated checks cover routing, generic recipients, content minimisation, real file bytes with mocked Meta transport, signed delivery, duplicates, replay after opt-in, reply window/idempotency and existing Accounting scope. Live Meta test-number receipt and email provider acceptance passed. The Telegram bot was created and its token installed; John must start it before the private destination and actual alert can be verified. Accounting receipt through Connect and a backend text reply remain pending. Configure the actual test WABA/phone and bot through the approved normal Chrome workflow; never claim mock tests are live provider evidence. See `meta-app-review.md` for the current evidence and remaining checks.
+Automated checks cover routing, generic recipients, content minimisation, real file bytes with mocked Meta transport, signed delivery, duplicates, replay after opt-in, reply window/idempotency and existing Accounting scope. Live Meta test-number receipt and email provider acceptance passed. The Telegram bot was created, its token installed and John's private destination configured after its `/start` arrived. John confirmed receipt of the generic Telegram alert for a subsequent WhatsApp reply; both alert delivery records were `sent`. His real WhatsApp `accounting test` text was labelled Accounting, delivered by Connect and stored once in Accounting's configured fictional scope after the Cloudflare runtime fix. Actual email inbox arrival, real document delivery and a backend text reply remain pending; Meta's expired temporary token needs refreshing for the latter two. Configure the actual test WABA/phone and bot through the approved normal Chrome workflow; never claim mock tests are live provider evidence. See `meta-app-review.md` for the current evidence and remaining checks.
 
 Official protocols: [Meta media API collection](https://www.postman.com/meta/whatsapp-business-platform/folder/13382743-ecb27be5-4d27-4763-bbee-6a8002c04bf3), [Meta Cloud API collection](https://www.postman.com/meta/whatsapp-business-platform/collection/wlk6lh4/whatsapp-cloud-api), [WhatsApp reply window policy](https://whatsappbusiness.com/policy/).

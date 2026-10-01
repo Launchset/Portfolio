@@ -248,7 +248,8 @@ test('backend delivers signed label/content once; receiver can verify exact byte
   await Promise.all([actions.dispatchBackendMessages(f.env), actions.dispatchBackendMessages(f.env)]);
   assert.equal(calls.length, 1); const { options } = calls[0]; const envelope = JSON.parse(new TextDecoder().decode(options.body));
   assert.equal(envelope.label, 'Accounting'); assert.equal(envelope.text, 'Please process this invoice');
-  assert.equal(options.headers['Idempotency-Key'], id); assert.equal(options.redirect, 'error');
+  assert.equal(options.headers['Idempotency-Key'], id); assert.equal(options.redirect, 'manual');
+  assert.equal(options.headers['User-Agent'], 'Launchset-Connect/1.0');
   assert.equal(await actions.verifyBackendRequest(config.targets[0].secret, options.headers['X-Launchset-Timestamp'], options.headers['X-Launchset-Signature'], options.body), true);
   assert.equal(await actions.verifyBackendRequest(config.targets[0].secret, options.headers['X-Launchset-Timestamp'], options.headers['X-Launchset-Signature'], new TextEncoder().encode('changed')), false);
   assert.equal(await actions.verifyBackendRequest(config.targets[0].secret, options.headers['X-Launchset-Timestamp'], options.headers['X-Launchset-Signature'], options.body, Date.now()+600000), false);
@@ -267,6 +268,7 @@ test('document forwarding downloads phone-owned media and sends actual bytes wit
   await intakeWorkflow(f, workflowPayload('document'));
   const bytes = new TextEncoder().encode('%PDF-1.4\nfictional invoice\n%%EOF'); const sha256 = (await import('node:crypto')).createHash('sha256').update(bytes).digest('hex');
   let envelope; globalThis.fetch = async (url, options) => {
+    assert.equal(options.redirect, 'manual');
     if (String(url).includes('graph.facebook.com')) { assert.ok(String(url).includes('phone_number_id=101')); return Response.json({url:'https://lookaside.fbsbx.com/file',file_size:bytes.length,mime_type:'application/pdf',sha256}); }
     if (String(url).includes('lookaside.fbsbx.com')) return new Response(bytes);
     envelope = JSON.parse(new TextDecoder().decode(options.body)); return Response.json({});
@@ -286,6 +288,10 @@ test('document download blocks untrusted credential destinations and oversized, 
   await assert.rejects(actions.downloadWhatsAppDocument(f.env,'101','300'), /document_too_large/);
   size=2; await assert.rejects(actions.downloadWhatsAppDocument(f.env,'101','300'), /document_size_mismatch/);
   size=1; hash='bad'; await assert.rejects(actions.downloadWhatsAppDocument(f.env,'101','300'), /document_hash_mismatch/);
+  calls=0; globalThis.fetch=async(requestUrl,options)=>{calls++;assert.equal(options.redirect,'manual');return String(requestUrl).includes('graph.facebook.com')
+    ? Response.json({url,file_size:1,mime_type:'application/pdf'})
+    : new Response(null,{status:302,headers:{Location:'https://evil.example.com/file'}});};
+  await assert.rejects(actions.downloadWhatsAppDocument(f.env,'101','300'), /media_download_failed/); assert.equal(calls,2);
 });
 
 test('backend retry backoff, recovery, retention and business deletion include content jobs', async () => {
@@ -293,6 +299,7 @@ test('backend retry backoff, recovery, retention and business deletion include c
   let calls=0; globalThis.fetch=async()=>{calls++; return new Response('',{status:503});};
   await actions.dispatchBackendMessages(f.env,now); await actions.dispatchBackendMessages(f.env,now+1000); assert.equal(calls,1);
   assert.equal(f.sqlite.prepare('SELECT status FROM connect_backend_deliveries').get().status,'pending');
+  assert.equal(f.sqlite.prepare('SELECT error_code FROM connect_backend_deliveries').get().error_code,'backend_http_503');
   globalThis.fetch=async()=>Response.json({}); await actions.dispatchBackendMessages(f.env,now+30001);
   assert.equal(f.sqlite.prepare('SELECT status FROM connect_backend_deliveries').get().status,'sent');
   f.sqlite.prepare('UPDATE connect_events SET received_at=1').run(); await maintainConnect(f.env);

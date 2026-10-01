@@ -2,7 +2,7 @@ import type { ConnectBusiness, ConnectEnvironment } from "./types";
 import { matchRoutingLabel, targetRevision, workflowConfiguration } from "./workflow-settings";
 import { extractMessageContent, type IncomingContent } from "../../platform/meta/message-content";
 import { downloadWhatsAppDocument, MessageActionError, sendWhatsAppText } from "../../platform/meta/message-actions";
-import { bytesToBase64, sendBackendMessage } from "../../platform/notifications/backend-message";
+import { BackendDeliveryError, bytesToBase64, sendBackendMessage } from "../../platform/notifications/backend-message";
 
 export async function messageIntakeStatements(environment: ConnectEnvironment, business: ConnectBusiness, payload: unknown,
   messageId: string, messageType: string, eventId: string, nonce: string, now: number) {
@@ -79,7 +79,7 @@ export async function dispatchBackendMessages(environment: ConnectEnvironment, n
         .bind(Date.now(), job.event_id, claim).run();
     } catch (error) {
       const attempt = job.attempts + 1;
-      const code = error instanceof MessageActionError ? error.code : "backend_delivery_failed";
+      const code = error instanceof MessageActionError || error instanceof BackendDeliveryError ? error.code : "backend_delivery_failed";
       await db.prepare("UPDATE connect_backend_deliveries SET status=?,next_attempt_at=?,error_code=?,claim_token=NULL WHERE event_id=? AND claim_token=?")
         .bind(permanent || attempt >= 8 ? "failed" : "pending", now + Math.min(3600000, 30000 * 2 ** (attempt - 1)), code, job.event_id, claim).run();
     }

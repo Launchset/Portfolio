@@ -1,5 +1,9 @@
 import type { BackendTarget } from "../../features/connect/workflow-settings";
 
+export class BackendDeliveryError extends Error {
+  constructor(public code: string) { super(code); }
+}
+
 export async function signBackendBody(secret: string, timestamp: string, body: Uint8Array) {
   const encoder = new TextEncoder();
   const prefix = encoder.encode(`${timestamp}.`);
@@ -12,10 +16,13 @@ export async function sendBackendMessage(target: BackendTarget, eventId: string,
   const body = new TextEncoder().encode(JSON.stringify(envelope));
   const timestamp = String(Math.floor(Date.now() / 1000));
   const signature = await signBackendBody(target.secret, timestamp, body);
-  const response = await fetch(target.url, { method: "POST", redirect: "error", signal: AbortSignal.timeout(15000), body,
-    headers: { "Content-Type": "application/json", "X-Launchset-Timestamp": timestamp, "X-Launchset-Signature": `sha256=${signature}`,
-      "Idempotency-Key": eventId } });
-  if (!response.ok) throw new Error("backend_rejected");
+  let response: Response;
+  try {
+    response = await fetch(target.url, { method: "POST", redirect: "manual", signal: AbortSignal.timeout(15000), body,
+      headers: { "Content-Type": "application/json", "User-Agent": "Launchset-Connect/1.0", "X-Launchset-Timestamp": timestamp,
+        "X-Launchset-Signature": `sha256=${signature}`, "Idempotency-Key": eventId } });
+  } catch { throw new BackendDeliveryError("backend_network_error"); }
+  if (!response.ok) throw new BackendDeliveryError(`backend_http_${response.status}`);
 }
 
 export function bytesToBase64(bytes: Uint8Array) {

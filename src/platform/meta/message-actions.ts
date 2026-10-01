@@ -15,7 +15,7 @@ export async function sendWhatsAppText(environment: ConnectEnvironment, phoneNum
   const meta = metaConfiguration(environment);
   let response;
   try {
-    response = await fetch(`${meta.base}/${phoneNumberId}/messages`, { method: "POST", redirect: "error",
+    response = await fetch(`${meta.base}/${phoneNumberId}/messages`, { method: "POST", redirect: "manual",
       headers: { ...meta.headers, "Content-Type": "application/json" }, signal: AbortSignal.timeout(10000),
       body: JSON.stringify({ messaging_product: "whatsapp", recipient_type: "individual", to: sender, type: "text", text: { preview_url: false, body: text } }) });
   } catch { throw new MessageActionError("send_outcome_unknown", true); }
@@ -38,7 +38,7 @@ export async function downloadWhatsAppDocument(environment: ConnectEnvironment, 
   let metadata;
   try {
     const response = await fetch(`${meta.base}/${mediaId}?phone_number_id=${phoneNumberId}`, {
-      headers: meta.headers, signal: AbortSignal.timeout(10000), redirect: "error" });
+      headers: meta.headers, signal: AbortSignal.timeout(10000), redirect: "manual" });
     if (!response.ok) throw new Error();
     metadata = await response.json() as { url?: string; mime_type?: string; file_size?: number; sha256?: string };
   } catch { throw new MessageActionError("media_lookup_failed"); }
@@ -51,7 +51,7 @@ export async function downloadWhatsAppDocument(environment: ConnectEnvironment, 
   if (url.protocol !== "https:" || url.username || url.password || url.port
     || !(url.hostname === "lookaside.fbsbx.com" || url.hostname.endsWith(".fbcdn.net"))) throw new MessageActionError("invalid_media_url");
   let response;
-  try { response = await fetch(url, { headers: meta.headers, signal: AbortSignal.timeout(15000), redirect: "error" }); }
+  try { response = await fetch(url, { headers: meta.headers, signal: AbortSignal.timeout(15000), redirect: "manual" }); }
   catch { throw new MessageActionError("media_download_failed"); }
   if (!response.ok || !response.body) throw new MessageActionError("media_download_failed");
   const reader = response.body.getReader(); const chunks: Uint8Array[] = []; let length = 0;
