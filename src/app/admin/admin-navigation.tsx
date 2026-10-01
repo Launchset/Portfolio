@@ -9,6 +9,7 @@ const items = [
   { href: "/admin/clients", label: "Clients", number: "02" },
   { href: "/admin/contracts", label: "Contracts", number: "03" },
   { href: "/admin/payments", label: "Payments", number: "04" },
+  { href: "/launchset-connect/workspace", label: "Connect", number: "05" },
 ];
 
 export default function AdminNavigation() {

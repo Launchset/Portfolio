@@ -41,6 +41,7 @@ export async function createAuth(request?: Request) {
     trustedOrigins: [
       "https://launchset.dev",
       "https://launchset-shadow.jhelyar04.workers.dev",
+      "https://launchset-connect-shadow.jhelyar04.workers.dev",
       "http://localhost:3000",
     ],
     secret: authEnv.BETTER_AUTH_SECRET,

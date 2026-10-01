@@ -65,6 +65,10 @@ Login
 
 Contracts are stored in the `CONTRACTS` R2 bucket. Stripe is called from server routes; Stripe webhooks are signature-checked before they update application records.
 
+## Launchset Connect
+
+`src/features/connect/` owns business connections, member isolation, message-alert intake and its delivery outbox. `src/platform/meta/` verifies WhatsApp signatures and checks WABA phone access; `src/platform/notifications/` sends generic alerts. Thin `/api/connect/` routes enforce authentication/origin or provider signature checks. `/launchset-connect/workspace` is a separate verified-email workspace; its membership does not depend on billing-contract status. The custom Worker's scheduled handler retries outbox jobs and clears 30-day records. Migration `0005_launchset_connect.sql` is authoritative. See `docs/launchset-connect.md` for the boundaries and remaining live setup.
+
 ## Dependency direction
 
 The intended dependency direction is:

@@ -24,6 +24,8 @@ Next.js, React, TypeScript, Better Auth, Stripe, Cloudflare Workers, D1 and R2.
 
 Start with [ARCHITECTURE.md](./ARCHITECTURE.md) for the system map and [AGENTS.md](./AGENTS.md) for change and validation conventions.
 
+Launchset Connect setup, access rules and delivery behaviour are in [docs/launchset-connect.md](./docs/launchset-connect.md). Its first release provides private WhatsApp message alerts and workspace routing. The [Meta review checklist](./docs/meta-app-review.md) separates implemented behaviour from live checks and future chatbot plans.
+
 ## Local development
 
 ```bash
