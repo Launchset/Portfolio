@@ -32,6 +32,12 @@ The deployed Accounting API then issued one signed reply request for its stored 
 
 John sent a PDF from his phone to the same Meta test conversation. Connect received the document at 10:46:32 UTC, selected the Accounting label and completed backend delivery on its first attempt without error. A scoped PostgreSQL read confirmed the corresponding submission links to a stored `application/pdf` source document with `intake_channel: whatsapp`; its declared and stored byte counts both equal 36,293. The configured scope contains the earlier text submission and this document submission. No document content or filename was printed. This verifies the real WhatsApp-to-Meta-to-Connect-to-Accounting document path. John's computer upload had remained pending; these results do not establish a general WhatsApp desktop media restriction.
 
+## Test token refreshed on 2 October 2026
+
+At 07:48 UTC, Meta's Graph API Explorer renewed the existing token for Launchset Connect with the two selected WhatsApp permissions. No password prompt was required. The token was captured as an encrypted envelope and validated privately before installation. Meta reported the correct app, both WhatsApp scopes and its standard `public_profile` scope; the exact test WABA phone list returned the configured phone as `CONNECTED` / `CLOUD_API`. Only `CONNECT_META_ACCESS_TOKEN` was installed on the isolated Connect Worker. API calls remain on the existing `v25.0` configuration. No real business phone or App Review answer was changed.
+
+The refreshed temporary token expires at **09:00 UTC on 2 October 2026 (16:00 Vietnam time)**. This is not a durable production or reviewer credential. After installation, the test reviewer signed in successfully and the deployed **Check Meta access** endpoint returned 200 / checked for its one assigned test connection. Fresh message/document/alert/reply receipt and the recording still require John's test inputs.
+
 ## First-release description
 
 Launchset Connect is a reusable messaging backend. Configured routing labels select generic email/Telegram alerts for Tubudd or signed text/document delivery to Accounting. Notification services receive no customer names, numbers or message content. A connected backend can request a text reply for its routed event within the service window. Launchset administers test connections and provides a private delivery monitor; existing verified member access remains in place.
@@ -77,7 +83,7 @@ Reviewer instructions remain blocked until an app platform is configured. Basic 
 
 John approved a separate test email/password login. It is now deployed and verified at [the isolated reviewer page](https://launchset-connect-shadow.jhelyar04.workers.dev/launchset-connect/reviewer). The account is assigned only to the existing Meta test connection. Live checks confirmed correct sign-in, one-business scope, blocked password sign-up, blocked administrator API/pages and no billing access. Chrome form sign-in reached the visually inspected delivery monitor. The 28 integration checks, lint, TypeScript, Next.js and OpenNext builds passed. Credentials remain private outside Git. See [reviewer access and proposed instructions](meta-reviewer-access.md).
 
-This completes the test login, not the reviewer recording or application. The Meta test token is still expired, mobile presentation is not yet verified, and the final Website platform/reviewer instructions require the agreed application review. Nothing was submitted to Meta.
+This completes the test login, not the reviewer recording or application. The Meta test token was refreshed later on 2 October with the limited expiry recorded above; mobile presentation is not yet verified, and the final Website platform/reviewer instructions require the agreed application review. Nothing was submitted to Meta.
 
 ## Data handling draft facts
 
