@@ -2,11 +2,15 @@
 
 ## Current status
 
-The 2 October 2026 test passed: generic email and Telegram alerts, Accounting text/PDF storage, and the backend-requested WhatsApp reply. John confirmed receipt of both alerts and the reply. No demonstration video has been recorded or uploaded, and the Meta application has not been submitted.
+The 2 October 2026 test passed: generic email and Telegram alerts, Accounting text/PDF storage, and the backend-requested WhatsApp reply. John confirmed receipt of both alerts and the reply. The first reviewer-access clip is now recorded and checked. No video has been uploaded and the Meta application has not been submitted.
 
-The shared browser controller supports screenshots but has no video-recording command. Use the Chromebook's screen recorder while the agent operates its own test page. Record the page area rather than unrelated tabs. Keep passwords, access tokens and unrelated conversations out of the recording.
+The shared browser controller supports screenshots but has no video-recording command. For this task, a private script used only its existing stream commands and the already installed Playwright FFmpeg encoder to capture this agent's tab at two frames per second, retaining elapsed timing. No broker, extension, dependency or permission was changed. The Chromebook recorder remains an alternative. Keep passwords, access tokens and unrelated conversations out of any recording.
 
-## First clip: reviewer access and account check
+## First clip: recorded reviewer access and account check
+
+The final silent WebM is **38 seconds**, 76 frames, 1,100,526 bytes. It is saved privately outside Git at `/home/jhelyar04/.local/share/launchset-connect/review-evidence/2026-10-02/reviewer-demo.webm`, with a timeline and evidence JSON alongside it. The actual reviewer sign-in and one-business scope passed. The live Meta account check succeeded at **08:37:29 UTC**, followed by the existing Accounting text/document and Tubudd email/Telegram delivery results. Saved video frames were decoded and visually inspected; the password remained masked. The site's cookie banner is visible, but the relevant delivery rows and labels can be read. This clip does not show new phone messages, destination inbox receipt, Accounting storage UI or reply receipt.
+
+For a future recording using the Chromebook controls:
 
 1. Open the isolated [reviewer sign-in](https://launchset-connect-shadow.jhelyar04.workers.dev/launchset-connect/reviewer). Prepare the test member email and masked password privately.
 2. John starts a partial-screen video recording with the Chromebook screen-capture controls and tells the agent it is recording.

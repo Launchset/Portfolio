@@ -45,6 +45,6 @@ The following is a draft for John's review. Supply the password privately in Met
 
 The temporary Meta token was refreshed on 2 October and the deployed account check returned 200 / checked; it expires at 09:00 UTC that day. Before submission, provide credentials valid for the review period, record the real workflows, and configure the agreed Website platform/reviewer instructions in Meta. Account creation and sign-in verification do not mean App Review is ready or submitted.
 
-John confirmed receipt of today's email alert, Telegram alert and backend-requested WhatsApp reply on 2 October. Accounting storage of the matching text and 240,204-byte PDF was independently verified. The recording itself is still pending.
+John confirmed receipt of today's email alert, Telegram alert and backend-requested WhatsApp reply on 2 October. Accounting storage of the matching text and 240,204-byte PDF was independently verified. A checked 38-second reviewer-login/account-check/delivery-monitor video is now saved privately. The remaining message-workflow clips and full application review are pending; nothing has been uploaded or submitted.
 
 See the [recording plan](meta-review-recording.md) for the first reviewer-access clip and the remaining message-workflow evidence.

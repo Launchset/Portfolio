@@ -93,6 +93,8 @@ John approved a separate test email/password login. It is now deployed and verif
 
 This completes the test login, not the reviewer recording or application. The Meta test token was refreshed later on 2 October with the limited expiry recorded above; mobile presentation is not yet verified, and the final Website platform/reviewer instructions require the agreed application review. Nothing was submitted to Meta.
 
+Later on 2 October, a 38-second silent reviewer-access clip was recorded using existing broker screenshots and the installed encoder. It shows the actual login, a successful live account check at 08:37:29 UTC, and existing Accounting/Tubudd delivery results. Saved frames were decoded and visually checked. The phone sends, destination inboxes, Accounting storage UI and reply receipt remain separate clips; no video upload or application submission occurred. See [recording status and timeline](meta-review-recording.md).
+
 ## Data handling draft facts
 
 - Cloudflare hosts the service and stores backend secrets, connection settings and 30-day technical event/delivery records.
