@@ -29,7 +29,7 @@ Browser
 | Desktop hero artwork | `src/features/home/desktop-hero-visual.tsx` | Decorative desktop illustration only |
 | Portfolio catalogue | `src/features/work/projects.ts` | Project metadata, descriptions, images and public URLs |
 | Project pages | `src/app/work/` | Work index, website case studies and tool case studies |
-| Authentication | `src/lib/auth.ts` | Better Auth configuration, Google login and magic-link delivery |
+| Authentication | `src/lib/auth.ts` | Better Auth configuration, Google login, magic-link delivery and the isolated Connect reviewer login |
 | Portal access | `src/features/portal/access.ts` | Session checks, client/admin access and Cloudflare app bindings |
 | Contracts | `src/lib/contracts.ts` | Signature validation and PDF stamping |
 | Stripe integration | `src/platform/stripe/` | Stripe requests, response parsing and webhook verification |
@@ -64,6 +64,14 @@ Login
 ```
 
 Contracts are stored in the `CONTRACTS` R2 bucket. Stripe is called from server routes; Stripe webhooks are signature-checked before they update application records.
+
+## Launchset Connect
+
+`src/features/connect/` owns business connections, existing member isolation, routing rules and durable alert/backend delivery queues. `workflow-settings.ts` reads the private test workflow registry; `message-workflows.ts` selects labels and destinations, retains content only for configured backend routes, dispatches deliveries and enforces reply deduplication and the service window. No new customer permission model or conversation inbox is implemented.
+
+`src/platform/meta/` verifies WhatsApp signatures, checks WABA phone access, downloads documents and sends text replies. `src/platform/notifications/` sends generic alerts and signs backend callbacks. Thin `/api/connect/` routes enforce authentication/origin, provider signatures or backend signatures. `/launchset-connect/workspace` is an operator delivery monitor with verified-email access independent of billing-contract status. The custom Worker's scheduled handler retries queued jobs and clears 30-day event/content/reply records. Migrations `0005_launchset_connect.sql` and `0006_connect_message_workflows.sql` are authoritative. See `docs/launchset-connect.md` and `docs/connect-backend-workflows.md` for protocols, boundaries and remaining live setup.
+
+`src/features/connect/reviewer-login.ts` enables password sign-in only for the configured reviewer email on the exact isolated Connect hostname. `/launchset-connect/reviewer` uses Better Auth's existing credential/session support; password sign-up is disabled. The review account uses existing business membership, has no client billing record and is not an administrator. Its enabling variables belong only to `wrangler.connect-shadow.jsonc`; production password login remains disabled. See `docs/meta-reviewer-access.md` for verified access and review instructions.
 
 ## Dependency direction
 

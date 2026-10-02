@@ -1,6 +1,8 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore The OpenNext worker is generated during the Cloudflare build.
 import openNextWorker from "./.open-next/worker.js";
+import { maintainConnect } from "./src/features/connect/inbox";
+import type { ConnectEnvironment } from "./src/features/connect/types";
 
 type WorkerEnvironment = {
   ASSETS: {
@@ -124,6 +126,9 @@ async function markdownResponse(request: Request, environment: WorkerEnvironment
 }
 
 const launchsetWorker = {
+  async scheduled(_controller: ScheduledController, environment: ConnectEnvironment, context: ExecutionContext) {
+    context.waitUntil(maintainConnect(environment));
+  },
   async fetch(
     request: Request,
     environment: WorkerEnvironment,
