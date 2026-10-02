@@ -1,12 +1,16 @@
 import { getCloudflareContext } from "@opennextjs/cloudflare";
 import { betterAuth } from "better-auth";
 import { magicLink } from "better-auth/plugins";
+import { APIError, createAuthMiddleware } from "better-auth/api";
+import { connectReviewerEmail } from "@/src/features/connect/reviewer-login";
 
 type AuthEnvironment = CloudflareEnv & {
   BETTER_AUTH_SECRET?: string;
   BETTER_AUTH_URL?: string;
   GOOGLE_CLIENT_ID?: string;
   GOOGLE_CLIENT_SECRET?: string;
+  CONNECT_REVIEWER_LOGIN_ENABLED?: string;
+  CONNECT_REVIEWER_EMAIL?: string;
 };
 
 function escapeHtml(value: string) {
@@ -23,6 +27,7 @@ export async function createAuth(request?: Request) {
   const authEnv = env as AuthEnvironment;
   const requestOrigin = request ? new URL(request.url).origin : undefined;
   const baseURL = requestOrigin ?? authEnv.BETTER_AUTH_URL ?? "https://launchset.dev";
+  const reviewerEmail = connectReviewerEmail(authEnv, requestOrigin);
 
   const socialProviders = {
     ...(authEnv.GOOGLE_CLIENT_ID && authEnv.GOOGLE_CLIENT_SECRET
@@ -46,7 +51,20 @@ export async function createAuth(request?: Request) {
     ],
     secret: authEnv.BETTER_AUTH_SECRET,
     database: authEnv.AUTH_DB,
-    emailAndPassword: { enabled: false },
+    emailAndPassword: {
+      enabled: Boolean(reviewerEmail),
+      disableSignUp: true,
+      requireEmailVerification: true,
+    },
+    hooks: {
+      before: createAuthMiddleware(async (context) => {
+        if (context.path === "/sign-in/email"
+          && (!reviewerEmail || typeof context.body?.email !== "string"
+            || context.body.email.trim().toLowerCase() !== reviewerEmail)) {
+          throw new APIError("UNAUTHORIZED", { code: "INVALID_EMAIL_OR_PASSWORD", message: "Invalid email or password." });
+        }
+      }),
+    },
     socialProviders,
     account: {
       accountLinking: {

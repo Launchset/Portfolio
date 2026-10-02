@@ -73,6 +73,12 @@ Reviewer instructions remain blocked until an app platform is configured. Basic 
 5. Review allowed usage for each requested permission, upload the screencast and confirm the required successful API tests in Meta.
 6. Submit only after all Meta steps are complete, the reviewed version is deployed to an approved review URL, and John has reviewed the exact final submission.
 
+### Reviewer login implemented on 2 October 2026
+
+John approved a separate test email/password login. It is now deployed and verified at [the isolated reviewer page](https://launchset-connect-shadow.jhelyar04.workers.dev/launchset-connect/reviewer). The account is assigned only to the existing Meta test connection. Live checks confirmed correct sign-in, one-business scope, blocked password sign-up, blocked administrator API/pages and no billing access. Chrome form sign-in reached the visually inspected delivery monitor. The 28 integration checks, lint, TypeScript, Next.js and OpenNext builds passed. Credentials remain private outside Git. See [reviewer access and proposed instructions](meta-reviewer-access.md).
+
+This completes the test login, not the reviewer recording or application. The Meta test token is still expired, mobile presentation is not yet verified, and the final Website platform/reviewer instructions require the agreed application review. Nothing was submitted to Meta.
+
 ## Data handling draft facts
 
 - Cloudflare hosts the service and stores backend secrets, connection settings and 30-day technical event/delivery records.
@@ -114,7 +120,8 @@ These country declarations remain part of John's full pre-submission review. Sav
 - [x] Meta test token refreshed and backend-requested text reply accepted by Meta.
 - [x] Real Meta document reaches Accounting on its first attempt; PDF bytes and WhatsApp provenance confirmed in storage.
 - [ ] WhatsApp receipt of the backend-requested reply confirmed.
-- [ ] Signed-in browser review, mobile layout and member isolation verified.
+- [x] Reviewer sign-in and desktop monitor verified in Chrome; live one-business scope and administrator/billing exclusions passed.
+- [ ] Mobile layout verified.
 - [ ] Final review host/platform, reviewer sign-in, permission scope and screencast prepared.
 - [x] Disclosure-history answer and adopted public-authority procedure entered and persistence verified.
 - [x] Responsible person/entity and UK country confirmed by John and entered.

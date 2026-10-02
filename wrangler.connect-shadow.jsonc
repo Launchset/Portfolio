@@ -47,6 +47,8 @@
     "AUTH_ADMIN_EMAIL": "launchsetfreelancer@gmail.com",
     "AUTH_EMAIL_FROM": "Launchset <login@launchset.dev>",
     "BETTER_AUTH_URL": "https://launchset-connect-shadow.jhelyar04.workers.dev",
+    "CONNECT_REVIEWER_LOGIN_ENABLED": "true",
+    "CONNECT_REVIEWER_EMAIL": "meta-reviewer@launchset.dev",
     "STRIPE_PORTAL_CONFIGURATION_ID": "bpc_1U0d66IdJKqNiD7V3ofgdkfs"
   },
   "images": {

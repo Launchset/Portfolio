@@ -6,6 +6,7 @@ Connect is a messaging backend for connected applications. Tubudd routes receive
 
 - `/launchset-connect`: public product description, current release and planned additions.
 - `/launchset-connect/workspace`: verified sign-in required. The Launchset admin sees all connections; a business member sees only connections whose `member_email` matches their verified email. Connect membership is independent of the billing portal.
+- `/launchset-connect/reviewer`: email/password sign-in only on the approved isolated review hostname, for the configured reviewer email. Password sign-up is disabled; existing member isolation applies. See [reviewer access](meta-reviewer-access.md).
 - `/api/connect/inbox`: same business isolation as the workspace; no public or shared API key.
 - `/api/connect/businesses`: administrator-only connection creation, editing and removal.
 - `/api/connect/businesses/[id]/check`: admin or assigned business member checks the WABA phone list using the server-side Meta access token. This proves access to the specific WABA/phone pair; it does not claim Meta business verification or app approval.
@@ -52,6 +53,6 @@ npm run build
 git diff --check
 ```
 
-The 26 integration checks execute the migrations and real SQLite queries, with simulated provider responses. They cover webhook signatures, mixed/status/media payloads, duplicate intake, account matching, business isolation, concurrent claims, retry recovery/exhaustion, recipient snapshots, routing rules, signed callbacks/replies, document validation and cascading retention/deletion. They do not prove live message delivery.
+The 28 integration checks execute the migrations and real SQLite queries, with simulated provider responses. They cover webhook signatures, mixed/status/media payloads, duplicate intake, account matching, business isolation, concurrent claims, retry recovery/exhaustion, recipient snapshots, routing rules, signed callbacks/replies, document validation and cascading retention/deletion. They do not prove live message delivery.
 
 Before claiming the first release is working end to end, run real test-number text and document messages through Meta's signed webhook. Verify actual email/Telegram alerts, backend receipt/document storage and a text reply from the receiving backend. Check the delivery monitor in a signed-in browser and on mobile. Keep a pending item for any provider or authenticated flow that has not been verified. See `meta-app-review.md` for factual evidence and `connect-backend-workflows.md` for protocol/configuration details.

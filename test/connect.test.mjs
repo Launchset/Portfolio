@@ -10,7 +10,7 @@ import { build } from "esbuild";
 const root = path.resolve(import.meta.dirname, "..");
 const temporary = await mkdtemp(path.join(process.env.TMPDIR || "/home/jhelyar04/.cache/agent-tmp", "connect-test."));
 const bundle = path.join(temporary, "connect.mjs");
-await build({ stdin: { contents: ["src/features/connect/inbox.ts", "src/features/connect/business-settings.ts", "src/platform/meta/whatsapp-webhook.ts", "src/platform/meta/account-access.ts", "src/features/connect/message-workflows.ts", "src/features/connect/workflow-settings.ts", "src/features/connect/backend-replies.ts", "src/platform/meta/message-actions.ts", "src/platform/notifications/backend-message.ts", "src/platform/notifications/backend-auth.ts"].map((file) => `export * from './${file}';`).join("\n"), resolveDir: root }, bundle: true, platform: "node", format: "esm", outfile: bundle });
+await build({ stdin: { contents: ["src/features/connect/inbox.ts", "src/features/connect/business-settings.ts", "src/platform/meta/whatsapp-webhook.ts", "src/platform/meta/account-access.ts", "src/features/connect/message-workflows.ts", "src/features/connect/workflow-settings.ts", "src/features/connect/backend-replies.ts", "src/platform/meta/message-actions.ts", "src/platform/notifications/backend-message.ts", "src/platform/notifications/backend-auth.ts", "src/features/connect/reviewer-login.ts"].map((file) => `export * from './${file}';`).join("\n"), resolveDir: root }, bundle: true, platform: "node", format: "esm", outfile: bundle });
 const { receiveWhatsAppEvents, dispatchConnectAlerts, listConnectInbox, updateConnectEvent, maintainConnect, verifyWhatsAppSignature, extractWhatsAppEvents, readWebhookBody, checkWhatsAppAccountAccess, parseBusinessSettings, saveBusinessSettings } = await import(pathToFileURL(bundle).href);
 const actions = await import(pathToFileURL(bundle).href);
 const schema = await readFile(path.join(root, "migrations/app/0005_launchset_connect.sql"), "utf8") + await readFile(path.join(root, "migrations/app/0006_connect_message_workflows.sql"), "utf8");
@@ -50,6 +50,25 @@ function payload({ waba = "100", phone = "101", id = "wamid.customer-1", type = 
     messages: [{ id, from: "84999999999", type, text: { body: "Private client message" } }],
   } }] }] };
 }
+
+test("reviewer password login cannot be enabled on production, other shadow sites or a foreign request origin", () => {
+  const env = { BETTER_AUTH_URL: actions.connectReviewOrigin, AUTH_ADMIN_EMAIL: "owner@example.com",
+    CONNECT_REVIEWER_LOGIN_ENABLED: "true", CONNECT_REVIEWER_EMAIL: "meta-reviewer@example.com" };
+  assert.equal(actions.connectReviewerEmail(env, actions.connectReviewOrigin), "meta-reviewer@example.com");
+  for (const origin of ["https://launchset.dev", "https://launchset-shadow.jhelyar04.workers.dev", "http://localhost:3000", "https://attacker.example"]) {
+    assert.equal(actions.connectReviewerEmail({ ...env, BETTER_AUTH_URL: origin }), null);
+    assert.equal(actions.connectReviewerEmail(env, origin), null);
+  }
+  assert.equal(actions.connectReviewerEmail({ ...env, CONNECT_REVIEWER_LOGIN_ENABLED: "false" }), null);
+  assert.equal(actions.connectReviewerEmail({ ...env, CONNECT_REVIEWER_LOGIN_ENABLED: undefined }), null);
+});
+
+test("a reviewer credential cannot use the administrator identity or an invalid email", () => {
+  const env = { BETTER_AUTH_URL: actions.connectReviewOrigin, AUTH_ADMIN_EMAIL: "owner@example.com", CONNECT_REVIEWER_LOGIN_ENABLED: "true" };
+  for (const email of [undefined, "", "invalid", " OWNER@EXAMPLE.COM "]) {
+    assert.equal(actions.connectReviewerEmail({ ...env, CONNECT_REVIEWER_EMAIL: email }), null);
+  }
+});
 
 test("signature rejects missing, malformed, wrong and tampered signatures", async () => {
   const body = new TextEncoder().encode(JSON.stringify(payload()));
