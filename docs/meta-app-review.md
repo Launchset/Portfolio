@@ -38,6 +38,14 @@ At 07:48 UTC, Meta's Graph API Explorer renewed the existing token for Launchset
 
 The refreshed temporary token expires at **09:00 UTC on 2 October 2026 (16:00 Vietnam time)**. This is not a durable production or reviewer credential. After installation, the test reviewer signed in successfully and the deployed **Check Meta access** endpoint returned 200 / checked for its one assigned test connection. Fresh message/document/alert/reply receipt and the recording still require John's test inputs.
 
+## Fresh end-to-end test on 2 October 2026
+
+After the token refresh, John confirmed sending the requested phone tests. Connect received a Tubudd-labelled text at 07:58:52 UTC; its email and Telegram delivery records both became `sent` without errors. This is provider acceptance; John has been asked to confirm inbox/chat receipt.
+
+An Accounting-labelled text arrived at 07:58:59 UTC and a PDF at 08:01:01 UTC. Both backend deliveries succeeded on their first attempt. Scoped reads from the deployed Accounting database confirmed the corresponding submissions in the configured fictional scope. The PDF has WhatsApp provenance, MIME type `application/pdf` and matching declared/stored length of **240,204 bytes**. The earlier text and 36,293-byte document remain separate historical test events; no real UK-business mapping was introduced.
+
+The deployed Accounting backend issued a single signed reply request tied to today's delivered text, with a newly generated stable request UUID saved before sending. Connect returned HTTP 200 / `accepted` with a Meta provider message ID. This proves fresh backend-to-Connect-to-Meta API acceptance, not WhatsApp delivery/read. No automatic accounting or assistant action was triggered. John has been asked separately to confirm today's Telegram alert, email alert and WhatsApp reply; those answers are pending.
+
 ## First-release description
 
 Launchset Connect is a reusable messaging backend. Configured routing labels select generic email/Telegram alerts for Tubudd or signed text/document delivery to Accounting. Notification services receive no customer names, numbers or message content. A connected backend can request a text reply for its routed event within the service window. Launchset administers test connections and provides a private delivery monitor; existing verified member access remains in place.
