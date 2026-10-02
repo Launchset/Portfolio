@@ -43,4 +43,8 @@ The following is a draft for John's review. Supply the password privately in Met
 4. Use the supplied demonstration recording for the actual permitted-recipient WhatsApp send, generic alert receipt, Accounting text/document storage and backend-requested reply. The current test sender is `+1 555-163-2129`; a new reviewer phone is not automatically an approved test recipient.
 5. The member can update a monitor event's routing label/status. Such an edit does not replay historical deliveries or change the deployed backend routing rules.
 
-The temporary Meta token was refreshed on 2 October and the deployed account check returned 200 / checked; it expires at 09:00 UTC that day. Before submission, provide credentials valid for the review period, confirm the outstanding email/WhatsApp receipts, record the real workflows, and configure the agreed Website platform/reviewer instructions in Meta. Account creation and sign-in verification do not mean App Review is ready or submitted.
+The temporary Meta token was refreshed on 2 October and the deployed account check returned 200 / checked; it expires at 09:00 UTC that day. Before submission, provide credentials valid for the review period, record the real workflows, and configure the agreed Website platform/reviewer instructions in Meta. Account creation and sign-in verification do not mean App Review is ready or submitted.
+
+John confirmed receipt of today's email alert, Telegram alert and backend-requested WhatsApp reply on 2 October. Accounting storage of the matching text and 240,204-byte PDF was independently verified. The recording itself is still pending.
+
+See the [recording plan](meta-review-recording.md) for the first reviewer-access clip and the remaining message-workflow evidence.
